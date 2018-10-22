@@ -1,0 +1,18 @@
+<h1><a href="{{ site.url }}">Cookieblues</a></h1>
+
+<p>
+    I'm a data science student at ITU with a bit of experience in mathematics.
+    I'll be posting stuff.
+</p>
+
+<h5 class="side">CATEGORIES</h5>
+<p class="side">
+    Linear Algebra and Optimisation
+</p>
+
+<h5 class="side">ARCHIVES</h5>
+{% for post in site.categories.pages %}
+    <p class="side">
+        {{post.date | date_to_string | slice: 0,6}}, {{post.date | slice: 0,4}} - {{post.title}}
+    </p>
+{% endfor %}
