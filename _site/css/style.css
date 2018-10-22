@@ -1,3 +1,12 @@
+.wrapper {
+  width: 800px;
+  margin: 0 auto; }
+
+section {
+  width: 570px;
+  float: right;
+  padding-bottom: 50px; }
+
 body {
   background-color: #fefefc;
   padding: 35px;
@@ -29,10 +38,6 @@ a {
 
 a:hover {
   color: #6a103c; }
-
-.wrapper {
-  width: 800px;
-  margin: 0 auto; }
 
 p.side {
   margin: 0 0 5px; }
@@ -118,10 +123,6 @@ header ul a:hover {
 header ul a:active {
   background-color: #f0f0f0; }
 
-strong {
-  color: #222;
-  font-weight: 500; }
-
 header ul li + li + li {
   border-right: none;
   width: 89px; }
@@ -131,10 +132,30 @@ header ul a strong {
   display: block;
   color: #222; }
 
-section {
-  width: 570px;
-  float: right;
-  padding-bottom: 50px; }
+footer {
+  width: 215px;
+  float: left;
+  position: fixed;
+  bottom: 50px;
+  -webkit-font-smoothing: subpixel-antialiased; }
+
+.footnotes {
+  font-size: 11px;
+  margin: 0 0 5px;
+  padding: 0; }
+
+p.footnotes {
+  margin: 0 0 5px;
+  padding: 0; }
+
+sup, sub {
+  font-size: 75%;
+  line-height: 0;
+  position: relative; }
+
+strong {
+  color: #222;
+  font-weight: 500; }
 
 small {
   font-size: 11px; }
@@ -144,13 +165,6 @@ hr {
   background: #e5e5e5;
   height: 1px;
   margin: 0 0 20px; }
-
-footer {
-  width: 215px;
-  float: left;
-  position: fixed;
-  bottom: 50px;
-  -webkit-font-smoothing: subpixel-antialiased; }
 
 ul.post_list {
   padding: 0; }

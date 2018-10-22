@@ -7,4 +7,5 @@ url: "https://cookieblues.github.io"
 markdown: kramdown
 kramdown:
    math_engine: mathjax
+   footnote_backlink:
 tags: [LinAlgOp]
