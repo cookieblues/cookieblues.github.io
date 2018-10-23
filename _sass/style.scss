@@ -11,7 +11,7 @@ section {
 
 body {
   background-color: #fefefc;
-  padding:35px;
+  padding:50px;
   font-family: Arial;
   font-size: 13px;
   color:#000000;
@@ -26,19 +26,31 @@ h1, h2, h3 {
 h1 {
   color:#0c0c0c;
   font-size:28px;
+  margin:0 0 20px;
 }
 
 h2 {
   color:#191919;
+  margin:0 0 15px;
 }
 
 h3 {
   color:#262626;
   font-size:17px;
+  margin:0 0 10px;
 }
 
-p, ul, ol, table, pre, dl {
-  margin:0 0 20px;
+p, ol, ul, table, pre, dl {
+  margin:0 0 15px;
+}
+
+strong {
+  color:#000000;
+  font-weight:600;
+}
+
+small {
+  font-size:11px;
 }
 
 a {
@@ -186,15 +198,6 @@ sup,sub {
   font-size:75%;
   line-height:0;
   position:relative;
-}
-
-strong {
-  color:#222;
-  font-weight:500;
-}
-
-small {
-  font-size:11px;
 }
 
 hr {

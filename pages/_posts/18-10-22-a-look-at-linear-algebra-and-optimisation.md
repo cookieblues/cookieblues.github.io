@@ -3,7 +3,28 @@ title: A Look at Linear Algebra and Optimisation
 layout: post
 tags: LinAlgOp
 ---
-Over the next month or two I'll try and post notes for the course "Linear Algebra and Optimisation" at the IT University of Copenhagen. While I didn't take the course myself, because I got merit from another linear algebra course, I did help a few of my classmates when they were taking it, and I'm also currently TAing the course for the new students.
+Over the next month or two I'll try and post notes for the course "Linear Algebra and Optimisation" at the IT University of Copenhagen. I'll attempt to make the notes give an intuitive understanding of the concepts introduced. Therefore the notes will **not** contain rigorous proofs and explanations of every little theorem you might run into in a linear algebra course.\\
+While I didn't take the course myself, because I got merit from another linear algebra course, I did help a few of my classmates when they were taking it, and I'm also currently TAing the course for the new students.
+
+### Overview
+The course is 14 weeks, tightly packed, and assumes you have exprience with vector calculation. It is split up in a linear algebra part and a calculus part, each taking up about half of the course with the linear algebra part taking up the first half. Since the course is underway in the 8th week as of writing this, which is the last week of linear algebra, I will start the notes from the 9th week; introduction to calculus.
+
+1. Vectors, linear combinations, and span
+2. Systems of linear equations
+3. Linear transformations and matrices
+4. Determinants
+5. Vector spaces, subspaces, basis
+6. Method of least squares with projection matrices
+7. Eigenvectors, eigenvalues, and diagonalisation
+8. PageRank algorithm
+9. Introduction to calculus:\\
+   (a) Limits, differentiation, the chain rule, implicit differentiation, derivatives of log functions, maximum and minimum values\\
+   (b) Integration and the fundamental theorem of calculus
+10. Newtons method and Taylor polynomials
+11. Motion along a curve
+12. Partial derivatives and gradients
+13. Optimisation, 2nd derivative test, and Lagrange multipliers
+14. Multiple integrals
 
 ### Motivation
 While I've taught linear algebra before, and it probably won't be the last time, having online notes to reference will likely buy me time in the future. Except for this, my motivation is threefold:
