@@ -8,12 +8,21 @@ section {
   padding-bottom: 50px; }
 
 body {
+<<<<<<< HEAD
   background-color: #ffffff;
+=======
+  background-color: #fefefc;
+>>>>>>> 2db8a95393fac0758640f19aed05de38cb00fd3e
   padding: 50px;
   font-family: Arial;
   font-size: 13px;
   color: #000000;
+<<<<<<< HEAD
   font-weight: normal; }
+=======
+  font-weight: normal;
+  word-wrap: break-word; }
+>>>>>>> 2db8a95393fac0758640f19aed05de38cb00fd3e
 
 h1, h2, h3 {
   font-weight: 450; }
@@ -32,9 +41,12 @@ h3 {
   font-size: 17px;
   margin: 0 0 10px; }
 
+<<<<<<< HEAD
 h4 {
   margin: 0 0 5px; }
 
+=======
+>>>>>>> 2db8a95393fac0758640f19aed05de38cb00fd3e
 p, ol, ul, table, pre, dl {
   margin: 0 0 15px; }
 
