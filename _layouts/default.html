@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% assign version = "1.0.4" %}
+    {% capture lchar %}{{page.url | slice: -1, 1}}{% endcapture %}
+    {% capture url %}{% if lchar == "/" %}{{page.url}}index.html{% else %}{{ page.url | default: 'index.html' }}{% endif %}{% endcapture %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>{{ site.title }}</title>
+    <link rel="stylesheet" href="{{ '/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <script type="text/javascript">
+      var stylesheet = document.createElement('link');
+      stylesheet.href = '/css/katex.min.css';
+      stylesheet.rel = 'stylesheet';
+      stylesheet.type = 'text/css';
+      document.getElementsByTagName('head')[0].appendChild(stylesheet);</script>
+    <script type="text/javascript">{% include js/katex.js %}</script>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <header>
+        {% include sidebar.html %}
+      </header>
+
+      <section>
+        <div id="content">
+          {{ content }}
+        </div>
+      </section>
+
+      <footer>
+        {% include footer.html %}
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+permalink: /:categories/:title/
+
+title: Cookieblues
+
+git_branch: master
+url: "https://cookieblues.github.io"
+markdown: kramdown
+kramdown:
+   math_engine: mathjax
+   footnote_backlink:
+tags: [LinAlgOp]
