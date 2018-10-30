@@ -7,7 +7,7 @@ Over the next month or two I'll try and post notes for the course "Linear Algebr
 While I didn't take the course myself, because I got merit from another linear algebra course, I did help a few of my classmates when they were taking it, and I'm also currently TAing the course for the new students.
 
 ### Overview
-The course is 14 weeks, tightly packed, and assumes you have exprience with vector calculation. It is split up in a linear algebra part and a calculus part, each taking up about half of the course with the linear algebra part taking up the first half. Since the course is underway in the 8th week as of writing this, which is the last week of linear algebra, I will start the notes from the 9th week to accomodate the students taking the course. On top of that, I'll split the first notes into three parts considering the amount of material that has to be plown through.
+The course is 14 weeks, tightly packed, and assumes you are familiar with basic vector calculation. It is split up in a linear algebra part and a calculus part, each taking up about half of the course with the linear algebra part taking up the first half. Since the course is underway in the 8th week as of writing this, which is the last week of linear algebra, I will start the notes from the 9th week to accomodate the students taking the course. On top of that, I'll split the first notes into three parts considering the amount of material that has to be plown through.
 
 1. Vectors, linear combinations, and span
 2. Systems of linear equations
