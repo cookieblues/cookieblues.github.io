@@ -101,7 +101,7 @@ f'(x)
 which is the actual derivative.
 
 ### Final thoughts
-One of my professors once said that *differentiation is mechanics and integration is art*. At first it just sounded like a crap quote, but it's more of a general saying than a quote really. Differentiation is mostly tedious calculation, and you just have to do it a lot to learn it. I'm considering uploading a few exercises that try and teach some core tips and tricks of differentiation. However, integration often requires some creativity, but we'll get to that later on.
+One of my professors once said that *differentiation is mechanics and integration is art*. At first it just sounded like a crap quote, but it's more of a general saying than a quote really. Differentiation is mostly tedious calculation, and you just have to practice it a lot to learn it. However, integration often requires some creativity, but we'll get to that later on. I'm considering uploading a few exercises after this first week of calculus that try and teach some core tips and tricks of differentiation and integration.
 
 
 [^1]: This is not the rigorous definition of a limit.

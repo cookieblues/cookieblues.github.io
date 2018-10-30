@@ -19,7 +19,7 @@ The course is 14 weeks, tightly packed, and assumes you have exprience with vect
 8. PageRank algorithm
 9. Introduction to calculus:\\
    (a) <a href="{{ site.url }}/pages/linalgop-notes-9a">The derivative, the limit, and the concept of approach</a>\\
-   (b) The chain rule, implicit differentiation, derivatives of log functions, extrema\\
+   (b) The chain rule, derivatives of logarithmic functions, and extrema\\
    (c) Integration and the fundamental theorem of calculus
 10. Newtons method and Taylor polynomials
 11. Motion along a curve
@@ -31,7 +31,7 @@ The course is 14 weeks, tightly packed, and assumes you have exprience with vect
 While I've taught linear algebra before, and it probably won't be the last time, having online notes to reference will likely buy me time in the future. Except for this, my motivation is threefold:
 
 1) The data science programme is mathematically heavy with network analysis, algorithms and data structures, and machine learning as courses on the menu. As such, a solid mathematical foundation is required. Most, if not all, other mathematically inclined programmes in Denmark have an introductory math course: mathematics and physics at KU have introduction to mathematics[^1][^2], computer science at KU has discrete mathematics[^3], and engineer students at DTU have to take an extensive introductory mathematics course[^4]. Ordinary concepts introduced by these courses include complex numbers, sequences and series, simple differential equations, Taylor's theorem, etc., which are not necessarily important concepts to grasp as a data scientist.\\
-Yet, these courses also serve the purpose of introducing students to rigour in mathematics, as well as refresh some elementary mathematics that the students might not have seen for years. The approach of LinAlgOp (as I will refer to it from now on) is to skip the previously mentioned lesser important concepts, and instead attempt to bunch together linear algebra and real analysis into one ambitious introductory mathematics course. The idea is intriguing, but in my opinion unrealistic with the way it's structured now.
+Yet, these courses also serve the purpose of introducing students to rigour in mathematics, as well as refresh some elementary mathematics that the students might not have seen for years. The approach of LinAlgOp (as I will refer to it from now on) is to skip the previously mentioned less important concepts, and instead attempt to bunch together linear algebra and real analysis into one ambitious introductory mathematics course. The idea is intriguing, but in my opinion unrealistic with the way the programme structured now.
 
 2) The entire programme is chaotic due to its recent kickoff last year. I started at kickoff last year, and now a year later we've lost half of the students who started. While there could be a multitude of reasons for this, I suspect LinAlgOp and statistics. It's evident from the distribution of the grades (that I will not reveal) of those two courses that something isn't right. Two quite extensive mathematics courses on the first year with no introduction to mathematics takes its toll. So, because of the high level of difficulty, and the intrinsic chaos present on a new programme, I feel that it's only reasonable to help one another - especially considering the importance of linear algebra in data science.
 
