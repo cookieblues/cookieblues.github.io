@@ -10,13 +10,12 @@ section {
 }
 
 body {
-  background-color: #fefefc;
+  background-color: #ffffff;
   padding:50px;
   font-family: Arial;
   font-size: 13px;
   color:#000000;
   font-weight:normal;
-  word-wrap:break-word;
 }
 
 h1, h2, h3 {
@@ -38,6 +37,10 @@ h3 {
   color:#262626;
   font-size:17px;
   margin:0 0 10px;
+}
+
+h4 {
+  margin:0 0 5px
 }
 
 p, ol, ul, table, pre, dl {

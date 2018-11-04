@@ -81,58 +81,104 @@ document.addEventListener("DOMContentLoaded", function() {
 
             <section>
                 <div id="content">
-                    <h1>A Look at Linear Algebra and Optimisation</h1>
-<p>Over the next month or two I’ll try and post notes for the course “Linear Algebra and Optimisation” at the IT University of Copenhagen. I’ll attempt to make the notes give an intuitive understanding of the concepts introduced. Therefore the notes will <strong>not</strong> contain rigorous proofs and explanations of every little theorem you might run into in a linear algebra course.<br />
-While I didn’t take the course myself, because I got merit from another linear algebra course, I did help a few of my classmates when they were taking it, and I’m also currently TAing the course for the new students.</p>
+                    <h1>LinAlgOp, notes 9a: The derivative, the limit, and the concept of approach</h1>
+<p>Imagine you’re participating in a $100$ metres sprint race. When you hear the starter’s pistol, you accelerate for dozens of metres, i.e. your velocity will increase until you reach your maximum speed. Let’s assume, you reach your maximum speed $5$ seconds into the race, after which you start to fatigue and decelerate - and let’s also assume, you finish the race in $10$ seconds. If we let $s(t)$ be the distance you’ve traveled at time $t$, and $v(t)$ your velocity at time $t$, then we can draw your velocity and the distance you’ve traveled in a plot like the one below.</p>
 
-<h3 id="overview">Overview</h3>
-<p>The course is 14 weeks, tightly packed, and assumes you are familiar with basic vector calculation. It is split up in a linear algebra part and a calculus part, each taking up about half of the course with the linear algebra part taking up the first half. Since the course is underway in the 8th week as of writing this, which is the last week of linear algebra, I will start the notes from the 9th week to accomodate the students taking the course. On top of that, I’ll split the first notes into three parts considering the amount of material that has to be plown through.</p>
+<video width="500" height="310" loop="" muted="" autoplay="">
+    <source src="../extra/linalgop-notes-9a/fig_01.mp4" type="video/mp4" />
+</video>
 
-<ol>
-  <li>Vectors, linear combinations, and span</li>
-  <li>Systems of linear equations</li>
-  <li>Linear transformations and matrices</li>
-  <li>Determinants</li>
-  <li>Vector spaces, subspaces, basis</li>
-  <li>Method of least squares with projection matrices</li>
-  <li>Eigenvectors, eigenvalues, and diagonalisation</li>
-  <li>PageRank algorithm</li>
-  <li>Introduction to calculus:<br />
-(a) <a href="http://localhost:4000/pages/linalgop-notes-9a">The derivative, the limit, and the concept of approach</a><br />
-(b) <a href="http://localhost:4000/pages/linalgop-notes-9b">The chain rule, derivatives of logarithmic functions, extrema, and optimisation</a><br />
-(c) Integration and the fundamental theorem of calculus</li>
-  <li>Newtons method and Taylor polynomials</li>
-  <li>Motion along a curve</li>
-  <li>Partial derivatives and gradients</li>
-  <li>Optimisation, 2nd derivative test, and Lagrange multipliers</li>
-  <li>Multiple integrals</li>
-</ol>
+<p>Notice how towards the middle of the race you’re traveling more metres per unit of time than at the beginning and end. We know that to calculate velocity, we take the ratio of the distance traveled and the time it took. If we start at $s(t_1)$ and end at $s(t_2)$, we say</p>
 
-<h3 id="motivation">Motivation</h3>
-<p>While I’ve taught linear algebra before, and it probably won’t be the last time, having online notes to reference will likely buy me time in the future. Except for this, my motivation is threefold:</p>
+<script type="math/tex; mode=display">v_{\text{average}} = \frac{s(t_2)-s(t_1)}{t_2-t_1}.</script>
 
-<p>1) The data science programme is mathematically heavy with network analysis, algorithms and data structures, and machine learning as courses on the menu. As such, a solid mathematical foundation is required. Most, if not all, other mathematically inclined programmes in Denmark have an introductory math course: mathematics and physics at KU have introduction to mathematics<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup><sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup>, computer science at KU has discrete mathematics<sup id="fnref:3"><a href="#fn:3" class="footnote">3</a></sup>, and engineer students at DTU have to take an extensive introductory mathematics course<sup id="fnref:4"><a href="#fn:4" class="footnote">4</a></sup>. Ordinary concepts introduced by these courses include complex numbers, sequences and series, simple differential equations, Taylor’s theorem, etc., which are not necessarily important concepts to grasp as a data scientist.<br />
-Yet, these courses also serve the purpose of introducing students to rigour in mathematics, as well as refresh some elementary mathematics that the students might not have seen for years. The approach of LinAlgOp (as I will refer to it from now on) is to skip the previously mentioned less important concepts, and instead attempt to bunch together linear algebra and real analysis into one ambitious introductory mathematics course. The idea is intriguing, but in my opinion unrealistic with the way the programme structured now.</p>
+<p>We can write this more formally as the average velocity from $t_1$ to some amount of time after that, if we use the time difference $t_2-t_1=\Delta t$. This gives us</p>
 
-<p>2) The entire programme is chaotic due to its recent kickoff last year. I started at kickoff last year, and now a year later we’ve lost half of the students who started. While there could be a multitude of reasons for this, I suspect LinAlgOp and statistics. It’s evident from the distribution of the grades (that I will not reveal) of those two courses that something isn’t right. Two quite extensive mathematics courses on the first year with no introduction to mathematics takes its toll. So, because of the high level of difficulty, and the intrinsic chaos present on a new programme, I feel that it’s only reasonable to help one another - especially considering the importance of linear algebra in data science.</p>
+<script type="math/tex; mode=display">v_{\text{average}} = \frac{s(t_1 + \Delta t)-s(t_1)}{\Delta t}. \quad \quad (1)</script>
 
-<p>3) Linear algebra is intuitive and applicable; however, it’s often taught with long, convoluted, and dull calculations without any insight in its practicality. When it comes to data science, I think learning-by-doing has merit to it. Yet, I also believe application often follows from intuition. Having an innate grasp of a concept makes it easier to discover and utilize it in different contexts. While LinAlgOp does a great job of inserting applications into the syllabus (the method of least squares with projection, diagonalisation, and even the PageRank algorithm), it unfortunately lacks much “intuition teaching”. My hope is that I can provide at least some intuition.</p>
+<p>This is a <em>change</em> in distance divided by a <em>change</em> in time, but if we were to ask, how fast you were running at an instant, the question doesn’t seem to make sense. No distance is traveled in a point in time, and no time has passed in an instant. Yet, in the plot above we have a function $v(t)$ that supposedly gives us the velocity at a point in time. The function gives us the <em>instantaneous</em> rate of <em>change</em> of distance.</p>
 
-<p>As of writing this, the course has run twice, and the latest version can be found <a href="https://mit.itu.dk/ucs/cb_www/course.sml?course_id=2013608&amp;mode=search&amp;lang=da&amp;print_friendly_p=t&amp;goto=1540218458.000" target="_blank">here</a>.</p>
+<h3 id="approach-and-limits">Approach and limits</h3>
+<p>To understand this phenomenon of change in an instant, we have to talk about the concept of approach. Let’s look at the function $f(x) = x^2+1$. Imagine we had to figure out what $f(0)$ is equal to, without inserting $0$ into the function. One way of doing it could be to start from a number higher than $0$, say $1$, evalute the function at that number $f(1)=1^2+1=2$, then divide the number we just evaluated with, and repeat the process. This would give us the sequence: $f(1)=2$, $f(0.5)=1.7$, $f(0.25)=1.5$, $f(0.125)=1.35$, and so on. The same sequence would appear, if we started from values lower than $0$. Now, we know the answer is $f(0)=1$, but our argument isn’t very convincing. We want to be able to pick a number for $x$ close to $0$, that can get us arbitrarily close to $1$. This means that for any value $c$ close to $1$, we must be able to pick a value $x_c$ close to $0$ that satisfies $|1-f(x_c)|&lt;|1-c|$. If we can be certain about this, then we can say that $f(x)$ approaches $1$<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>. We can certainly do this! Let’s say $c=1.01$, then we solve</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+f(x) &= 1.01 \\
+x^2 + 1 &= 1.01 \\
+x &= \sqrt{1.01-1} \\
+x &= \pm 0.1
+\end{aligned} %]]></script>
+
+<p>and pick a value of $x$ between $-0.1$ and $0.1$. We can generalize this such that for a given $c$, we pick $x$ to be between $-\sqrt{c-1}$ and $\sqrt{c-1}$. The key thing here is, if we want to say that a function approaches a value, then we have to be able to get <em>arbitrarily</em> close to it - and this has to be the case, if we’re approaching from either side of $x_c$.</p>
+
+<p>This is the concept of approach and the intuition behind limits. Suppose $f(x)$ is defined for all $x$ around $a$ but not necessarily at $a$. We can say</p>
+
+<script type="math/tex; mode=display">\lim_{x \to x_c} f(x) = c, \quad \quad (2)</script>
+
+<p>if we can make $f(x)$ get arbitrarily close to $c$ for values of $x$ close but not equal to $x_c$. Equation $(2)$ is read: “the limit of $f$ of $x$ as $x$ approaches $x_c$ equals $c$”. Another way to write this is</p>
+
+<script type="math/tex; mode=display">f(x) \to c \quad \text{as} \quad x \to x_c,</script>
+
+<p>which is read: “$f$ of $x$ approaches $c$ as $x$ approaches $x_c$”.</p>
+
+<h4 id="example">Example:</h4>
+<p>Suppose we have to find the limit</p>
+
+<script type="math/tex; mode=display">\lim_{x \to 1} \frac{1-\sqrt{x}}{1-x}.</script>
+
+<p>The problem here is that we cannot insert $x=1$ into the fraction, as we would then divide by $0$. Instead, we do a bit of algebraic manipulation to get a limit, we can evaluate</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+\lim_{x \to 1} \frac{1-\sqrt{x}}{1-x}
+&= \lim_{x \to 1} \frac{1-\sqrt{x}}{(1-\sqrt{x})(1+\sqrt{x})} \\
+&= \lim_{x \to 1} \frac{1}{1+\sqrt{x}} \\
+&= \frac{1}{1+\sqrt{1}} \\
+&= \frac{1}{2}.
+\end{aligned} %]]></script>
+
+<h3 id="derivatives">Derivatives</h3>
+<p>If we return to our initial example of the sprint race, we asked ourselves: how fast were you running at a point in time? With our new knowledge of approach and limits, we can rephrase the question and instead ask: what happens when $\Delta t$ approaches $0$ in equation $(1)$? The question asks, what</p>
+
+<script type="math/tex; mode=display">v(t) = \lim_{\Delta t \to 0} \frac{s(t+\Delta t)-s(t)}{\Delta t} \quad \quad (3)</script>
+
+<p>is equal to. Underneath is an illustration of $v(t)$ as $\Delta t \to 0$.</p>
+
+<video width="500" height="310" loop="" muted="" autoplay="">
+    <source src="../extra/linalgop-notes-9a/fig_02.mp4" type="video/mp4" />
+</video>
+
+<p>As can be seen above, the velocity turns out to be the slope or tangent line of the distance. This is also what we call the derivative of the distance function. This is usually denoted</p>
+
+<script type="math/tex; mode=display">\frac{d}{dt}s(t) = v(t),</script>
+
+<p>where $\frac{d}{dt}$ is the differentiation operator; differentiation is the process of finding a derivative. Using the common notation $y=f(x)$ to show that the independent (free) variable is $x$, and the dependent variable is $y$, we can write up several notations for the derivative:</p>
+
+<script type="math/tex; mode=display">\frac{df}{dx} = \frac{dy}{dx} = \frac{d}{dx}f(x) = f'(x) = y' = Df(x) = D_x f(x).</script>
+
+<h4 id="example-1">Example:</h4>
+<p>Let $f(x) = x + \frac{1}{x}$, and let’s try and find the derivative using the definition from $(3)$. We see</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+f'(x)
+&= \lim_{\Delta x \to 0} \frac{f(x+\Delta x)-f(x)}{\Delta x} \\
+&= \lim_{\Delta x \to 0} \frac{x+\Delta x + \frac{1}{x + \Delta x} - \left( x + \frac{1}{x} \right)}{\Delta x} \\
+&= \lim_{\Delta x \to 0} \frac{\Delta x + \frac{1}{x + \Delta x} - \frac{1}{x}}{\Delta x} \\
+&= \lim_{\Delta x \to 0} 1 + \frac{x - (x + \Delta x)}{\Delta x (x + \Delta x)x} \\
+&= \lim_{\Delta x \to 0} 1 - \frac{1}{(x + \Delta x)x} \\
+&= 1 - \frac{1}{x^2},
+\end{aligned} %]]></script>
+
+<p>which is the actual derivative.</p>
+
+<h3 id="final-thoughts">Final thoughts</h3>
+<p>One of my professors once said: “differentiation is mechanics and integration is art”. At first it just sounded like a crap quote, but it’s more of a general saying than a quote really. Differentiation is mostly tedious calculation, and you just have to practice it a lot to learn it. However, integration often requires some creativity, but we’ll get to that later on. I’m considering uploading a few exercises after this first week of calculus that try and teach some core tips and tricks of differentiation and integration.</p>
 
 <div class="footnotes">
   <ol>
     <li id="fn:1">
-      <p>https://studier.ku.dk/bachelor/matematik/undervisning-og-opbygning/matematik/</p>
-    </li>
-    <li id="fn:2">
-      <p>https://studier.ku.dk/bachelor/fysiske-fag/undervisning-og-opbygning/</p>
-    </li>
-    <li id="fn:3">
-      <p>https://studier.ku.dk/bachelor/datalogi/undervisning-og-opbygning/</p>
-    </li>
-    <li id="fn:4">
-      <p>https://www.dtu.dk/Uddannelse/Bachelor#uddannelsens-opbygning</p>
+      <p>This is not the rigorous definition of a limit.</p>
     </li>
   </ol>
 </div>
