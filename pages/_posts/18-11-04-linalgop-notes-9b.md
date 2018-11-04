@@ -181,7 +181,7 @@ P( \text{data} | \text{parameter} )
 &= \pi^{46} (1-\pi)^{54}.
 \end{aligned} $$
 
-Since the probability of heads and tails is $\pi$ and $1-\pi$ respectively, and they're independent events, we can take the product of the probabilities of each coin toss in our sequence to get the probability of the entire sequence. This is commonly known as the product rule of probability[^6][^7]. We want to figure out, what the most likely probability of heads is $(\pi)$ with our data of 46 heads and 54 tails. Just like our data, the parameter $\pi$ has a fixed value too, but it's unknown. We therefore treat it as a variable between 0 and 1 that we are free to choose. We now have the so-called [*likelihood function*](https://en.wikipedia.org/wiki/Likelihood_function){:target="_blank"}.
+The left-hand side is read: "the probability of the data given the parameter". Since the probability of heads and tails is $\pi$ and $1-\pi$ respectively, and they're independent events, we can take the product of the probabilities of each coin toss in our sequence to get the probability of the entire sequence. This is commonly known as the product rule of probability[^6][^7]. We want to figure out, what the most likely probability of heads is $(\pi)$ with our data of 46 heads and 54 tails. Just like our data, the parameter $\pi$ has a fixed value too, but it's unknown. We therefore treat it as a variable between 0 and 1 that we are free to choose. We now have the so-called [*likelihood function*](https://en.wikipedia.org/wiki/Likelihood_function){:target="_blank"}.
 
 $$
 \mathcal{L} ( \text{parameter} | \text{data} ) = \pi^{46} (1-\pi)^{54},
