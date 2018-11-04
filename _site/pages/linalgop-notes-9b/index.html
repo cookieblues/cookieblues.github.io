@@ -47,9 +47,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 <h1><a href="http://localhost:4000">Cookieblues</a></h1>
 
 <p>
-    I'm a data science student at ITU with a bit of experience in mathematics.
-    I'll be posting stuff.
+    I'm a data science student at ITU with a bit of experience in mathematics. I'll be posting stuff. <br><br> E-mail: shro@itu.dk.
 </p>
+
 
 <h5 class="side">CATEGORIES</h5>
 <p class="side">
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     <p class="side">
         <a href="/pages/linalgop-notes-9b/">
-            29 Oct, 2018 - LinAlgOp, notes 9b: The chain rule, derivatives of logarithmic functions, extrema, and optimisation
+            04 Nov, 2018 - LinAlgOp, notes 9b: The chain rule, derivatives of logarithmic functions, extrema, and optimisation
         </a>
     </p>
 
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function() {
             <section>
                 <div id="content">
                     <h1>LinAlgOp, notes 9b: The chain rule, derivatives of logarithmic functions, extrema, and optimisation</h1>
-<p>Differentiation is commonly taught through rote learning, which I’m not a fan of. Therefore I’ll allow myself to skip the basic rules of differentiation, and what the derivative of every little function is. Instead, I want to focus on the useful and interesting namely the chain rule and logarithmic derivatives, both of which are important in machine learning. At the end, we’ll talk about optimisation, where we’ll try and combine, what we’ve learned.</p>
+<p>Differentiation is commonly taught through rote learning, which I’m not a fan of. Therefore I’ll allow myself to skip the basic rules of differentiation, and what the derivative of every little function is. Instead, I want to focus on the useful and interesting, namely, the chain rule and logarithmic derivatives, both of which are important in machine learning. At the end, we’ll talk about optimisation, where we’ll try and combine, what we’ve learned.</p>
 
 <h3 id="the-chain-rule">The chain rule</h3>
 <p>There are many rules of differentiation, e.g. let $u,v$ be functions, then the sum rule tells us how to take the derivative of a sum of functions</p>
@@ -231,7 +231,7 @@ f'(x) &> 0 \quad \text{for} \quad 2 < x.
 <h3 id="optimisation-example-putting-it-all-together">Optimisation example (putting it all together)</h3>
 <p>Now, let’s take everything we’ve learned, put it together, and use it! Optimisation problems often aim to find the extrema of a specifically constructed function. In most literature this function is called the <em>objective</em> function, and the aim is to find its maximum or minimum. The objective function can be interpreted as the error or accuracy of a model, and our goal is to minimize or maximize this measure, hence optimizing the model.</p>
 
-<p>Suppose we have a coin, and we want to find the most likely probability (parameter) for this coin to hit heads and tails. If we let $\pi$ represent the unknown probability of heads, $1-\pi$ the probabilty of tails, and toss the coin $100$ times, then our result looks something like</p>
+<p>Suppose we have a coin, and we want to find the most likely probability (parameter) for this coin to hit heads and tails - i.e., we want to create a model that calculates the most likely number of heads and tails in a number of coin tosses. If we let $\pi$ represent the unknown probability of heads, $1-\pi$ the unknown probabilty of tails, and toss the coin $100$ times, then our result could look something like this</p>
 
 <script type="math/tex; mode=display">HHTHTTHHHTHT \dots,</script>
 
@@ -245,7 +245,7 @@ P( \text{data} | \text{parameter} )
 &= \pi^{46} (1-\pi)^{54}.
 \end{aligned} %]]></script>
 
-<p>Since the probability of heads and tails is $\pi$ and $1-\pi$ respectively, and they’re independent events, we can take the product of the probabilities of each coin toss in our sequence to get the probability of the entire sequence. This is commonly known as the product rule of probability<sup id="fnref:6"><a href="#fn:6" class="footnote">6</a></sup><sup id="fnref:7"><a href="#fn:7" class="footnote">7</a></sup>. We want to figure out, what the most likely probability of heads is $(\pi)$ with our data of 46 heads and 54 tails. Just like our data, the parameter $\pi$ has a fixed value too, but it’s unknown. We therefore treat it as a variable between 0 and 1 that we are free to choose. We now have the so-called <a href="https://en.wikipedia.org/wiki/Likelihood_function" target="_blank"><em>likelihood function</em></a>.</p>
+<p>The left-hand side is read: “the probability of the data given the parameter”. Since the probability of heads and tails is $\pi$ and $1-\pi$ respectively, and they’re independent events, we can take the product of the probabilities of each coin toss in our sequence to get the probability of the entire sequence. This is commonly known as the product rule of probability<sup id="fnref:6"><a href="#fn:6" class="footnote">6</a></sup><sup id="fnref:7"><a href="#fn:7" class="footnote">7</a></sup>. We want to figure out, what the most likely probability of heads is $(\pi)$ with our data of 46 heads and 54 tails. Just like our data, the parameter $\pi$ has a fixed value too, but it’s unknown. We therefore treat it as a variable between 0 and 1 that we are free to choose. We now have the so-called <a href="https://en.wikipedia.org/wiki/Likelihood_function" target="_blank"><em>likelihood function</em></a>.</p>
 
 <script type="math/tex; mode=display">\mathcal{L} ( \text{parameter} | \text{data} ) = \pi^{46} (1-\pi)^{54},</script>
 
@@ -255,12 +255,12 @@ P( \text{data} | \text{parameter} )
     <source src="../extra/linalgop-notes-9b/fig_02.mp4" type="video/mp4" />
 </video>
 
-<p>The maximum value of the likelihood function is at $\pi=0.46$, and we’re done, but let’s examine closer, what we did. We tossed a coin $100$ times, asked ourselves what the most likely probability of heads is, and called this value $\pi$. Then we wrote up the likelihood function of $\pi$, and found the value of $\pi$ corresponding to the maximum of the likelihood function. Let’s try and generalize this method.<br />
+<p>The maximum value of the likelihood function is at $\pi=0.46$, and we’re done. We now have a parameter $\pi = 0.46$ that gives us the most likely ratio of heads to coin tosses, given the data we produced. We can think of this as optimizing our coin toss model, but let’s examine closer, what we did. We tossed a coin $100$ times, asked ourselves what the most likely probability of heads is, and called this value $\pi$. Then we wrote up the likelihood function of $\pi$, and found the value of $\pi$ corresponding to the maximum of the likelihood function. Let’s now try and generalize this method, in case we produced different data.<br />
 Let’s say we toss the coin $n$ times, and we get $k$ heads. Our likelihood function would be</p>
 
 <script type="math/tex; mode=display">\mathcal{L} ( \pi | \text{data} ) = \pi^x (1-\pi)^{n-k}.</script>
 
-<p>Then we want to find the maximum of this function. While we could try and take the derivative straight away, there is an important theorem, we utilize instead: the natural logarithm is a strictly increasing function, and so the natural logarithm of a function achieves its maxima at the same values as the function itself. Therefore, instead of finding the maximum of $\mathcal{L}$, we can find the maximum of $\ln ( \mathcal{L} )$, which often times is easier. By using the rules of logarithms, we find</p>
+<p>Then we want to find the maximum of this function. While we could try and take the derivative straight away, there is an important theorem, we use instead: the natural logarithm is a strictly increasing function, so the natural logarithm of a function achieves its maxima at the same values as the function itself. Therefore, instead of finding the maximum of $\mathcal{L}$, we can find the maximum of $\ln ( \mathcal{L} )$, which often times is easier. By using the rules of logarithms, we find</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{aligned}
@@ -280,7 +280,7 @@ Let’s say we toss the coin $n$ times, and we get $k$ heads. Our likelihood fun
 &= \frac{k}{\pi} - \frac{n-k}{1-\pi}
 \end{aligned} %]]></script>
 
-<p>Then we set the derivative equal to zero and solve for $\pi$ to find the maximum point:</p>
+<p>Then we set the derivative equal to zero and solve for $\pi$ to find the maximum:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{aligned}
