@@ -3,7 +3,7 @@ title: "LinAlgOp, notes 9b: The chain rule, derivatives of logarithmic functions
 layout: post
 tags: LinAlgOp
 ---
-Differentiation is commonly taught through rote learning, which I'm not a fan of. Therefore I'll allow myself to skip the basic rules of differentiation, and what the derivative of every little function is. Instead, I want to focus on the useful and interesting namely the chain rule and logarithmic derivatives, both of which are important in machine learning. At the end, we'll talk about optimisation, where we'll try and combine, what we've learned.
+Differentiation is commonly taught through rote learning, which I'm not a fan of. Therefore I'll allow myself to skip the basic rules of differentiation, and what the derivative of every little function is. Instead, I want to focus on the useful and interesting, namely, the chain rule and logarithmic derivatives, both of which are important in machine learning. At the end, we'll talk about optimisation, where we'll try and combine, what we've learned.
 
 ### The chain rule
 There are many rules of differentiation, e.g. let $u,v$ be functions, then the sum rule tells us how to take the derivative of a sum of functions
