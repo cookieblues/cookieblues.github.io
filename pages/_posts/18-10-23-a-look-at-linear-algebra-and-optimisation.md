@@ -19,7 +19,7 @@ The course is 14 weeks, tightly packed, and assumes you are familiar with basic 
 8. PageRank algorithm
 9. Introduction to calculus:\\
    (a) <a href="{{ site.url }}/pages/linalgop-notes-9a">The derivative, the limit, and the concept of approach</a>\\
-   (b) The chain rule, derivatives of logarithmic functions, and extrema\\
+   (b) <a href="{{ site.url }}/pages/linalgop-notes-9b">The chain rule, derivatives of logarithmic functions, extrema, and optimisation</a>\\
    (c) Integration and the fundamental theorem of calculus
 10. Newtons method and Taylor polynomials
 11. Motion along a curve
