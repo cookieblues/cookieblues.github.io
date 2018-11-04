@@ -166,7 +166,7 @@ We can interpret this as, if we're coming from the left, then $x=2$ is a maximum
 ### Optimisation example (putting it all together)
 Now, let's take everything we've learned, put it together, and use it! Optimisation problems often aim to find the extrema of a specifically constructed function. In most literature this function is called the *objective* function, and the aim is to find its maximum or minimum. The objective function can be interpreted as the error or accuracy of a model, and our goal is to minimize or maximize this measure, hence optimizing the model.
 
-Suppose we have a coin, and we want to find the most likely probability (parameter) for this coin to hit heads and tails. If we let $\pi$ represent the unknown probability of heads, $1-\pi$ the probabilty of tails, and toss the coin $100$ times, then our result looks something like
+Suppose we have a coin, and we want to find the most likely probability (parameter) for this coin to hit heads and tails - i.e., we want to create a model that calculates the most likely number of heads and tails in a number of coin tosses. If we let $\pi$ represent the unknown probability of heads, $1-\pi$ the unknown probabilty of tails, and toss the coin $100$ times, then our result could look something like this
 
 $$
 HHTHTTHHHTHT \dots,
@@ -193,14 +193,14 @@ i.e. a function of the parameter given the data. Below is a plot of the likeliho
     <source src="../extra/linalgop-notes-9b/fig_02.mp4" type="video/mp4">
 </video>
 
-The maximum value of the likelihood function is at $\pi=0.46$, and we're done, but let's examine closer, what we did. We tossed a coin $100$ times, asked ourselves what the most likely probability of heads is, and called this value $\pi$. Then we wrote up the likelihood function of $\pi$, and found the value of $\pi$ corresponding to the maximum of the likelihood function. Let's try and generalize this method.\\
+The maximum value of the likelihood function is at $\pi=0.46$, and we're done. We now have a parameter $\pi = 0.46$ that gives us the most likely ratio of heads to coin tosses, given the data we produced. We can think of this as optimizing our coin toss model, but let's examine closer, what we did. We tossed a coin $100$ times, asked ourselves what the most likely probability of heads is, and called this value $\pi$. Then we wrote up the likelihood function of $\pi$, and found the value of $\pi$ corresponding to the maximum of the likelihood function. Let's now try and generalize this method, in case we produced different data.\\
 Let's say we toss the coin $n$ times, and we get $k$ heads. Our likelihood function would be
 
 $$
 \mathcal{L} ( \pi | \text{data} ) = \pi^x (1-\pi)^{n-k}.
 $$
 
-Then we want to find the maximum of this function. While we could try and take the derivative straight away, there is an important theorem, we utilize instead: the natural logarithm is a strictly increasing function, and so the natural logarithm of a function achieves its maxima at the same values as the function itself. Therefore, instead of finding the maximum of $\mathcal{L}$, we can find the maximum of $\ln ( \mathcal{L} )$, which often times is easier. By using the rules of logarithms, we find
+Then we want to find the maximum of this function. While we could try and take the derivative straight away, there is an important theorem, we use instead: the natural logarithm is a strictly increasing function, so the natural logarithm of a function achieves its maxima at the same values as the function itself. Therefore, instead of finding the maximum of $\mathcal{L}$, we can find the maximum of $\ln ( \mathcal{L} )$, which often times is easier. By using the rules of logarithms, we find
 
 $$ \begin{aligned}
 \ln ( \mathcal{L}( \pi | \text{data} ) )
@@ -218,7 +218,7 @@ $$ \begin{aligned}
 &= \frac{k}{\pi} - \frac{n-k}{1-\pi}
 \end{aligned} $$
 
-Then we set the derivative equal to zero and solve for $\pi$ to find the maximum point:
+Then we set the derivative equal to zero and solve for $\pi$ to find the maximum:
 
 $$ \begin{aligned}
 \frac{d}{d\pi} \ln ( \mathcal{L} )
