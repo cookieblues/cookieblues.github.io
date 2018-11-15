@@ -8,4 +8,4 @@ markdown: kramdown
 kramdown:
    math_engine: mathjax
    footnote_backlink:
-tags: [LinAlgOp]
+tags: [LinAlgOp,ML]

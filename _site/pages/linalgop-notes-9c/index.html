@@ -47,20 +47,26 @@ document.addEventListener("DOMContentLoaded", function() {
                 <h1><a href="http://localhost:4000">Cookieblues</a></h1>
 
 <p>
-    I'm a data science student at ITU with a bit of experience in mathematics.
-    I'll be posting stuff.
+    I'm a data science student at ITU with a bit of experience in mathematics. I'll be posting stuff. <br><br> E-mail: shro@itu.dk.
 </p>
+
 
 <h5 class="side">CATEGORIES</h5>
 <p class="side">
-    Linear Algebra and Optimisation
+    <a href="http://localhost:4000/pages/cats/linalgop">Linear Algebra and Optimisation</a>
 </p>
 
 <h5 class="side">ARCHIVES</h5>
 
     <p class="side">
+        <a href="/pages/linalgop-notes-9c/">
+            12 Nov, 2018 - LinAlgOp, notes 9c: Integration and the fundamental theorem of calculus
+        </a>
+    </p>
+
+    <p class="side">
         <a href="/pages/linalgop-notes-9b/">
-            29 Oct, 2018 - LinAlgOp, notes 9b: The chain rule, derivatives of logarithmic functions, extrema, and simple optimisation
+            04 Nov, 2018 - LinAlgOp, notes 9b: The chain rule, derivatives of logarithmic functions, extrema, and optimisation
         </a>
     </p>
 
@@ -72,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     <p class="side">
         <a href="/pages/a-look-at-linear-algebra-and-optimisation/">
-            23 Oct, 2018 - A Look at Linear Algebra and Optimisation
+            23 Oct, 2018 - A look at Linear Algebra and Optimisation
         </a>
     </p>
 
@@ -81,173 +87,122 @@ document.addEventListener("DOMContentLoaded", function() {
 
             <section>
                 <div id="content">
-                    <h1>LinAlgOp, notes 9b: The chain rule, derivatives of logarithmic functions, extrema, and simple optimisation</h1>
-<p>Differentiation is commonly taught through rote learning, which I’m not a fan of. Therefore I’ll allow myself to skip the basic rules of differentiation, and what the derivative of every little function is. Instead, I want to focus on the useful and interesting namely the chain rule and logarithmic derivatives, both of which are important in machine learning. At the end, we’ll talk about optimisation, where we’ll try and combine, what we’ve learned.</p>
+                    <h1>LinAlgOp, notes 9c: Integration and the fundamental theorem of calculus</h1>
+<p>In <a href="http://localhost:4000/pages/linalgop-notes-9a">notes 9a</a> we introduced the derivative by looking at a $100$ meter sprint race. We looked at the so-called distance function $s(t)$, which told us how far we’d run in the race at time $t$, and asked if we could figure out a function for velocity $v(t)$. We found that the derivative of the distance function $s(t)$ was the velocity function $v(t)$, which we wrote up</p>
 
-<h3 id="the-chain-rule">The chain rule</h3>
-<p>There are many rules of differentiation, e.g. let $u,v$ be functions, then the sum rule tells us how to take the derivative of a sum of functions</p>
+<script type="math/tex; mode=display">\frac{d}{dt}s(t) = s'(t) = v(t).</script>
 
-<script type="math/tex; mode=display">\frac{d}{dx} (u + v) = \frac{du}{dx} + \frac{dv}{dx},</script>
+<p>This time we will look at the velocity function and try to figure out the distance function, i.e. we want to do the opposite as last time, where we found the derivative; we want to find the antiderivative.
+<!--more--></p>
 
-<p>the product rule tells us how to take the derivative of a product of functions</p>
+<h3 id="integration">Integration</h3>
+<p>Let’s take the example from last time but only focus on the velocity. If we want to find the antiderivative, we could ask ourselves, what function when taking the derivative gives us the velocity function. In that case, we have essentially solved our problem of finding the antiderivative, but we’re going to take a different approach. Let’s say you run a constant $10$ meters per second, so you finish the $100$ meter sprint in $10$ seconds. If we plot the velocity function with time on the x-axis, and velocity $\left( \frac{\text{distance}}{\text{time}} \right)$ on the y-axis (like below), we can think of area on the plot as distance, since</p>
 
-<script type="math/tex; mode=display">\frac{d}{dx} (u \cdot v) = \frac{du}{dx} \cdot v + u \cdot \frac{dv}{dx},</script>
-
-<p>and the chain rule tells us how to take the derivative of a <em>composition</em> of functions. A function composition can be thought of as putting one function into another. Say we have two functions $f(x) = \sin (x)$ and $g(x) = x^2$. We can make two compositions from these two functions: $(f \circ g) (x) = f(g(x)) = \sin \left( x^2 \right)$ and $(g \circ f) (x) = g(f(x)) = \sin^2(x)$. The $\circ$ symbol represents a function composition. <br />
-Let’s choose $(f \circ g) (x) = \sin \left( x^2 \right)$ and try to reason our way to its derivative. From <a href="http://localhost:4000/pages/linalgop-notes-9a">notes 9a</a> we know, the derivative of a function is the oxymoron <em>instantaneous</em> rate of <em>change</em>. If we call this change $dx$, then we can write the derivative as</p>
-
-<script type="math/tex; mode=display">\frac{du}{dx} = \lim_{ dx \to 0} \frac{u(x+ dx)-u(x)}{ dx}. \quad \quad (1)</script>
-
-<p>We can also phrase this as: a slight change in the function’s output divided by a slight change in its input. In our example of function composition, $(f \circ g) (x) = \sin \left( x^2 \right)$, we have to think about this in two steps:</p>
-
-<p>Firstly, we have to consider, what happens to $g(x)$, when a slight change in $x$ occurs. Since $g(x) = x^2$, a slight change $dx$ will equal $g(x + dx) - g(x)$ or rather</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned}
-g(x + dx) - g(x)
-&= (x+dx)^2 - x^2 \\
-&= x^2 + 2xdx + (dx)^2 - x^2 \\
-&= 2xdx + ( dx )^2.
-\end{aligned} %]]></script>
-
-<p>If we divide both sides by the slight change $dx$ and compare it to equation $(1)$, we see, we’ve calculated the derivative of $g$</p>
-
-<script type="math/tex; mode=display">\frac{dg}{dx} = \frac{g(x + dx) - g(x)}{dx} = 2x + dx, \quad \quad (2)</script>
-
-<p>which is $2x$, plus a slight change that will be negligible, when $dx \to 0$.</p>
-
-<p>Secondly, we have to consider, what happens to $f(g(x))$, when a slight change in $g(x)$ occurs. Using the same reasoning as before, and knowing that the derivative of $\sin(x)$ is $\cos(x)$, we can say</p>
-
-<script type="math/tex; mode=display">\frac{df}{dg} = \cos(g) \quad \quad (3)</script>
-
-<p>as $dg \to 0$, i.e. the derivative of $\sin(g)$ with respect to $g$ is $\cos(g)$. Multiplying $(2)$ and $(3)$ yields</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned}
-\frac{df}{dg} \cdot \frac{dg}{dx} &= \cos(g) 2x \\
-\frac{df}{dx} &= \cos( x^2 ) 2x,
-\end{aligned} %]]></script>
-
-<p>which is the derivative of $(f \circ g)(x) = \sin \left( x^2 \right)$ with respect to $x$. This result is the derivative of $f$ with respect to $g$ times the derivative of $g$ with respect to $x$, or rather the derivative of the “outer” function $(f)$ times the derivative of the “inner” function $(g)$. That’s the chain rule<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>. <br />
-More formally, if $g$ is a function differentiable at $a$, and $f$ is a function differentiable at $g(a)$, then the composite function $h = f \circ g$ is differentiable at $a$, and the derivative is</p>
-
-<script type="math/tex; mode=display">h'(a) = (f \circ g)'(a) = f'(g(a)) g'(a).</script>
-
-<h4 id="example">Example:</h4>
-<p>Let’s try and find the derivative of $f(x) = \sqrt[3]{7-3x}$. We start by rewriting the root as a power $f(x) = (7-3x)^{1/3}$. Then we let the inner function equal $g(x)=7-3x$, and the outer function $h(g) = g^{1/3}$. The derivative of $g$ with respect to $x$ is $-3$, and the derivative of $h(g)$ with respect to $g$ is $\frac{1}{3} g^{-2/3}$. The product of these gives us the derivative</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned}
-\frac{df}{dx}
-&= -3 \cdot \frac{1}{3} (7-3x)^{-\frac{2}{3}} \\
-&= -\frac{1}{(7-3x)^{\frac{2}{3}}}.
-\end{aligned} %]]></script>
-
-<h3 id="derivatives-of-logarithmic-functions">Derivatives of logarithmic functions</h3>
-<p>It’s tempting to dive into the relationship between derivatives, exponential, and logarithmic functions<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup>. Instead we will briefly talk about logarithms, some of their properties, and then look at the usefulness of logarithms, when we get to optimisation, which is also an appetizer for <a href="https://en.wikipedia.org/wiki/Maximum_likelihood_estimation" target="_blank">maximum likelihood estimation</a> in machine learning<sup id="fnref:3"><a href="#fn:3" class="footnote">3</a></sup><sup id="fnref:4"><a href="#fn:4" class="footnote">4</a></sup>. However, before we get into the derivative of logarithms, let’s refresh logarithms, shall we? <br />
-Firstly, a logarithm is the inverse function to an exponential function, i.e. $x$ is the base-$b$ logarithm of $y$ if and only if $b^x = y$. This is written</p>
-
-<script type="math/tex; mode=display">\log_b y = x \iff b^x = y.</script>
-
-<p>Logarithms are used to solve questions like: what exponent should 3 be raised to equal 27?</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned}
-3^x &= 81 \\
-x &= \log_3 81 \\
-x &= 4.
-\end{aligned} %]]></script>
-
-<p>The <em>common</em> logarithm is the logarithm to base $10$ denoted $\log(x)$. The <em>natural</em> logarithm, which is the one we’ll be using the most, has Euler’s number<sup id="fnref:5"><a href="#fn:5" class="footnote">5</a></sup> $e$ as its base and is denoted $\ln(x)$. Logarithms are useful for their special properties - the most common being</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned}
-\log_b x + \log_b y &= \log_b (xy) \\
-\log_b x - \log_b y &= \log_b \left( \frac{x}{y} \right) \\
-\log_b x^y &= y \log x,
-\end{aligned} %]]></script>
-
-<p>and many more, but these are the important ones for our purposes. The derivative of a logarithm is</p>
-
-<script type="math/tex; mode=display">\frac{d}{dx} (\log_b x) = \frac{1}{x \ln b},</script>
-
-<p>which makes the derivative of the natural logarithm</p>
-
-<script type="math/tex; mode=display">\frac{d}{dx} (\ln x) = \frac{1}{x}.</script>
-
-<h4 id="example-1">Example:</h4>
-<p>Let’s try and find the derivative with respect to $z$ of $\ln \left( 17 + z^{3/2} \right)$. We notice that this function is composite, and the outer function is the natural logarithm with derivative $\frac{1}{x}$. Therefore, using the chain rule and the derivative of the natural logarithm, we have</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned}
-\frac{d}{dz} \ln \left( 17 + z^\frac{3}{2} \right)
-&= \frac{1}{17 + z^\frac{3}{2}} \frac{d}{dz} \left( 17 + z^\frac{3}{2} \right) \\
-&= \frac{1}{17 + z^\frac{3}{2}} \frac{3}{2}z^\frac{1}{2} \\
-&= \frac{3 \sqrt{z}}{34 + 2z^\frac{3}{2}}.
-\end{aligned} %]]></script>
-
-<h3 id="extrema">Extrema</h3>
-<p>Extrema is the collective term for maxima and minima, which are the largest and smallest values of a function. Usually we distinguish between a <em>local</em> or <em>relative</em> extremum and a <em>global</em> or <em>absolute</em> extremum, where local and relative refers to a specific interval, and global and absolute refers to the domain of the function.<br />
-A point $x$ is an absolute maximum or minimum of a function $f$ in the interval $\left[ a,b \right]$, if</p>
-
-<script type="math/tex; mode=display">f(x) \geq f(x') \text{ or } f(x) \leq f(x') \text{ for all } x' \in \left[ a,b \right],</script>
-
-<p>and $x$ is a relative maximum or minimum, if it’s the absolute maximum or minimum value in a tiny interval around $x$, i.e. the interval $(x-c,x+c)$ for some small value $c$. While there are a couple of exceptions, we can in general find the extrema of a function by calculating its derivative and setting it equal to zero. This is because, as one might intuitively reason, the curve of the function “changes direction” at an extremum as illustrated below with the slope.</p>
+<script type="math/tex; mode=display">\text{velocity} \times \text{time} = \frac{\text{distance}}{\text{time}} \times \text{time} = \text{distance}.</script>
 
 <video width="500" height="310" loop="" muted="" autoplay="">
-    <source src="../extra/linalgop-notes-9b/fig_01.mp4" type="video/mp4" />
+    <source src="../extra/linalgop-notes-9c/fig_02.mp4" type="video/mp4" />
 </video>
 
-<p>We can also think of the extrema of a function is where the derivative changes sign before and after. This is also known as the <em>first derivative test</em>.</p>
+<p>I know it sounds weird to have distance be area, but try and stick with it. The plot above illustrates, how the area equals the distance traveled. Take some time to study the plot above, and let this idea become clear. Now, it’s easy to find the area, when the velocity is constant, since we’re just dealing with a rectangle - so let’s try and step it up a notch.</p>
 
-<h4 id="example-2">Example:</h4>
-<p>Let’s try and find the extrema of $f(x) = x^4-6x^3+12x^2-8x$. The derivative can be factorized as</p>
+<p>Let’s say, the velocity function follows the parabola $v(t)=t(10-t)=10t-t^2$. A quick <a href="http://localhost:4000/pages/linalgop-notes-9b">extrema</a> analysis tells us, this function increases from $v(t) = 0$ at $t=0$ up to a maximum $v(t) = 25$ at $t=5$, and then decreases again to $v(t)=0$ at $t=10$. To find the area between this velocity function and the x-axis, we could use the rectangle as inspiration and try to fill rectangles under the curve. Let’s chop the function up in $6$ rectangles, making their widths equal $\frac{10}{6}$ - and if we choose the rectangles’ upper left corners to touch the function, then it would look something like the plot below.</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{aligned}
-\frac{df}{dx}
-&= \frac{d}{dx} \left( x^4-6x^3+12x^2-8x \right) \\
-&= 4x^3-18x^2+24x-8 \\
-&= 2(x-2)^2 (2x-1).
-\end{aligned} %]]></script>
+<video width="500" height="310" loop="" muted="" autoplay="">
+    <source src="../extra/linalgop-notes-9c/fig_03.mp4" type="video/mp4" />
+</video>
 
-<p>Setting this equal to zero gives us two values for $x$, $2$ and $\frac{1}{2}$. To check if these points are extrema, we use the first derivative test and check the value of the derivative before and after each point. We see</p>
+<p>We end up with six rectangles as wanted, where each rectangle’s height is given by the point, where the upper left corner touches the velocity function. The height of the first rectangle is $v(0) = 0\cdot (10-0) = 0$, the height of the second rectangle is $v \left( \frac{10}{6} \right) = \frac{10}{6} \cdot \left( 10 - \frac{10}{6} \right) \approx 14$, the height of the third rectangle is $v \left( \frac{20}{6} \right) = \frac{20}{6} \cdot \left( 10 - \frac{20}{6} \right) \approx 22$, etc. The widths of all the rectangles are obviously $\frac{10}{6}$, as we defined, so we can write the area as</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 \begin{aligned}
-f'(x) &< 0 \quad \text{for} \quad  x < \frac{1}{2}, \\
-f'(x) &> 0 \quad \text{for} \quad \frac{1}{2} < x < 2, \\
-f'(x) &> 0 \quad \text{for} \quad 2 < x.
+\text{Area}
+&= \frac{10}{6} \cdot v(0) + \frac{10}{6} \cdot v \left( \frac{10}{6} \right) + \frac{10}{6} \cdot v \left( \frac{20}{6} \right) + \cdots + \frac{10}{6} \cdot  v \left( \frac{50}{6} \right).
 \end{aligned} %]]></script>
 
-<p>This implies that $f(x)$ has a minimum at $x=\frac{1}{2}$, but neither a maximum or a minimum at $x=2$. By plotting $f$ we can see, what is going on at $x=2$:</p>
+<p>If we call the points, where the rectangles touch the velocity function, $t_0, t_1, \dots, t_5$, we can write this as the sum</p>
 
-<h3 id="simple-optimisation-putting-it-all-together">Simple optimisation (putting it all together)</h3>
-<p>Now, let’s take everything we’ve learned, put it together, and utilize it! Optimisation problems often times aim to find the extrema of a specific function. In most literature this function is called the <em>loss</em> function, and the aim is to find its minimum, i.e. the function can be interpreted as an error of a model, and our goal is obviously to minimize this error.</p>
+<script type="math/tex; mode=display">\text{Area} = \sum_{n=0}^{5} v \left( t_n \right) \cdot \frac{10}{6}.</script>
 
-<p>Now, the really useful thing about the logarithm is, it’s a strictly increasing function, so the logarithm of a function has its maxima</p>
+<p>We can write this even more generalized, if we let $N$ be the number of rectangles, and $a,b$ be the endpoints of the interval. So in our case $N=6$, and $a=0,b=10$. We could write this as</p>
 
-<p>Properties of exponential and logarithmic functions, thereby derive their derivatives. Yet, the really useful thing about logarithmic functions and their derivatives is that the natural logarithm is a monotonically increasing function, so we can use it in a lot of optimisation problems - and this is what they’ll be useful for in machine learning.</p>
+<script type="math/tex; mode=display">\text{Area} = \sum_{n=0}^{N-1} v \left( t_n \right) \cdot \frac{b-a}{N}. \quad \quad (1)</script>
 
-<h4 id="example-3">Example:</h4>
-<p>TBA.</p>
+<p>Obviously, we are not going to get a good approximation of the area under the velocity function with only six rectangles, but by increasing the number of rectangles our approximation will get closer and closer to the actual area. To do that, we want the width of the rectangles to get <em>infinitesimally</em> small, which means, they’re as close to $0$ as possible. We can interpret this another way; if we want the width of the rectangles $\left( \frac{b-a}{N} \right)$ to get infinitesimally small, we can take the <a href="http://localhost:4000/pages/linalgop-notes-9a">limit</a> of $(1)$ as $N$ approaches infinity</p>
+
+<script type="math/tex; mode=display">\text{Area} = \lim_{N \to \infty} \sum_{n=0}^{N-1} v \left( t_n \right) \cdot \frac{b-a}{N}. \quad \quad (2)</script>
+
+<p>The plot below illustrates how the area is refined as the number of rectangles increase.</p>
+
+<video width="500" height="310" loop="" muted="" autoplay="">
+    <source src="../extra/linalgop-notes-9c/fig_04.mp4" type="video/mp4" />
+</video>
+
+<p>This is the intuition behind integration, and what we wrote in $(2)$ is the general idea of a integrals<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>. Usually, we rewrite $(2)$ as</p>
+
+<script type="math/tex; mode=display">\lim_{N \to \infty} \sum_{n=0}^{N-1} v \left( t_n \right) \Delta t, \quad \quad (3)</script>
+
+<p>where $\Delta t = \frac{b-a}{N}$ to signify the width, and $t_n = a + n \cdot \Delta t$. This is called a <em>definite</em> integral, which is an integral with a lower and upper limit, $a$ and $b$. To shorten this even further, we use the integral sign $\int$, and write $(3)$ as</p>
+
+<script type="math/tex; mode=display">\int_a^b v(t) dt. \quad \quad (4)</script>
+
+<p>The integral sign represents the sum of the infinitesimally narrow rectangles between $a$ and $b$ under the function $v(t)$. This is read as: the integral from $a$ to $b$ of $v(t)$.</p>
+
+<h3 id="the-fundamental-theorem-of-calculus">The fundamental theorem of calculus</h3>
+<p>Let’s take a moment to go through, what we’ve just done. Our original question was, whether or not we could find a distance function purely by looking at the velocity function. We reasoned that since $\text{velocity} \times \text{time} = \text{distance}$, then the area underneath the velocity function from start to finish, would be the distance traveled from start to finish. To calculate the area underneath the velocity function, we chopped it up into a bunch of infinitesimally narrow rectangles, and then found the area of the rectangles with the width and height of each of them. From this, we can say</p>
+
+<script type="math/tex; mode=display">s(T) = \int_0^T v(t) dt, \quad \quad (5)</script>
+
+<p>i.e., the distance traveled from $t=0$ to $t=T$ (or $10$ if we want ten seconds) is the same as the integral from $t=0$ to $t=T$ of the velocity function. In <a href="http://localhost:4000/pages/linalgop-notes-9a">notes 9a</a> we talked about the derivative as the instantaneous rate of change of a function - if we consider $s(T)$ (the area under the velocity function) as a function on its own, we can deduce its derivative. If we denote the instantaneous change in time as $dT$, then the change in area can be approximated by a rectangle as before, where the height is the velocity function $v(T)$. In other words, if the time changes by a tiny amount $dT$, then the area under the velocity function changes by the rectangle $v(t)dT$, which gives us</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+ds(T) &= v(T)dT \\
+\frac{d}{dT}s(T) &= v(T).
+\end{aligned} %]]></script>
+
+<p>This is the first part of the fundamental theorem of calculus<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup>; let $f$ be some function, and $F$ the function of the area under $f$ (the integral of $f$), i.e.</p>
+
+<script type="math/tex; mode=display">F(x) = \int_a^x f(t) dt,</script>
+
+<p>then the derivative of $F$ is equal to the original function $f$</p>
+
+<script type="math/tex; mode=display">F'(x) = f(x). \quad \quad (6)</script>
+
+<p>The next question to tackle is then: how do we compute this? Well, $(6)$ gives us a hint that we actually mentioned in the beginning. To find the integral we compute the <em>indefinite</em> integral or the <em>antiderivative</em>, which is the integral without a lower or upper limit. We ask ourselves: what function when taking the derivative gives us $v(t)=10t-t^2$? We know that the derivative of $t^2$ is $2t$, so multiplying this by $5$ gives us the first term - and the derivative of $t^3$ is $3t^2$, so we can multiply this by $-1/3$ to get the second term. At the end we have</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+\int v(t) dt &= \int 10t-t^2 dt \\
+&= 5t^2 - \frac{1}{3} t^3 + c.
+\end{aligned} %]]></script>
+
+<p>The $c$ is the potential constant that we lose after taking the derivative.</p>
+
+<p>The second and final part of the fundamental theorem of calculus follows from the first part. Given $f$ and its antiderivative $F$, we can say</p>
+
+<script type="math/tex; mode=display">\int_a^b f(x) dx = F(b)-F(a).</script>
+
+<h4 id="example">Example:</h4>
+<p>Let’s take the definite integral</p>
+
+<script type="math/tex; mode=display">\begin{aligned}
+\int_{1}^e \frac{1}{x} dx,
+\end{aligned}</script>
+
+<p>where $e$ is <a href="https://en.wikipedia.org/wiki/E_(mathematical_constant)" target="_blank">Euler’s number</a>. We start by finding the antiderivative of $\frac{1}{x}$, which from <a href="http://localhost:4000/pages/linalgop-notes-9b">notes 9b</a> we know is $\ln x$, and then we can compute the integral</p>
+
+<script type="math/tex; mode=display">\begin{aligned}
+\int_{1}^e \frac{1}{x} dx = \ln(e) - \ln(1) = 1 - 0 = 1.
+\end{aligned}</script>
 
 <div class="footnotes">
   <ol>
     <li id="fn:1">
-      <p>Yet, this is not a rigorous proof of the chain rule.</p>
+      <p>Not the rigorous definition of the <a href="https://en.wikipedia.org/wiki/Riemann_integral#Riemann_integral" target="_blank">Riemann integral</a>.</p>
     </li>
     <li id="fn:2">
-      <p>I might write a post about this in the future.</p>
-    </li>
-    <li id="fn:3">
-      <p><em>Pattern Recognition and Machine Learning</em>, Christopher M. Bishop, pg. 23.</p>
-    </li>
-    <li id="fn:4">
-      <p>https://en.wikipedia.org/wiki/Likelihood_function#Log-likelihood</p>
-    </li>
-    <li id="fn:5">
-      <p>https://en.wikipedia.org/wiki/E_(mathematical_constant)</p>
+      <p>Not the rigorous <a href="https://en.wikipedia.org/wiki/Fundamental_theorem_of_calculus" target="_blank">theorem</a>.</p>
     </li>
   </ol>
 </div>

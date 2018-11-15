@@ -193,8 +193,8 @@ i.e. a function of the parameter given the data. Below is a plot of the likeliho
     <source src="../extra/linalgop-notes-9b/fig_02.mp4" type="video/mp4">
 </video>
 
-The maximum value of the likelihood function is at $\pi=0.46$, and we're done. We now have a parameter $\pi = 0.46$ that gives us the most likely ratio of heads to coin tosses, given the data we produced. We can think of this as optimizing our coin toss model, but let's examine closer, what we did. We tossed a coin $100$ times, asked ourselves what the most likely probability of heads is, and called this value $\pi$. Then we wrote up the likelihood function of $\pi$, and found the value of $\pi$ corresponding to the maximum of the likelihood function. Let's now try and generalize this method, in case we produced different data.\\
-Let's say we toss the coin $n$ times, and we get $k$ heads. Our likelihood function would be
+The maximum value of the likelihood function is at $\pi=0.46$, and we're done. We now have a parameter $\pi = 0.46$ that gives us the most likely ratio of heads to coin tosses, given the data we produced. We can think of this as optimizing our coin toss model, but let's examine closer, what we did. We tossed a coin $100$ times, asked ourselves what the most likely probability of heads is, and called this value $\pi$. Then we wrote up the likelihood function of $\pi$, and found the value of $\pi$ corresponding to the maximum of the likelihood function.\\
+Let's now try and generalize this method, in case we produced different data. Say we toss the coin $n$ times, and we get $k$ heads. Our likelihood function would be
 
 $$
 \mathcal{L} ( \pi | \text{data} ) = \pi^k (1-\pi)^{n-k}.
@@ -235,7 +235,7 @@ k - \pi n
 &= \frac{k}{n},
 \end{aligned} $$
 
-and we're done! The most likely probability of heads is therefore the number of heads $k$, we get in $n$ coin tosses ($\frac{46}{100} = 0.46$ in our example). While the example at hand is simple enough to find the result without using our method, we can use this same method in many other scenarios, where the result isn't as easily found. Also, notice how we utilized our knowledge of the chain rule, logarithms, and extrema.
+and we're done! The most likely probability of heads is therefore the number of heads $k$, we get in $n$ coin tosses ($\frac{46}{100} = 0.46$ in our example). While the example at hand is simple enough to find the result without using our method, we can use this exact method in many other scenarios, where the results aren't as easily found. Also, notice how we utilized our knowledge of the chain rule, logarithms, and extrema.
 
 [^1]: Yet, this is not a rigorous proof of the chain rule.
 [^2]: I might write a post about this in the future.

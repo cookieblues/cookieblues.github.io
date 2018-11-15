@@ -53,10 +53,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
 <h5 class="side">CATEGORIES</h5>
 <p class="side">
-    Linear Algebra and Optimisation
+    <a href="http://localhost:4000/pages/cats/linalgop">Linear Algebra and Optimisation</a>
 </p>
 
 <h5 class="side">ARCHIVES</h5>
+
+    <p class="side">
+        <a href="/pages/linalgop-notes-9c/">
+            12 Nov, 2018 - LinAlgOp, notes 9c: Integration and the fundamental theorem of calculus
+        </a>
+    </p>
 
     <p class="side">
         <a href="/pages/linalgop-notes-9b/">
@@ -72,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     <p class="side">
         <a href="/pages/a-look-at-linear-algebra-and-optimisation/">
-            23 Oct, 2018 - A Look at Linear Algebra and Optimisation
+            23 Oct, 2018 - A look at Linear Algebra and Optimisation
         </a>
     </p>
 
@@ -255,10 +261,10 @@ P( \text{data} | \text{parameter} )
     <source src="../extra/linalgop-notes-9b/fig_02.mp4" type="video/mp4" />
 </video>
 
-<p>The maximum value of the likelihood function is at $\pi=0.46$, and we’re done. We now have a parameter $\pi = 0.46$ that gives us the most likely ratio of heads to coin tosses, given the data we produced. We can think of this as optimizing our coin toss model, but let’s examine closer, what we did. We tossed a coin $100$ times, asked ourselves what the most likely probability of heads is, and called this value $\pi$. Then we wrote up the likelihood function of $\pi$, and found the value of $\pi$ corresponding to the maximum of the likelihood function. Let’s now try and generalize this method, in case we produced different data.<br />
-Let’s say we toss the coin $n$ times, and we get $k$ heads. Our likelihood function would be</p>
+<p>The maximum value of the likelihood function is at $\pi=0.46$, and we’re done. We now have a parameter $\pi = 0.46$ that gives us the most likely ratio of heads to coin tosses, given the data we produced. We can think of this as optimizing our coin toss model, but let’s examine closer, what we did. We tossed a coin $100$ times, asked ourselves what the most likely probability of heads is, and called this value $\pi$. Then we wrote up the likelihood function of $\pi$, and found the value of $\pi$ corresponding to the maximum of the likelihood function.<br />
+Let’s now try and generalize this method, in case we produced different data. Say we toss the coin $n$ times, and we get $k$ heads. Our likelihood function would be</p>
 
-<script type="math/tex; mode=display">\mathcal{L} ( \pi | \text{data} ) = \pi^x (1-\pi)^{n-k}.</script>
+<script type="math/tex; mode=display">\mathcal{L} ( \pi | \text{data} ) = \pi^k (1-\pi)^{n-k}.</script>
 
 <p>Then we want to find the maximum of this function. While we could try and take the derivative straight away, there is an important theorem, we use instead: the natural logarithm is a strictly increasing function, so the natural logarithm of a function achieves its maxima at the same values as the function itself. Therefore, instead of finding the maximum of $\mathcal{L}$, we can find the maximum of $\ln ( \mathcal{L} )$, which often times is easier. By using the rules of logarithms, we find</p>
 
@@ -298,7 +304,7 @@ k - \pi n
 &= \frac{k}{n},
 \end{aligned} %]]></script>
 
-<p>and we’re done! The most likely probability of heads is therefore the number of heads $k$, we get in $n$ coin tosses ($\frac{46}{100} = 0.46$ in our example). While the example at hand is simple enough to find the result without using our method, we can use this same method in many other scenarios, where the result isn’t as easily found. Also, notice how we utilized our knowledge of the chain rule, logarithms, and extrema.</p>
+<p>and we’re done! The most likely probability of heads is therefore the number of heads $k$, we get in $n$ coin tosses ($\frac{46}{100} = 0.46$ in our example). While the example at hand is simple enough to find the result without using our method, we can use this exact method in many other scenarios, where the results aren’t as easily found. Also, notice how we utilized our knowledge of the chain rule, logarithms, and extrema.</p>
 
 <div class="footnotes">
   <ol>
