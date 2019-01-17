@@ -4,7 +4,7 @@ layout: post
 tags: ITUEVAL
 excerpt_separator: <!--more-->
 ---
-The [IT University of Copenhagen (ITU)](https://www.itu.dk/){:target="_blank"} conducts a student evaluation of the courses and the university itself each semester. I love the evaluations, and naturally, as a data science student, I cannot keep my hands off them. On top of that, this analysis will serve as notes or guidelines for the first project of the [First Year Project](https://mit.itu.dk/ucs/cb_www/course.sml?course_id=2708256&mode=search&lang=en&print_friendly_p=t&goto=1547640286.000){:target="_blank"} course. This first part will focus on elementary [data scraping](https://en.wikipedia.org/wiki/Data_scraping){:target="_blank"}, which in its broadest term is the act of collecting data.
+The [IT University of Copenhagen (ITU)](https://www.itu.dk/){:target="_blank"} conducts a student evaluation of the courses and the university itself each semester. The evaluations are one of the only ways that students can provide feedback to the lecturers, which can improve the learning environment, course material, exercises, and so on. The evaluations are also packed with interesting data, and naturally, as a data science student, I cannot keep my hands off them. On top of that, this analysis will serve as notes or guidelines for the first project of the [First Year Project](https://mit.itu.dk/ucs/cb_www/course.sml?course_id=2708256&mode=search&lang=en&print_friendly_p=t&goto=1547640286.000){:target="_blank"} course. This first part will focus on elementary [data scraping](https://en.wikipedia.org/wiki/Data_scraping){:target="_blank"}, which in its broadest sense is the act of collecting data.
 <!--more-->
 
 ### Browser automation with Selenium
