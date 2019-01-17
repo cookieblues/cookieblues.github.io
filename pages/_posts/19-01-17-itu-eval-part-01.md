@@ -106,7 +106,7 @@ def get_textual_2(driver):
     df = pd.concat([pd.Series(good),pd.Series(bad)],axis=1)
     return df.rename(columns={0:"good",1:"bad"})
 
-textual_df = get_textual_1(driver)
+textual_df = get_textual_2(driver)
 {% endhighlight %}
 
 If we use the wrong function for an evaluation template, we'll return an empty DataFrame. We can therefore make one function that takes care of both scenarios.
