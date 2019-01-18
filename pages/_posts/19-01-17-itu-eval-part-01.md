@@ -9,7 +9,7 @@ This analysis of the evaluations will be a series of posts, where I'll dive into
 <!--more-->
 
 ### Browser automation with Selenium
-To scrape data, firstly, we'll need to find a place where the wanted data is located and free to use. Luckily, the ITU has made the evaluations publicly available on their website[^1]. Also, I spoke to someone at ITU, and they said that we can do anything we want with the evaluations, as long as the data is publicly available. So far, so good.\\
+To scrape data, firstly, we'll need to find a place where our wanted data is located and free to use. Luckily, the ITU has made the evaluations publicly available on [their website](https://en.itu.dk/about-itu/organisation/facts-and-figures/quality-and-educational-environment/course-evaluation){:target="_blank"}. Also, I spoke to someone at ITU, and they said that we can do anything we want with the evaluations, as long as the data is publicly available. So far, so good.\\
 Secondly, now we'll have to come up with a way to actually collect the data. The link on ITU's website leads to a webpage, where we can choose specific evaluation results for any evaluation period we desire. While the number of evaluation periods is small enough for us to manually collect the results, there are several benefits to not collecting the results this way. First of all, by avoiding performing a task the naive way we might learn something new. Second of all, if our method is broad enough, it might generalize to other tasks and save us time in the long run. Third of all, if we were to manually collect the results, the naive way would be to download the HTML pages, and afterwards clean the data for our purpose - however, we can clean the data as we collect it, if we don't do it the naive way.\\
 Now, there are many ways to scrape data from websites, and depending on the specific website there might be a plethora of tools better suited for your purpose (public APIs, specific modules, etc.), especially if you want to scrape data from more popular sites. In this brief introduction to data scraping, we'll utilize [Selenium](https://github.com/SeleniumHQ/Selenium){:target="_blank"}, which is definitely not the most efficient library for browser automation, but we don't have a lot of data to scrape, and we want something that is user-friendly.
 
@@ -143,5 +143,3 @@ def pick_fulltime(driver):
 That's it! We can now go through all the different evaluation periods, scrape the data, and save the DataFrames.
 
 
-
-[^1]: https://en.itu.dk/about-itu/organisation/facts-and-figures/quality-and-educational-environment/course-evaluation
