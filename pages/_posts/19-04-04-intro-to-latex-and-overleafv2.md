@@ -2,11 +2,13 @@
 title: "The bare minimum guide to LaTeX"
 layout: post
 tags: General
+excerpt_separator: <!--more-->
 ---
 A few people have been asking for a short guide to LaTeX, but since I don't have that much time on my hands these days, I thought I'd start with a very short guide that I can expand if needed.
 
 ### Why?
-You can think of LaTeX as a programming language, except that you're programming documents, which makes it simple and well-suited for large projects and complicated document structures. The other big plus for LaTeX is the ability to write complicated mathematical equations (or chemistry stuff) simply and beautiful. 
+You can think of LaTeX as a programming language for documents. It's well-suited for large projects and complicated document structures, as it keeps track of a bunch of things by itself (we won't get into those things in this post though). The other huge plus for LaTeX is the ability to write complicated mathematical equations simple and beautiful.
+<!--more-->
 
 ### Getting started with Overleaf
 While it's possible to install LaTeX and a LaTeX editor on your computer, I think using Overleaf (version 2) is the best choice for most people; you won't have to find a proper LaTeX installation, worry about a million LaTeX files, deal with packages, figure out how to collaborate with other people, or worry about having access to your documents on different computers.\\
@@ -286,7 +288,7 @@ $$
 \int_0^\pi \sin (x) dx
 $$
 
-Square brackets are just plainly written `[` and `]`, curly brackets require a backslash beforehand `\{` `\}` as they wrap arguments in LaTeX. If the expression is large, you can write `\left` and `\right` before the paranthesis to make LaTeX adjust the size of them for your expression. Here are some examples:
+Square brackets are just plainly written `[` and `]`, curly brackets require a backslash beforehand `\{` `\}` as they are used for wrapping arguments in LaTeX. If the expression is large, you can write `\left` and `\right` before the paranthesis to make LaTeX adjust the size of them for your expression. Here are some examples:
 
 {% highlight latex %}
 \begin{equation}
@@ -329,7 +331,7 @@ $$
 $$
 
 ### Final words
-You might've noticed that your document didn't change even though you changed your LaTeX code. This is because LaTeX is just that: code. There's a big green button that says "Recompile" in the top left of your document, if you click it, the new code that you have written will be executed, and you will see it in your document (or you get an error, if there's a mistake in your code). To the right of the button is a small downward pointing arrow - if you click that, you can turn "Auto compile" on or off. This will get Overleaf to compile your code regularly as you write it.
+You might've noticed that your document didn't change even though you changed your LaTeX code. This is because LaTeX is just that: code. There's a big green button that says "Recompile" in the top left of your document. If you click it, the new code, you have written, will be executed, and you will see it in your document (or you get an error, if there's a mistake in your code). To the right of the button is a small downward pointing arrow - if you click that, you can turn "Auto compile" on or off. This will get Overleaf to compile your code regularly as you write it.
 
 ### Exercises
 To practice writing equations, try and see if you can write the equations underneath.
