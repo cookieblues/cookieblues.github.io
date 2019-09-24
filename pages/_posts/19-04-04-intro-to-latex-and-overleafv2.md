@@ -8,11 +8,11 @@ A few people have been asking for a short guide to LaTeX, but since I don't have
 
 ### Why?
 You can think of LaTeX as a programming language for documents. It's well-suited for large projects and complicated document structures, as it keeps track of a bunch of things by itself (we won't get into those things in this post though). The other huge plus for LaTeX is the ability to write complicated mathematical equations simple and beautiful.
-<!--more-->
 
 ### Getting started with Overleaf
 While it's possible to install LaTeX and a LaTeX editor on your computer, I think using Overleaf (version 2) is the best choice for most; you won't have to find a proper LaTeX installation, worry about a million LaTeX files, deal with packages, figure out how to collaborate with other people, or worry about having access to your documents on different computers.\\
 Firstly, go to [this link](https://www.overleaf.com?r=094710d5&rm=d&rs=b){:target="_blank"} (this is a referral link that gives me a few bonuses on Overleaf - it won't have any affect on you, but if you prefer not to use this, then go to Google and search for Overleaf v2) and sign up for an Overleaf (version 2) account. Secondly, go back to Overleaf and log in. Thirdly, you should see a green button in the top left that says "New Project". Click the button and choose "Blank Project". It will ask you to name your project, which can be whatever you want (it can be changed later if needed), and then press "Create".
+<!--more-->
 
 ### The structure of a LaTeX document
 You should see a document on the right side of your screen, a bit of code in the middle, and an overview of your project on the left (that only contains `main.tex`). If you don't see the document on the right, then there should be a tiny button in the top right (below "Chat") that looks like two arrows pointing at each other. Hover over the button and it should say "Split screen". If you click the button, your document should appear.
