@@ -11,12 +11,13 @@ $$
 $$
 
 This time we will look at the velocity function and try to figure out the distance function, i.e. we want to do the opposite as last time, where we found the derivative; we want to find the antiderivative.
-<!--more-->
 
 ### Integration
 Let's take the example from last time but only focus on the velocity. If we want to find the antiderivative, we could ask ourselves, what function when taking the derivative gives us the velocity function. In that case, we have essentially solved our problem of finding the antiderivative, but we're going to take a different approach. Let's say you run a constant $10$ meters per second, so you finish the $100$ meter sprint in $10$ seconds. If we plot the velocity function with time on the x-axis, and velocity $\left( \frac{\text{distance}}{\text{time}} \right)$ on the y-axis (like below), we can think of area on the plot as distance, since
 
 $$\text{velocity} \times \text{time} = \frac{\text{distance}}{\text{time}} \times \text{time} = \text{distance}.$$
+
+<!--more-->
 
 <video width="500" height="310" loop muted autoplay>
     <source src="../extra/bslialo-notes-9c/fig_02.mp4" type="video/mp4">

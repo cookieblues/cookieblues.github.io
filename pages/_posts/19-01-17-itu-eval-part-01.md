@@ -21,7 +21,7 @@ url = "https://mit.itu.dk/ucs/evaluation/public.sml?lang=english"
 driver.get(url)
 {% endhighlight %}
 
-We're going to use the WebDriver API from Selenium, which makes browser automation as intuitive as normal web browsing. By "getting" the URL, a new Firefox window will open, which is run by the driver. We can now manoeuvre around on the webpage by using the driver's functions and with a little bit of knowledge of [XPath](https://en.wikipedia.org/wiki/XPath){:target="_blank"}. By right-clicking on the webpage and looking at the page source, we can see that the radio buttons, that dictate the results you get, can be identified by their value. For now, we'll look at the evaluations of ITU in general, which is the radio button of value 0. We find the element through the driver, and click on it.
+We're going to use the WebDriver API from Selenium, which makes browser automation almost as intuitive as normal web browsing. By "getting" the URL, a new Firefox window will open, which is administered by the driver. We can now manoeuvre around on the webpage by using the driver's functions and with a little bit of knowledge of [XPath](https://en.wikipedia.org/wiki/XPath){:target="_blank"}. By right-clicking on the webpage and looking at the page source, we can see the radio buttons, which dictate the results we get, can be identified by their value. For now, we'll look at the evaluations of ITU in general, which is the radio button of value 0. We find the element through the driver, and click on it.
 
 {% highlight python %}
 driver.find_element_by_xpath(
@@ -72,7 +72,7 @@ def get_numerical(driver):
 numerical_df = get_numerical(driver)
 {% endhighlight %}
 
-To quickly explain the function: it turns out, it's the fourth (index three) table that we need. Pandas' read_html function returns a list, since it expects a list of tables, however, we only give it one, and therefore we take index zero. We also set the second (index one) row to be the header as the first row is irrelevant. Lastly, we rename the first column for readability. This gives us the numerical data in a DataFrame.
+To briefly explain the function: it turns out, it's the fourth (index three) table that we need. Pandas' read_html function returns a list, since it expects a list of tables, however, we only give it one, and therefore we take index zero. We also set the second (index one) row to be the header as the first row is irrelevant. Lastly, we rename the first column for readability. This gives us the numerical data in a DataFrame.
 
 The next thing we need is the textual data. This is a little more complicated, since the textual data is wrapped in a lot of lists. By inspecting the page source, we can see that all the textual evaluations are wrapped in ul tags. By further inspection, every fourth ul tag are "Good things about the IT University", and the ones following are "Things that could be improved". We could grab all the ul tags and use some regular expressions to get what we want, [but you should not attempt to parse HTML with regex](https://stackoverflow.com/a/1732454){:target="_blank"}. In each ul tag we have li tags, where only a few contain text that we need. The function below gets us exactly what we want.
 

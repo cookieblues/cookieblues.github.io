@@ -2,6 +2,7 @@
 title: "BSLIALO, notes 9b: The chain rule, derivatives of logarithmic functions, extrema, and optimisation"
 layout: post
 tags: BSLIALO
+excerpt_separator: <!--more-->
 ---
 Differentiation is commonly taught through rote learning, which I'm not a fan of. Therefore I'll allow myself to skip the basic rules of differentiation, and what the derivative of every little function is. Instead, I want to focus on the useful and interesting, namely, the chain rule and logarithmic derivatives, both of which are important in machine learning. At the end, we'll talk about optimisation, where we'll try and combine, what we've learned.
 
@@ -18,7 +19,10 @@ $$
 \frac{d}{dx} (u \cdot v) = \frac{du}{dx} \cdot v + u \cdot \frac{dv}{dx},
 $$
 
-and the chain rule tells us how to take the derivative of a *composition* of functions. A function composition can be thought of as putting one function into another. Say we have two functions $f(x) = \sin (x)$ and $g(x) = x^2$. We can make two compositions from these two functions: $(f \circ g) (x) = f(g(x)) = \sin \left( x^2 \right)$ and $(g \circ f) (x) = g(f(x)) = \sin^2(x)$. The $\circ$ symbol represents a function composition. \\
+and the chain rule tells us how to take the derivative of a *composition* of functions. A function composition can be thought of as putting one function into another. Say we have two functions $f(x) = \sin (x)$ and $g(x) = x^2$. We can make two compositions from these two functions: $(f \circ g) (x) = f(g(x)) = \sin \left( x^2 \right)$ and $(g \circ f) (x) = g(f(x)) = \sin^2(x)$. The $\circ$ symbol represents a function composition.
+
+<!--more-->
+
 Let's choose $(f \circ g) (x) = \sin \left( x^2 \right)$ and try to reason our way to its derivative. From <a href="{{ site.url }}/pages/bslialo-notes-9a">notes 9a</a> we know, the derivative of a function is the oxymoron *instantaneous* rate of *change*. If we call this change $dx$, then we can write the derivative as
 
 $$
@@ -42,7 +46,7 @@ $$
 \frac{dg}{dx} = \frac{g(x + dx) - g(x)}{dx} = 2x + dx, \quad \quad (2)
 $$
 
-which is $2x$, plus a slight change that will be negligible, when $dx \to 0$.
+which is $2x$, plus a slight change that will be negligible, when $dx$ approaches $0$.
 
 
 Secondly, we have to consider, what happens to $f(g(x))$, when a slight change in $g(x)$ occurs. Using the same reasoning as before, and knowing that the derivative of $\sin(x)$ is $\cos(x)$, we can say
@@ -58,7 +62,8 @@ $$ \begin{aligned}
 \frac{df}{dx} &= \cos( x^2 ) 2x,
 \end{aligned} $$
 
-which is the derivative of $(f \circ g)(x) = \sin \left( x^2 \right)$ with respect to $x$. This result is the derivative of $f$ with respect to $g$ times the derivative of $g$ with respect to $x$, or rather the derivative of the "outer" function $(f)$ times the derivative of the "inner" function $(g)$. That's the chain rule[^1]. \\
+which is the derivative of $(f \circ g)(x) = \sin \left( x^2 \right)$ with respect to $x$. This result is the derivative of $f$ with respect to $g$ times the derivative of $g$ with respect to $x$, or rather the derivative of the "outer" function $(f)$ times the derivative of the "inner" function $(g)$. That's the chain rule[^1].
+
 More formally, if $g$ is a function differentiable at $a$, and $f$ is a function differentiable at $g(a)$, then the composite function $h = f \circ g$ is differentiable at $a$, and the derivative is
 
 $$
@@ -75,7 +80,8 @@ $$ \begin{aligned}
 \end{aligned} $$
 
 ### Derivatives of logarithmic functions
-It's tempting to dive into the relationship between derivatives, exponential, and logarithmic functions[^2]. Instead we will briefly talk about logarithms, some of their properties, and then look at the usefulness of logarithms, when we get to optimisation, which is also an appetizer for [maximum likelihood estimation](https://en.wikipedia.org/wiki/Maximum_likelihood_estimation){:target="_blank"} in machine learning[^3][^4]. However, before we get into the derivative of logarithms, let's refresh logarithms, shall we? \\
+It's tempting to dive into the relationship between derivatives, exponential, and logarithmic functions[^2]. Instead we will briefly talk about logarithms, some of their properties, and then look at the usefulness of logarithms, when we get to optimisation, which is also an appetizer for [maximum likelihood estimation](https://en.wikipedia.org/wiki/Maximum_likelihood_estimation){:target="_blank"} in machine learning[^3][^4]. However, before we get into the derivative of logarithms, let's refresh logarithms, shall we?
+
 Firstly, a logarithm is the inverse function to an exponential function, i.e. $x$ is the base-$b$ logarithm of $y$ if and only if $b^x = y$. This is written
 
 $$
@@ -122,7 +128,8 @@ $$ \begin{aligned}
 
 
 ### Extrema
-Extrema is the collective term for maxima and minima, which are the largest and smallest values of a function. Usually we distinguish between a *local* or *relative* extremum and a *global* or *absolute* extremum, where local and relative refers to a specific interval, and global and absolute refers to the domain of the function.\\
+Extrema is the collective term for maxima and minima, which are the largest and smallest values of a function. Usually we distinguish between a *local* or *relative* extremum and a *global* or *absolute* extremum, where local and relative refers to a specific interval, and global and absolute refers to the domain of the function.
+
 A point $x$ is an absolute maximum or minimum of a function $f$ in the interval $\left[ a,b \right]$, if
 
 $$
@@ -193,7 +200,8 @@ i.e. a function of the parameter given the data. Below is a plot of the likeliho
     <source src="../extra/bslialo-notes-9b/fig_02.mp4" type="video/mp4">
 </video>
 
-The maximum value of the likelihood function is at $\pi=0.46$, and we're done. We now have a parameter $\pi = 0.46$ that gives us the most likely ratio of heads to coin tosses, given the data we produced. We can think of this as optimizing our coin toss model, but let's examine closer, what we did. We tossed a coin $100$ times, asked ourselves what the most likely probability of heads is, and called this value $\pi$. Then we wrote up the likelihood function of $\pi$, and found the value of $\pi$ corresponding to the maximum of the likelihood function.\\
+The maximum value of the likelihood function is at $\pi=0.46$, and we're done. We now have a parameter $\pi = 0.46$ that gives us the most likely ratio of heads to coin tosses, given the data we produced. We can think of this as optimizing our coin toss model, but let's examine closer, what we did. We tossed a coin $100$ times, asked ourselves what the most likely probability of heads is, and called this value $\pi$. Then we wrote up the likelihood function of $\pi$, and found the value of $\pi$ corresponding to the maximum of the likelihood function.
+
 Let's now try and generalize this method, in case we produced different data. Say we toss the coin $n$ times, and we get $k$ heads. Our likelihood function would be
 
 $$

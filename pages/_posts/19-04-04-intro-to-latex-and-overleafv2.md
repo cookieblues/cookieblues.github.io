@@ -288,7 +288,7 @@ $$
 \int_0^\pi \sin (x) dx
 $$
 
-Square brackets are just plainly written `[` and `]`, curly brackets require a backslash beforehand `\{` `\}` as they are used for wrapping arguments in LaTeX. If the expression is large, you can write `\left` and `\right` before the paranthesis to make LaTeX adjust the size of them for your expression. Here are some examples:
+Square brackets are just plainly written `[` and `]`, curly brackets require a backslash beforehand `\{` `\}` as they are otherwise used for wrapping arguments in LaTeX. If the expression is large, you can write `\left` and `\right` before the paranthesis to make LaTeX adjust the size of them for your expression. Here are some examples:
 
 {% highlight latex %}
 \begin{equation}
@@ -356,7 +356,7 @@ $$
 \int_a^b x^{10} \sum_{i=1}^n i^2 dx
 $$
 
-These next ones require something I haven't shown in this post, so a little bit of Googling or outside-the-box thinking could help you.
+These next ones require something I haven't shown in this post, so a little bit of Googling or outside-the-box thinking is required.
 
 $$
 1+2+3+\cdots+n = \frac{n(n+1)}{2}

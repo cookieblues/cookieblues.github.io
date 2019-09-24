@@ -2,12 +2,15 @@
 title: "BSLIALO, notes 9a: The derivative, the limit, and the concept of approach"
 layout: post
 tags: BSLIALO
+excerpt_separator: <!--more-->
 ---
 Imagine you're participating in a $100$ metres sprint race. When you hear the starter's pistol, you accelerate for dozens of metres, i.e. your velocity will increase until you reach your maximum speed. Let's assume, you reach your maximum speed $5$ seconds into the race, after which you start to fatigue and decelerate - and let's also assume, you finish the race in $10$ seconds. If we let $s(t)$ be the distance you've traveled at time $t$, and $v(t)$ your velocity at time $t$, then we can draw your velocity and the distance you've traveled in a plot like the one below.
 
 <video width="500" height="310" loop muted autoplay>
-    <source src="../extra/bslialo-notes-9a/fig_01.mp4" type="video/mp4">
+    <source src="{{ site.url }}/pages/extra/bslialo-notes-9a/fig_01.mp4" type="video/mp4">
 </video>
+
+<!--more-->
 
 Notice how towards the middle of the race you're traveling more metres per unit of time than at the beginning and end. We know that to calculate velocity, we take the ratio of the distance traveled and the time it took. If we start at $s(t_1)$ and end at $s(t_2)$, we say
 

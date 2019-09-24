@@ -10,4 +10,4 @@ kramdown:
    footnote_backlink:
 plugins:
   - jekyll-last-modified-at
-tags: [BSLIALO,BSMALEA,General,ITUEVAL,ML]
+tags: [General,BSLIALO,BSMALEA,dataviz,ITUEVAL,ML]
