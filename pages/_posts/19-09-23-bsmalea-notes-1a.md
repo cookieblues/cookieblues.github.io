@@ -32,7 +32,7 @@ INSERT ANIMATION
 MORE EXPLICIT THAT THERE ARE TARGET VALUES
 MAYBE MORE EXPLICIT THAT THERE ARE ONE TARGET FOR EACH INPUT
 -->
-Supervised learning refers to a subset of machine learning tasks, where we're given a dataset $\mathcal{D} = \left\\{ (\mathbf{x}_1,\mathbf{t}_1), \dots, (\mathbf{x}_N,\mathbf{t}_N) \right\\}$ of $N$ input-output pairs, and our goal is to come up with a function $h$ from the inputs $\mathbf{x}$ to the outputs $\mathbf{t}$. Each input-output pair refers to observations, where we want to predict the output from the input. Each input variable $\mathbf{x}$ is a $D_1$-dimensional vector (or a scalar), representing the observation with numerical values; these are commonly called **features** or **attributes**. Likewise, each output or **target** variable $\mathbf{t}$ is a $D_2$-dimensional vector (but most often just a scalar).
+Supervised learning refers to a subset of machine learning tasks, where we're given a dataset $\mathcal{D} = \left\\{ (\mathbf{x}_1,\mathbf{t}_1), \dots, (\mathbf{x}_N,\mathbf{t}_N) \right\\}$ of $N$ input-output pairs, and our goal is to come up with a function $h$ from the inputs $\mathbf{x}$ to the outputs $\mathbf{t}$. In more layman's terms: we are given a dataset with specific predetermined labels that we want to predict - hence the learning is *supervised*, since we are handed some data that tells us, what we want to predict. Each input-output pair refers to observations, where we want to predict the output from the input. Each input variable $\mathbf{x}$ is a $D_1$-dimensional vector (or a scalar), representing the observation with numerical values; these are commonly called **features** or **attributes**. Likewise, each output or **target** variable $\mathbf{t}$ is a $D_2$-dimensional vector (but most often just a scalar).
 
 In **classification** the possible values for the target variables form a finite number of discrete categories $t \in \\{ C_1, \dots, C_k \\}$ commonly called **classes**. An example of this could be trying to classify olive oil into geographical regions (our classes) based on various aspects (our features) of the olive oils[^4]. The features could be concentrations of acids in the olive oils, and the classes could be northern and southern France. Another classic example is recognizing handwritten digits[^5]; given an image of $28 \times 28$ pixels, we can represent each image as a $784$-dimensional vector, which will be our input variable, and our targets will be scalars from $0$ to $9$ each representing a distinct digit. A third example could be predicting whether students are in risk of dropping out or not. In this case, we have two classes (in risk and not in risk), which we can predict based on data about the student e.g. grades or attendance. This is actually something I implemented once!
 
@@ -58,16 +58,16 @@ $$
 which we refer to as the **parameters** or **weights** of our model. $M$ is the order of our polynomial, and $\mathbf{w} = \left( w_0, w_1, \dots, w_M \right)^\intercal$ denotes all our parameters, i.e. we have $M+1$ parameters for our $M$th order polynomial. Now, the objective is to estimate the 'best' values for our parameters. In the <a href="{{ site.url }}/pages/bsmalea-notes-1b">next post</a> we'll discuss exactly how we define and find the 'best' values, but for now we'll go over it briefly. We define what is called an **objective function** (also called **error** or **loss** function). We construct our objective function such that it outputs a value that tells us how our model is performing. For this task we define the objective function as the sum of the squared differences between the predictions of our polynomial given input variables and the corresponding target variables, i.e.
 
 $$
-E(\mathbf{w}) = \sum_{n=1}^N \left( h(x_n, \mathbf{w}) - t_n \right)^2, \quad \quad (2)
+E(\mathbf{w}) = \sum_{n=1}^N \left( t_n - h(x_n, \mathbf{w}) \right)^2, \quad \quad (2)
 $$
 
 and if we substitute $h(x_n, \mathbf{w})$ with the sum on the right-hand side of $(1)$, we get
 
 $$
-E(\mathbf{w}) =  \sum_{n=1}^N \left( \sum_{m=0}^M w_m x^m - t_n \right)^2.
+E(\mathbf{w}) =  \sum_{n=1}^N \left( t_n - \sum_{m=0}^M w_m x^m \right)^2.
 $$
 
-Let's take a minute to understand what $(2)$ is saying. The term on the right-hand side between the paranthesis is commonly called the $n$th residual and is denoted $r_n = h(x_n, \mathbf{w}) - t_n$. It's the difference between the output of our polynomial for input variable $x_n$ and the corresponding target variable $t_n$. The difference can be both negative and positive depending on whether the output of our polynomial is lower or higher than the target - we therefore square these differences and add them all up in order to get a value that tells us how our polynomial is performing. Note that since we're squaring all the differences, the value of the objective function $E$ cannot be lower than zero, and if it's zero, then our model is making no mistakes; it is predicting the exact value of the target every time.
+Let's take a minute to understand what $(2)$ is saying. The term on the right-hand side between the paranthesis is commonly called the $n$th residual and is denoted $r_n = t_n - h(x_n, \mathbf{w})$. It's the difference between the output of our polynomial for input variable $x_n$ and the corresponding target variable $t_n$. The difference can be both negative and positive depending on whether the output of our polynomial is lower or higher than the target - we therefore square these differences and add them all up in order to get a value that tells us how our polynomial is performing. Note that since we're squaring all the differences, the value of the objective function $E$ cannot be lower than zero, and if it's zero, then our model is making no mistakes; it is predicting the exact value of the target every time.
 
 <!---
 INSERT PICTURE/ANIMATION OF RESIDUALS
@@ -138,7 +138,22 @@ Now we can plot our estimated polynomial with our data points. I've also plotted
 <img src="{{ site.url }}/pages/extra/bsmalea-notes-1a/poly_reg.svg">
 
 
+### Summary
+* Machine learning studies **how to make computers learn on their own** with the goal of **predicting the future**.
 
+* **Supervised learning** refers to machine learning tasks, where we are given *labeled data*, and we want to predict those labels.
+
+* **Unsupervised learning**, as it suggests, refers to tasks, where we are *not* provided with labels for our data.
+
+* **Features** refer to the **attributes** (usually columns) of our data e.g. height, weight, shoe size, etc., if our observations are humans.
+
+* **Classification and regression are supervised** tasks, **clustering and density estimation are unsupervised** tasks.
+
+* **Parameters** refer to the values, **we want to estimate** in a machine learning model.
+
+* The **process of estimating the values of the parameters** is called the **training or learning** process.
+
+* An **objective function** is a **measure of the performance** of our model.
 
 
 [^1]: R. Kohavi and F. Provost, "Glossary of terms," Machine Learning, vol. 30, no. 2–3, pp. 271–274, 1998.
