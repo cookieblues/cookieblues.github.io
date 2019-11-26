@@ -23,7 +23,7 @@ Underneath is an overview of the notes, I'll be writing. They more or less follo
 
 1. Introduction to machine learning:\\
     (a) <a href="{{ site.url }}/pages/bsmalea-notes-1a">What is machine learning?</a>\\
-    (b) Model selection and validation, the "no free lunch" theorem, and the curse of dimensionality\\
+    (b) <a href="{{ site.url }}/pages/bsmalea-notes-1b">Model selection and validation, the "no free lunch" theorem, and the curse of dimensionality</a>\\
     (c) Frequentism and Bayesianism\\
     (d) Decision and information theory
 2. Linear models for regression
