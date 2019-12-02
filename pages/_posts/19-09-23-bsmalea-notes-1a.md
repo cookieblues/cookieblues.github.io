@@ -98,14 +98,14 @@ Let's try and implement our model - let's start with the dataset shown underneat
 {% highlight python %}
 import numpy as np
 
-x = np.array([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1])
-t = np.array([1.15, 0.84, 0.39, 0.14, 0, 0.56, 1.16, 1.05, 1.45, 2.39, 1.86])
+x = np.array([-1, -0.8, -0.6, -0.4, -0.2, 0, 0.2, 0.4, 0.6, 0.8, 1])
+t = np.array([-4.9, -3.5, -2.8, 0.8, 0.3, -1.6, -1.3, 0.5, 2.1, 2.9, 5.6])
 {% endhighlight %}
 
 To begin with we can define the order of our polynomial, find the number of data points, and then set up our design matrix.
 
 {% highlight python %}
-M = 3
+M = 4
 N = len(x)
 X = np.zeros((N, M+1))
 {% endhighlight %}
