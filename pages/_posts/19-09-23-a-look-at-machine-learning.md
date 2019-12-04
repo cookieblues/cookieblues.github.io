@@ -26,16 +26,16 @@ Underneath is an overview of the notes, I'll be writing. They more or less follo
     (b) <a href="{{ site.url }}/pages/bsmalea-notes-1b">Model selection and validation, the "no free lunch" theorem, and the curse of dimensionality</a>\\
     (c) Frequentism and Bayesianism\\
     (d) Decision and information theory
-2. <a href="{{ site.url }}/pages/bsmalea-notes-2">Linear models for regression</a>
+2. <a href="{{ site.url }}/pages/bsmalea-notes-2">Regression</a>
 3. Linear models for classification:\\
     (a) Overview of linear classifiers\\
     (b) Discriminant functions\\
     (c) Discriminative models (logistic regression)\\
     (d) Generative models
 4. Neural networks (feed-forward, backprop)
-5. Kernel methods
+5. SVM (SMO), kernel methods
 6. Graphical models
 7. Mixture models and expectation-maximization (EM)
 8. Sequential data (HMM)
-9. Continuous latent variables (PCA)
+9. Dimensionality reduction (LDA), continuous latent variables (PCA)
 10. Combining models (ensemble methods, AdaBoost)

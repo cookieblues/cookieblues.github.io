@@ -1,5 +1,5 @@
 ---
-title: "BSMALEA, notes 2: Linear regression"
+title: "BSMALEA, notes 2: Regression"
 layout: post
 tags: BSMALEA
 excerpt_separator: <!--more-->
