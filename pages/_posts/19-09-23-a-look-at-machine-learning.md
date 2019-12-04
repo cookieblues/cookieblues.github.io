@@ -26,7 +26,7 @@ Underneath is an overview of the notes, I'll be writing. They more or less follo
     (b) <a href="{{ site.url }}/pages/bsmalea-notes-1b">Model selection and validation, the "no free lunch" theorem, and the curse of dimensionality</a>\\
     (c) Frequentism and Bayesianism\\
     (d) Decision and information theory
-2. Linear models for regression
+2. <a href="{{ site.url }}/pages/bsmalea-notes-2">Linear models for regression</a>
 3. Linear models for classification:\\
     (a) Overview of linear classifiers\\
     (b) Discriminant functions\\
