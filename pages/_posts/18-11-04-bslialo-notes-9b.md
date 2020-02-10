@@ -1,6 +1,7 @@
 ---
 title: "BSLIALO, notes 9b: The chain rule, derivatives of logarithmic functions, extrema, and optimisation"
 layout: post
+category: Linear Algebra and Optimisation
 tags: BSLIALO
 excerpt_separator: <!--more-->
 ---
@@ -23,7 +24,7 @@ and the chain rule tells us how to take the derivative of a *composition* of fun
 
 <!--more-->
 
-Let's choose $(f \circ g) (x) = \sin \left( x^2 \right)$ and try to reason our way to its derivative. From <a href="{{ site.url }}/pages/bslialo-notes-9a">notes 9a</a> we know, the derivative of a function is the oxymoron *instantaneous* rate of *change*. If we call this change $dx$, then we can write the derivative as
+Let's choose $(f \circ g) (x) = \sin \left( x^2 \right)$ and try to reason our way to its derivative. From <a href="{{ site.url }}/bslialo-notes-9a">notes 9a</a> we know, the derivative of a function is the oxymoron *instantaneous* rate of *change*. If we call this change $dx$, then we can write the derivative as
 
 $$
 \frac{du}{dx} = \lim_{ dx \to 0} \frac{u(x+ dx)-u(x)}{ dx}. \quad \quad (1)
@@ -139,7 +140,7 @@ $$
 and $x$ is a relative maximum or minimum, if it's the absolute maximum or minimum value in a tiny interval around $x$, i.e. the interval $(x-c,x+c)$ for some small value $c$. While there are a couple of exceptions, we can in general find the extrema of a function by calculating its derivative and setting it equal to zero. This is because, as one might intuitively reason, the curve of the function "changes direction" at an extremum as illustrated below with the slope.
 
 <video width="500" height="310" loop muted autoplay>
-    <source src="../extra/bslialo-notes-9b/fig_01.mp4" type="video/mp4">
+    <source src="{{ site.url }}/pages/extra/bslialo-notes-9b/fig_01.mp4" type="video/mp4">
 </video>
 
 We can also think of the extrema of a function is where the derivative changes sign before and after. This is also known as the *first derivative test*.
@@ -165,7 +166,7 @@ f'(x) &> 0 \quad \text{for} \quad 2 < x.
 This implies that $f(x)$ has a minimum at $x=\frac{1}{2}$, but neither a maximum or a minimum at $x=2$. By plotting $f$ we can see, what goes on at $x=2$:
 
 <video width="500" height="310" loop muted autoplay>
-    <source src="../extra/bslialo-notes-9b/fig_03.mp4" type="video/mp4">
+    <source src="{{ site.url }}/pages/extra/bslialo-notes-9b/fig_03.mp4" type="video/mp4">
 </video>
 
 We can interpret this as, if we're coming from the left, then $x=2$ is a maximum, but coming from the right it's a minimum. Therefore it can neither be a maximum or minimum.
@@ -197,7 +198,7 @@ $$
 i.e. a function of the parameter given the data. Below is a plot of the likelihood function, where the x-axis is the value of our parameter $\pi$, which varies from $0$ to $1$, and the y-axis is the probability of that specific value of $\pi$ given our data or *likelihood*. Don't worry about the low values on the y-axis - we're only interested in the relation between the values (the largest of them).
 
 <video width="500" height="310" loop muted autoplay>
-    <source src="../extra/bslialo-notes-9b/fig_02.mp4" type="video/mp4">
+    <source src="{{ site.url }}/pages/extra/bslialo-notes-9b/fig_02.mp4" type="video/mp4">
 </video>
 
 The maximum value of the likelihood function is at $\pi=0.46$, and we're done. We now have a parameter $\pi = 0.46$ that gives us the most likely ratio of heads to coin tosses, given the data we produced. We can think of this as optimizing our coin toss model, but let's examine closer, what we did. We tossed a coin $100$ times, asked ourselves what the most likely probability of heads is, and called this value $\pi$. Then we wrote up the likelihood function of $\pi$, and found the value of $\pi$ corresponding to the maximum of the likelihood function.

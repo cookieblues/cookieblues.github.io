@@ -1,6 +1,7 @@
 ---
 title: "BSLIALO, notes 9a: The derivative, the limit, and the concept of approach"
 layout: post
+category: Linear Algebra and Optimisation
 tags: BSLIALO
 excerpt_separator: <!--more-->
 ---
@@ -75,7 +76,7 @@ $$
 is equal to. Underneath is an illustration of $v(t)$ as $\Delta t \to 0$.
 
 <video width="500" height="310" loop muted autoplay>
-    <source src="../extra/bslialo-notes-9a/fig_02.mp4" type="video/mp4">
+    <source src="{{ site.url }}/pages/extra/bslialo-notes-9a/fig_02.mp4" type="video/mp4">
 </video>
 
 As can be seen above, the velocity turns out to be the slope or tangent line of the distance. This is also what we call the derivative of the distance function. This is usually denoted

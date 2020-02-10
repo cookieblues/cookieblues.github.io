@@ -1,6 +1,7 @@
 ---
 title: "The bare minimum guide to LaTeX"
 layout: post
+category: Bare minimum guides
 tags: bare_min_guide
 excerpt_separator: <!--more-->
 ---

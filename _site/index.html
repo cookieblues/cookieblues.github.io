@@ -9,10 +9,14 @@
             gtag("js", new Date());
             gtag("config", "UA-128381822-1");
         </script>
+
+        
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="chrome=1">
         <title>Cookieblues</title>
-        <link rel="stylesheet" href="/css/style.css?v=">
+        <link rel="stylesheet" href="/css/style.css?v=0f2e6d9be75801ded07a276cf8194cd78cedaf9e">
+
+        <!-- START KATEX -->
         <script type="text/javascript">
             var stylesheet = document.createElement("link");
             stylesheet.href = "/css/katex.min.css";
@@ -39,6 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
         </script>
+        <!-- END KATEX -->
     </head>
 
     <body>
@@ -46,38 +51,136 @@ document.addEventListener("DOMContentLoaded", function() {
             <header>
                 <h1><a href="http://localhost:4000">Cookieblues</a></h1>
 
+
 <p>
-    I'm a data science student at ITU with a bit of experience in mathematics. I'll be posting stuff. <br><br> E-mail: shro@itu.dk.
+    I'm a data science student at ITU with a bit of experience in mathematics.<br><br> E-mail: shro@itu.dk.
 </p>
 
 
 <h5 class="side">CATEGORIES</h5>
-<p class="side">
-    <a href="http://localhost:4000/pages/cats/linalgop">Linear Algebra and Optimisation</a>
-</p>
+
+
+
+
+
+
+
+
+    
+    
+
+    
+
+    <p class="side">
+        <a href='http://localhost:4000/bare_minimum_guides'>Bare minimum guides</a> (1)
+    </p>
+
+
+
+    
+    
+
+    
+
+    <p class="side">
+        <a href='http://localhost:4000/linear_algebra_and_optimisation'>Linear Algebra and Optimisation</a> (4)
+    </p>
+
+
+
+    
+    
+
+    
+
+    <p class="side">
+        <a href='http://localhost:4000/machine_learning'>Machine Learning</a> (4)
+    </p>
+
+
+
+    
+    
+
+    
+
+    <p class="side">
+        <a href='http://localhost:4000/updates'>Updates</a> (1)
+    </p>
+
+
+
+    
+    
+
+    
+        
+
 
 <h5 class="side">ARCHIVES</h5>
 
     <p class="side">
-        <a href="/pages/linalgop-notes-9c/">
-            12 Nov, 2018 - LinAlgOp, notes 9c: Integration and the fundamental theorem of calculus
+        <a href="/how-to-do-data-science-without-machine-learning/">
+            31 Jan, 2020 - How to do data science without machine learning
         </a>
     </p>
 
     <p class="side">
-        <a href="/pages/linalgop-notes-9b/">
-            04 Nov, 2018 - LinAlgOp, notes 9b: The chain rule, derivatives of logarithmic functions, extrema, and optimisation
+        <a href="/bsmalea-notes-2/">
+            02 Dec, 2019 - BSMALEA, notes 2: Regression
         </a>
     </p>
 
     <p class="side">
-        <a href="/pages/linalgop-notes-9a/">
-            25 Oct, 2018 - LinAlgOp, notes 9a: The derivative, the limit, and the concept of approach
+        <a href="/bsmalea-notes-1b/">
+            26 Nov, 2019 - BSMALEA, notes 1b: Model selection and validation, the "no free lunch" theorem, and the curse of dimensionality
         </a>
     </p>
 
     <p class="side">
-        <a href="/pages/a-look-at-linear-algebra-and-optimisation/">
+        <a href="/bsmalea-notes-1a/">
+            23 Sep, 2019 - BSMALEA, notes 1a: What is machine learning?
+        </a>
+    </p>
+
+    <p class="side">
+        <a href="/a-look-at-machine-learning/">
+            23 Sep, 2019 - A look at Machine Learning
+        </a>
+    </p>
+
+    <p class="side">
+        <a href="/bare-minimum-latex/">
+            04 Apr, 2019 - The bare minimum guide to LaTeX
+        </a>
+    </p>
+
+    <p class="side">
+        <a href="/itu-eval-part-01/">
+            17 Jan, 2019 - Analysis of the biyearly evaluations at the IT University of Copenhagen, part 1: Data scraping
+        </a>
+    </p>
+
+    <p class="side">
+        <a href="/bslialo-notes-9c/">
+            15 Nov, 2018 - BSLIALO, notes 9c: Integration and the fundamental theorem of calculus
+        </a>
+    </p>
+
+    <p class="side">
+        <a href="/bslialo-notes-9b/">
+            04 Nov, 2018 - BSLIALO, notes 9b: The chain rule, derivatives of logarithmic functions, extrema, and optimisation
+        </a>
+    </p>
+
+    <p class="side">
+        <a href="/bslialo-notes-9a/">
+            25 Oct, 2018 - BSLIALO, notes 9a: The derivative, the limit, and the concept of approach
+        </a>
+    </p>
+
+    <p class="side">
+        <a href="/a-look-at-linear-algebra-and-optimisation/">
             23 Oct, 2018 - A look at Linear Algebra and Optimisation
         </a>
     </p>
@@ -86,37 +189,99 @@ document.addEventListener("DOMContentLoaded", function() {
             </header>
 
             <section>
-                <div id="content">
-                    <h1>Recent posts</h1>
+                <h1>Recent posts</h1>
 
-    <h2><a href="/pages/linalgop-notes-9c/">LinAlgOp, notes 9c: Integration and the fundamental theorem of calculus</a></h2>
-    <p><p>In <a href="http://localhost:4000/pages/linalgop-notes-9a">notes 9a</a> we introduced the derivative by looking at a $100$ meter sprint race. We looked at the so-called distance function $s(t)$, which told us how far we’d run in the race at time $t$, and asked if we could figure out a function for velocity $v(t)$. We found that the derivative of the distance function $s(t)$ was the velocity function $v(t)$, which we wrote up</p>
-
-<script type="math/tex; mode=display">\frac{d}{dt}s(t) = s'(t) = v(t).</script>
-
-<p>This time we will look at the velocity function and try to figure out the distance function, i.e. we want to do the opposite as last time, where we found the derivative; we want to find the antiderivative.</p>
+    <h2 class="frontpage"><a href="/how-to-do-data-science-without-machine-learning/">How to do data science without machine learning</a></h2>
+    <p class="date">Posted 31 Jan, 2020.</p>
+    <p><p>I recently participated in a challenge orchestrated by <a href="https://omdena.com/" target="_blank">Omdena</a>, which (if you don’t already know) is an international hub for AI enthusiasts that want to leverage AI solutions to solve some of humanity’s problems. The challenge was posed by a Nigerian NGO called RA365, and if you want to read more about it, Omdena asked me to write a small article for their blog regarding some work I did in the challenge. I didn’t really do much AI, so I decided to write about just that!<br />
+You can find the article by clicking <a href="https://medium.com/omdena/ai-in-nigeria-doing-data-science-for-good-without-machine-learning-6f7b1856d813" target="_blank">here</a>.</p>
 
 </p>
 
-    <h2><a href="/pages/linalgop-notes-9b/">LinAlgOp, notes 9b: The chain rule, derivatives of logarithmic functions, extrema, and optimisation</a></h2>
-    <p><p>Differentiation is commonly taught through rote learning, which I’m not a fan of. Therefore I’ll allow myself to skip the basic rules of differentiation, and what the derivative of every little function is. Instead, I want to focus on the useful and interesting, namely, the chain rule and logarithmic derivatives, both of which are important in machine learning. At the end, we’ll talk about optimisation, where we’ll try and combine, what we’ve learned.</p>
+    <h2 class="frontpage"><a href="/bsmalea-notes-2/">BSMALEA, notes 2: Regression</a></h2>
+    <p class="date">Posted 02 Dec, 2019.</p>
+    <p><p>Regression analysis refers to a set of techniques for estimating relationships among variables. This post introduces <strong>linear regression</strong> augmented by <strong>basis functions</strong> to enable non-linear adaptation. Linear regression lies at the heart of supervised learning, as will be apparent when we turn to classification. Thus, a thorough understanding of this model will be hugely beneficial. We’ll go through two derivations of the optimal parameters namely the method of <strong>ordinary least squares (OLS)</strong>, which we briefly looked at in <a href="http://localhost:4000/bsmalea-notes-1a">notes 1a</a>, and <strong>maximum likelihood estimation (MLE)</strong>. We’ll also dabble with some Python throughout the post.</p>
+
+<h3 id="setup-and-objective">Setup and objective</h3>
+<p>Given a training dataset of $N$ input variables $\mathbf{x} \in \mathbb{R}^D$ with corresponding target variables $t \in \mathbb{R}$, the objective of regression is to construct a function $h(\mathbf{x})$ that yields prediction values of $t$ for new values of $\mathbf{x}$.</p>
+
+<p>The simplest linear model for regression is just known as <em>linear regression</em>, where the predictions are generated by</p>
+
+<script type="math/tex; mode=display">h\left(\mathbf{x},\mathbf{w} \right) = w_0 + w_1 x_1 + \dots + w_D x_D = w_0 + \sum_{i=1}^D w_i x_i. \quad \quad (1)</script>
+
+<p>The first term $w_0$ is commonly called the <em>intercept</em> or <em>bias</em> parameter, and allows $h$ to adapt to a fixed offset in the data - we’ll show exactly what this means later in this post. If we introduce a $1$ as the first element of each $\mathbf{x}$, we can rewrite $(1)$ with vector notation, i.e. if we define $\mathbf{x} = \left( 1, x_1, \dots , x_D  \right)^\intercal$, we can rewrite $(1)$ as</p>
+
+<script type="math/tex; mode=display">h(\mathbf{x},\mathbf{w}) = \mathbf{w}^\intercal \mathbf{x},</script>
 
 </p>
 
-    <h2><a href="/pages/linalgop-notes-9a/">LinAlgOp, notes 9a: The derivative, the limit, and the concept of approach</a></h2>
-    <p><p>Imagine you’re participating in a $100$ metres sprint race. When you hear the starter’s pistol, you accelerate for dozens of metres, i.e. your velocity will increase until you reach your maximum speed. Let’s assume, you reach your maximum speed $5$ seconds into the race, after which you start to fatigue and decelerate - and let’s also assume, you finish the race in $10$ seconds. If we let $s(t)$ be the distance you’ve traveled at time $t$, and $v(t)$ your velocity at time $t$, then we can draw your velocity and the distance you’ve traveled in a plot like the one below.</p>
+    <h2 class="frontpage"><a href="/bsmalea-notes-1b/">BSMALEA, notes 1b: Model selection and validation, the "no free lunch" theorem, and the curse of dimensionality</a></h2>
+    <p class="date">Posted 26 Nov, 2019.</p>
+    <p><p>Now we know a bit about machine learning: it involves models. Machine learning attempts to model data in order to make predictions about the data. In the <a href="http://localhost:4000/bsmalea-notes-1a">previous post</a> we dove into the inner functions of a model, and that is very much what machine learning is about. Yet, it’s only half of it, really. The other half has to do with the concept of prediction, and how we make sure our, model can predict well. This course doesn’t dabble that deep into this other half - but there are a few important topics in this regard, you should be aware of, as they pop up in machine learning all the time.</p>
+
+<h3 id="model-selection-and-validation">Model selection and validation</h3>
+<p>In the <a href="http://localhost:4000/bsmalea-notes-1a">previous post</a>, we went over polynomial regression. In the Python implementation, I chose to go with a polynomial of order $4$ (for no reason whatsoever). However, perhaps $M=4$ isn’t the ‘best’ choice - but what is the ‘best’ choice, and how do we find it? Firstly, the order of our polynomial is set before the training process begins, and we call these special parameters in our model <strong>“hyperparameters”</strong>. Secondly, the process of figuring out the values of the hyperparameters is called <strong>hyperparameter optimization</strong> and is a part of <strong>model selection</strong>. Thirdly, as mentioned in the <a href="http://localhost:4000/bsmalea-notes-1a">previous post</a>, machine learning is mostly concerned with prediction, which means that we define the ‘best’ model as the one that <strong>generalizes</strong> the best, i.e. which model would perform the best on data it wasn’t trained on?</p>
+
+<p>To begin with, we usually want to come up with some kind of <strong>evaluation metric</strong> (which <em>can</em> be different from the objective function). Then we divide our training dataset into three: a <strong>training</strong>, a <strong>validation</strong> (sometimes called <strong>development</strong>), and a <strong>test</strong> dataset. Usually the new training dataset is $80\%$ of the original, and the validation and test datasets are $10\%$ each. Then we train our model on the training dataset, perform model selection on the validation dataset, and do a final evaluation of the model on the test dataset. This way, we can determine the model with the lowest <strong>generalization error</strong>. The generalization error refers to the performance of the model on <em>unseen data</em> (data it wasn’t trained on).</p>
 
 </p>
 
-    <h2><a href="/pages/a-look-at-linear-algebra-and-optimisation/">A look at Linear Algebra and Optimisation</a></h2>
-    <p><p>Over the next month or two I’ll try and post notes for the course “<a href="https://mit.itu.dk/ucs/cb_www/course.sml?course_id=2013608&amp;mode=search&amp;lang=da&amp;print_friendly_p=t&amp;goto=1540218458.000" target="_blank">Linear Algebra and Optimisation</a>” at the <a href="https://www.itu.dk/" target="_blank">IT University of Copenhagen</a>. I’ll attempt to write the notes as to give an intuitive understanding of the introduced concepts. Therefore the notes will <strong>not</strong> contain rigorous proofs and explanations of every little theorem, you might run into in a linear algebra course.<br />
-While I didn’t take the course myself, because I got merit from another linear algebra course, I did help a few of my classmates when they were taking it, and I’m also currently TAing the course.</p>
+    <h2 class="frontpage"><a href="/bsmalea-notes-1a/">BSMALEA, notes 1a: What is machine learning?</a></h2>
+    <p class="date">Posted 23 Sep, 2019.</p>
+    <p><p>It seems, most people derive their definition of machine learning from a quote from Arthur Lee Samuel in 1959: “Programming computers to learn from experience should eventually eliminate the need for much of this detailed programming effort.” The interpretation to take away from this is that “machine learning is the field of study that gives computers the ability to learn without being explicitly programmed.”</p>
+
+<p>While Arthur Lee Samuel first coined the term “machine learning” in 1959<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>, the methods applied in machine learning come way before, e.g. the method of least-squares was first published by A. M. Legendre in 1805<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup>, and Bayes’ theorem, which is the cornerstone of Bayesian statistics, was first underpinned by Thomas Bayes in 1763<sup id="fnref:3"><a href="#fn:3" class="footnote">3</a></sup>. In the next post, we’ll see the importance of Bayes’ theorem in machine learning, when we dive into frequentism and Bayesianism.</p>
+
+<!---
+INSERT TIMELINE
+-->
+
+<p>Machine learning draws a lot of its methods from statistics, but there is a distinctive difference between the two areas: <strong>statistics is mainly concerned with estimation</strong>, whereas <strong>machine learning is mainly concerned with prediction</strong>. This distinction makes for great differences, as we will see soon enough.</p>
+
+<h3 id="categories-of-machine-learning">Categories of machine learning</h3>
+<!--
+WRITE OUT THAT CLASSIFICATION/REGRESSION ARE SUPERVISED AND CLUSTERING/DENSITY ESTIMATION ARE UNSUPERVISED
+-->
+<p>There are many different machine learning methods that solve different tasks. This course presupposes two fundamental ones; <strong>supervised</strong> learning and <strong>unsupervised</strong> learning. These are further divided into two smaller categories as shown in the image underneath.</p>
+
+<!---
+INSERT ANIMATION
+-->
+<p><img src="http://localhost:4000/pages/extra/bsmalea-notes-1a/categories_of_ml.svg" /></p>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>R. Kohavi and F. Provost, “Glossary of terms,” Machine Learning, vol. 30, no. 2–3, pp. 271–274, 1998.</p>
+    </li>
+    <li id="fn:2">
+      <p>A. M. Legendre, “Nouvelles méthodes pour la détermination des orbites des comètes,” 1805.</p>
+    </li>
+    <li id="fn:3">
+      <p>T. Bayes and R. Price, “An essay towards solving a problem in the doctrine of chances,” in a letter to J. Canton, 1763.</p>
+    </li>
+  </ol>
+</div>
+</p>
+
+    <h2 class="frontpage"><a href="/a-look-at-machine-learning/">A look at Machine Learning</a></h2>
+    <p class="date">Posted 23 Sep, 2019.</p>
+    <p><p>This hopefully won’t take as long as my notes on <a href="http://localhost:4000/linear_algebra_and_optimisation">Linear Algebra and Optimization</a>, but I will start writing up my notes for the course “<a href="https://mit.itu.dk/ucs/cb_www/course.sml?course_id=2013612&amp;mode=search&amp;lang=en&amp;print_friendly_p=t&amp;goto=1542111182.000" target="_blank">Machine Learning</a>” at the <a href="https://www.itu.dk/" target="_blank">IT University of Copenhangen</a>. My goal is as always to explain the intuition behind the introduced concepts, making it easier to understand and engage with. I believe this can help the few who struggle to understand the concepts, as well as found the concepts for those who know how to employ them but lack the why.</p>
+
+<h3 id="overview">Overview</h3>
+<p>If you click the link above, you’ll see that there are four intended learning outcomes for the course; the student should be able to:</p>
+
+<ul>
+  <li><strong>Discuss</strong>, clearly <strong>explain</strong>, and <strong>reflect</strong> upon central machine learning concepts and algorithms.</li>
+  <li><strong>Choose among</strong> and <strong>make use</strong> of the most important machine learning approaches in order to apply (match) them to practical problems.</li>
+  <li><strong>Implement</strong> abstractly specified machine learning methods in an imperative programming language.</li>
+  <li><strong>Combine</strong> and <strong>modify</strong> machine learning methods to <strong>analyse</strong> practical dataset and <strong>convey</strong> the results.</li>
+</ul>
 
 </p>
 
 
 
-                </div>
             </section>
 
             <footer>

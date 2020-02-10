@@ -9,10 +9,14 @@
             gtag("js", new Date());
             gtag("config", "UA-128381822-1");
         </script>
+
+        
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="chrome=1">
         <title>{{ site.title }}</title>
         <link rel="stylesheet" href="{{ '/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+
+        <!-- START KATEX -->
         <script type="text/javascript">
             var stylesheet = document.createElement("link");
             stylesheet.href = "/css/katex.min.css";
@@ -23,6 +27,7 @@
         <script type="text/javascript">
             {% include js/katex.js %}
         </script>
+        <!-- END KATEX -->
     </head>
 
     <body>

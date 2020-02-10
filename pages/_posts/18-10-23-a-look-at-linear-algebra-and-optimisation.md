@@ -1,6 +1,7 @@
 ---
 title: "A look at Linear Algebra and Optimisation"
 layout: post
+category: Linear Algebra and Optimisation
 tags: BSLIALO
 excerpt_separator: <!--more-->
 ---
@@ -21,10 +22,10 @@ The course is 14 weeks, tightly packed, and assumes you are familiar with basic 
 7. Eigenvectors, eigenvalues, and diagonalisation
 8. PageRank algorithm
 9. Introduction to calculus:\\
-   (a) <a href="{{ site.url }}/pages/bslialo-notes-9a">The derivative, the limit, and the concept of approach</a>\\
-   (b) <a href="{{ site.url }}/pages/bslialo-notes-9b">The chain rule, derivatives of logarithmic functions, extrema, and optimisation</a>\\
-   (c) <a href="{{ site.url }}/pages/bslialo-notes-9c">Integration and the fundamental theorem of calculus</a>
-10. <a href="{{ site.url }}/pages/bslialo-notes-10">Taylor polynomials and Newton-Raphson's method</a>
+   (a) [The derivative, the limit, and the concept of approach]({{ site.url }}/bslialo-notes-9a)\\
+   (b) [The chain rule, derivatives of logarithmic functions, extrema, and optimisation]({{ site.url }}/bslialo-notes-9b)\\
+   (c) [Integration and the fundamental theorem of calculus]({{ site.url }}/bslialo-notes-9c)
+10. [Taylor polynomials and Newton-Raphson's method]({{ site.url }}/bslialo-notes-10)
 11. Motion along a curve
 12. Partial derivatives and gradients
 13. Optimisation, 2nd derivative test, and Lagrange multipliers

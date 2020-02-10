@@ -1,13 +1,24 @@
-permalink: /:categories/:title/
+permalink: /:title/
 
 title: Cookieblues
 
 git_branch: master
 url: "https://cookieblues.github.io"
+
 markdown: kramdown
 kramdown:
    math_engine: mathjax
    footnote_backlink:
+  
 plugins:
   - jekyll-last-modified-at
-tags: [General,BSLIALO,BSMALEA,dataviz,ITUEVAL,ML]
+
+tags: [
+  General,
+  BSLIALO,
+  BSMALEA,
+  dataviz,
+  ITUEVAL,
+  ML,
+  bare_min_guide
+]

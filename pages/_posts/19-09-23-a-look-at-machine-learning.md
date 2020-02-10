@@ -1,10 +1,11 @@
 ---
 title: "A look at Machine Learning"
 layout: post
+category: Machine Learning
 tags: BSMALEA
 excerpt_separator: <!--more-->
 ---
-This hopefully won't take as long as my notes on <a href="{{ site.url }}/pages/cats/bslialo">Linear Algebra and Optimization</a>, but I will start writing up my notes for the course "[Machine Learning](https://mit.itu.dk/ucs/cb_www/course.sml?course_id=2013612&mode=search&lang=en&print_friendly_p=t&goto=1542111182.000){:target="_blank"}" at the [IT University of Copenhangen](https://www.itu.dk/){:target="_blank"}. My goal is as always to explain the intuition behind the introduced concepts, making it easier to understand and engage with. I believe this can help the few who struggle to understand the concepts, as well as found the concepts for those who know how to employ them but lack the why.
+This hopefully won't take as long as my notes on <a href="{{ site.url }}/linear_algebra_and_optimisation">Linear Algebra and Optimization</a>, but I will start writing up my notes for the course "[Machine Learning](https://mit.itu.dk/ucs/cb_www/course.sml?course_id=2013612&mode=search&lang=en&print_friendly_p=t&goto=1542111182.000){:target="_blank"}" at the [IT University of Copenhangen](https://www.itu.dk/){:target="_blank"}. My goal is as always to explain the intuition behind the introduced concepts, making it easier to understand and engage with. I believe this can help the few who struggle to understand the concepts, as well as found the concepts for those who know how to employ them but lack the why.
 
 ### Overview
 If you click the link above, you'll see that there are four intended learning outcomes for the course; the student should be able to:
@@ -22,14 +23,14 @@ Both statistics and linear algebra are prerequisites for machine learning. Not e
 Underneath is an overview of the notes, I'll be writing. They more or less follow the structure of the course.
 
 1. Introduction to machine learning:\\
-    (a) <a href="{{ site.url }}/pages/bsmalea-notes-1a">What is machine learning?</a>\\
-    (b) <a href="{{ site.url }}/pages/bsmalea-notes-1b">Model selection and validation, the "no free lunch" theorem, and the curse of dimensionality</a>\\
+    (a) <a href="{{ site.url }}/bsmalea-notes-1a">What is machine learning?</a>\\
+    (b) <a href="{{ site.url }}/bsmalea-notes-1b">Model selection and validation, the "no free lunch" theorem, and the curse of dimensionality</a>\\
     (c) Frequentism and Bayesianism\\
     (d) Decision and information theory
-2. <a href="{{ site.url }}/pages/bsmalea-notes-2">Regression</a>
-3. Linear models for classification:\\
-    (a) Overview of linear classifiers\\
-    (b) Discriminant functions\\
+2. <a href="{{ site.url }}/bsmalea-notes-2">Regression</a>
+3. Classification:\\
+    (a) Overview of classifiers\\
+    (b) Distribution-free models\\
     (c) Discriminative models (logistic regression)\\
     (d) Generative models
 4. Neural networks (feed-forward, backprop)

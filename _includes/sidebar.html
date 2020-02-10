@@ -1,21 +1,41 @@
 <h1><a href="{{ site.url }}">Cookieblues</a></h1>
 
+
 <p>
-    I'm a data science student at ITU with a bit of experience in mathematics.<br><br> E-mail: shro@itu.dk.
+    I'm a data science student at ITU with a bit of experience in mathematics.<br><br> E-mail: <style type="text/css">p span.displaynone{display:none;}</style>shro@<span class="displaynone">null</span>itu.dk.
 </p>
 
 
 <h5 class="side">CATEGORIES</h5>
-<p class="side">
-    <a href="{{ site.url }}/pages/cats/bslialo">Linear Algebra and Optimisation</a>
-    <a href="{{ site.url }}/pages/cats/bsmalea">Machine Learning</a>
-</p>
+{% capture categories %}
+    {% for cat in site.categories %}
+        |{{ cat[0] }}#{{ cat[1].size }}
+    {% endfor %}
+{% endcapture %}
+
+{% assign sorted_categories = categories | split: '|' | sort %}
+
+{% for cat in sorted_categories %}
+{% unless forloop.first %}
+    {% assign cat_items = cat | split: '#' %}
+    {% assign category_url = cat_items[0] | downcase | replace:' ','_' %}
+
+    {% if cat_items[0] == 'pages' %}
+        {% continue %}
+    {% endif %}
+
+    <p class="side">
+        <a href='{{ site.url }}/{{ category_url }}'>{{ cat_items[0] }}</a> ({{ cat_items[1] | strip }})
+    </p>
+{% endunless %}
+{% endfor %}
+
 
 <h5 class="side">ARCHIVES</h5>
-{% for post in site.categories.pages %}
+{% for post in site.posts %}
     <p class="side">
         <a href="{{ post.url }}">
-            {{post.date | date: '%d %b, %Y' }} - {{post.title}}
+            {{ post.date | date: '%d %b, %Y' }} - {{ post.title }}
         </a>
     </p>
 {% endfor %}

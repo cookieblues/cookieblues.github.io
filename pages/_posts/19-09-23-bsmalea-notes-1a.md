@@ -1,6 +1,7 @@
 ---
 title: "BSMALEA, notes 1a: What is machine learning?"
 layout: post
+category: Machine Learning
 tags: BSMALEA
 excerpt_separator: <!--more-->
 ---
@@ -55,7 +56,7 @@ $$
 h(x, \mathbf{w}) = w_0 + w_1 x + w_2 x^2 + \dots + w_M x^M = \sum_{m=0}^M w_m x^m, \quad \quad (1)
 $$
 
-which we refer to as the **parameters** or **weights** of our model. $M$ is the order of our polynomial, and $\mathbf{w} = \left( w_0, w_1, \dots, w_M \right)^\intercal$ denotes all our parameters, i.e. we have $M+1$ parameters for our $M$th order polynomial. Now, the objective is to estimate the 'best' values for our parameters. In the <a href="{{ site.url }}/pages/bsmalea-notes-1b">next post</a> we'll discuss exactly how we define and find the 'best' values, but for now we'll go over it briefly. We define what is called an **objective function** (also called **error** or **loss** function). We construct our objective function such that it outputs a value that tells us how our model is performing. For this task we define the objective function as the sum of the squared differences between the predictions of our polynomial given input variables and the corresponding target variables, i.e.
+which we refer to as the **parameters** or **weights** of our model. $M$ is the order of our polynomial, and $\mathbf{w} = \left( w_0, w_1, \dots, w_M \right)^\intercal$ denotes all our parameters, i.e. we have $M+1$ parameters for our $M$th order polynomial. Now, the objective is to estimate the 'best' values for our parameters. In the <a href="{{ site.url }}/bsmalea-notes-1b">next post</a> we'll discuss exactly how we define and find the 'best' values, but for now we'll go over it briefly. We define what is called an **objective function** (also called **error** or **loss** function). We construct our objective function such that it outputs a value that tells us how our model is performing. For this task we define the objective function as the sum of the squared differences between the predictions of our polynomial given input variables and the corresponding target variables, i.e.
 
 $$
 E(\mathbf{w}) = \sum_{n=1}^N \left( t_n - h(x_n, \mathbf{w}) \right)^2, \quad \quad (2)
@@ -73,7 +74,7 @@ Let's take a minute to understand what $(2)$ is saying. The term on the right-ha
 INSERT PICTURE/ANIMATION OF RESIDUALS
 -->
 
-So far, so good! Since the objective function tells us how well we're doing, and the lower it is, the better we're doing, we will try and find the minimum of the objective function. That is we want to find the values for our parameters $\mathbf{w}$ that give us the lowest value for $E$. The process of determining the values for our parameters is called the **training** or **learning** process. Recall from the <a href="{{ site.url }}/pages/bslialo-notes-9b">notes about extrema</a> that to find the minimum of a function, we take the derivative, set it equal to zero, and solve for our parameters $\mathbf{w}$. Since we have a lot of parameters, we'll take the partial derivative of $E$ with respect to the $i$th parameter $w_i$, set it equal to zero, and solve for it. This will give us a linear system of $M+1$ equations with $M+1$ unknowns (our parameters $\mathbf{w}$). We'll go over the derivation of the solution to this problem in the next post, but for now we'll just have it given; the solution is
+So far, so good! Since the objective function tells us how well we're doing, and the lower it is, the better we're doing, we will try and find the minimum of the objective function. That is we want to find the values for our parameters $\mathbf{w}$ that give us the lowest value for $E$. The process of determining the values for our parameters is called the **training** or **learning** process. Recall from the <a href="{{ site.url }}/bslialo-notes-9b">notes about extrema</a> that to find the minimum of a function, we take the derivative, set it equal to zero, and solve for our parameters $\mathbf{w}$. Since we have a lot of parameters, we'll take the partial derivative of $E$ with respect to the $i$th parameter $w_i$, set it equal to zero, and solve for it. This will give us a linear system of $M+1$ equations with $M+1$ unknowns (our parameters $\mathbf{w}$). We'll go over the derivation of the solution to this problem in the next post, but for now we'll just have it given; the solution is
 
 $$
 \hat{\mathbf{w}} = \left( \mathbf{X}^\intercal \mathbf{X} \right)^{-1} \mathbf{X}^\intercal \textbf{\textsf{t}}, \quad \quad (3)

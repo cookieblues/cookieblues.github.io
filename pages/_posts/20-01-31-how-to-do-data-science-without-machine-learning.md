@@ -1,6 +1,7 @@
 ---
 title: "How to do data science without machine learning"
 layout: post
+category: Updates
 tags: news
 excerpt_separator: <!--more-->
 ---
