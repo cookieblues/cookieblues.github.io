@@ -1,0 +1,14 @@
+I"�<p>Differentiation is commonly taught through rote learning, which I’m not a fan of. Therefore I’ll allow myself to skip the basic rules of differentiation, and what the derivative of every little function is. Instead, I want to focus on the useful and interesting, namely, the chain rule and logarithmic derivatives, both of which are important in machine learning. At the end, we’ll talk about optimisation, where we’ll try and combine, what we’ve learned.</p>
+
+<h3 id="the-chain-rule">The chain rule</h3>
+<p>There are many rules of differentiation, e.g. let $u,v$ be functions, then the sum rule tells us how to take the derivative of a sum of functions</p>
+
+<script type="math/tex; mode=display">\frac{d}{dx} (u + v) = \frac{du}{dx} + \frac{dv}{dx},</script>
+
+<p>the product rule tells us how to take the derivative of a product of functions</p>
+
+<script type="math/tex; mode=display">\frac{d}{dx} (u \cdot v) = \frac{du}{dx} \cdot v + u \cdot \frac{dv}{dx},</script>
+
+<p>and the chain rule tells us how to take the derivative of a <em>composition</em> of functions. A function composition can be thought of as putting one function into another. Say we have two functions $f(x) = \sin (x)$ and $g(x) = x^2$. We can make two compositions from these two functions: $(f \circ g) (x) = f(g(x)) = \sin \left( x^2 \right)$ and $(g \circ f) (x) = g(f(x)) = \sin^2(x)$. The $\circ$ symbol represents a function composition.</p>
+
+:ET

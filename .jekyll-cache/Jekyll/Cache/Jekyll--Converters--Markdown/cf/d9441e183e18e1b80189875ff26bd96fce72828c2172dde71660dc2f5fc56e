@@ -1,0 +1,373 @@
+I"�X<p>I study data science at the <a href="https://www.itu.dk/" target="_blank">IT University of Copenhagen</a>, where there’s a fair bit of mathematics. I feel that there’s a presumption of mathematical understanding and rigor in a lot of the courses, which is never founded in the start of the programme. I used to study mathematics, and I was taught these things during a discrete mathematics course, so I’ve stitched the best bits and pieces together from that course with what I’ve learned since to create this short and (hopefully) useful crash course in discrete mathematics. The goal is that after reading this post, the reader should be able to read and write mathematics (better than before at least), as well as understand certain mathematical concepts a little better such as proofs, functions, combinatorics, etc.</p>
+
+<p>So, what <em>is</em> discrete mathematics actually? It’s kind of difficult to explain or define, but once you start doing discrete mathematics, it will become more evident. The word “discrete” comes from the Latin “discretus” which means separated, and I think that comes closest to explain it. Discrete mathematics studies mathematical structures that are <em>discrete</em>, which means <em>not continuous</em>. Commonly, discrete mathematics is described as dealing with countable things, but that does not mean finite; discrete structures can be both finite and infinite. Let’s just dive into it though!</p>
+
+<p>The guide will mainly focus on solving exercises and they will gradually get more difficult. Don’t expect to solve the exercises quickly - spend at least 10 minutes on an exercise before you move on (or look at the solution). I’ve rated the exercises from one (easiest) to five (hardest).</p>
+
+<h3 id="numbers">Numbers</h3>
+<p>To begin with, we have to be familiar with the different kinds of numbers that we’re dealing with. This is important when we start talking about certain properties that they each possess.</p>
+
+<blockquote>
+  <p><strong>Definition 1</strong> <em>The numbers $\dots, -3, -2, -1, 0, 1, 2, 3, \dots$ are called the set of <strong>integers</strong> (or <strong>whole numbers</strong>) and are denoted by $\mathbb{Z}$.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><strong>Definition 2</strong> <em>The positive integers $1, 2, 3, \dots$ are called the set of <strong>natural numbers</strong> and are denoted by $\mathbb{N}$. Commonly $\mathbb{N}_0$ denotes the set of natural numbers and $0$.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><strong>Definition 3</strong> <em>The numbers that can be written as fractions $\frac{a}{b}$, where $a$ and $b$ are integers and $b \not = 0$, are called the set of <strong>rational numbers</strong> and are denoted by $\mathbb{Q}$.</em></p>
+</blockquote>
+
+<p>In discrete mathematics, we’ll mainly be dealing with integers, but we’ll also touch on some properties of rational numbers.
+<!--more--></p>
+
+<blockquote>
+  <p><strong>Theorem 4</strong> <em>For any integers $x$, $y$, $z$, the following basic rules apply:</em></p>
+
+  <script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+x+y &= y+x \\
+(x+y)+z &= x+(y+z) \\
+x+0 &= 0+x = x \\
+x+(-x) &= (-x) + x = 0 \\
+xy &= yx \\
+(xy)z &= x(yz) \\
+x \cdot 1 &= 1x = x \\
+x(y+z) &= xy+xz, \quad (x+y)z = xz+yz \\
+x &\leq x \\
+\text{if } x &\leq y \text{ and } y \leq z \text{ then } x \leq z \\
+\text{if } x &\leq y \text{ and } y \leq x \text{ then } x = y \\
+\text{if } x &\leq y \text{ then } x+z \leq y+z \\
+\text{if } x &\leq y \text{ and } 0 \leq z \text{ then } xz \leq yz
+\end{aligned} %]]></script>
+</blockquote>
+
+<blockquote>
+  <p><strong>Definition 5</strong> <em>An integer $d$ is called a <strong>divisor</strong> (or <strong>factor</strong>) of another integer $n$, if there exists an integer $q$ such that $dq=n$. We write $d \mid n$ and say “$d$ <strong>divides</strong> $n$”, “$n$ is <strong>divisible</strong> by $d$”, or “$n$ is a <strong>multiple</strong> of $d$”.</em></p>
+</blockquote>
+
+<p>As an example, $12$ is divisible by $1$, $2$, $3$, $4$, $6$, and $12$. These are all the <em>positive</em> divisors of $12$. Likewise, $-39$, $26$, and $130$ are all multiples of $13$.</p>
+
+<p><em>Exercise 1 (1/5):</em> Determine all the divisors of 27, and all <em>positive</em> divisors of 31.</p>
+
+<blockquote>
+  <p><strong>Theorem 6</strong> <em>Let $n$ and $d$ be integers. If $d \mid n$, then $d \mid -n$.</em> <br />
+<strong>Proof:</strong> By definition 5 we know that there exists an integer $q$ such that $dq = n$. To show $d \mid -n$, we have to find an integer $q_1$ such that $dq_1 = -n$. Since $dq=n$ then $-dq = -n$, so $d \cdot (-q) = -n$. Since $q$ is an integer, then $-q$ must be an integer too. So if $q_1 = -q$, it satisfies $dq_1 = -n$ and shows that $d \mid -n$. $\square$</p>
+</blockquote>
+
+<p><em>Exercise 2 (2/5):</em> Let $n$ and $d$ be integers. Show that if $d \mid n$, then $-d \mid n$, and $-d \mid -n$.</p>
+
+<p><em>Exercise 3 (2/5):</em> Let $a$, $b$, and $c$ be integers. Show that if $a \mid b$ and $b \mid c$, then $a \mid c$.</p>
+
+<p><em>Exercise 4 (3/5):</em> The integers $n$ and $m$ satisfy $2 \mid n$ and $6 \mid m$. Show that $4 \mid m(m+n)$.</p>
+
+<p><em>Exercise 5 (3/5):</em> The integers $n$ and $m$ satisfy $n+m=n^2$. Show that $n \mid m$.</p>
+
+<blockquote>
+  <p><strong>Definition 7</strong> <em>1, -1, $n$, and $-n$ are called the <strong>trivial divisors</strong> of $n$. A divisor of $n$ that isn’t trivial is called a <strong>non-trivial divisor</strong>.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><strong>Definition 8</strong> <em>An integer $n &gt; 1$ is called a <strong>prime number</strong> (or just <strong>prime</strong>) if it only has trivial divisors. If $n$ is not a prime number, then it’s called a <strong>composite number</strong>.</em></p>
+</blockquote>
+
+<p>The first $10$ prime numbers are therefore $2$, $3$, $5$, $7$, $11$, $13$, $17$, $19$, $23$, and $29$.</p>
+
+<p><em>Exercise 6 (1/5):</em> Determine all the prime numbers less than $50$.</p>
+
+<blockquote>
+  <p><strong>Note 9</strong> <em>The integer $1$ is neither a prime number nor a composite number.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><strong>Definition 10</strong> <em>A prime number that is a divisor in a number $n$ is called a <strong>prime factor</strong> of $n$.</em></p>
+</blockquote>
+
+<p><em>Exercise 7 (1/5):</em> Determine all the prime factors of $30$.</p>
+
+<blockquote>
+  <p><strong>Theorem 11</strong> <em>Every integer $n&gt;1$ has at least one prime factor. In particular, the smallest divisor larger than $1$ is a prime factor.</em> <br />
+<strong>Proof:</strong> Let $n&gt;1$ be an integer, and $p&gt;1$ the smallest divisor of $n$. If $p$ is not prime, then $p$ is a composite number and has a non-trivial divisor larger than $1$. It follows from exercise 3 that this divisor must also be a divisor of $n$, which contradicts that $p$ is the smallest divisor of $n$ that is larger than $1$. Therefore $p$ has to be prime and thereby a prime factor of $n$. $\square$</p>
+</blockquote>
+
+<blockquote>
+  <p><strong>Definition 12</strong> <em>The <strong>prime factorization</strong> of an integer $n&gt;1$ is the product of primes equal to $n$, i.e. $n = p_1^{\alpha_1} p_2^{\alpha_2} \cdots p_m^{\alpha_m} $, where $p_i$ is prime, and $\alpha_i$ is a natural number.</em></p>
+</blockquote>
+
+<p>As an example, the prime factorization of $6$ is $2 \cdot 3$, and the prime factorization of $72$ is $2^3 \cdot 3^2$.</p>
+
+<p><em>Exercise 8 (1/5):</em> Determine the prime factorization of $180$ and $9009$.</p>
+
+<blockquote>
+  <p><strong>Lemma 13 <em>Euclid’s lemma</em></strong> <em>If $m$ and $n$ are integers, $p$ is prime, and $p \mid ab$, then $p \mid a$ or $p \mid b$.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><strong>Theorem 14 <em>Fundamental theorem of arithmetic</em></strong> <em>Every integer $n&gt;1$ has a unique prime factorization.</em><br />
+<strong>Proof:</strong> We’ll return to this after induction.</p>
+</blockquote>
+
+<p><em>Exercise 9 (2/5):</em> The product of $4$ distinct positive integers is equal to 2020. What is the sum of the $4$ integers?</p>
+
+<p>What follows from the uniqueness of the prime factorization is that for integers $a$, $b$, $n$ larger than $1$, if $n=a \cdot b$, then the prime factorization of $n$ is equal to the product of the prime factorizations of $a$ and $b$.</p>
+
+<p><em>Exercise 10 (1/5):</em> If $n^2$ is divisible by a prime $p$, is $n$ also divisible by $p$?</p>
+
+<blockquote>
+  <p><strong>Corollary 15</strong> Let $p_1, p_2, \dots, p_m$ be $m$ distinct prime numbers, and let $\alpha_1, \alpha_2, \dots, \alpha_m$ be natural numbers. An integer $n$ is divisible by the product $p_1^{\alpha_1} p_2^{\alpha_2} \cdots p_m^{\alpha_m}$ if and only if it’s divisible by the numbers $p_1^{\alpha_1}, p_2^{\alpha_2}, \dots, p_m^{\alpha_m}$.<br />
+<strong>Proof:</strong> TBA.</p>
+</blockquote>
+
+<p>As an example, if we want to show that an integer $n$ is divisible by $6$, it is enough to show that $n$ is divisible by $2$ and $3$.</p>
+
+<p><em>Exercise 11 (2/5):</em> Is $11011 \cdot 111$ divisible by $121$?</p>
+
+<p><em>Exercise 12 (3/5):</em> Show that the product of $3$ consecutive integers is divisible by $6$.</p>
+
+<p><em>Exercise 13 (3/5):</em> Show that the product of $5$ consecutive integers is divisible by $60$.</p>
+
+<p><em>Exercise 14 (4/5):</em> Show that $n^3-n$ is divisible by 6 for any integer $n$.</p>
+
+<p><em>Exericse 15 (5/5):</em> Let $a$ and $b$ be $2$ positive integers that sum to $2002$. Is it possible for $2002$ to divide $ab$?<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup></p>
+
+<p><em>Exercise 16 (5/5):</em> It is true of three integers $a$, $b$, and $c$ that $a+b^2=c^2$. Show that $6$ divides $abc$.<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup></p>
+
+<p><em>Exercise 17 (5/5):</em> Show that if $a$ and $b$ are integers and $a^2+b^2+9ab$ is divisible by $11$, then $a^2-b^2$ is divisible by $11$.<sup id="fnref:3"><a href="#fn:3" class="footnote">3</a></sup></p>
+
+<h3 id="logic">Logic</h3>
+<p>Now we’ll take a look at logic, which is essential to understanding and reading mathematics. Logic is the kind of word that gets thrown around in everyday conversation without having any reference to the analysis of argument.</p>
+
+<blockquote>
+  <p><strong>Definition 16</strong> <em>A (mathematical) <strong>proposition</strong> is a statement that is either true or false.</em></p>
+</blockquote>
+
+<p>Examples of propositions are $1 &gt; 2$ and $1 &lt; 2$, where the first is false and the second is true. However, $2+8$ and $\sin \pi$ are not propositions, as they are neither true nor false. What about the statement $x &gt; 5$ though? It’s not a proposition, because we haven’t determined the value of $x$ yet, and hence cannot determine whether it’s true or false. However, it will be a proposition once we assign a value to $x$. In this case, we call $x$ a <strong>free variable</strong>.</p>
+
+<blockquote>
+  <p><strong>Definition 17</strong> <em>A statement, which contains a free variable, is called a <strong>predicate</strong>.</em></p>
+</blockquote>
+
+<p>Predicates can have multiple free variables such as $a^2 + b^2 = c^2$.</p>
+
+<blockquote>
+  <p><strong>Definition 18</strong> <em>Let $p$ and $q$ be propositions. We define the following relationships between propositions represented by <strong>connectives</strong>:</em></p>
+
+  <ul>
+    <li><em><strong>Conjugation</strong>: $p \wedge q$ is true, when both $p$ and $q$ are true or false. It’s read “$p$ and $q$”.</em></li>
+    <li><em><strong>Disjunction</strong>: $p \vee q$ is true, when either $p$ or $q$ are true or they both are true and false when both $p$ and $q$ are false. It’s read “$p$ or $q$”.</em></li>
+    <li><em><strong>Negation</strong>: $\neg p$ is true when $p$ is false, and false when $p$ is true. It’s read “not $p$” or “non $p$”.</em></li>
+    <li><em><strong>Conditional (or implication)</strong>: $p \Rightarrow q$ is false when $p$ is true and $q$ is false, otherwise it’s true. It’s read “if $p$ then $q$”. Note that we can write the conditional the other way too $q \Leftarrow p$.</em></li>
+    <li><em><strong>Biconditional</strong>: $p \Leftrightarrow q$ is true if $p$ and $q$ have the same truth value. It’s read “$p$ if and only if $q$”.</em></li>
+  </ul>
+</blockquote>
+
+<p>We can illustrate these definitions in a table, where we show all combinations of truth values for $p$ and $q$, and we can comebine connectives to create more complicated propositions. The table below shows the truth values of the connectives for all combinations of truth values for $p$ and $q$, and the column to the right has a more complicated proposition.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">$p$</th>
+      <th style="text-align: center">$q$</th>
+      <th style="text-align: center">$p \wedge q$</th>
+      <th style="text-align: center">$p \vee q$</th>
+      <th style="text-align: center">$\neg p$</th>
+      <th style="text-align: center">$p \Rightarrow q$</th>
+      <th style="text-align: center">$p \Leftrightarrow q$</th>
+      <th style="text-align: center">$(\neg (p \wedge q)) \wedge (p \vee q)$</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">T</td>
+      <td style="text-align: center">T</td>
+      <td style="text-align: center">T</td>
+      <td style="text-align: center">T</td>
+      <td style="text-align: center">F</td>
+      <td style="text-align: center">T</td>
+      <td style="text-align: center">T</td>
+      <td style="text-align: center">F</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">T</td>
+      <td style="text-align: center">F</td>
+      <td style="text-align: center">F</td>
+      <td style="text-align: center">T</td>
+      <td style="text-align: center">F</td>
+      <td style="text-align: center">F</td>
+      <td style="text-align: center">F</td>
+      <td style="text-align: center">T</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">F</td>
+      <td style="text-align: center">T</td>
+      <td style="text-align: center">F</td>
+      <td style="text-align: center">T</td>
+      <td style="text-align: center">T</td>
+      <td style="text-align: center">T</td>
+      <td style="text-align: center">F</td>
+      <td style="text-align: center">T</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">F</td>
+      <td style="text-align: center">F</td>
+      <td style="text-align: center">F</td>
+      <td style="text-align: center">F</td>
+      <td style="text-align: center">T</td>
+      <td style="text-align: center">T</td>
+      <td style="text-align: center">T</td>
+      <td style="text-align: center">F</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>Exercise 18 (1/5):</em> Write up the truth table for $(p \Rightarrow q) \wedge (q \Rightarrow p)$.</p>
+
+<p><em>Exercise 19 (1/5):</em> Write up the truth table for $(\neg (p \vee q)) \Rightarrow r$.</p>
+
+<blockquote>
+  <p><strong>Definition 19</strong> <em>A <strong>contradiction</strong> is a proposition that is always false.</em></p>
+</blockquote>
+
+<p>As an example, the proposition $p \wedge (\neg p)$ is a contradiction, as can be seen from the truth table below.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">$p$</th>
+      <th style="text-align: center">$\neg p$</th>
+      <th style="text-align: center">$p \wedge (\neg p)$</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">T</td>
+      <td style="text-align: center">F</td>
+      <td style="text-align: center">F</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">F</td>
+      <td style="text-align: center">T</td>
+      <td style="text-align: center">F</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>If we let $p$ be the proposition “it is raining”, then $\neg p$ will be “it is not raining”, and the proposition $p \wedge (\neg p)$ becomes “it is raining and it is not raining”. Obviously, it cannot be raining and not raining at the same time, which makes this proposition always false and thereby a contradiction.</p>
+
+<blockquote>
+  <p><strong>Definition 20</strong> <em>A <strong>tautology</strong> is a proposition that is always true.</em></p>
+</blockquote>
+
+<p>We can use almost the same example as before. The proposition $p \vee (\neg p)$ is a tautology, as can be seen from the truth table below.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">$p$</th>
+      <th style="text-align: center">$\neg p$</th>
+      <th style="text-align: center">$p \vee (\neg p)$</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">T</td>
+      <td style="text-align: center">F</td>
+      <td style="text-align: center">T</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">F</td>
+      <td style="text-align: center">T</td>
+      <td style="text-align: center">T</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Again, if we let $p$ be the proposition “it is raining”, then $\neg p$ will be “it is not raining”, and the proposition $p \vee (\neg p)$ becomes “it is raining or it is not raining”. Obviously, it’s either raining or not, which makes this proposition always true and thereby a tautology.</p>
+
+<p><em>Exercise 20 (1/5):</em> Show that $((p \wedge q) \Rightarrow r) \Leftrightarrow (p \Rightarrow (q \Rightarrow r))$ is a tautology.</p>
+
+<p><em>Exercise 21 (1/5):</em> Show that $\neg (((p \wedge q) \Rightarrow r) \Leftrightarrow (p \Rightarrow (q \Rightarrow r)))$ is a contradiction.</p>
+
+<blockquote>
+  <p><strong>Definition 21</strong> <em>Two propositions $p$ and $q$ are called <strong>equivalent</strong>, and we write $p \equiv q$, if and only if $p \Leftrightarrow q$ is a tautology.</em></p>
+</blockquote>
+
+<p><em>Exercise 22 (1/5):</em> Show that $\neg (p \wedge q) \equiv \neg p \vee \neg q$ and $\neg (p \vee q) \equiv \neg p \wedge \neg q$ using truth tables, which are called the <strong>De Morgan’s laws</strong>.</p>
+
+<blockquote>
+  <p><strong>Definition 22</strong> <em>The <strong>contrapositive</strong> of the conditional $p \Rightarrow q$ is $\neg q \Rightarrow \neg p$.</em></p>
+</blockquote>
+
+<p><em>Exercise 23 (1/5):</em> Show that $p \Rightarrow q$ and $\neg q \Rightarrow \neg p$ are equivalent, i.e. $p \Rightarrow q \equiv \neg q \Rightarrow \neg p$.</p>
+
+<p><em>Exercise 24 (3/5):</em> Let $a,b,c \in \mathbb{Z}$. Use  De Morgan’s laws and then contraposition to show that if $a \nmid bc$, then $a \nmid b$ and $a \nmid c$. We could also write this as $a \nmid bc \Rightarrow (a \nmid b) \wedge (a \nmid c)$. Note that $p \nmid q$ means $p$ does not divide $q$.</p>
+
+<p>Note that we can also combine predicates with connectives, and we have two more operators to talk about when it comes to predicates.</p>
+
+<blockquote>
+  <p><strong>Definition 23</strong> <em>Let $p(x)$ be a predicate of the elements in a set $D$. We can create the proposition</em></p>
+
+  <script type="math/tex; mode=display">\forall x \in D : p(x),</script>
+
+  <p><em>which is true, exactly when $p(x)$ is true for all elements $x$ in $D$. We say “for all (or any/each/every) $x$ in $D$ $p(x)$ (is true)”. This is called the <strong>universal quantifier</strong>.</em><br />
+<em>We can also create the proposition</em></p>
+
+  <script type="math/tex; mode=display">\exists x \in D : p(x),</script>
+
+  <p><em>which is true, exactly when $p(x)$ is true for (at least) one element $x$ in $D$. We say “for some (or there exists a) $x$ in $D$ p(x) (is true)”. This is called the <strong>existential quantifier</strong>.</em></p>
+</blockquote>
+
+<p>Let’s do some examples of these to get them under our skin. The predicate $x^2 \geq 0$ is true no matter what real number we set $x$ to be. We can therefore say that the proposition $\forall x \in \mathbb{R} : x^2 \geq 0$ is true. Likewise, we can say the proposition $\exists x \in \mathbb{R} : x^2 &lt; 1$ is true, since if $x=0$ then $x^2 = 0 &lt; 1$. However, the proposition $\forall x \in \mathbb{R} : x^2 &lt; 1$ is not true, for example if $x=5$ then $x^2 = 25 \nless 1$.</p>
+
+<p>If we have a predicate with two free variables but we quantify one of them, for example $\forall x \in \mathbb{R} : x^2 &gt; y$, then this is a predicate of the free variable $y$. The predicate is true for negative values of $y$ and false for nonnegative (positive and zero) values of $y$.<br />
+Also, we can use multiple quantifiers, where <em>the order matters</em> (in most cases). For example, the proposition</p>
+
+<script type="math/tex; mode=display">\forall y \in \mathbb{R} \exists x \in \mathbb{R} : x^2 > y</script>
+
+<p>says that for all real numbers $y$ there exists a real number $x$ such that $x^2$ is larger than $y$. This is true. It doesn’t matter what $y$ we choose, we can always find a real number such that when we square it, it’s larger than $y$. However, if we switch the quantifiers, then the proposition</p>
+
+<script type="math/tex; mode=display">\exists x \in \mathbb{R} \forall y \in \mathbb{R} : x^2 > y</script>
+
+<p>is false, since we cannot find a real number such that when we square it, it will be larger than all other real numbers.</p>
+
+<blockquote>
+  <p><strong>Theorem 24</strong> <em>Let $x$ be an element of some set $D$ and $p(x)$ a predicate of $x$. We then have the following rules:</em></p>
+
+  <script type="math/tex; mode=display">% <![CDATA[
+\begin{aligned}
+\neg (\forall x \in D : p(x)) &\equiv \exists x \in D : \neg p(x) \\
+\neg (\exists x \in D : p(x)) &\equiv \forall x \in D : \neg p(x)
+\end{aligned} %]]></script>
+</blockquote>
+
+<h3 id="proofs">Proofs</h3>
+
+<h4 id="induction-and-recursion">Induction (and recursion)</h4>
+
+<h3 id="set-theory">Set theory</h3>
+
+<h4 id="relations">Relations</h4>
+
+<h3 id="functions">Functions</h3>
+
+<h3 id="counting">Counting</h3>
+
+<h4 id="combinatorics-and-permutations">Combinatorics and permutations</h4>
+
+<h3 id="graph-theory">Graph theory</h3>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>Exercise 3 from the Georg Mohr competition (2002): <a href="http://georgmohr.dk/gmopg/gm02pb.pdf" target="_blank">link</a>. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>Exercise 2 from the Georg Mohr competition (2008): <a href="http://georgmohr.dk/gmopg/gm08pb.pdf" target="_blank">link</a>. <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:3">
+      <p>Exercise 2 from the Georg Mohr competition (2004): <a href="http://georgmohr.dk/gmopg/gm04pb.pdf" target="_blank">link</a>. <a href="#fnref:3" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

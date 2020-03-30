@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+
+    <title>{{ page.title }} | {{ site.title }}</title>
+    
+    <link rel="shortcut icon" href="{{ site.baseurl }}/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="{{ site.baseurl }}/favicon.ico" type="image/x-icon">
+    <link href='{{ site.baseurl }}/feed.xml' rel='alternate' type='application/atom+xml'>
+    <link rel="canonical" href="{{ site.baseurl }}{{ page.url }}">
+    <link rel="manifest" href="{{ site.baseurl }}/manifest.json">
+
+    {% capture style %}
+        {% include style.scss %}
+    {% endcapture %}
+    {% capture pygment %}
+        {% include pygment.scss %}
+    {% endcapture %}
+    <style>
+        {{ style | scssify }}
+        {{ pygment | scssify }}
+    </style>
+    
+    <!-- START KATEX -->
+    <script type="text/javascript">
+        var stylesheet = document.createElement("link");
+        stylesheet.href = "/css/katex.min.css";
+        stylesheet.rel = "stylesheet";
+        stylesheet.type = "text/css";
+        document.getElementsByTagName("head")[0].appendChild(stylesheet);
+    </script>
+    <script type="text/javascript">
+        {% include js/katex.js %}
+    </script>
+    <!-- END KATEX -->
+
+</head>
+
+<body>

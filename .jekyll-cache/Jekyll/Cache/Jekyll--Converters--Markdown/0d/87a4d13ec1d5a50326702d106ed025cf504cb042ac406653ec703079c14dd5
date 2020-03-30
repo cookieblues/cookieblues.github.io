@@ -1,0 +1,12 @@
+I"1<p>In <a href="http://localhost:4000/bslialo-notes-9a">notes 9a</a> we introduced the derivative by looking at a $100$ meter sprint race. We looked at the so-called distance function $s(t)$, which told us how far we’d run in the race at time $t$, and asked if we could figure out a function for velocity $v(t)$. We found that the derivative of the distance function $s(t)$ was the velocity function $v(t)$, which we wrote up</p>
+
+<script type="math/tex; mode=display">\frac{d}{dt}s(t) = s'(t) = v(t).</script>
+
+<p>This time we will look at the velocity function and try to figure out the distance function, i.e. we want to do the opposite as last time, where we found the derivative; we want to find the antiderivative.</p>
+
+<h3 id="integration">Integration</h3>
+<p>Let’s take the example from last time but only focus on the velocity. If we want to find the antiderivative, we could ask ourselves, what function when taking the derivative gives us the velocity function. In that case, we have essentially solved our problem of finding the antiderivative, but we’re going to take a different approach. Let’s say you run a constant $10$ meters per second, so you finish the $100$ meter sprint in $10$ seconds. If we plot the velocity function with time on the x-axis, and velocity $\left( \frac{\text{distance}}{\text{time}} \right)$ on the y-axis (like below), we can think of area on the plot as distance, since</p>
+
+<script type="math/tex; mode=display">\text{velocity} \times \text{time} = \frac{\text{distance}}{\text{time}} \times \text{time} = \text{distance}.</script>
+
+:ET

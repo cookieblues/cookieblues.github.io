@@ -1,24 +1,24 @@
-permalink: /:title/
-
+###########
+# site.title
 title: Cookieblues
+description: Personal blog
+url: https://cookieblues.github.io
 
-git_branch: master
-url: "https://cookieblues.github.io"
 
+#########################
+# more settings
 markdown: kramdown
 kramdown:
-   math_engine: mathjax
-   footnote_backlink:
-  
-plugins:
-  - jekyll-last-modified-at
+  math_engine: mathjax
 
-tags: [
-  General,
-  BSLIALO,
-  BSMALEA,
-  dataviz,
-  ITUEVAL,
-  ML,
-  bare_min_guide
-]
+sass:
+  sass_dir: css
+  style:    compressed
+
+permalink: /:title/
+timezone: America/New_York
+future: false
+
+exclude:
+- README.md
+- LICENSE.md

@@ -1,0 +1,18 @@
+I"Ñ<p>As mentioned in <a href="http://localhost:4000/bsmalea-notes-3a">notes 3a</a>, generative classifiers model the <strong>joint probability distribution</strong> of the input and target variables $p(\mathbf{x}, t)$. This means, we would end up with a distribution that could generate (hence the name) new input variables with their respective targets, i.e. we can sample new data points with the joint probability distribution, and we will see how to do that in this post.</p>
+
+<p>The model, we will be looking at in this post, is the <strong>Gaussian Discriminant Analysis (GDA)</strong>. Now is when the nomenclature starts getting tricky! Note that the Gaussian <em>Discriminant</em> Analysis model is a <em>generative</em> model! It is <em>not</em> a discriminative model despite its name.</p>
+
+<h3 id="setup-and-objective">Setup and objective</h3>
+<p>Given a training dataset of $N$ input variables $\mathbf{x} \in \mathbb{R}^D$ with corresponding target variables $t \in \mathcal{C}$ where $\mathcal{C} = \{ \mathcal{C}_1, \dots, \mathcal{C}_C \}$, GDA assumes that the class conditional distributions are Gaussian distributions, and the objective becomes</p>
+
+<p>the objective of GDA is to assume that 
+ the class conditional distributions is distributed by Gaussian distributions, i.e.</p>
+
+<script type="math/tex; mode=display">p</script>
+
+<h3 id="derivation-and-training">Derivation and training</h3>
+
+<h3 id="model-selection">Model selection</h3>
+
+<p>Naive bayes, LDA, QDA</p>
+:ET

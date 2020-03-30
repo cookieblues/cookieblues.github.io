@@ -1,0 +1,23 @@
+I"f<p>I study data science at the <a href="https://www.itu.dk/" target="_blank">IT University of Copenhagen</a>, where there’s a fair bit of mathematics. I feel that there’s a presumption of mathematical understanding and rigor in a lot of the courses, which is never founded in the start of the programme. I used to study mathematics, and I was taught these things during a discrete mathematics course, so I’ve stitched the best bits and pieces together from that course with what I’ve learned since to create this short and (hopefully) useful crash course in discrete mathematics. The goal is that after reading this post, the reader should be able to read and write mathematics (better than before at least), as well as understand certain mathematical concepts a little better such as proofs, functions, combinatorics, etc.</p>
+
+<p>So, what <em>is</em> discrete mathematics actually? It’s kind of difficult to explain or define, but once you start doing discrete mathematics, it will become more evident. The word “discrete” comes from the Latin “discretus” which means separated, and I think that comes closest to explain it. Discrete mathematics studies mathematical structures that are <em>discrete</em>, which means <em>not continuous</em>. Commonly, discrete mathematics is described as dealing with countable things, but that does not mean finite; discrete structures can be both finite and infinite. Let’s just dive into it though!</p>
+
+<p>The guide will mainly focus on solving exercises and they will gradually get more difficult. Don’t expect to solve the exercises quickly - spend at least 10 minutes on an exercise before you move on (or look at the solution). I’ve rated the exercises from one (easiest) to five (hardest).</p>
+
+<h3 id="numbers">Numbers</h3>
+<p>To begin with, we have to be familiar with the different kinds of numbers that we’re dealing with. This is important when we start talking about certain properties that they each possess.</p>
+
+<blockquote>
+  <p><strong>Definition 1</strong> <em>The numbers $\dots, -3, -2, -1, 0, 1, 2, 3, \dots$ are called the set of <strong>integers</strong> (or <strong>whole numbers</strong>) and are denoted by $\mathbb{Z}$.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><strong>Definition 2</strong> <em>The positive integers $1, 2, 3, \dots$ are called the set of <strong>natural numbers</strong> and are denoted by $\mathbb{N}$. Commonly $\mathbb{N}_0$ denotes the set of natural numbers and $0$.</em></p>
+</blockquote>
+
+<blockquote>
+  <p><strong>Definition 3</strong> <em>The numbers that can be written as fractions $\frac{a}{b}$, where $a$ and $b$ are integers and $b \not = 0$, are called the set of <strong>rational numbers</strong> and are denoted by $\mathbb{Q}$.</em></p>
+</blockquote>
+
+<p>In discrete mathematics, we’ll mainly be dealing with integers, but we’ll also touch on some properties of rational numbers.</p>
+:ET

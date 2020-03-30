@@ -1,48 +1,20 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128381822-1"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag("js", new Date());
-            gtag("config", "UA-128381822-1");
-        </script>
+---
+layout: compress
+---
 
-        
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="chrome=1">
-        <title>{{ site.title }}</title>
-        <link rel="stylesheet" href="{{ '/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+{% include head.html %}
 
-        <!-- START KATEX -->
-        <script type="text/javascript">
-            var stylesheet = document.createElement("link");
-            stylesheet.href = "/css/katex.min.css";
-            stylesheet.rel = "stylesheet";
-            stylesheet.type = "text/css";
-            document.getElementsByTagName("head")[0].appendChild(stylesheet);
-        </script>
-        <script type="text/javascript">
-            {% include js/katex.js %}
-        </script>
-        <!-- END KATEX -->
-    </head>
+    <main>
 
-    <body>
-        <div class="wrapper">
-            <header>
-                {% include sidebar.html %}
-            </header>
+        {% include header.html %}
 
-            <section>
-                {{ content }}
-            </section>
+        <h1>{{ page.title }}</h1>
 
-            <footer>
-                {% include footer.html %}
-            </footer>
-        </div>
-    </body>
+        {{ content }}
+
+    </main>
+
+    {% include footer.html %}
+
+</body>
 </html>
