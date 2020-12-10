@@ -1,20 +1,57 @@
----
-layout: compress
----
+<!doctype html>
 
-{% include head.html %}
+<html lang="en">
 
-    <main>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-        {% include header.html %}
+	{% seo %}
+	{% feed_meta %}
 
-        <h1>{{ page.title }}</h1>
+	<link href="//fonts.googleapis.com/css?family=Antic+Slab|Fira+Sans" rel="stylesheet">
+	<link rel="stylesheet" media="screen" href="{{ site.baseurl }}/css/screen.css">
+	{% if page.print_stylesheet %}
+	<link rel="stylesheet" media="print" href="{{ site.baseurl }}/css/print.css">
+	{% endif %}
+	<link rel="icon" type="image/png" href="{{ site.baseurl }}/images/logo.svg">
 
-        {{ content }}
+	{% if jekyll.environment == 'production' and site.google_analytics_key != '' %}
+	<script>
+		window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }; ga.l = +new Date;
+		ga('create', '{{ site.google_analytics_key }}', 'auto');
+		ga('send', 'pageview');
+	</script>
+	<script async src='https://www.google-analytics.com/analytics.js'></script>
+	{% endif %}
 
-    </main>
+	<!-- START d3 -->
+	<script type="text/javascript" src="{{ site.baseurl }}/js/d3.min.js"></script>
+	<!-- END d3 -->
+</head>
 
-    {% include footer.html %}
+<body>
+	{% include navigation.html %}
+	<header>
+		<a href="{{site.baseurl }}/">
+			<img src="{{ site.baseurl }}{{ site.data.company_details.logo_image }}" width="100" alt="logo">
+		</a>
+	</header>
 
+	<div class="container main-content">
+		<section class="content">{{ content }}</section>
+		{% if page.include_sidebar == false %}
+		{% else %}
+		{% include sidebar.html %}
+		{% endif %}
+	</div>
+
+	<footer>
+		<div class="container">
+			<hr>
+			&copy; {{ site.title }} {{ site.time | date: "%Y" }}. All rights reserved.
+		</div>
+	</footer>
 </body>
+
 </html>

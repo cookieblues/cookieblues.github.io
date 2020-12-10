@@ -1,12 +1,30 @@
 ---
-layout: default
-title: Recent posts
+title: Home
 ---
+<section class="posts">
+	{% for post in paginator.posts %}
+		<article class="post">
+			{% include post-heading.html post=post %}
+			<div class="image">
+				<img src="{{ post.featured_image }}" alt="{{ post.title }}">
+			</div>
 
-{% for post in site.posts %}
-    <article>
-        <h2><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h2>
-        <span class="mini-note">{{ post.date | date: "%b %-d, %Y" }}</span>
-        {{ post.excerpt }}
-    </article>
-{% endfor %}
+			{{ post.excerpt }}
+		</article>
+		<hr>
+	{% endfor %}
+
+	{% if paginator.total_pages > 1 %}
+		<div class="pagination">
+			{% if paginator.previous_page %}
+				<a href="{{ site.baseurl }}{{ paginator.previous_page_path }}" class="previous btn">&larr; Newer posts</a>
+			{% endif %}
+
+			<span class="page_number ">{{ paginator.page }} of {{ paginator.total_pages }}</span>
+
+			{% if paginator.next_page %}
+				<a href="{{ site.baseurl }}{{ paginator.next_page_path }}" class="next btn">Older posts &rarr;</a>
+			{% endif %}
+		</div>
+	{% endif %}
+</section>

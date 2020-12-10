@@ -1,24 +1,31 @@
 ---
-layout: compress
+layout: default
 ---
+<article class="post">
+	{% include post-heading.html post=page post_page=true %}
+	<div class="image">
+		<img src="{{ page.featured_image }}" alt="{{ page.title }}">
+	</div>
 
-{% include head.html %}
-
-    <main>
-
-        {% include header.html %}
-
-        <article>
-            <h1>{{ page.title }}</h1>
-            <p class="subtitle">{{ page.date | date: "%b %-d, %Y" }}</p>
-
-            {{ page.content }}
-
-            <hr>
-        </article>
-
-    </main>
-
-    {% include footer-post.html %}
-</body>
-</html>
+	<div class="post-body">
+		{{ content }}
+	</div>
+	
+	{% if site.disqus_shortname and page.comments %}
+		<div id="disqus_thread"></div>
+		<script>
+			var disqus_shortname = '{{ site.disqus_shortname }}';
+			var disqus_config = function () {
+				this.page.url = "{{ page.url | prepend: site.url }}";
+				this.page.identifier = "{{ page.id }}";
+			};
+			(function() {  // DON'T EDIT BELOW THIS LINE
+				var d = document, s = d.createElement('script');
+				s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+				s.setAttribute('data-timestamp', +new Date());
+				(d.head || d.body).appendChild(s);
+			})();
+		</script>
+		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+	{% endif %}
+</article>

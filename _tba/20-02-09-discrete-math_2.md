@@ -11,7 +11,6 @@ So, what *is* discrete mathematics actually? It's kind of difficult to explain o
 The guide will mainly focus on solving exercises and they will gradually get more difficult. Don't expect to solve the exercises quickly - spend at least 10 minutes on an exercise before you move on (or look at the solution). I've rated the exercises from one (easiest) to five (hardest).
 <!--more-->
 
-
 ### Numbers
 To begin with, we have to be familiar with the different kinds of numbers that we're dealing with. This is important when we start talking about certain properties that they each possess.
 
