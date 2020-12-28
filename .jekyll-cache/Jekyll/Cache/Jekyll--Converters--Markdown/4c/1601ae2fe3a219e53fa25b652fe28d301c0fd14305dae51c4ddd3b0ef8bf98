@@ -1,4 +1,4 @@
-I"�U<p>A few people have been asking for a short guide to LaTeX, but since I don’t have that much time on my hands these days, I thought I’d start with a very short guide that I can expand if needed.</p>
+I"�O<p>A few people have been asking for a short guide to LaTeX, but since I don’t have that much time on my hands these days, I thought I’d start with a very short guide that I can expand if needed.</p>
 
 <h3 id="why">Why?</h3>
 <p>You can think of LaTeX as a programming language for documents. It’s well-suited for large projects and complicated document structures, as it keeps track of a bunch of things by itself (we won’t get into those things in this post though). The other huge plus for LaTeX is the ability to write complicated mathematical equations simple and beautiful.
@@ -68,31 +68,31 @@
 x+y
 <span class="nt">\end{equation}</span></code></pre></figure>
 
-<script type="math/tex; mode=display">x+y</script>
+\[x+y\]
 
 <figure class="highlight"><pre><code class="language-latex" data-lang="latex"><span class="nt">\begin{equation}</span>
 <span class="k">\sqrt</span><span class="p">{</span>2<span class="p">}</span>
 <span class="nt">\end{equation}</span></code></pre></figure>
 
-<script type="math/tex; mode=display">\sqrt{2}</script>
+\[\sqrt{2}\]
 
 <figure class="highlight"><pre><code class="language-latex" data-lang="latex"><span class="nt">\begin{equation}</span>
 <span class="k">\sin</span>(x)
 <span class="nt">\end{equation}</span></code></pre></figure>
 
-<script type="math/tex; mode=display">\sin(x)</script>
+\[\sin(x)\]
 
 <figure class="highlight"><pre><code class="language-latex" data-lang="latex"><span class="nt">\begin{equation}</span>
 <span class="k">\tan</span>(x)
 <span class="nt">\end{equation}</span></code></pre></figure>
 
-<script type="math/tex; mode=display">\tan(x)</script>
+\[\tan(x)\]
 
 <figure class="highlight"><pre><code class="language-latex" data-lang="latex"><span class="nt">\begin{equation}</span>
 <span class="k">\sqrt</span><span class="p">{</span><span class="k">\exp</span>(<span class="k">\cos</span>(2x))<span class="p">}</span>
 <span class="nt">\end{equation}</span></code></pre></figure>
 
-<script type="math/tex; mode=display">\sqrt{\exp(\cos(2x))}</script>
+\[\sqrt{\exp(\cos(2x))}\]
 
 <h4 id="super--and-subscripts">Super- and subscripts</h4>
 
@@ -100,25 +100,25 @@ x+y
 x<span class="p">^</span>2
 <span class="nt">\end{equation}</span></code></pre></figure>
 
-<script type="math/tex; mode=display">x^2</script>
+\[x^2\]
 
 <figure class="highlight"><pre><code class="language-latex" data-lang="latex"><span class="nt">\begin{equation}</span>
 a<span class="p">_{</span>12<span class="p">}</span>
 <span class="nt">\end{equation}</span></code></pre></figure>
 
-<script type="math/tex; mode=display">a_{12}</script>
+\[a_{12}\]
 
 <figure class="highlight"><pre><code class="language-latex" data-lang="latex"><span class="nt">\begin{equation}</span>
 e<span class="p">^{</span>a+b<span class="p">}</span> = e<span class="p">^</span>a e<span class="p">^</span>b
 <span class="nt">\end{equation}</span></code></pre></figure>
 
-<script type="math/tex; mode=display">e^{a+b} = e^a e^b</script>
+\[e^{a+b} = e^a e^b\]
 
 <figure class="highlight"><pre><code class="language-latex" data-lang="latex"><span class="nt">\begin{equation}</span>
 <span class="k">\sin</span><span class="p">^</span>2(x) + <span class="k">\cos</span><span class="p">^</span>2(x) = 1
 <span class="nt">\end{equation}</span></code></pre></figure>
 
-<script type="math/tex; mode=display">\sin^2(x) + \cos^2(x) = 1</script>
+\[\sin^2(x) + \cos^2(x) = 1\]
 
 <h4 id="fractions">Fractions</h4>
 
@@ -126,25 +126,25 @@ e<span class="p">^{</span>a+b<span class="p">}</span> = e<span class="p">^</span
 <span class="k">\frac</span><span class="p">{</span>1<span class="p">}{</span>2<span class="p">}</span> = 1/2
 <span class="nt">\end{equation}</span></code></pre></figure>
 
-<script type="math/tex; mode=display">\frac{1}{2} = 1/2</script>
+\[\frac{1}{2} = 1/2\]
 
 <figure class="highlight"><pre><code class="language-latex" data-lang="latex"><span class="nt">\begin{equation}</span>
 <span class="k">\frac</span><span class="p">{</span>1<span class="p">}{</span><span class="k">\sin</span>(x)<span class="p">}</span>
 <span class="nt">\end{equation}</span></code></pre></figure>
 
-<script type="math/tex; mode=display">\frac{1}{\sin(x)}</script>
+\[\frac{1}{\sin(x)}\]
 
 <figure class="highlight"><pre><code class="language-latex" data-lang="latex"><span class="nt">\begin{equation}</span>
 <span class="k">\frac</span><span class="p">{</span>x+<span class="k">\frac</span><span class="p">{</span>1<span class="p">}{</span>x<span class="p">}}{</span>x<span class="p">^</span>2-1<span class="p">}</span>
 <span class="nt">\end{equation}</span></code></pre></figure>
 
-<script type="math/tex; mode=display">\frac{x+\frac{1}{x}}{x^2-1}</script>
+\[\frac{x+\frac{1}{x}}{x^2-1}\]
 
 <figure class="highlight"><pre><code class="language-latex" data-lang="latex"><span class="nt">\begin{equation}</span>
 (f/g)' = <span class="k">\frac</span><span class="p">{</span>f'g-fg'<span class="p">}{</span>g<span class="p">^</span>2<span class="p">}</span>
 <span class="nt">\end{equation}</span></code></pre></figure>
 
-<script type="math/tex; mode=display">(f/g)' = \frac{f'g-fg'}{g^2}</script>
+\[(f/g)' = \frac{f'g-fg'}{g^2}\]
 
 <h4 id="integrals-sums-and-other-operators">Integrals, sums, and other operators</h4>
 
@@ -152,25 +152,25 @@ e<span class="p">^{</span>a+b<span class="p">}</span> = e<span class="p">^</span
 <span class="k">\int</span> x<span class="p">^</span>3 dx + <span class="k">\sum</span><span class="p">_{</span>n=1<span class="p">}^{</span>N<span class="p">}</span> n
 <span class="nt">\end{equation}</span></code></pre></figure>
 
-<script type="math/tex; mode=display">\int x^3 dx + \sum_{n=1}^{N} n</script>
+\[\int x^3 dx + \sum_{n=1}^{N} n\]
 
 <figure class="highlight"><pre><code class="language-latex" data-lang="latex"><span class="nt">\begin{equation}</span>
 <span class="k">\int</span><span class="p">_</span>0<span class="p">^</span>1 <span class="k">\frac</span><span class="p">{</span>1<span class="p">}{</span>x<span class="p">}</span> dx + <span class="k">\sum</span><span class="p">_{</span>a,b<span class="p">}</span> a-b
 <span class="nt">\end{equation}</span></code></pre></figure>
 
-<script type="math/tex; mode=display">\int_0^1 \frac{1}{x} dx + \sum_{a,b} a-b</script>
+\[\int_0^1 \frac{1}{x} dx + \sum_{a,b} a-b\]
 
 <figure class="highlight"><pre><code class="language-latex" data-lang="latex"><span class="nt">\begin{equation}</span>
 <span class="k">\int</span><span class="p">_</span>0<span class="p">^</span><span class="k">\pi</span> <span class="k">\sin</span> (x) dx + <span class="k">\sum</span><span class="p">_{</span>n=1<span class="p">}^</span>N <span class="k">\frac</span><span class="p">{</span>1<span class="p">}{</span>n<span class="p">}</span>
 <span class="nt">\end{equation}</span></code></pre></figure>
 
-<script type="math/tex; mode=display">\int_0^\pi \sin (x) dx + \sum_{n=1}^N \frac{1}{n}</script>
+\[\int_0^\pi \sin (x) dx + \sum_{n=1}^N \frac{1}{n}\]
 
 <figure class="highlight"><pre><code class="language-latex" data-lang="latex"><span class="nt">\begin{equation}</span>
 <span class="k">\int</span> <span class="k">\frac</span><span class="p">{</span>x<span class="p">^{</span><span class="k">\sin</span> (x)<span class="p">}}{</span><span class="k">\sqrt</span><span class="p">{</span><span class="k">\cos</span> (x)<span class="p">}}</span> dx + <span class="k">\sum</span><span class="p">_{</span>n=1<span class="p">}^</span>N <span class="k">\frac</span><span class="p">{</span>n<span class="p">}{</span>n+1<span class="p">}</span>
 <span class="nt">\end{equation}</span></code></pre></figure>
 
-<script type="math/tex; mode=display">\int \frac{x^{\sin (x)}}{\sqrt{\cos (x)}} dx + \sum_{n=1}^N \frac{n}{n+1}</script>
+\[\int \frac{x^{\sin (x)}}{\sqrt{\cos (x)}} dx + \sum_{n=1}^N \frac{n}{n+1}\]
 
 <h4 id="greek-letters">Greek letters</h4>
 
@@ -178,26 +178,25 @@ e<span class="p">^{</span>a+b<span class="p">}</span> = e<span class="p">^</span
 2<span class="k">\pi</span>
 <span class="nt">\end{equation}</span></code></pre></figure>
 
-<script type="math/tex; mode=display">2\pi</script>
+\[2\pi\]
 
 <figure class="highlight"><pre><code class="language-latex" data-lang="latex"><span class="nt">\begin{equation}</span>
 |x-a| &lt; <span class="k">\delta</span>
 <span class="nt">\end{equation}</span></code></pre></figure>
 
-<script type="math/tex; mode=display">% <![CDATA[
-|x-a| < \delta %]]></script>
+\[|x-a| &lt; \delta\]
 
 <figure class="highlight"><pre><code class="language-latex" data-lang="latex"><span class="nt">\begin{equation}</span>
 <span class="k">\varphi</span> = <span class="k">\frac</span><span class="p">{</span>1+<span class="k">\sqrt</span><span class="p">{</span>5<span class="p">}}{</span>2<span class="p">}</span>
 <span class="nt">\end{equation}</span></code></pre></figure>
 
-<script type="math/tex; mode=display">\varphi = \frac{1+\sqrt{5}}{2}</script>
+\[\varphi = \frac{1+\sqrt{5}}{2}\]
 
 <figure class="highlight"><pre><code class="language-latex" data-lang="latex"><span class="nt">\begin{equation}</span>
 <span class="k">\int</span><span class="p">_</span>0<span class="p">^</span><span class="k">\pi</span> <span class="k">\sin</span> (x) dx
 <span class="nt">\end{equation}</span></code></pre></figure>
 
-<script type="math/tex; mode=display">\int_0^\pi \sin (x) dx</script>
+\[\int_0^\pi \sin (x) dx\]
 
 <h4 id="brackets">Brackets</h4>
 <p>Square brackets are just plainly written <code class="highlighter-rouge">[</code> and <code class="highlighter-rouge">]</code>, curly brackets require a backslash beforehand <code class="highlighter-rouge">\{</code> <code class="highlighter-rouge">\}</code> as they are otherwise used for wrapping arguments in LaTeX. If the expression is large, you can write <code class="highlighter-rouge">\left</code> and <code class="highlighter-rouge">\right</code> before the paranthesis to make LaTeX adjust the size of them for your expression. Here are some examples:</p>
@@ -206,25 +205,25 @@ e<span class="p">^{</span>a+b<span class="p">}</span> = e<span class="p">^</span
 <span class="k">\{</span>1,2,3,4<span class="k">\}</span>
 <span class="nt">\end{equation}</span></code></pre></figure>
 
-<script type="math/tex; mode=display">\{1,2,3,4\}</script>
+\[\{1,2,3,4\}\]
 
 <figure class="highlight"><pre><code class="language-latex" data-lang="latex"><span class="nt">\begin{equation}</span>
 y - <span class="k">\left</span>( <span class="k">\frac</span><span class="p">{</span>1<span class="p">}{</span>x<span class="p">}</span> <span class="k">\right</span>)<span class="p">^</span>2 = 0
 <span class="nt">\end{equation}</span></code></pre></figure>
 
-<script type="math/tex; mode=display">y - \left( \frac{1}{x} \right)^2 = 0</script>
+\[y - \left( \frac{1}{x} \right)^2 = 0\]
 
 <figure class="highlight"><pre><code class="language-latex" data-lang="latex"><span class="nt">\begin{equation}</span>
 <span class="k">\left</span>( <span class="k">\int</span><span class="p">_</span>0<span class="p">^</span>t <span class="k">\log</span> (y) dy <span class="k">\right</span>)<span class="p">^</span>t
 <span class="nt">\end{equation}</span></code></pre></figure>
 
-<script type="math/tex; mode=display">\left( \int_0^t \log (y) dy \right)^t</script>
+\[\left( \int_0^t \log (y) dy \right)^t\]
 
 <figure class="highlight"><pre><code class="language-latex" data-lang="latex"><span class="nt">\begin{equation}</span>
 <span class="k">\int</span><span class="p">_</span>a<span class="p">^</span>b <span class="k">\frac</span><span class="p">{</span>x<span class="p">}{</span>b-a<span class="p">}</span> dx = <span class="k">\left</span><span class="na">[ \frac{x}{b-a} \right]</span><span class="p">^</span>b<span class="p">_</span>a
 <span class="nt">\end{equation}</span></code></pre></figure>
 
-<script type="math/tex; mode=display">\int_a^b \frac{x}{b-a} dx = \left[ \frac{x}{b-a} \right]^b_a</script>
+\[\int_a^b \frac{x}{b-a} dx = \left[ \frac{x}{b-a} \right]^b_a\]
 
 <h3 id="final-tips">Final tips</h3>
 <p>You might’ve noticed that your document didn’t change even though you changed your LaTeX code. This is because LaTeX is just that: code. There’s a big green button that says “Recompile” in the top left of your document. If you click it, the new code you have written will be compiled, and you will see it in your document (or you get an error, if there’s a mistake in your code). To the right of the button is a small downward pointing arrow - if you click that, you can turn “Auto compile” on or off. This will get Overleaf to compile your code as you’re writing.</p>
@@ -235,31 +234,30 @@ y - <span class="k">\left</span>( <span class="k">\frac</span><span class="p">{<
 <h3 id="exercises">Exercises</h3>
 <p>To practice writing equations, try and see if you can write the equations underneath.</p>
 
-<script type="math/tex; mode=display">a^z + b^z = c^z</script>
+\[a^z + b^z = c^z\]
 
-<script type="math/tex; mode=display">\sqrt{\frac{n}{n-1}}</script>
+\[\sqrt{\frac{n}{n-1}}\]
 
-<script type="math/tex; mode=display">e^{ix} = r ( \cos \theta + i \sin \theta )</script>
+\[e^{ix} = r ( \cos \theta + i \sin \theta )\]
 
-<script type="math/tex; mode=display">\int \frac{\sin (x)}{x^2+1} dx</script>
+\[\int \frac{\sin (x)}{x^2+1} dx\]
 
-<script type="math/tex; mode=display">\int_a^b x^{10} \sum_{i=1}^n i^2 dx</script>
+\[\int_a^b x^{10} \sum_{i=1}^n i^2 dx\]
 
 <p>These next ones require something I haven’t shown in this post, so a little bit of Googling or outside-the-box thinking is required.</p>
 
-<script type="math/tex; mode=display">1+2+3+\cdots+n = \frac{n(n+1)}{2}</script>
+\[1+2+3+\cdots+n = \frac{n(n+1)}{2}\]
 
-<script type="math/tex; mode=display">\lim_{x \to x_0} \frac{f(x)-f(x_0)}{x-x_0} = c</script>
+\[\lim_{x \to x_0} \frac{f(x)-f(x_0)}{x-x_0} = c\]
 
-<script type="math/tex; mode=display">\frac{1}{\zeta (s)} = \prod_{p \text{ prime}} \left( 1 - \frac{1}{p^s} \right)</script>
+\[\frac{1}{\zeta (s)} = \prod_{p \text{ prime}} \left( 1 - \frac{1}{p^s} \right)\]
 
-<script type="math/tex; mode=display">% <![CDATA[
-\det
+\[\det
 \begin{pmatrix}
-    a & b \\
-    c & d
+    a &amp; b \\
+    c &amp; d
 \end{pmatrix}
-= ad-bc %]]></script>
+= ad-bc\]
 
-<script type="math/tex; mode=display">\max \left\{ 0, \left| \frac{1}{a}-b \right| \right\}</script>
+\[\max \left\{ 0, \left| \frac{1}{a}-b \right| \right\}\]
 :ET

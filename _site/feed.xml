@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-12-10T16:13:22+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Treat Template</title><subtitle>Food blog template for Jekyll.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;twitter&quot;=&gt;nil}</name></author><entry><title type="html">How to do data science without machine learning</title><link href="http://localhost:4000/updates/2020/01/31/how-to-do-data-science-without-machine-learning/" rel="alternate" type="text/html" title="How to do data science without machine learning" /><published>2020-01-31T00:00:00+00:00</published><updated>2020-01-31T00:00:00+00:00</updated><id>http://localhost:4000/updates/2020/01/31/how-to-do-data-science-without-machine-learning</id><content type="html" xml:base="http://localhost:4000/updates/2020/01/31/how-to-do-data-science-without-machine-learning/">&lt;p&gt;I recently participated in a challenge orchestrated by &lt;a href=&quot;https://omdena.com/&quot;&gt;Omdena&lt;/a&gt;, which (if you don’t already know) is an international hub for AI enthusiasts that want to leverage AI solutions to solve some of humanity’s problems. The challenge was posed by a Nigerian NGO called RA365, and if you want to read more about it, Omdena asked me to write a small article for their blog regarding some work I did in the challenge. I didn’t really do much AI, so I decided to write about just that!&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-12-28T16:00:41+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Treat Template</title><subtitle>Food blog template for Jekyll.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;twitter&quot;=&gt;nil}</name></author><entry><title type="html">How to do data science without machine learning</title><link href="http://localhost:4000/updates/2020/01/31/how-to-do-data-science-without-machine-learning/" rel="alternate" type="text/html" title="How to do data science without machine learning" /><published>2020-01-31T00:00:00+00:00</published><updated>2020-01-31T00:00:00+00:00</updated><id>http://localhost:4000/updates/2020/01/31/how-to-do-data-science-without-machine-learning</id><content type="html" xml:base="http://localhost:4000/updates/2020/01/31/how-to-do-data-science-without-machine-learning/">&lt;p&gt;I recently participated in a challenge orchestrated by &lt;a href=&quot;https://omdena.com/&quot;&gt;Omdena&lt;/a&gt;, which (if you don’t already know) is an international hub for AI enthusiasts that want to leverage AI solutions to solve some of humanity’s problems. The challenge was posed by a Nigerian NGO called RA365, and if you want to read more about it, Omdena asked me to write a small article for their blog regarding some work I did in the challenge. I didn’t really do much AI, so I decided to write about just that!&lt;/p&gt;
 
 &lt;p&gt;You can find the article by clicking &lt;a href=&quot;https://medium.com/omdena/ai-in-nigeria-doing-data-science-for-good-without-machine-learning-6f7b1856d813&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;twitter&quot;=&gt;nil}</name></author><summary type="html">I recently participated in a challenge orchestrated by Omdena, which (if you don’t already know) is an international hub for AI enthusiasts that want to leverage AI solutions to solve some of humanity’s problems. The challenge was posed by a Nigerian NGO called RA365, and if you want to read more about it, Omdena asked me to write a small article for their blog regarding some work I did in the challenge. I didn’t really do much AI, so I decided to write about just that!</summary></entry><entry><title type="html">The bare minimum guide to LaTeX</title><link href="http://localhost:4000/guides/2019/04/04/bare-minimum-latex/" rel="alternate" type="text/html" title="The bare minimum guide to LaTeX" /><published>2019-04-04T00:00:00+00:00</published><updated>2019-04-04T00:00:00+00:00</updated><id>http://localhost:4000/guides/2019/04/04/bare-minimum-latex</id><content type="html" xml:base="http://localhost:4000/guides/2019/04/04/bare-minimum-latex/">&lt;p&gt;A few people have been asking for a short guide to LaTeX, but since I don’t have that much time on my hands these days, I thought I’d start with a very short guide that I can expand if needed.&lt;/p&gt;
 
@@ -24,11 +24,8 @@
 &lt;span class=&quot;k&quot;&gt;\date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;April 2019&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
 &lt;span class=&quot;nt&quot;&gt;\begin{document}&lt;/span&gt;
-
 &lt;span class=&quot;k&quot;&gt;\maketitle&lt;/span&gt;
-
 &lt;span class=&quot;k&quot;&gt;\section&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;Introduction&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
 &lt;span class=&quot;nt&quot;&gt;\end{document}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;At first, it can look a bit daunting, but let’s try and decompose the different parts. The first line specifies what kind of document you want to write. In this case it defaults to an &lt;code class=&quot;highlighter-rouge&quot;&gt;article&lt;/code&gt;, which is probably what most documents should be. The second line imports the package &lt;code class=&quot;highlighter-rouge&quot;&gt;inputenc&lt;/code&gt;. The next three lines of code specifies some metadata about the document; the title, author and date. All of this is called the &lt;strong&gt;preample&lt;/strong&gt;, because it comes before the actual document. This is where, you can make changes to the structure of your document, e.g. the size of the margins, the size of the font, define specific functions, change the layout, etc. However, we won’t dive into all these things in this guide. We’ll only change the date from &lt;code class=&quot;highlighter-rouge&quot;&gt;\date{April 2019}&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;\date{\today}&lt;/code&gt;.&lt;/p&gt;
@@ -49,15 +46,11 @@
 &lt;span class=&quot;k&quot;&gt;\date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;\today&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
 &lt;span class=&quot;nt&quot;&gt;\begin{document}&lt;/span&gt;
-
 &lt;span class=&quot;k&quot;&gt;\maketitle&lt;/span&gt;
-
 &lt;span class=&quot;k&quot;&gt;\tableofcontents&lt;/span&gt;
-
 &lt;span class=&quot;k&quot;&gt;\section&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;Introduction&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;\subsection*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;No number&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;% this is a comment that won't appear in the document&lt;/span&gt;
-
 &lt;span class=&quot;nt&quot;&gt;\end{document}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;h3 id=&quot;text&quot;&gt;Text&lt;/h3&gt;
@@ -70,31 +63,31 @@
 x+y
 &lt;span class=&quot;nt&quot;&gt;\end{equation}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;x+y&lt;/script&gt;
+\[x+y\]
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-latex&quot; data-lang=&quot;latex&quot;&gt;&lt;span class=&quot;nt&quot;&gt;\begin{equation}&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;\sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;2&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;\end{equation}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\sqrt{2}&lt;/script&gt;
+\[\sqrt{2}\]
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-latex&quot; data-lang=&quot;latex&quot;&gt;&lt;span class=&quot;nt&quot;&gt;\begin{equation}&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;\sin&lt;/span&gt;(x)
 &lt;span class=&quot;nt&quot;&gt;\end{equation}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\sin(x)&lt;/script&gt;
+\[\sin(x)\]
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-latex&quot; data-lang=&quot;latex&quot;&gt;&lt;span class=&quot;nt&quot;&gt;\begin{equation}&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;\tan&lt;/span&gt;(x)
 &lt;span class=&quot;nt&quot;&gt;\end{equation}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\tan(x)&lt;/script&gt;
+\[\tan(x)\]
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-latex&quot; data-lang=&quot;latex&quot;&gt;&lt;span class=&quot;nt&quot;&gt;\begin{equation}&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;\sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;\exp&lt;/span&gt;(&lt;span class=&quot;k&quot;&gt;\cos&lt;/span&gt;(2x))&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;\end{equation}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\sqrt{\exp(\cos(2x))}&lt;/script&gt;
+\[\sqrt{\exp(\cos(2x))}\]
 
 &lt;h4 id=&quot;super--and-subscripts&quot;&gt;Super- and subscripts&lt;/h4&gt;
 
@@ -102,25 +95,25 @@ x+y
 x&lt;span class=&quot;p&quot;&gt;^&lt;/span&gt;2
 &lt;span class=&quot;nt&quot;&gt;\end{equation}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;x^2&lt;/script&gt;
+\[x^2\]
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-latex&quot; data-lang=&quot;latex&quot;&gt;&lt;span class=&quot;nt&quot;&gt;\begin{equation}&lt;/span&gt;
 a&lt;span class=&quot;p&quot;&gt;_{&lt;/span&gt;12&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;\end{equation}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;a_{12}&lt;/script&gt;
+\[a_{12}\]
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-latex&quot; data-lang=&quot;latex&quot;&gt;&lt;span class=&quot;nt&quot;&gt;\begin{equation}&lt;/span&gt;
 e&lt;span class=&quot;p&quot;&gt;^{&lt;/span&gt;a+b&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; = e&lt;span class=&quot;p&quot;&gt;^&lt;/span&gt;a e&lt;span class=&quot;p&quot;&gt;^&lt;/span&gt;b
 &lt;span class=&quot;nt&quot;&gt;\end{equation}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;e^{a+b} = e^a e^b&lt;/script&gt;
+\[e^{a+b} = e^a e^b\]
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-latex&quot; data-lang=&quot;latex&quot;&gt;&lt;span class=&quot;nt&quot;&gt;\begin{equation}&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;\sin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;^&lt;/span&gt;2(x) + &lt;span class=&quot;k&quot;&gt;\cos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;^&lt;/span&gt;2(x) = 1
 &lt;span class=&quot;nt&quot;&gt;\end{equation}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\sin^2(x) + \cos^2(x) = 1&lt;/script&gt;
+\[\sin^2(x) + \cos^2(x) = 1\]
 
 &lt;h4 id=&quot;fractions&quot;&gt;Fractions&lt;/h4&gt;
 
@@ -128,25 +121,25 @@ e&lt;span class=&quot;p&quot;&gt;^{&lt;/span&gt;a+b&lt;span class=&quot;p&quot;&
 &lt;span class=&quot;k&quot;&gt;\frac&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;2&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; = 1/2
 &lt;span class=&quot;nt&quot;&gt;\end{equation}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\frac{1}{2} = 1/2&lt;/script&gt;
+\[\frac{1}{2} = 1/2\]
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-latex&quot; data-lang=&quot;latex&quot;&gt;&lt;span class=&quot;nt&quot;&gt;\begin{equation}&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;\frac&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;\sin&lt;/span&gt;(x)&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;\end{equation}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\frac{1}{\sin(x)}&lt;/script&gt;
+\[\frac{1}{\sin(x)}\]
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-latex&quot; data-lang=&quot;latex&quot;&gt;&lt;span class=&quot;nt&quot;&gt;\begin{equation}&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;\frac&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;x+&lt;span class=&quot;k&quot;&gt;\frac&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;}}{&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;^&lt;/span&gt;2-1&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;\end{equation}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\frac{x+\frac{1}{x}}{x^2-1}&lt;/script&gt;
+\[\frac{x+\frac{1}{x}}{x^2-1}\]
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-latex&quot; data-lang=&quot;latex&quot;&gt;&lt;span class=&quot;nt&quot;&gt;\begin{equation}&lt;/span&gt;
 (f/g)' = &lt;span class=&quot;k&quot;&gt;\frac&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;f'g-fg'&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;g&lt;span class=&quot;p&quot;&gt;^&lt;/span&gt;2&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;\end{equation}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;(f/g)' = \frac{f'g-fg'}{g^2}&lt;/script&gt;
+\[(f/g)' = \frac{f'g-fg'}{g^2}\]
 
 &lt;h4 id=&quot;integrals-sums-and-other-operators&quot;&gt;Integrals, sums, and other operators&lt;/h4&gt;
 
@@ -154,25 +147,25 @@ e&lt;span class=&quot;p&quot;&gt;^{&lt;/span&gt;a+b&lt;span class=&quot;p&quot;&
 &lt;span class=&quot;k&quot;&gt;\int&lt;/span&gt; x&lt;span class=&quot;p&quot;&gt;^&lt;/span&gt;3 dx + &lt;span class=&quot;k&quot;&gt;\sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;_{&lt;/span&gt;n=1&lt;span class=&quot;p&quot;&gt;}^{&lt;/span&gt;N&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; n
 &lt;span class=&quot;nt&quot;&gt;\end{equation}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\int x^3 dx + \sum_{n=1}^{N} n&lt;/script&gt;
+\[\int x^3 dx + \sum_{n=1}^{N} n\]
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-latex&quot; data-lang=&quot;latex&quot;&gt;&lt;span class=&quot;nt&quot;&gt;\begin{equation}&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;\int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;_&lt;/span&gt;0&lt;span class=&quot;p&quot;&gt;^&lt;/span&gt;1 &lt;span class=&quot;k&quot;&gt;\frac&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; dx + &lt;span class=&quot;k&quot;&gt;\sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;_{&lt;/span&gt;a,b&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; a-b
 &lt;span class=&quot;nt&quot;&gt;\end{equation}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\int_0^1 \frac{1}{x} dx + \sum_{a,b} a-b&lt;/script&gt;
+\[\int_0^1 \frac{1}{x} dx + \sum_{a,b} a-b\]
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-latex&quot; data-lang=&quot;latex&quot;&gt;&lt;span class=&quot;nt&quot;&gt;\begin{equation}&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;\int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;_&lt;/span&gt;0&lt;span class=&quot;p&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;\pi&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;\sin&lt;/span&gt; (x) dx + &lt;span class=&quot;k&quot;&gt;\sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;_{&lt;/span&gt;n=1&lt;span class=&quot;p&quot;&gt;}^&lt;/span&gt;N &lt;span class=&quot;k&quot;&gt;\frac&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;n&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;\end{equation}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\int_0^\pi \sin (x) dx + \sum_{n=1}^N \frac{1}{n}&lt;/script&gt;
+\[\int_0^\pi \sin (x) dx + \sum_{n=1}^N \frac{1}{n}\]
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-latex&quot; data-lang=&quot;latex&quot;&gt;&lt;span class=&quot;nt&quot;&gt;\begin{equation}&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;\int&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;\frac&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;^{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;\sin&lt;/span&gt; (x)&lt;span class=&quot;p&quot;&gt;}}{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;\sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;\cos&lt;/span&gt; (x)&lt;span class=&quot;p&quot;&gt;}}&lt;/span&gt; dx + &lt;span class=&quot;k&quot;&gt;\sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;_{&lt;/span&gt;n=1&lt;span class=&quot;p&quot;&gt;}^&lt;/span&gt;N &lt;span class=&quot;k&quot;&gt;\frac&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;n&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;n+1&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;\end{equation}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\int \frac{x^{\sin (x)}}{\sqrt{\cos (x)}} dx + \sum_{n=1}^N \frac{n}{n+1}&lt;/script&gt;
+\[\int \frac{x^{\sin (x)}}{\sqrt{\cos (x)}} dx + \sum_{n=1}^N \frac{n}{n+1}\]
 
 &lt;h4 id=&quot;greek-letters&quot;&gt;Greek letters&lt;/h4&gt;
 
@@ -180,26 +173,25 @@ e&lt;span class=&quot;p&quot;&gt;^{&lt;/span&gt;a+b&lt;span class=&quot;p&quot;&
 2&lt;span class=&quot;k&quot;&gt;\pi&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;\end{equation}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;2\pi&lt;/script&gt;
+\[2\pi\]
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-latex&quot; data-lang=&quot;latex&quot;&gt;&lt;span class=&quot;nt&quot;&gt;\begin{equation}&lt;/span&gt;
 |x-a| &amp;lt; &lt;span class=&quot;k&quot;&gt;\delta&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;\end{equation}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-|x-a| &lt; \delta %]]&gt;&lt;/script&gt;
+\[|x-a| &amp;lt; \delta\]
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-latex&quot; data-lang=&quot;latex&quot;&gt;&lt;span class=&quot;nt&quot;&gt;\begin{equation}&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;\varphi&lt;/span&gt; = &lt;span class=&quot;k&quot;&gt;\frac&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;1+&lt;span class=&quot;k&quot;&gt;\sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;5&lt;span class=&quot;p&quot;&gt;}}{&lt;/span&gt;2&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;\end{equation}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\varphi = \frac{1+\sqrt{5}}{2}&lt;/script&gt;
+\[\varphi = \frac{1+\sqrt{5}}{2}\]
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-latex&quot; data-lang=&quot;latex&quot;&gt;&lt;span class=&quot;nt&quot;&gt;\begin{equation}&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;\int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;_&lt;/span&gt;0&lt;span class=&quot;p&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;\pi&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;\sin&lt;/span&gt; (x) dx
 &lt;span class=&quot;nt&quot;&gt;\end{equation}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\int_0^\pi \sin (x) dx&lt;/script&gt;
+\[\int_0^\pi \sin (x) dx\]
 
 &lt;h4 id=&quot;brackets&quot;&gt;Brackets&lt;/h4&gt;
 &lt;p&gt;Square brackets are just plainly written &lt;code class=&quot;highlighter-rouge&quot;&gt;[&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;]&lt;/code&gt;, curly brackets require a backslash beforehand &lt;code class=&quot;highlighter-rouge&quot;&gt;\{&lt;/code&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;\}&lt;/code&gt; as they are otherwise used for wrapping arguments in LaTeX. If the expression is large, you can write &lt;code class=&quot;highlighter-rouge&quot;&gt;\left&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;\right&lt;/code&gt; before the paranthesis to make LaTeX adjust the size of them for your expression. Here are some examples:&lt;/p&gt;
@@ -208,25 +200,25 @@ e&lt;span class=&quot;p&quot;&gt;^{&lt;/span&gt;a+b&lt;span class=&quot;p&quot;&
 &lt;span class=&quot;k&quot;&gt;\{&lt;/span&gt;1,2,3,4&lt;span class=&quot;k&quot;&gt;\}&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;\end{equation}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\{1,2,3,4\}&lt;/script&gt;
+\[\{1,2,3,4\}\]
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-latex&quot; data-lang=&quot;latex&quot;&gt;&lt;span class=&quot;nt&quot;&gt;\begin{equation}&lt;/span&gt;
 y - &lt;span class=&quot;k&quot;&gt;\left&lt;/span&gt;( &lt;span class=&quot;k&quot;&gt;\frac&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;\right&lt;/span&gt;)&lt;span class=&quot;p&quot;&gt;^&lt;/span&gt;2 = 0
 &lt;span class=&quot;nt&quot;&gt;\end{equation}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;y - \left( \frac{1}{x} \right)^2 = 0&lt;/script&gt;
+\[y - \left( \frac{1}{x} \right)^2 = 0\]
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-latex&quot; data-lang=&quot;latex&quot;&gt;&lt;span class=&quot;nt&quot;&gt;\begin{equation}&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;\left&lt;/span&gt;( &lt;span class=&quot;k&quot;&gt;\int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;_&lt;/span&gt;0&lt;span class=&quot;p&quot;&gt;^&lt;/span&gt;t &lt;span class=&quot;k&quot;&gt;\log&lt;/span&gt; (y) dy &lt;span class=&quot;k&quot;&gt;\right&lt;/span&gt;)&lt;span class=&quot;p&quot;&gt;^&lt;/span&gt;t
 &lt;span class=&quot;nt&quot;&gt;\end{equation}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\left( \int_0^t \log (y) dy \right)^t&lt;/script&gt;
+\[\left( \int_0^t \log (y) dy \right)^t\]
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-latex&quot; data-lang=&quot;latex&quot;&gt;&lt;span class=&quot;nt&quot;&gt;\begin{equation}&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;\int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;_&lt;/span&gt;a&lt;span class=&quot;p&quot;&gt;^&lt;/span&gt;b &lt;span class=&quot;k&quot;&gt;\frac&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;}{&lt;/span&gt;b-a&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; dx = &lt;span class=&quot;k&quot;&gt;\left&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;[ \frac{x}{b-a} \right]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;^&lt;/span&gt;b&lt;span class=&quot;p&quot;&gt;_&lt;/span&gt;a
 &lt;span class=&quot;nt&quot;&gt;\end{equation}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\int_a^b \frac{x}{b-a} dx = \left[ \frac{x}{b-a} \right]^b_a&lt;/script&gt;
+\[\int_a^b \frac{x}{b-a} dx = \left[ \frac{x}{b-a} \right]^b_a\]
 
 &lt;h3 id=&quot;final-tips&quot;&gt;Final tips&lt;/h3&gt;
 &lt;p&gt;You might’ve noticed that your document didn’t change even though you changed your LaTeX code. This is because LaTeX is just that: code. There’s a big green button that says “Recompile” in the top left of your document. If you click it, the new code you have written will be compiled, and you will see it in your document (or you get an error, if there’s a mistake in your code). To the right of the button is a small downward pointing arrow - if you click that, you can turn “Auto compile” on or off. This will get Overleaf to compile your code as you’re writing.&lt;/p&gt;
@@ -237,30 +229,29 @@ y - &lt;span class=&quot;k&quot;&gt;\left&lt;/span&gt;( &lt;span class=&quot;k&q
 &lt;h3 id=&quot;exercises&quot;&gt;Exercises&lt;/h3&gt;
 &lt;p&gt;To practice writing equations, try and see if you can write the equations underneath.&lt;/p&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;a^z + b^z = c^z&lt;/script&gt;
+\[a^z + b^z = c^z\]
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\sqrt{\frac{n}{n-1}}&lt;/script&gt;
+\[\sqrt{\frac{n}{n-1}}\]
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;e^{ix} = r ( \cos \theta + i \sin \theta )&lt;/script&gt;
+\[e^{ix} = r ( \cos \theta + i \sin \theta )\]
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\int \frac{\sin (x)}{x^2+1} dx&lt;/script&gt;
+\[\int \frac{\sin (x)}{x^2+1} dx\]
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\int_a^b x^{10} \sum_{i=1}^n i^2 dx&lt;/script&gt;
+\[\int_a^b x^{10} \sum_{i=1}^n i^2 dx\]
 
 &lt;p&gt;These next ones require something I haven’t shown in this post, so a little bit of Googling or outside-the-box thinking is required.&lt;/p&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;1+2+3+\cdots+n = \frac{n(n+1)}{2}&lt;/script&gt;
+\[1+2+3+\cdots+n = \frac{n(n+1)}{2}\]
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\lim_{x \to x_0} \frac{f(x)-f(x_0)}{x-x_0} = c&lt;/script&gt;
+\[\lim_{x \to x_0} \frac{f(x)-f(x_0)}{x-x_0} = c\]
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\frac{1}{\zeta (s)} = \prod_{p \text{ prime}} \left( 1 - \frac{1}{p^s} \right)&lt;/script&gt;
+\[\frac{1}{\zeta (s)} = \prod_{p \text{ prime}} \left( 1 - \frac{1}{p^s} \right)\]
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-\det
+\[\det
 \begin{pmatrix}
-    a &amp; b \\
-    c &amp; d
+    a &amp;amp; b \\
+    c &amp;amp; d
 \end{pmatrix}
-= ad-bc %]]&gt;&lt;/script&gt;
+= ad-bc\]
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;\max \left\{ 0, \left| \frac{1}{a}-b \right| \right\}&lt;/script&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;twitter&quot;=&gt;nil}</name></author><summary type="html">A few people have been asking for a short guide to LaTeX, but since I don’t have that much time on my hands these days, I thought I’d start with a very short guide that I can expand if needed.</summary></entry></feed>
+\[\max \left\{ 0, \left| \frac{1}{a}-b \right| \right\}\]</content><author><name>{&quot;name&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;twitter&quot;=&gt;nil}</name></author><summary type="html">A few people have been asking for a short guide to LaTeX, but since I don’t have that much time on my hands these days, I thought I’d start with a very short guide that I can expand if needed.</summary></entry></feed>

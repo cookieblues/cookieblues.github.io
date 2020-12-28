@@ -31,11 +31,8 @@ Let's look at the code now. I've posted below, what your code should look like (
 \date{April 2019}
 
 \begin{document}
-
 \maketitle
-
 \section{Introduction}
-
 \end{document}
 {% endhighlight %}
 
@@ -57,15 +54,11 @@ You might've noticed, there's a number next to the section. This is used for you
 \date{\today}
 
 \begin{document}
-
 \maketitle
-
 \tableofcontents
-
 \section{Introduction}
 \subsection*{No number}
 % this is a comment that won't appear in the document
-
 \end{document}
 {% endhighlight %}
 
