@@ -1,4 +1,99 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-12-28T16:00:41+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Treat Template</title><subtitle>Food blog template for Jekyll.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;twitter&quot;=&gt;nil}</name></author><entry><title type="html">How to do data science without machine learning</title><link href="http://localhost:4000/updates/2020/01/31/how-to-do-data-science-without-machine-learning/" rel="alternate" type="text/html" title="How to do data science without machine learning" /><published>2020-01-31T00:00:00+00:00</published><updated>2020-01-31T00:00:00+00:00</updated><id>http://localhost:4000/updates/2020/01/31/how-to-do-data-science-without-machine-learning</id><content type="html" xml:base="http://localhost:4000/updates/2020/01/31/how-to-do-data-science-without-machine-learning/">&lt;p&gt;I recently participated in a challenge orchestrated by &lt;a href=&quot;https://omdena.com/&quot;&gt;Omdena&lt;/a&gt;, which (if you don’t already know) is an international hub for AI enthusiasts that want to leverage AI solutions to solve some of humanity’s problems. The challenge was posed by a Nigerian NGO called RA365, and if you want to read more about it, Omdena asked me to write a small article for their blog regarding some work I did in the challenge. I didn’t really do much AI, so I decided to write about just that!&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-01-11T17:52:46+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Treat Template</title><subtitle>Food blog template for Jekyll.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;twitter&quot;=&gt;nil}</name></author><entry><title type="html">Pearson Correlation Coefficient and Cosine Similarity in Word Embeddings</title><link href="http://localhost:4000/machine%20learning/natural%20language%20processing/2021/01/11/pcc-and-cosine-similarity/" rel="alternate" type="text/html" title="Pearson Correlation Coefficient and Cosine Similarity in Word Embeddings" /><published>2021-01-11T00:00:00+00:00</published><updated>2021-01-11T00:00:00+00:00</updated><id>http://localhost:4000/machine%20learning/natural%20language%20processing/2021/01/11/pcc-and-cosine-similarity</id><content type="html" xml:base="http://localhost:4000/machine%20learning/natural%20language%20processing/2021/01/11/pcc-and-cosine-similarity/">&lt;p&gt;A friend of mine recently asked me about word embeddings and similarity. I remember, I learned that the typical way of calculating the similarity between a pair of word embeddings is to take the cosine of the angle between their vectors. This measure of similarity makes sense due to the way that these word embeddings are commonly constructed, where each dimension is supposed to represent some sort of semantic meaning&lt;span class=&quot;marginnote&quot;&gt;These word embedding techniques have obvious flaws, such as words that are spelled the same way but have different meanings (called &lt;a href=&quot;https://en.wikipedia.org/wiki/Homograph&quot;&gt;homographs&lt;/a&gt;), or sarcasm which often times is saying one thing but meaning the opposite.&lt;/span&gt;. Yet, my friend asked if you could calculate the correlation between word embeddings as an alternative to cosine similarity, and it turns out that it’s almost the exact same thing.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.aclweb.org/anthology/N19-1100/&quot;&gt;Zhelezniak et al. (2019)&lt;/a&gt; explains this well. Given a vocabulary of $N$ words $\mathcal{V} = \{ w_1, \dots, w_N \}$ with a corresponding word embedding matrix $\mathbf{W} \in \mathbb{R}^{N \times D}$, each row in $\mathbf{W}$ corresponds to a word. Considering a pair of these, we can calcuate their &lt;a href=&quot;https://en.wikipedia.org/wiki/Pearson_correlation_coefficient#For_a_sample&quot;&gt;Pearson correlation coefficient (PCC)&lt;/a&gt;. Let $(\mathbf{x}, \mathbf{y}) = \{ (x_1, y_1), \dots, (x_D, y_D) \}$ denote this pair, and we can compute the PCC as&lt;/p&gt;
+
+\[r_{xy} = \frac{ \sum_{i=1}^D (x_i - \bar{x})(y_i - \bar{y}) }{ \sqrt{\sum_{i=1}^D (x_i - \bar{x})^2} \sqrt{\sum_{i=1}^D (y_i - \bar{y})^2} }, \quad \quad (1)\]
+
+&lt;p&gt;where $\bar{x} = \frac{1}{D} \sum_{i=1}^D x_i$ is the sample mean; and analogously for $\bar{y}$.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://en.wikipedia.org/wiki/Cosine_similarity&quot;&gt;cosine similarity&lt;/a&gt; between vectors $\mathbf{x}, \mathbf{y}$ is&lt;/p&gt;
+
+\[\begin{aligned}
+\cos \theta
+&amp;amp;= \frac{\mathbf{x} \cdot \mathbf{y}}{\| \mathbf{x} \| \| \mathbf{y} \|} \\
+&amp;amp;= \frac{\sum_{i=1}^D x_i y_i}{\sqrt{\sum_{i=1}^D x_i^2} \sqrt{\sum_{i=1}^D y_i^2}} \quad \quad (2),
+\end{aligned}\]
+
+&lt;p&gt;where we see that equation $(1)$ and $(2)$ are the same, if the sample means are 0. The question then becomes: is the mean of word vectors (across the $D$ dimensions) 0?&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://nlp.stanford.edu/projects/glove/&quot;&gt;GloVe&lt;/a&gt; is a popular algorithm for constructing word embeddings, and their pre-trained word embeddings are also commonly used. Let’s download the pre-trained word embeddings, and see if the mean of their vectors equal 0.&lt;/p&gt;
+
+&lt;p&gt;&lt;span class=&quot;marginnote&quot;&gt;The GloVe embeddings take up a little more than 800 MB. Depending on your connection, this might take a few minutes to download.&lt;/span&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;urllib.request&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;urlretrieve&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;zipfile&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ZipFile&lt;/span&gt;
+
+
+&lt;span class=&quot;n&quot;&gt;GLOVE_URL&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'http://nlp.stanford.edu/data/glove.6B.zip'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;GLOVE_FILENAME&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'raw_data.zip'&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;urlretrieve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GLOVE_URL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GLOVE_FILENAME&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ZipFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GLOVE_FILENAME&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zipfile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;zipfile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;extractall&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'data'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This piece of code will give us a folder called &lt;code class=&quot;highlighter-rouge&quot;&gt;data&lt;/code&gt; with 4 different GloVe embedding files of varying vector dimensionalities (50, 100, 200, and 300). I will use the file with dimensionality 300. We can now load the words and their corresponding vectors and calculate the mean of each vector.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;tqdm&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tqdm&lt;/span&gt;
+
+
+&lt;span class=&quot;n&quot;&gt;DIM&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;300&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;words&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;word_matrix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zeros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;400_000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# vocab is 400k
+&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'data/glove.6B.{DIM}d.txt'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encoding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'utf-8'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;pbar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tqdm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;total&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;400_000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;enumerate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;words&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;line&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;word_matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;idx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;line&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dtype&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;float32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;pbar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;update&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;pbar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;means&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;word_matrix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Plotting these means in a histogram will give us insight into the distribution.&lt;/p&gt;
+
+&lt;p&gt;&lt;span class=&quot;marginnote&quot;&gt;Distribution of means of GloVe word vectors from &lt;code class=&quot;highlighter-rouge&quot;&gt;glove.6B.300d.txt&lt;/code&gt;.&lt;/span&gt;&lt;/p&gt;
+&lt;figure&gt;
+    &lt;img src=&quot;/extra/pcc-and-cosine-similarity/means_hist.svg&quot; /&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;As we can see, the means fall closely to 0, which means the PCC and the cosine similarity will be roughly the same when used to calculate similarity between pairs of word embeddings.&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;twitter&quot;=&gt;nil}</name></author><summary type="html">A friend of mine recently asked me about word embeddings and similarity. I remember, I learned that the typical way of calculating the similarity between a pair of word embeddings is to take the cosine of the angle between their vectors. This measure of similarity makes sense due to the way that these word embeddings are commonly constructed, where each dimension is supposed to represent some sort of semantic meaningThese word embedding techniques have obvious flaws, such as words that are spelled the same way but have different meanings (called homographs), or sarcasm which often times is saying one thing but meaning the opposite.. Yet, my friend asked if you could calculate the correlation between word embeddings as an alternative to cosine similarity, and it turns out that it’s almost the exact same thing.</summary></entry><entry><title type="html">How to do data science without machine learning</title><link href="http://localhost:4000/updates/2020/01/31/how-to-do-data-science-without-machine-learning/" rel="alternate" type="text/html" title="How to do data science without machine learning" /><published>2020-01-31T00:00:00+00:00</published><updated>2020-01-31T00:00:00+00:00</updated><id>http://localhost:4000/updates/2020/01/31/how-to-do-data-science-without-machine-learning</id><content type="html" xml:base="http://localhost:4000/updates/2020/01/31/how-to-do-data-science-without-machine-learning/">&lt;p&gt;I recently participated in a challenge orchestrated by &lt;a href=&quot;https://omdena.com/&quot;&gt;Omdena&lt;/a&gt;, which (if you don’t already know) is an international hub for AI enthusiasts that want to leverage AI solutions to solve some of humanity’s problems. The challenge was posed by a Nigerian NGO called RA365, and if you want to read more about it, Omdena asked me to write a small article for their blog regarding some work I did in the challenge. I didn’t really do much AI, so I decided to write about just that!&lt;/p&gt;
 
 &lt;p&gt;You can find the article by clicking &lt;a href=&quot;https://medium.com/omdena/ai-in-nigeria-doing-data-science-for-good-without-machine-learning-6f7b1856d813&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;twitter&quot;=&gt;nil}</name></author><summary type="html">I recently participated in a challenge orchestrated by Omdena, which (if you don’t already know) is an international hub for AI enthusiasts that want to leverage AI solutions to solve some of humanity’s problems. The challenge was posed by a Nigerian NGO called RA365, and if you want to read more about it, Omdena asked me to write a small article for their blog regarding some work I did in the challenge. I didn’t really do much AI, so I decided to write about just that!</summary></entry><entry><title type="html">The bare minimum guide to LaTeX</title><link href="http://localhost:4000/guides/2019/04/04/bare-minimum-latex/" rel="alternate" type="text/html" title="The bare minimum guide to LaTeX" /><published>2019-04-04T00:00:00+00:00</published><updated>2019-04-04T00:00:00+00:00</updated><id>http://localhost:4000/guides/2019/04/04/bare-minimum-latex</id><content type="html" xml:base="http://localhost:4000/guides/2019/04/04/bare-minimum-latex/">&lt;p&gt;A few people have been asking for a short guide to LaTeX, but since I don’t have that much time on my hands these days, I thought I’d start with a very short guide that I can expand if needed.&lt;/p&gt;
 

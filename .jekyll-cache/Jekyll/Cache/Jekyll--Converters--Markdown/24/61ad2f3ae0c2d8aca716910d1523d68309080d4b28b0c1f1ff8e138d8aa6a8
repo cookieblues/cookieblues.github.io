@@ -1,0 +1,47 @@
+I"<p>A friend of mine recently asked me about word embeddings and similarity. I remember, I learned that the typical way of calculating the similarity between a pair of word embeddings is to take the cosine of the angle between their vectors. This measure of similarity makes sense due to the way that these word embeddings are commonly constructed, where each dimension is supposed to represent some sort of semantic meaning<span class="marginnote">These word embedding techniques have obvious flaws, such as words that are spelled the same way but have different meanings (called <a href="https://en.wikipedia.org/wiki/Homograph">homographs</a>), or sarcasm which often times is saying one thing but meaning the opposite.</span>. Yet, my friend asked if you could calculate the correlation between word embeddings as an alternative to cosine similarity, and it turns out that it’s almost the exact same thing.</p>
+
+<p><a href="https://www.aclweb.org/anthology/N19-1100/">Zhelezniak et al. (2019)</a> explains this well. Given a vocabulary of $N$ words $\mathcal{V} = \{ w_1, \dots, w_N \}$ with a corresponding word embedding matrix $\mathbf{W} \in \mathbb{R}^{N \times D}$, each row in $\mathbf{W}$ corresponds to a word. Considering a pair of these, we can calcuate their <a href="https://en.wikipedia.org/wiki/Pearson_correlation_coefficient#For_a_sample">Pearson correlation coefficient (PCC)</a>. Let $(\mathbf{x}, \mathbf{y}) = \{ (x_1, y_1), \dots, (x_D, y_D) \}$ denote this pair, and we can compute the PCC as</p>
+
+\[r_{xy} = \frac{ \sum_{i=1}^D (x_i - \bar{x})(y_i - \bar{y}) }{ \sqrt{\sum_{i=1}^D (x_i - \bar{x})^2} \sqrt{\sum_{i=1}^D (y_i - \bar{y})^2} }, \quad \quad (1)\]
+
+<p>where $\bar{x} = \frac{1}{D} \sum_{i=1}^D x_i$ is the sample mean; and analogously for $\bar{y}$.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Cosine_similarity">cosine similarity</a> between vectors $\mathbf{x}, \mathbf{y}$ is</p>
+
+\[\begin{aligned}
+\cos \theta
+&amp;= \frac{\mathbf{x} \cdot \mathbf{y}}{\| \mathbf{x} \| \| \mathbf{y} \|} \\
+&amp;= \frac{\sum_{i=1}^D x_i y_i}{\sqrt{\sum_{i=1}^D x_i^2} \sqrt{\sum_{i=1}^D y_i^2}} \quad \quad (2),
+\end{aligned}\]
+
+<p>where we see that equation $(1)$ and $(2)$ are the same, if the sample means are 0. The question then becomes: is the mean of word vectors (across the $D$ dimensions) 0?</p>
+
+<p><a href="https://nlp.stanford.edu/projects/glove/">GloVe</a> is a popular algorithm for constructing word embeddings, and their pre-trained word embeddings are also commonly used. Let’s download the pre-trained word embeddings, and see if the mean of their vectors equal 0.</p>
+
+<p><span class="marginnote">The GloVe embeddings take up a little more then 800 MB. Depending on your connection, this might take a few minutes to download.</span></p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre><span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlretrieve</span>
+<span class="kn">from</span> <span class="nn">zipfile</span> <span class="kn">import</span> <span class="n">ZipFile</span>
+
+
+<span class="n">GLOVE_URL</span> <span class="o">=</span> <span class="s">'http://nlp.stanford.edu/data/glove.6B.zip'</span>
+<span class="n">GLOVE_FILENAME</span> <span class="o">=</span> <span class="s">'raw_data.zip'</span>
+
+<span class="n">urlretrieve</span><span class="p">(</span><span class="n">GLOVE_URL</span><span class="p">,</span> <span class="n">GLOVE_FILENAME</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">ZipFile</span><span class="p">(</span><span class="n">GLOVE_FILENAME</span><span class="p">)</span> <span class="k">as</span> <span class="n">zipfile</span><span class="p">:</span>
+    <span class="n">zipfile</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="s">'data'</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+:ET

@@ -57,6 +57,10 @@ a:hover { color: #6a103c; }
 
 .sidenote-number:after { content: counter(sidenote-counter); font-family: 'Fira Sans', sans-serif; font-size: 80%; position: relative; top: -0.5rem; vertical-align: baseline; }
 
+code { line-height: 1.5; }
+
+.lineno { color: rgba(0, 0, 0, 0.25); }
+
 input[type="submit"] { margin-top: 10px; padding-top: 10px; padding-bottom: 10px; }
 
 input[type="text"], input[type="email"], textarea { display: block; width: 100%; font-size: 1.1em; padding: 10px; box-sizing: border-box; border: 1px solid #666; resize: none; }
@@ -168,7 +172,7 @@ Customize these however you like.
 .highlight .err { border: 1px solid #FF0000; }
 
 /* Error */
-.highlight .k { color: #000000; font-weight: bold; }
+.highlight .k { color: #6a103c; font-weight: bold; }
 
 /* Keyword */
 .highlight .kc { color: #000000; font-weight: bold; }
@@ -177,7 +181,7 @@ Customize these however you like.
 .highlight .kd { color: #000000; font-weight: bold; }
 
 /* Keyword.Declaration */
-.highlight .kn { color: #000000; }
+.highlight .kn { color: #6a103c; font-weight: bold; }
 
 /* Keyword.Namespace */
 .highlight .kp { color: #008000; }
