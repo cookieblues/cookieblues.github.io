@@ -1,3 +1,0 @@
-I"&<p>A friend of mine recently started learning about natural language processing and was asking me about word embeddings and similarity. I learned that the typical way of calculating the similarity between a pair of word embeddings is to take the cosine of the angle between their vectors.</p>
-
-:ET
