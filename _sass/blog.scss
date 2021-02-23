@@ -73,3 +73,11 @@ code {
 .lineno {
     color: rgba(0, 0, 0, 0.25);
 }
+
+// Outline text on poll plot
+.party-tooltip {
+    stroke: rgb(195, 195, 195);
+    stroke-width: 2.25px;
+    paint-order: stroke;
+    background-color: #000000;
+  }

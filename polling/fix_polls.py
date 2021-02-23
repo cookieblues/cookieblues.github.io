@@ -51,7 +51,7 @@ mean_df = df.copy()
 
 # Fix duplicates
 mean_of_dupes = mean_df[mean_df.index.duplicated(keep=False)].groupby(by='date').mean()
-mean_df[mean_df.index.duplicated(keep=False)] = mean_of_dupes
+mean_df.loc[mean_df.index.duplicated(keep=False)] = mean_of_dupes
 mean_df = mean_df.drop_duplicates()
 
 # Calc mean

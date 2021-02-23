@@ -61,6 +61,8 @@ code { line-height: 1.5; }
 
 .lineno { color: rgba(0, 0, 0, 0.25); }
 
+.party-tooltip { stroke: #c3c3c3; stroke-width: 2.25px; paint-order: stroke; background-color: #000000; }
+
 input[type="submit"] { margin-top: 10px; padding-top: 10px; padding-bottom: 10px; }
 
 input[type="text"], input[type="email"], textarea { display: block; width: 100%; font-size: 1.1em; padding: 10px; box-sizing: border-box; border: 1px solid #666; resize: none; }

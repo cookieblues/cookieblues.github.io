@@ -16,6 +16,7 @@ var svg = d3.select(".content").append("svg")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
+
 // List of groups (here I have one group per column)
 var partyNames = [
   'Socialdemokratiet',
@@ -65,7 +66,6 @@ svg.append("g")
 
 // Highlight the party that is hovered
 var partyHighlight = function(d){
-
   if ('values' in d) {
     selected_party = d.values[0].party
   }
@@ -75,22 +75,18 @@ var partyHighlight = function(d){
   else {
     selected_party = d.party
   }
-
   d3.selectAll(".dot")
     .transition()
     .duration(200)
     .style("opacity", 0.1)
-
   d3.selectAll(".partyLine")
     .transition()
     .duration(200)
     .style("opacity", 0.1)
-
   d3.selectAll(".partyText")
     .transition()
     .duration(200)
     .style("opacity", 0.1)
-
   d3.selectAll("." + selected_party)
     .transition()
     .duration(200)
@@ -103,12 +99,10 @@ var partyNotHighlight = function(){
     .transition()
     .duration(200)
     .style("opacity", 0.375)
-
   d3.selectAll(".partyLine")
     .transition()
     .duration(200)
     .style("opacity", 1.0)
-
   d3.selectAll(".partyText")
     .transition()
     .duration(200)
@@ -120,8 +114,6 @@ var showLinesUpToMouse = function(){
   // recover date coordinate we need
   var mouse = d3.mouse(this)[0];
   var x0 = x.invert(mouse);
-
-
 }
 
 // Process CSVs
@@ -154,8 +146,6 @@ Promise.all([
     .on('mouseover', mouseover)
     .on('mousemove', mousemove)
     .on('mouseout', mouseout);
-
-  
     
   // Add the lines
   var line = d3.line()
@@ -191,24 +181,24 @@ Promise.all([
       .on("mouseleave", partyNotHighlight)
   console.log(partyLines)
 
-  var svgagain = d3.select(".content").select("svg")
-    .on("mousemove", function() {
-      // recover coordinate we need
-      var mouse = d3.mouse(this)[0];
-      var x0 = x.invert(mouse);
-      redrawPartyLines(x0);
-    });
+  // var svgagain = d3.select(".content").select("svg")
+  //   .on("mousemove", function() {
+  //     // recover coordinate we need
+  //     var mouse = d3.mouse(this)[0];
+  //     var x0 = x.invert(mouse);
+  //     redrawPartyLines(x0);
+  //   });
 
-  function redrawPartyLines(pt) {
-    // push a new data point onto the back
-    ptdata.push(pt);
-    // Redraw the path:
-    path.attr("d", function(d) { return line(d);})
-    // If more than 100 points, drop the old data pt off the front
-    if (ptdata.length > npoints) {
-      ptdata.shift();
-    }
-  }
+  // function redrawPartyLines(pt) {
+  //   // push a new data point onto the back
+  //   ptdata.push(pt);
+  //   // Redraw the path:
+  //   path.attr("d", function(d) { return line(d);})
+  //   // If more than 100 points, drop the old data pt off the front
+  //   if (ptdata.length > npoints) {
+  //     ptdata.shift();
+  //   }
+  // }
 
   var lastVals = pollingMean.forEach(element => element.values[element.values.length-1]);
   
@@ -244,6 +234,8 @@ Promise.all([
     d3.select(".mouse-line")
       .style("opacity", 1);
   }
+  
+  // What happens when the mouse 
   function mousemove() {
     // recover coordinate we need
     var mouse = d3.mouse(this)[0];
@@ -251,10 +243,16 @@ Promise.all([
     // find idx in data
     var i = bisect(files[0], x0);
     selectedData = files[0][i];
+    //var asd = function(d) { return selectedData[d.name]};
+    var ypos = [];
+    var ys = Object.values(selectedData).slice(1).map(parseFloat).sort();
+    console.log(ys);
     labels
       .attr("transform", function(d) { return "translate(" + x(parseTime(selectedData.date)) + "," + y(selectedData[d.name]) + ")"; }) // Put the text at the position of the mouse
       .attr("x", -5)
       .text(function(d) { return "\xa0\xa0" + d.name.replaceAll("_", " ") + " " + selectedData[d.name] + "%"; })
+
+    // Vertical dotted date line
     var vertPos = mouse-1
     d3.select(".mouse-line")
       .attr("d", function() {
@@ -262,12 +260,55 @@ Promise.all([
         d += " " + vertPos + "," + y(0);
         return d;
       })
-      .append("text")
-        .attr("x", 12)
-        .attr("y", -12)
-        .text("ADSSD")
-        .style("font-size", 25);
+    
+    var ypos = [];
+    d3.selectAll("myLines")
+    .attr("transform", function(d, i) {
+      console.log(width/mouse)
+      var xDate = x.invert(mouse),
+          bisect = d3.bisector(function(d) { return d.date; }).right;
+          idx = bisect(d.value, xDate);
+      
+      var beginning = 0,
+          end = lines[i].getTotalLength(),
+          target = null;
+
+      while (true){
+        target = Math.floor((beginning + end) / 2);
+        pos = lines[i].getPointAtLength(target);
+        if ((target === end || target === beginning) && pos.x !== mouse) {
+            break;
+        }
+        if (pos.x > mouse)      end = target;
+        else if (pos.x < mouse) beginning = target;
+        else break; //position found
+      }
+      
+      d3.select(this).select('text')
+        .text(y.invert(pos.y).toFixed(2));
+        
+        ypos.push ({ind: i, y: pos.y, off: 0});
+        
+      return "translate(" + mouse + "," + pos.y +")";
+    })
+    .call(function(sel) {
+      ypos.sort (function(a,b) { return a.y - b.y; });
+      ypos.forEach (function(p,i) {
+        if (i > 0) {
+          var last = ypos[i-1].y;
+          ypos[i].off = Math.max (0, (last + 15) - ypos[i].y);
+          ypos[i].y += ypos[i].off;
+        }
+      })
+      ypos.sort (function(a,b) { return a.ind - b.ind; });
+    })
+    .select("text")
+    
+    .attr("transform", function(d,i) {
+      return "translate (10,"+(3+ypos[i].off)+")";
+    });
   }
+
   function mouseout() {
     labels.style("opacity", 0)
     d3.select(".mouse-line")
