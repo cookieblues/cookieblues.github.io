@@ -157,10 +157,7 @@ mouseG.append("svg:rect") // append a rect to catch mouse movements on canvas
                 var d = "M" + mouse[0] + "," + y(0);
                 d += " " + mouse[0] + "," + 0;
                 return d;
-            })
-            .select("text")
-            .text("WEOW")
-            .attr("translate(" + mouse[0] + "," + pos.y +")");
+            });
 
         // Make party tooltips invisible
         d3.selectAll(".mouse-per-line")
