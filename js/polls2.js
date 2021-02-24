@@ -207,7 +207,7 @@ mouseG.append("svg:rect") // append a rect to catch mouse movements on canvas
                 
                 // Tooltip text
                 d3.select(this).select("text")
-                    .text(d.name.replaceAll("_", " ") + " " + y.invert(pos.y).toFixed(1) + "%")
+                    .text(d.name.replace(/_/g," ") + " " + y.invert(pos.y).toFixed(1) + "%")
                     .attr("class", "party-tooltip " + d.name);
                 
                 ypos.push({ind: i, y: pos.y, off: 0});
