@@ -10,7 +10,7 @@ disqus_shortname:
 
 # Values for the jekyll-seo-tag gem (https://github.com/jekyll/jekyll-seo-tag)
 logo: /images/logo.svg
-description: A blog about data .
+description: A blog about data.
 author:
   name:
   email:

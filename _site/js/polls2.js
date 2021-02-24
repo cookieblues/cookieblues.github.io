@@ -11,15 +11,16 @@ var x = d3.scaleTime()
 const yMax = 40;
 var y = d3.scaleLinear()
     .domain([0, yMax])
-    .range([ height-100, 0 ]);
+    .range([ height-50, 0 ]);
 
 var xAxis = d3.axisBottom(x)
 var yAxis = d3.axisLeft(y);
 
 // Define function to plot lines
 var line = d3.line()
-.x(function(d) { return x(d.date) })
-.y(function(d) { return y(+d.value) })
+    .defined(function (d) { return d.value != ""; })
+    .x(function(d) { return x(d.date) })
+    .y(function(d) { return y(+d.value) });
 
 var svg = d3.select(".content").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -68,23 +69,24 @@ Promise.all([
     d3.csv("../polling/fixed_polls.csv")
 ]).then(function(files) {
     var data = partyNames.map( function(partyName) { // .map allows to do something for each element of the list
-    return {
-        name: partyName,
-        values: files[0].map(function(d) {
-            return {date: parseTime(d.date), value: +d[partyName], party: partyName};
-        })
-    };
-});
+        return {
+            name: partyName,
+            values: files[0].map(function(d) {
+                return {date: parseTime(d.date), value: d[partyName], party: partyName};
+            })
+        };
+    });
 
-Object.keys(data).forEach(function(d) {
-    d.date = parseTime(d.date);
-});
+    Object.keys(data).forEach(function(d) {
+        d.date = parseTime(d.date);
+    });
 
-var cities = data.map(function(partyObject) {
-    return {
-        name: partyObject.name,
-        values: partyObject.values
-    };
+
+    var cities = data.map(function(partyObject) {
+        return {
+            name: partyObject.name,
+            values: partyObject.values.filter(d => d.value != "")
+        };
     });
 
 // Set x lim
@@ -124,19 +126,21 @@ mouseG.append("path")
 var lines = document.getElementsByClassName("line");
 
 
-
 mouseG.append("svg:rect") // append a rect to catch mouse movements on canvas
     .attr("width", width) // can"t catch mouse events on a g element
     .attr("height", height)
     .attr("fill", "none")
     .attr("pointer-events", "all")
     // .on("mouseout", function() { // on mouse out hide line, circles and text
-    //     d3.select(".mouse-line")
-    //         .style("opacity", 0);
-    //     // d3.selectAll(".mouse-per-line circle")
-    //     //     .style("opacity", 0);
-    //     d3.selectAll(".mouse-per-line text")
-    //         .style("opacity", 0);
+    //     var mouse = d3.mouse(this);
+    //     d3.selectAll(".mouse-per-line")
+    //         .filter(function(d, i) {
+    //             var xDate = x.invert(mouse[0]),
+    //             bisect = d3.bisector(function(d) { return d.date; }).right;
+    //             idx = bisect(d.values, xDate);
+    //             return idx > 0;
+    //         })
+    //         .style("opacity", 0)
     // })
     .on("mouseover", function() { // on mouse in show line, circles and text
         d3.select(".mouse-line")
@@ -145,31 +149,57 @@ mouseG.append("svg:rect") // append a rect to catch mouse movements on canvas
             .style("opacity", 1);
     })
     .on("mousemove", function() { // mouse moving over canvas
-        // Draw grey vertical line to follow mouse
         var mouse = d3.mouse(this);
+        var xDate = x.invert(mouse[0]); // current mouseover date
+        // Draw grey vertical line to follow mouse
         d3.select(".mouse-line")
             .attr("d", function() {
-            var d = "M" + mouse[0] + "," + y(0);
-            d += " " + mouse[0] + "," + 0;
-            return d;
-            });
+                var d = "M" + mouse[0] + "," + y(0);
+                d += " " + mouse[0] + "," + 0;
+                return d;
+            })
+            .select("text")
+            .text("WEOW")
+            .attr("translate(" + mouse[0] + "," + pos.y +")");
 
-        var ypos = [];
-        var maxOff = 0;
+        // Make party tooltips invisible
         d3.selectAll(".mouse-per-line")
+            .filter(function(d, i) {
+                bisect = d3.bisector(function(d) { return d.date; }).right;
+                idx = bisect(d.values, xDate);
+                return idx == 0;
+            })
+            .style("opacity", 0)
+        
+        var ypos = [];
+        d3.selectAll(".mouse-per-line")
+            .filter(function(d, i) {
+                bisect = d3.bisector(function(d) { return d.date; }).right;
+                idx = bisect(d.values, xDate);
+                return idx > 0;
+            })
+            .style("opacity", 1)
             .attr("transform", function(d, i) {
-                
                 // var xDate = x.invert(mouse[0]),
                 // bisect = d3.bisector(function(d) { return d.date; }).right;
                 // idx = bisect(d.values, xDate);
                 
+                //console.log(d.name, idx);
+
+                //console.log(d)
+                //var maxIdx = Object.keys(lines[i].animatedPathSegList).length;
+                //console.log(idx)
+                var currentLine = document.getElementsByClassName("line " + d.name)[0];
+                //console.log(currentLine)
+
+                
                 var beginning = 0,
-                    end = lines[i].getTotalLength(),
+                    end = currentLine.getTotalLength(),
                     target = null;
 
                 while (true){
                     target = Math.floor((beginning + end) / 2);
-                    pos = lines[i].getPointAtLength(target);
+                    pos = currentLine.getPointAtLength(target);
                     if ((target === end || target === beginning) && pos.x !== mouse[0]) {
                         break;
                     }
@@ -180,27 +210,26 @@ mouseG.append("svg:rect") // append a rect to catch mouse movements on canvas
                 
                 // Tooltip text
                 d3.select(this).select("text")
-                .text(d.name.replaceAll("_", " ") + " " + y.invert(pos.y).toFixed(1) + "%")
-                .attr("class", "party-tooltip " + d.name);
-                    
-                ypos.push ({ind: i, y: pos.y, off: 0});
+                    .text(d.name.replaceAll("_", " ") + " " + y.invert(pos.y).toFixed(1) + "%")
+                    .attr("class", "party-tooltip " + d.name);
+                
+                ypos.push({ind: i, y: pos.y, off: 0});
                     
                 return "translate(" + mouse[0] + "," + pos.y +")";
             })
             .call(function(sel) {
-                ypos.sort (function(a,b) { return a.y - b.y; });
-                ypos.forEach (function(p,i) {
+                ypos.sort(function(a, b) { return a.y - b.y; });
+                ypos.forEach (function(p, i) {
                     if (i > 0) {
                         var last = ypos[i-1].y;
                         ypos[i].off = Math.max (0, (last + 15) - ypos[i].y);
                         ypos[i].y += ypos[i].off;
-                        if (ypos[i].off > maxOff) maxOff = ypos[i].off;
                     }
                 })
-                ypos.sort (function(a,b) { return a.ind - b.ind; });
+                ypos.sort(function(a,b) { return a.ind - b.ind; });
             })
             .select("text")
-            .attr("transform", function(d,i) {
+            .attr("transform", function(d, i) {
                 return "translate (7,"+(ypos[i].off-5)+")";
             });
     });
@@ -265,12 +294,14 @@ city.append("path")
 // Load poll data
 var pollingData = partyNames.map( function(partyName) {
     return {
-      name: partyName,
-      values: files[1].map(function(d) {
-          return {date: parseTime(d.date), value: +d[partyName], name: partyName};
-        })
-      };
-  });
+        name: partyName,
+        values: files[1]
+            .filter((d)=>{return d[partyName] != "";})
+            .map(function(d) {
+                return {date: parseTime(d.date), value: +d[partyName], name: partyName}
+            })
+    };
+});
 
 // Add the points
 mouseG
@@ -285,16 +316,23 @@ mouseG
     .data(function(d){ return d.values })
     .enter()
     .append("circle")
-        .attr("class", function (d) {return "dot " + d.name} )
-        .attr("cx", function(d) { return x(d.date) } )
-        .attr("cy", function(d) { return y(d.value) } )
+        .attr("class", function (d) {
+            return "dot " + d.name
+        })
+        .attr("cx", function(d) {
+            return x(d.date)
+        })
+        .attr("cy", function(d) {
+            return y(d.value)
+        })
         .attr("r", 4)
         .style("opacity", 0.375)
         .on("mouseover", highlightParty)
         .on("mouseleave", unhighlightParties);
 
 
-var mousePerLine = mouseG.selectAll(".mouse-per-line")
+var mousePerLine = mouseG
+    .selectAll(".mouse-per-line")
     .data(cities)
     .enter()
     .append("g")
@@ -304,7 +342,6 @@ var mousePerLine = mouseG.selectAll(".mouse-per-line")
     //.attr("class", "mouse-per-line");
 
 mousePerLine.append("text")
-    .attr("transform", "translate(10,3)")
     .style("fill", function(d) {
         return partyColors[d.name];
     });
