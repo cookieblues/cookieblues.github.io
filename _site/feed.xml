@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-02-25T21:25:31+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Cookieblues</title><subtitle>A blog about data.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;twitter&quot;=&gt;nil}</name></author><entry><title type="html">The bare minimum guide to Matplotlib</title><link href="http://localhost:4000/guides/2021/02/15/bare-minimum-matplotlib/" rel="alternate" type="text/html" title="The bare minimum guide to Matplotlib" /><published>2021-02-15T00:00:00+00:00</published><updated>2021-02-15T00:00:00+00:00</updated><id>http://localhost:4000/guides/2021/02/15/bare-minimum-matplotlib</id><content type="html" xml:base="http://localhost:4000/guides/2021/02/15/bare-minimum-matplotlib/">&lt;p&gt;If you want to work with arrays in Python, you use NumPy. If you want to work with tabular data, you use Pandas. The quintessential Python library for data visualization is Matplotlib. It’s easy to use, flexible, and a lot of other visualization libraries build on the shoulders of Matplotlib. This means that learning Matplotlib will make it easier to understand and work with some of the more fancy visualization libraries.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-03-02T23:55:14+00:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Cookieblues</title><subtitle>A blog about data.</subtitle><author><name>{&quot;name&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;twitter&quot;=&gt;nil}</name></author><entry><title type="html">The bare minimum guide to Matplotlib</title><link href="http://localhost:4000/guides/2021/02/15/bare-minimum-matplotlib/" rel="alternate" type="text/html" title="The bare minimum guide to Matplotlib" /><published>2021-02-15T00:00:00+00:00</published><updated>2021-02-15T00:00:00+00:00</updated><id>http://localhost:4000/guides/2021/02/15/bare-minimum-matplotlib</id><content type="html" xml:base="http://localhost:4000/guides/2021/02/15/bare-minimum-matplotlib/">&lt;p&gt;If you want to work with arrays in Python, you use NumPy. If you want to work with tabular data, you use Pandas. The quintessential Python library for data visualization is Matplotlib. It’s easy to use, flexible, and a lot of other visualization libraries build on the shoulders of Matplotlib. This means that learning Matplotlib will make it easier to understand and work with some of the more fancy visualization libraries.&lt;/p&gt;
 
 &lt;h3 id=&quot;getting-started&quot;&gt;Getting started&lt;/h3&gt;
 &lt;p&gt;You’ll need to install the Matplotlib library. Assuming you have some terminal at your disposal and you have &lt;a href=&quot;https://en.wikipedia.org/wiki/Pip_(package_manager)&quot; target=&quot;_blank&quot;&gt;pip&lt;/a&gt; installed, you can install Matplotlib with the following commaned: &lt;code class=&quot;highlighter-rouge&quot;&gt;pip install matplotlib&lt;/code&gt;. You can read more about the installation in Matplotlib’s &lt;a href=&quot;https://matplotlib.org/users/installing.html&quot; target=&quot;_blank&quot;&gt;installation guide&lt;/a&gt;.&lt;/p&gt;
@@ -216,7 +216,63 @@
   &lt;li&gt;You save figures with the &lt;code class=&quot;highlighter-rouge&quot;&gt;plt.savefig()&lt;/code&gt; function.&lt;/li&gt;
   &lt;li&gt;There are a bunch of libraries that build on the shoulders of Matplotlib that could be beneficial to the specific plot you’re trying to create, e.g. &lt;a href=&quot;https://seaborn.pydata.org/&quot;&gt;Seaborn&lt;/a&gt;, &lt;a href=&quot;https://docs.bokeh.org/en/latest/&quot;&gt;Bokeh&lt;/a&gt;, &lt;a href=&quot;https://plotly.com/&quot;&gt;Plotly&lt;/a&gt;, and many more.&lt;/li&gt;
   &lt;li&gt;Look at the &lt;a href=&quot;https://matplotlib.org/stable/gallery/index.html&quot;&gt;gallery&lt;/a&gt;. Please, please, look at the &lt;a href=&quot;https://matplotlib.org/stable/gallery/index.html&quot;&gt;gallery&lt;/a&gt;! Don’t waste 3 hours working on a plot, if someone has already made it.&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;twitter&quot;=&gt;nil}</name></author><summary type="html">If you want to work with arrays in Python, you use NumPy. If you want to work with tabular data, you use Pandas. The quintessential Python library for data visualization is Matplotlib. It’s easy to use, flexible, and a lot of other visualization libraries build on the shoulders of Matplotlib. This means that learning Matplotlib will make it easier to understand and work with some of the more fancy visualization libraries.</summary></entry><entry><title type="html">Pearson Correlation Coefficient and Cosine Similarity in Word Embeddings</title><link href="http://localhost:4000/machine%20learning/natural%20language%20processing/2021/01/11/pcc-and-cosine-similarity/" rel="alternate" type="text/html" title="Pearson Correlation Coefficient and Cosine Similarity in Word Embeddings" /><published>2021-01-11T00:00:00+00:00</published><updated>2021-01-11T00:00:00+00:00</updated><id>http://localhost:4000/machine%20learning/natural%20language%20processing/2021/01/11/pcc-and-cosine-similarity</id><content type="html" xml:base="http://localhost:4000/machine%20learning/natural%20language%20processing/2021/01/11/pcc-and-cosine-similarity/">&lt;p&gt;A friend of mine recently asked me about word embeddings and similarity. I remember, I learned that the typical way of calculating the similarity between a pair of word embeddings is to take the cosine of the angle between their vectors. This measure of similarity makes sense due to the way that these word embeddings are commonly constructed, where each dimension is supposed to represent some sort of semantic meaning&lt;span class=&quot;marginnote&quot;&gt;These word embedding techniques have obvious flaws, such as words that are spelled the same way but have different meanings (called &lt;a href=&quot;https://en.wikipedia.org/wiki/Homograph&quot;&gt;homographs&lt;/a&gt;), or sarcasm which often times is saying one thing but meaning the opposite.&lt;/span&gt;. Yet, my friend asked if you could calculate the correlation between word embeddings as an alternative to cosine similarity, and it turns out that it’s almost the exact same thing.&lt;/p&gt;
+&lt;/ol&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;twitter&quot;=&gt;nil}</name></author><summary type="html">If you want to work with arrays in Python, you use NumPy. If you want to work with tabular data, you use Pandas. The quintessential Python library for data visualization is Matplotlib. It’s easy to use, flexible, and a lot of other visualization libraries build on the shoulders of Matplotlib. This means that learning Matplotlib will make it easier to understand and work with some of the more fancy visualization libraries.</summary></entry><entry><title type="html">The bare minimum guide to Matplotlib</title><link href="http://localhost:4000/guides/2021/02/15/matplotlib-manual-waffle-charts/" rel="alternate" type="text/html" title="The bare minimum guide to Matplotlib" /><published>2021-02-15T00:00:00+00:00</published><updated>2021-02-15T00:00:00+00:00</updated><id>http://localhost:4000/guides/2021/02/15/matplotlib-manual-waffle-charts</id><content type="html" xml:base="http://localhost:4000/guides/2021/02/15/matplotlib-manual-waffle-charts/">&lt;p&gt;https://en.wikipedia.org/wiki/Pie_chart
+https://stackoverflow.com/questions/41400136/how-to-do-waffle-charts-in-python-square-piechart&lt;/p&gt;
+
+&lt;p&gt;import numpy as np
+impo
+from matplotlib.patches import Rectangle
+from matplotlib.collections import PatchCollection
+from mpl_toolkits.mplot3d.art3d import Poly3DCollection&lt;/p&gt;
+
+&lt;p&gt;def rectangle_histogram(n_train, n_val, n_test, n_squares, ax, sidelength=1, **kwargs):
+    sqrt_n_squares = np.ceil(np.sqrt(n_squares))
+    start_x = 0
+    start_y = sqrt_n_squares * sidelength
+    actual_sidelength = sidelength * 0.9&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;train_rects = list()
+for i in range(n_train):
+    cur_x = start_x + (i % sqrt_n_squares)
+    cur_y = start_y - (i // sqrt_n_squares)
+    rect = plot_rectangle(
+        cur_x, cur_y, width=actual_sidelength, height=actual_sidelength
+    )
+    train_rects.append(rect)
+train_patch = PatchCollection(
+    train_rects, facecolor=&quot;darkturquoise&quot;, alpha=0.375, edgecolor=&quot;none&quot;
+)
+ax.add_collection(train_patch)
+
+val_rects = list()
+for i in range(n_train, n_train + n_val):
+    cur_x = start_x + (i % sqrt_n_squares)
+    cur_y = start_y - (i // sqrt_n_squares)
+    rect = plot_rectangle(
+        cur_x, cur_y, width=actual_sidelength, height=actual_sidelength
+    )
+    val_rects.append(rect)
+val_patch = PatchCollection(
+    val_rects, facecolor=&quot;indigo&quot;, alpha=0.375, edgecolor=&quot;none&quot;
+)
+ax.add_collection(val_patch)
+
+test_rects = list()
+for i in range(n_train + n_val, n_train + n_val + n_test):
+    cur_x = start_x + (i % sqrt_n_squares)
+    cur_y = start_y - (i // sqrt_n_squares)
+    rect = plot_rectangle(
+        cur_x, cur_y, width=actual_sidelength, height=actual_sidelength
+    )
+    test_rects.append(rect)
+test_patch = PatchCollection(
+    test_rects, facecolor=&quot;magenta&quot;, alpha=0.375, edgecolor=&quot;none&quot;
+)
+ax.add_collection(test_patch)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;def plot_rectangle(x, y, width, height, **kwargs):
+    return Rectangle((x, y), width=width, height=height, **kwargs)&lt;/p&gt;</content><author><name>{&quot;name&quot;=&gt;nil, &quot;email&quot;=&gt;nil, &quot;twitter&quot;=&gt;nil}</name></author><summary type="html">https://en.wikipedia.org/wiki/Pie_chart https://stackoverflow.com/questions/41400136/how-to-do-waffle-charts-in-python-square-piechart</summary></entry><entry><title type="html">Pearson Correlation Coefficient and Cosine Similarity in Word Embeddings</title><link href="http://localhost:4000/machine%20learning/natural%20language%20processing/2021/01/11/pcc-and-cosine-similarity/" rel="alternate" type="text/html" title="Pearson Correlation Coefficient and Cosine Similarity in Word Embeddings" /><published>2021-01-11T00:00:00+00:00</published><updated>2021-01-11T00:00:00+00:00</updated><id>http://localhost:4000/machine%20learning/natural%20language%20processing/2021/01/11/pcc-and-cosine-similarity</id><content type="html" xml:base="http://localhost:4000/machine%20learning/natural%20language%20processing/2021/01/11/pcc-and-cosine-similarity/">&lt;p&gt;A friend of mine recently asked me about word embeddings and similarity. I remember, I learned that the typical way of calculating the similarity between a pair of word embeddings is to take the cosine of the angle between their vectors. This measure of similarity makes sense due to the way that these word embeddings are commonly constructed, where each dimension is supposed to represent some sort of semantic meaning&lt;span class=&quot;marginnote&quot;&gt;These word embedding techniques have obvious flaws, such as words that are spelled the same way but have different meanings (called &lt;a href=&quot;https://en.wikipedia.org/wiki/Homograph&quot;&gt;homographs&lt;/a&gt;), or sarcasm which often times is saying one thing but meaning the opposite.&lt;/span&gt;. Yet, my friend asked if you could calculate the correlation between word embeddings as an alternative to cosine similarity, and it turns out that it’s almost the exact same thing.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://www.aclweb.org/anthology/N19-1100/&quot;&gt;Zhelezniak et al. (2019)&lt;/a&gt; explains this well. Given a vocabulary of $N$ words $\mathcal{V} = \{ w_1, \dots, w_N \}$ with a corresponding word embedding matrix $\mathbf{W} \in \mathbb{R}^{N \times D}$, each row in $\mathbf{W}$ corresponds to a word. Considering a pair of these, we can calcuate their &lt;a href=&quot;https://en.wikipedia.org/wiki/Pearson_correlation_coefficient#For_a_sample&quot;&gt;Pearson correlation coefficient (PCC)&lt;/a&gt;. Let $(\mathbf{x}, \mathbf{y}) = \{ (x_1, y_1), \dots, (x_D, y_D) \}$ denote this pair, and we can compute the PCC as&lt;/p&gt;
 

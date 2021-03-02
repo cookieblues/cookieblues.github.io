@@ -7,23 +7,27 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>About | Cookieblues</title>
+<title>The bare minimum guide to Matplotlib | Cookieblues</title>
 <meta name="generator" content="Jekyll v4.0.0" />
-<meta property="og:title" content="About" />
+<meta property="og:title" content="The bare minimum guide to Matplotlib" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="A blog about data." />
-<meta property="og:description" content="A blog about data." />
-<link rel="canonical" href="http://localhost:4000/om/" />
-<meta property="og:url" content="http://localhost:4000/om/" />
+<meta name="description" content="https://en.wikipedia.org/wiki/Pie_chart https://stackoverflow.com/questions/41400136/how-to-do-waffle-charts-in-python-square-piechart" />
+<meta property="og:description" content="https://en.wikipedia.org/wiki/Pie_chart https://stackoverflow.com/questions/41400136/how-to-do-waffle-charts-in-python-square-piechart" />
+<link rel="canonical" href="http://localhost:4000/guides/2021/02/15/matplotlib-manual-waffle-charts/" />
+<meta property="og:url" content="http://localhost:4000/guides/2021/02/15/matplotlib-manual-waffle-charts/" />
 <meta property="og:site_name" content="Cookieblues" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-02-15T00:00:00+00:00" />
 <script type="application/ld+json">
-{"description":"A blog about data.","url":"http://localhost:4000/om/","@type":"WebPage","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/images/logo.svg"}},"headline":"About","@context":"https://schema.org"}</script>
+{"description":"https://en.wikipedia.org/wiki/Pie_chart https://stackoverflow.com/questions/41400136/how-to-do-waffle-charts-in-python-square-piechart","url":"http://localhost:4000/guides/2021/02/15/matplotlib-manual-waffle-charts/","@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/images/logo.svg"}},"headline":"The bare minimum guide to Matplotlib","dateModified":"2021-02-15T00:00:00+00:00","datePublished":"2021-02-15T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/guides/2021/02/15/matplotlib-manual-waffle-charts/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 	<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Cookieblues" />
 
 	<link href="//fonts.googleapis.com/css?family=Antic+Slab|Fira+Sans" rel="stylesheet">
 	<link rel="stylesheet" media="screen" href="/css/screen.css">
+	
+	<link rel="stylesheet" media="print" href="/css/print.css">
 	
 	<link rel="icon" type="image/png" href="/images/logo.svg">
 
@@ -74,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 
 		
-		<a href="/om/" class=" active">Om</a>
+		<a href="/om/" class="">Om</a>
 	
 </nav>
 
@@ -85,11 +89,83 @@ document.addEventListener("DOMContentLoaded", function() {
 	</header>
 
 	<div class="container main-content">
-		<section class="content"><h1>Om/About</h1>
+		<section class="content"><article class="post">
+	<h1>
+	<a href="/guides/2021/02/15/matplotlib-manual-waffle-charts/">
+		The bare minimum guide to Matplotlib
+	</a>
+</h1>
+<time datetime="2021-02-15T00:00:00+00:00">
+	February 15, 2021
+</time>
 
-<p>Jeg er bachelor i datavidenskab med lidt erfaring i matematik.</p>
+	<div class="image">
+		<img src="https://upload.wikimedia.org/wikipedia/en/5/56/Matplotlib_logo.svg" alt="The bare minimum guide to Matplotlib">
+	</div>
 
-<p><i>I'm a BSc in data science with a bit of experience in mathematics.</i></p>
+	<div class="post-body">
+		<p>https://en.wikipedia.org/wiki/Pie_chart
+https://stackoverflow.com/questions/41400136/how-to-do-waffle-charts-in-python-square-piechart</p>
+
+<p>import numpy as np
+impo
+from matplotlib.patches import Rectangle
+from matplotlib.collections import PatchCollection
+from mpl_toolkits.mplot3d.art3d import Poly3DCollection</p>
+
+<p>def rectangle_histogram(n_train, n_val, n_test, n_squares, ax, sidelength=1, **kwargs):
+    sqrt_n_squares = np.ceil(np.sqrt(n_squares))
+    start_x = 0
+    start_y = sqrt_n_squares * sidelength
+    actual_sidelength = sidelength * 0.9</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>train_rects = list()
+for i in range(n_train):
+    cur_x = start_x + (i % sqrt_n_squares)
+    cur_y = start_y - (i // sqrt_n_squares)
+    rect = plot_rectangle(
+        cur_x, cur_y, width=actual_sidelength, height=actual_sidelength
+    )
+    train_rects.append(rect)
+train_patch = PatchCollection(
+    train_rects, facecolor="darkturquoise", alpha=0.375, edgecolor="none"
+)
+ax.add_collection(train_patch)
+
+val_rects = list()
+for i in range(n_train, n_train + n_val):
+    cur_x = start_x + (i % sqrt_n_squares)
+    cur_y = start_y - (i // sqrt_n_squares)
+    rect = plot_rectangle(
+        cur_x, cur_y, width=actual_sidelength, height=actual_sidelength
+    )
+    val_rects.append(rect)
+val_patch = PatchCollection(
+    val_rects, facecolor="indigo", alpha=0.375, edgecolor="none"
+)
+ax.add_collection(val_patch)
+
+test_rects = list()
+for i in range(n_train + n_val, n_train + n_val + n_test):
+    cur_x = start_x + (i % sqrt_n_squares)
+    cur_y = start_y - (i // sqrt_n_squares)
+    rect = plot_rectangle(
+        cur_x, cur_y, width=actual_sidelength, height=actual_sidelength
+    )
+    test_rects.append(rect)
+test_patch = PatchCollection(
+    test_rects, facecolor="magenta", alpha=0.375, edgecolor="none"
+)
+ax.add_collection(test_patch)
+</code></pre></div></div>
+
+<p>def plot_rectangle(x, y, width, height, **kwargs):
+    return Rectangle((x, y), width=width, height=height, **kwargs)</p>
+
+	</div>
+	
+	
+</article>
 </section>
 		
 		<aside class="sidebar">
