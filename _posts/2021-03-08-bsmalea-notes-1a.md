@@ -3,7 +3,7 @@ date: 2021-03-08
 title: "Machine learning, notes 1a: What is machine learning?"
 categories:
   - Guides
-featured_image: https://cookieblues.github.io/extra/bsmalea-notes-2/test.svg
+featured_image: https://raw.githubusercontent.com/cookieblues/cookieblues.github.io/f1b1ba6d4669131256419c6e57a2c9527150135d/extra/bsmalea-notes-2/test.svg
 ---
 It seems, most people derive their definition of machine learning from a quote from Arthur Lee Samuel in 1959: "Programming computers to learn from experience should eventually eliminate the need for much of this detailed programming effort." The interpretation to take away from this is that "machine learning is the field of study that gives computers the ability to learn without being explicitly programmed."
 
