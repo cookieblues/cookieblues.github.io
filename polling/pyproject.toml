@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "polling"
+name = "src"
 version = "0.1.0"
 description = ""
 authors = ["cookieblues <shro@itu.dk>"]
@@ -9,6 +9,7 @@ python = "^3.9"
 pandas = "^1.2.2"
 numpy = "^1.20.1"
 pystan = "^2.19.1"
+matplotlib = "^3.3.4"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

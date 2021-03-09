@@ -26,7 +26,7 @@ h = np.poly1d(np.flip(beta, 0))
 x_ = np.linspace(x.min()-0.025, x.max()+0.025, 250)
 t_ = h(x_)
 
-fig = plt.figure(figsize=(6,6/golden))
+fig = plt.figure(figsize=(8, 8/golden))
 ax = fig.add_subplot()
 
 ax.scatter(x, t,
@@ -51,7 +51,8 @@ ax.plot(
 ax.set_xlim(x.min()-0.025, x.max()+0.025)
 ax.set_xticks([-1, -0.8, -0.6, -0.4, -0.2, 0, 0.2, 0.4, 0.6, 0.8, 1])
 ax.set_xticklabels(["$-1.0$", "$-0.8$", "$-0.6$", "$-0.4$", "$-0.2$", "$0.0$", "$0.2$", "$0.4$", "$0.6$", "$0.8$", "$1.0$"])
-ax.legend(frameon=False)
+
+ax.legend(frameon=False, fontsize=14)
 
 
 plt.tight_layout()

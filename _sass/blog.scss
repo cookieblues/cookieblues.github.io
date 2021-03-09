@@ -36,11 +36,11 @@
 /*span*/.sidenote {
     font-size: 80%;
     left: calc(50% + 280px);
-    line-height: 1.3rem;
+    line-height: 1.1rem;
     max-width: 400px;
     position: absolute;
     margin-top: 5px;
-    width: 50%;
+    width: 100%;
 }
 
 /*span*/.sidenote {
@@ -68,6 +68,7 @@
 
 code {
     line-height: 1.5;
+    font-size: 125%;
 }
 
 .lineno {

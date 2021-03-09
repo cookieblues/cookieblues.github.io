@@ -47,7 +47,7 @@ a:hover { color: #6a103c; }
 .take-me .button { padding-top: 10px; padding-bottom: 10px; }
 
 /*span*/
-.marginnote, .sidenote { font-size: 80%; left: calc(50% + 280px); line-height: 1.3rem; max-width: 400px; position: absolute; margin-top: 5px; width: 50%; }
+.marginnote, .sidenote { font-size: 80%; left: calc(50% + 280px); line-height: 1.1rem; max-width: 400px; position: absolute; margin-top: 5px; width: 100%; }
 
 /*span*/
 .sidenote:before { content: counter(sidenote-counter) " "; font-family: 'Fira Sans', sans-serif; position: relative; top: -0.5rem; vertical-align: baseline; }
@@ -57,7 +57,7 @@ a:hover { color: #6a103c; }
 
 .sidenote-number:after { content: counter(sidenote-counter); font-family: 'Fira Sans', sans-serif; font-size: 80%; position: relative; top: -0.5rem; vertical-align: baseline; }
 
-code { line-height: 1.5; }
+code { line-height: 1.5; font-size: 125%; }
 
 .lineno { color: rgba(0, 0, 0, 0.25); }
 
@@ -134,37 +134,6 @@ nav a:hover { color: #000; }
 .cms-editor-active .editor-link { display: inline-block; margin: 0 auto 20px auto; padding: 10px 20px; }
 
 .cms-editor-active nav .editor-link { display: inline; margin: 0; padding: 20px 15px; }
-
-/**
-* @license lyradesigns.com v1
-* Updated: Dec 17, 2014
-* Add pin buttons to images
-* Copyright (c) 2014 Jonas Goslow - LYRA
-* Released under the MIT license
-* https://github.com/timmywil/jquery.panzoom/blob/master/MIT-License.txt
-
-Customize these however you like.
-
-*/
-.imgPinWrap { position: relative; display: inline-block; }
-
-.imgPinWrap .pin { opacity: 0; position: absolute; display: block; -webkit-transition: all .25s ease-in-out; -moz-transition: all .25s ease-in-out; -o-transition: all .25s ease-in-out; transition: all .25s ease-in-out; }
-
-.imgPinWrap .pin img { display: block; }
-
-.imgPinWrap .pin:hover { box-shadow: 0 0 5px #fff; }
-
-.imgPinWrap:hover .pin { opacity: 1; }
-
-.imgPinWrap .left { left: 15px; }
-
-.imgPinWrap .right { right: 15px; }
-
-.imgPinWrap .bottom { bottom: 15px; }
-
-.imgPinWrap .top { top: 15px; }
-
-.imgPinWrap .center { left: 50%; top: 50%; }
 
 .highlight .hll { background-color: #ffffcc; }
 

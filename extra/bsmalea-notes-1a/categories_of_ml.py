@@ -7,7 +7,7 @@ from sklearn.datasets import make_blobs, make_classification
 from sklearn.cluster import KMeans
 from sklearn.mixture import GaussianMixture
 
-fig = plt.figure(figsize=(6,6))
+fig = plt.figure(figsize=(6, 6))
 mpl.rc("text", usetex=True)
 mpl.rc("font", family="serif")
 
@@ -279,15 +279,15 @@ ax4.set_position(box4)
 fig.text(0.5,0.965,
     s=r"Supervised learning: $\mathcal{D} = \{ (\mathbf{x}_1, t_1), \dots, (\mathbf{x}_N, t_N ) \}$",
     fontsize = 20,
-    horizontalalignment='center',
-    verticalalignment='center'
+    horizontalalignment="center",
+    verticalalignment="center"
 )
 fig.text(0.5,0.46,
     s=r"Unsupervised learning: $\mathcal{D} = \{ \mathbf{x}_1, \dots, \mathbf{x}_N \}$",
     fontsize = 20,
-    horizontalalignment='center',
-    verticalalignment='center'
+    horizontalalignment="center",
+    verticalalignment="center"
 )
 
-plt.savefig("categories_of_ml.svg")
+#plt.savefig("categories_of_ml.svg")
 plt.show()

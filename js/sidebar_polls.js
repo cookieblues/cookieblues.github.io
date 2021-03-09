@@ -65,8 +65,8 @@ svg.append("g")
 
 // Process CSVs
 Promise.all([
-  d3.csv("/polling/mean_polls.csv"),
-  d3.csv("/polling/fixed_polls.csv")
+  d3.csv("/polling/data/processed/mean_polls_old.csv"),
+  d3.csv("/polling/data/processed/fixed_polls.csv")
 ]).then(function(files) {
   var pollingMean = partyNames.map( function(partyName) { // .map allows to do something for each element of the list
     return {
