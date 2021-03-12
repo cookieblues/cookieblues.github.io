@@ -14,7 +14,7 @@ def f(x):
 
 Ms = [2, 4, 6, 8]
 
-fig = plt.figure(figsize=(6,6/golden))
+fig = plt.figure(figsize=(8, 8/golden))
 
 for i, M in enumerate(Ms):
     N = len(x)
@@ -37,29 +37,46 @@ for i, M in enumerate(Ms):
         s = 12.5,
         marker = "o"
     )
-    ax.plot(x_, t_,
-        color="turquoise",
-        linewidth = 1,
-        label = "Predicted"
-    )
+    if i == 0:
+        ax.plot(x_, t_,
+            color="turquoise",
+            linewidth = 1,
+            label = "Predicted",
+            zorder=2
+        )
+    else:
+        ax.plot(x_, t_,
+            color="turquoise",
+            linewidth = 1,
+            zorder=2
+        )
     true = np.linspace(x.min()-0.05, x.max()+0.05, 250)
-    ax.plot(
-        true, f(true),
-        color="magenta",
-        linewidth = 1,
-        label = "True"
-    )
-    
+    if i == 0:
+        ax.plot(
+            true, f(true),
+            color="magenta",
+            linewidth = 1,
+            label = "True",
+            zorder=1
+        )
+    else:
+        ax.plot(
+            true, f(true),
+            color="magenta",
+            linewidth = 1,
+            zorder=1
+        )
 
     ax.set_xlim(x.min()-0.05, x.max()+0.05)
     ax.text(0.6, -5, s=r"$M={}$".format(M))
     ax.set_ylim(t.min()-0.5, t.max()+0.5)
     #ax.set_title(str(M))
-    ax.legend(frameon=False, loc=2)
+    if i == 0:
+        ax.legend(frameon=False, loc=2)
 
 
 plt.tight_layout()
-plt.savefig("model_selection_poly_reg.svg")
+plt.savefig("model_selection_poly_reg.png")
 plt.show()
 
 

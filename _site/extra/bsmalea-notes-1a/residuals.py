@@ -96,7 +96,7 @@ ax.legend(frameon=False, fontsize=14)
 
 
 plt.tight_layout()
-plt.savefig("residuals.svg")
+plt.savefig("residuals.png")
 plt.show()
 
 

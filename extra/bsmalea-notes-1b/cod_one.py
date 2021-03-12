@@ -89,7 +89,7 @@ ax.legend(frameon=False,loc=(0.01,0.55))
 
 
 plt.tight_layout()
-plt.savefig("one_dim_cod.svg",
-    bbox_inches=mpl.transforms.Bbox([[0, 1.5], [6/golden, (6/golden)-1.25]])
-)
+# plt.savefig("one_dim_cod.svg",
+#     bbox_inches=mpl.transforms.Bbox([[0, 1.5], [6/golden, (6/golden)-1.25]])
+# )
 plt.show()

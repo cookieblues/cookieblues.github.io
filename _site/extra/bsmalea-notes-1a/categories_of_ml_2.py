@@ -351,5 +351,5 @@ fig.text(0.5, 0.475,
     verticalalignment="center"
 )
 
-plt.savefig("categories_of_ml_2.svg", bbox_inches = 'tight')
+plt.savefig("categories_of_ml_2.png", bbox_inches = 'tight')
 #plt.show()

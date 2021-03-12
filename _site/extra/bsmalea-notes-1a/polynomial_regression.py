@@ -56,7 +56,7 @@ ax.legend(frameon=False, fontsize=14)
 
 
 plt.tight_layout()
-plt.savefig("poly_reg.svg")
+plt.savefig("poly_reg.png")
 plt.show()
 
 
