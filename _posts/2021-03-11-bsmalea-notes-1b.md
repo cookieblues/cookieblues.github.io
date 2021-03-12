@@ -3,7 +3,7 @@ date: 2021-03-11
 title: 'Machine learning, notes 1b: Model selection and validation, the "no free lunch" theorem, and the curse of dimensionality'
 categories:
   - Guides
-featured_image: https://raw.githubusercontent.com/cookieblues/cookieblues.github.io/f1b1ba6d4669131256419c6e57a2c9527150135d/extra/bsmalea-notes-1b/test.png
+featured_image: https://raw.githubusercontent.com/cookieblues/cookieblues.github.io/master/extra/bsmalea-notes-1b/test.png
 ---
 Now we know a bit about machine learning: it involves models. Machine learning attempts to model data in order to make predictions about the data. In the previous post we dove into the inner functions of a model, and that is very much what machine learning is about. Yet, it's only half of it, really. The other half has to do with the concept of prediction, and how we make sure our models predict well. This course doesn't dabble that deep into this other half - but there are a few important topics in this regard that you should be aware of, as they pop up in machine learning all the time.
 
