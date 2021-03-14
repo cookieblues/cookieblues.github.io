@@ -17,7 +17,7 @@ party_names = [
     "Alternativet"
 ]
 
-df = pd.read_csv("polls.csv", usecols=[
+df = pd.read_csv("data/raw/polls.csv", usecols=[
     "year",
     "month",
     "day",
@@ -38,7 +38,7 @@ df = pd.read_csv("polls.csv", usecols=[
 ])
 
 today = pd.to_datetime("today").date()
-start_date = today-pd.DateOffset(months=6)
+start_date = today-pd.DateOffset(months=12)
 six_months_range = pd.date_range(start_date, today, freq="1D")
 
 df["date"] = pd.to_datetime(df[["year", "month", "day"]])
@@ -46,24 +46,13 @@ df = df.sort_values(by="date", ascending=True)
 df.index = df["date"]
 df = df.drop(["year", "month", "day", "date"], axis=1)
 
-### Get mean data
-mean_df = df.copy()
-
-# Fix duplicates
-mean_of_dupes = mean_df[mean_df.index.duplicated(keep=False)].groupby(by="date").mean()
-mean_df.loc[mean_df.index.duplicated(keep=False)] = mean_of_dupes
-mean_df = mean_df.drop_duplicates()
-
-# Calc mean
-mean_df = mean_df.rolling("14D", min_periods=0).mean().round(1)
-mean_df.columns = party_names
-mean_df = mean_df.reindex(pd.date_range(mean_df.index[0], today).date)
-mean_df = mean_df.ffill()
-mean_df = mean_df.loc[
-    start_date <= mean_df.index,
-    party_names
-].copy()
-mean_df.to_csv("mean_polls.csv")
+### Fix mean
+mean_df = pd.read_csv("data/processed/mean_polls_raw.csv", index_col="date", parse_dates=["date"])
+# Remove less than 0.05
+breakpoint()
+#mean_df = mean_df[mean_df >= 0.05].copy()
+mean_df = mean_df.loc[mean_df.index >= start_date].copy()
+mean_df.to_csv("data/processed/mean_polls.csv")
 
 ### Get poll data
 new_df = df.copy()
@@ -72,6 +61,4 @@ new_df = new_df.loc[
     start_date <= new_df.index,
     party_names
 ].copy()
-
-new_df.to_csv("fixed_polls.csv")
-
+new_df.to_csv("data/processed/fixed_polls.csv")

@@ -1,6 +1,0 @@
-I"
-<p>Now we know a bit about machine learning: it involves models. Machine learning attempts to model data in order to make predictions about the data. In the <a href="http://localhost:4000/bsmalea-notes-1a">previous post</a> we dove into the inner functions of a model, and that is very much what machine learning is about. Yet, it’s only half of it, really. The other half has to do with the concept of prediction, and how we make sure our models predict well. This course doesn’t dabble that deep into this other half - but there are a few important topics in this regard that you should be aware of, as they pop up in machine learning all the time.</p>
-
-<h3 id="model-selection-and-validation">Model selection and validation</h3>
-<p>In the <a href="http://localhost:4000/bsmalea-notes-1a">previous post</a>, we went over polynomial regression. In the Python implementation, we went with a 4th order polynomial. However, perhaps $M=4$ isn’t the ‘best’ choice - but what is the ‘best’ choice, and how do we find it?</p>
-:ET
