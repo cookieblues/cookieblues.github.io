@@ -104,7 +104,7 @@ Promise.all([
       .attr("class", function(d){ return "partyLine " + d.values[0].party })
       .attr("d", function(d){ return line(d.values) } )
       .attr("stroke", function(d){ return partyColors[d.name] })
-      .style("stroke-width", 2.5)
+      .style("stroke-width", 1.5)
       .style("fill", "none")
       .style('opacity', 0.15)
 
@@ -153,6 +153,6 @@ Promise.all([
       .attr("class", function (d) { return "dot " + d.party } )
       .attr("cx", function(d) { return x(d.date) } )
       .attr("cy", function(d) { return y(d.value) } )
-      .attr("r", 4)
+      .attr("r", 2)
       .style('opacity', 0.15)
 })
