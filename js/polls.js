@@ -163,6 +163,9 @@ mouseG.append("svg:rect") // append a rect to catch mouse movements on canvas
         d3.selectAll(".mouse-per-line")
             .filter(function(d, i) {
                 bisect = d3.bisector(function(d) { return d.date; }).right;
+                if (d.values[d.values.length-1].date < xDate) {
+                    return true;
+                }
                 idx = bisect(d.values, xDate);
                 return idx == 0;
             })
@@ -172,6 +175,9 @@ mouseG.append("svg:rect") // append a rect to catch mouse movements on canvas
         d3.selectAll(".mouse-per-line")
             .filter(function(d, i) {
                 bisect = d3.bisector(function(d) { return d.date; }).right;
+                if (d.values[d.values.length-1].date < xDate) {
+                    return false;
+                }
                 idx = bisect(d.values, xDate);
                 return idx > 0;
             })
