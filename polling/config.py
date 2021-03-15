@@ -271,9 +271,9 @@ model{
         //     normal(centre_track[stability:(n_days-1), p], sigma);
 
         // -- observational model
-        print(p);
-        print(houseEffects[house, p]);
-        print(centre_track[poll_day, p]);
+        // print(p);
+        // print(houseEffects[house, p]);
+        // print(centre_track[poll_day, p]);
         centered_obs_y[p,] ~ normal(houseEffects[house, p] + centre_track[poll_day, p], pseudoSampleSigma);
     }
 }

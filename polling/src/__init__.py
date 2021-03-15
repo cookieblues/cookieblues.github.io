@@ -183,7 +183,7 @@ def dirichlet_multinomial_process():
         seed=1
     )
     posterior_df = posterior.to_dataframe()
-    posterior_df.to_csv("data/processed/dirichlet_multinomial_posterior.csv", index=False)
+    posterior_df.to_csv("data/interim/dirichlet_multinomial_posterior.csv", index=False)
     breakpoint()
 
 
@@ -261,11 +261,6 @@ def gaussian_process():
         "sigma": 0.15,
         # "sigma_volatile": 0.4,
     }
-    
-    def init_houseadjustment(n_pollsters=len(uniq_pollsters), n_parties=len(sorted_parties), mean=0, std=0.005):
-        shape = (n_pollsters, n_parties)
-        init_values = np.random.normal(mean, std, size=shape)
-        return {"houseAdjustment": init_values}
 
     # Compile model
     model_filepath = MODEL_DIRECTORY / "gaussian_process.pkl"
@@ -279,11 +274,9 @@ def gaussian_process():
     # Sample from model
     posterior = model.sampling(
         data=model_data,
-        #init=init_houseadjustment,
         chains=2,
-        iter=100,
+        iter=500,
         seed=1
     )
     posterior_df = posterior.to_dataframe()
-    posterior_df.to_csv("data/processed/gaussian_posterior.csv", index=False)
-    breakpoint()
+    return posterior_df

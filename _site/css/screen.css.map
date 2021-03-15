@@ -3,16 +3,16 @@
 	"file": "screen.css",
 	"sources": [
 		"screen.scss",
-		"_sass/variables.scss",
-		"_sass/elements.scss",
-		"_sass/layout.scss",
-		"_sass/blog.scss",
-		"_sass/forms.scss",
-		"_sass/navigation.scss",
-		"_sass/sidebar.scss",
-		"_sass/recipes.scss",
-		"_sass/cloudcannon.scss",
-		"_sass/pygment.scss"
+		"../../../../../OneDrive/code/cookieblues.github.io/_sass/variables.scss",
+		"../../../../../OneDrive/code/cookieblues.github.io/_sass/elements.scss",
+		"../../../../../OneDrive/code/cookieblues.github.io/_sass/layout.scss",
+		"../../../../../OneDrive/code/cookieblues.github.io/_sass/blog.scss",
+		"../../../../../OneDrive/code/cookieblues.github.io/_sass/forms.scss",
+		"../../../../../OneDrive/code/cookieblues.github.io/_sass/navigation.scss",
+		"../../../../../OneDrive/code/cookieblues.github.io/_sass/sidebar.scss",
+		"../../../../../OneDrive/code/cookieblues.github.io/_sass/recipes.scss",
+		"../../../../../OneDrive/code/cookieblues.github.io/_sass/cloudcannon.scss",
+		"../../../../../OneDrive/code/cookieblues.github.io/_sass/pygment.scss"
 	],
 	"sourcesContent": [
 		"@import \"variables\";\n@import \"elements\";\n@import \"layout\";\n@import \"blog\";\n@import \"forms\";\n@import \"navigation\";\n@import \"sidebar\";\n@import \"recipes\";\n@import \"cloudcannon\";\n@import \"pygment\";\n",
