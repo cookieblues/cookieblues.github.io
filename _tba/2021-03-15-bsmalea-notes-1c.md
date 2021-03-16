@@ -1,74 +1,80 @@
 ---
-title: "BSMALEA, notes 1c: Frequentism and Bayesianism"
-layout: post
-tags: BSMALEA
-excerpt_separator: <!--more-->
+date: 2021-03-15
+title: "Machine learning, notes 1c: Frequentism and Bayesianism"
+categories:
+  - Guides
+featured_image: https://raw.githubusercontent.com/cookieblues/cookieblues.github.io/master/extra/bsmalea-notes-1b/test.png
 ---
-As mentioned in <a href="{{ site.url }}/pages/bsmalea-notes-1a">notes 1a</a>, machine learning is mainly concerned with prediction, and as you can imagine, prediction is very much concerned with probability. In this post we are going to look at the two main [interpretations of probability](https://en.wikipedia.org/wiki/Probability_interpretations){:target="_blank"}: Frequentism and Bayesianism.
+As mentioned in <a href="{{ site.url }}/guides/2021/03/08/bsmalea-notes-1a/">notes 1a</a>, machine learning is mainly concerned with prediction, and as you can imagine, prediction is very much concerned with probability. In this post we are going to look at the two main [interpretations of probability](https://en.wikipedia.org/wiki/Probability_interpretations){:target="_blank"}: frequentism and Bayesianism.
 
-While the adjective "Bayesian" first appeared around the 1950s by R. A. Fisher[^1], the concept was properly formalized long before by P. S. Laplace and known as "inverse probability"[^2]. So while the gist of the Bayesian approach has been known for a while, it hasn't gained much popularity until recently, perhaps mostly due to computational complexity.
+While the adjective "Bayesian" first appeared around the 1950s by R. A. Fisher<span class="sidenote-number"></span><span class="sidenote">S. E. Fienberg, "When did Bayesian inference become "Bayesian"?," 2006.</span>, the concept was properly formalized long before by P. S. Laplace in the 18th century, but known as "inverse probability"<span class="sidenote-number"></span><span class="sidenote">S. M. Stigler, "The History of Statistics: The Measurement of Uncertainty Before 1900," ch. 3, 1986.</span>. So while the gist of the Bayesian approach has been known for a while, it hasn't gained much popularity until recently, perhaps mostly due to computational complexity.
 
-The philosophical difference between the frequentist and Bayesian interpretation of probability is their definitions of probability: the frequentist (or classical) definition of probability is based on **frequencies of events**, whereas the Bayesian definition of probability is based on **our knowledge of events**. In the context of machine learning, the difference can be interpreted as: what the data says versus what we know from the data.
+The philosophical difference between the frequentist and Bayesian interpretation of probability is their definitions of probability: **the frequentist (or classical) definition of probability is based on frequencies of events**, whereas **the Bayesian definition of probability is based on our knowledge of events**. In the context of machine learning, we can interpret this difference as: what the data says versus what we know from the data.
 
-To understand what this means, I like [this analogy](https://stats.stackexchange.com/a/56){:target="_blank"}: imagine you've lost your phone somewhere in your home. You use your friend's phone to call your phone - as it's calling, your phone starts ringing (it's not on vibrate). How do you decide, where to look for your phone in your home? The frequentist would use their ears to identify the most likely area from which the sound is coming, which would be where the phone is located. The Bayesian would also use their ears, but in addition they would recall which areas of their home they've previously lost their phone and take it into account, when inferring where to look for the phone.
+To understand what this means, I like to use [this analogy](https://stats.stackexchange.com/a/56){:target="_blank"}. Imagine you've lost your phone somewhere in your home. You use your friend's phone to call your phone - as it's calling, your phone starts ringing (it's not on vibrate). How do you decide, where to look for your phone in your home? The frequentist would use their ears to identify the most likely area from which the sound is coming. However, the Bayesian would also use their ears, but in addition they would recall which areas of their home they've previously lost their phone and take it into account, when inferring where to look for the phone. Both the frequentist and the Bayesian use their ears when inferring, where to look for the phone, but the Bayesian also incorporates **prior knowledge** about the lost phone into their inference.
 
-<!--more-->
-
-It's important to note that there's nothing stopping the frequentist from incorporating the prior knowledge in some way. Dependent on the problem at hand though, it might be easier or it might be more difficult. The frequentist is really at a loss though, if the event hasn't happened before and there's no way to repeat it numerous times. A classic example is predicting if the Arctic ice pack will have melted by some year, which will happen either once or never. Even though it's not possible to repeat the event numerous times, we do have prior knowledge about the ice cap, and it would be unscientific not to include it.
+It's important to note that there's nothing stopping the frequentist from also incorporating the prior knowledge in some way. It's usually more difficult though. The frequentist is really at a loss though, if the event hasn't happened before and there's no way to repeat it numerous times. A classic example is predicting if the Arctic ice pack will have melted by some year, which will happen either once or never. Even though it's not possible to repeat the event numerous times, we do have prior knowledge about the ice cap, and it would be unscientific not to include it.
 
 ### Bayes' theorem
-Hopefully, these last paragraphs haven't confused you more than they've enlightened, because now we turn to formalizing the Bayesian approach - and to do this, we need to talk about **Bayes' theorem**. Let's say we have two sets of outcomes $\mathcal{A}$ and $\mathcal{B}$, also called events. We denote the probabilities of each event $p(\mathcal{A})$ and $p(\mathcal{B})$ respectively. The probability of both events is denoted with the joint probability $p(\mathcal{A},\mathcal{B})$, and we can expand this with conditional probabilities
+Hopefully, these last paragraphs haven't confused you more than they've enlightened, because now we turn to formalizing the Bayesian approach - and to do this, we need to talk about **Bayes' theorem**. Let's say we have two sets of outcomes $\mathcal{A}$ and $\mathcal{B}$ (also called events). We denote the probabilities of each event $p(\mathcal{A})$ and $p(\mathcal{B})$ respectively. The probability of both events is denoted with the joint probability $p(\mathcal{A},\mathcal{B})$, and we can expand this with conditional probabilities
 
 $$
 p(\mathcal{A},\mathcal{B}) = p(\mathcal{A}|\mathcal{B}) p(\mathcal{B}), \quad \quad (1)
 $$
 
-i.e. the conditional probability of $\mathcal{A}$ given $\mathcal{B}$ and the probability of $\mathcal{B}$ gives us the joint probability of $\mathcal{A}$ and $\mathcal{B}$. This works the other way around too
+i.e., the conditional probability of $\mathcal{A}$ given $\mathcal{B}$ and the probability of $\mathcal{B}$ gives us the joint probability of $\mathcal{A}$ and $\mathcal{B}$. It follows that
 
 $$
-p(\mathcal{A},\mathcal{B}) = p(\mathcal{B}|\mathcal{A}) p(\mathcal{A}). \quad \quad (2)
+p(\mathcal{A},\mathcal{B}) = p(\mathcal{B}|\mathcal{A}) p(\mathcal{A}) \quad \quad (2)
 $$
 
-Since the left-hand sides of $(1)$ and $(2)$ are the same, we can see that the right-hand sides are equal
+as well. Since the left-hand sides of $(1)$ and $(2)$ are the same, we can see that the right-hand sides are equal
 
 $$ \begin{aligned}
 p(\mathcal{A}|\mathcal{B}) p(\mathcal{B}) &= p(\mathcal{B}|\mathcal{A}) p(\mathcal{A}) \\
 p(\mathcal{A} | \mathcal{B}) &= \frac{p(\mathcal{B} | \mathcal{A}) p(\mathcal{A})}{p(\mathcal{B})},
 \end{aligned} $$
 
-which is Bayes' theorem and should seem familiar if you're taking this course. We're calculating the conditional probability of $\mathcal{A}$ given $\mathcal{B}$ from the conditional probability of $\mathcal{B}$ given $\mathcal{A}$ and the respective probabilities of $\mathcal{A}$ and $\mathcal{B}$. However, it might not be clear-cut, why this is so important in machine learning, so let's write Bayes' theorem in a different way instead
+which is Bayes' theorem. This should seem familiar to you - if not, I'd recommend reading up on some basics of probability theory before moving on.
+
+We're calculating the conditional probability of $\mathcal{A}$ given $\mathcal{B}$ from the conditional probability of $\mathcal{B}$ given $\mathcal{A}$ and the respective probabilities of $\mathcal{A}$ and $\mathcal{B}$. However, it might not be clear-cut, why this is so important in machine learning, so let's write Bayes' theorem in a more 'data sciencey' way:
 
 $$
 \overbrace{p(\mathcal{\text{hypothesis}} | \mathcal{\text{data}})}^{\text{posterior}}
 = \frac{ \overbrace{p(\mathcal{\text{data}} | \mathcal{\text{hypothesis}})}^{\text{likelihood}} \, \overbrace{p(\mathcal{\text{hypothesis}})}^{\text{prior}} }{ \underbrace{p(\mathcal{\text{data}})}_{\text{evidence}} }.
 $$
 
-The evidence ensures that the posterior distribution on the left-hand side is a valid probability density and is called the normalization constant. Since it's just a normalization constant though, we often state the theorem in words as
+Usually, we're not just dealing with probabilities but probability distributions, and the evidence (the denominator above) ensures that the posterior distribution on the left-hand side is a valid probability density and is called the normalization constant. Since it's just a normalization constant though, we often state the theorem in words as
 
 $$
 \text{posterior} \propto \text{likelihood} \times \text{prior},
 $$
 
-where $\propto$ means "proportional to". Note that if we assume what's called a *flat* prior, i.e., a prior that is ambivalent towards the hypothesis, then the posterior is proportional to the likelihood, and we end up with the frequentist approach; maximum likelihood.
+where $\propto$ means "proportional to".
+<!-- Note that if we assume what's called a *flat* prior, i.e., a prior that is ambivalent towards the hypothesis, then the posterior is proportional to the likelihood, and we end up with the frequentist approach; maximum likelihood. -->
 
-<!--
 ### Example: coin flipping
 We'll start with [a simple example](https://www.behind-the-enemy-lines.com/2008/01/are-you-bayesian-or-frequentist-or.html){:target="_blank"} that I think nicely illustrates the difference between the frequentist and Bayesian approach. Consider the following problem:
 
-*A coin flips heads up with probability $\alpha$ and tails with probability $1-\alpha$ ($\alpha$ is unknown). You flip the coin 35 times, and it ends up head 25 times. Now, would you bet for or against the event that the next two tosses turn up heads?*
+*A coin flips heads up with probability $\alpha$ and tails with probability $1-\alpha$ ($\alpha$ is unknown). You flip the coin 35 times, and it ends up heads 25 times. Now, would you bet for or against the event that the next two tosses turn up heads?*
 
 For our sake let's define these variables:\\
 $\mathcal{H}$ : two heads in a row\\
-$\mathcal{D}$ : observed data, i.e. $\mathcal{D} = (n_{\text{head}}, n_{\text{tail}}) = (25, 10)$.
+$\mathcal{D}$ : observed data, i.e., $\mathcal{D} = (n_{\text{heads}}, n_{\text{tails}}) = (25, 10)$.
+
+Now, we want to estimate the value of the parameter $\alpha$, so that we can calculate the probability of seeing 2 heads in a row. If the probability is less than 0.5, we will bet against seeing 2 heads in a row, but if it's above 0.5, then we bet for. So let's look at how the frequentist and Bayesian would estimate $\alpha$!
 
 #### Frequentist approach
-As the frequentist, we ask the question: what's the probability that we got $\mathcal{D}$ given $\alpha$? More formally, what is $p(\mathcal{D}|\alpha)$? We can consider the experiment as a binomial distribution. We have $n=35$ trials, $k=25$ successes, and $\alpha$ is our probability of succes; using the likelihood of a binomial distribution, we can find the value of $\alpha$ that maximizes the probability of the data. We therefore want to find the value of $\alpha$ that maximizes
+As the frequentist, we ask the question: what's the probability that we got $\mathcal{D}$ given $\alpha$? More formally, what is $p(\mathcal{D}|\alpha)$? The experiment of flipping the coin 35 times follows a binomial distribution. We have $n=35$ trials, $k=25$ successes, and $\alpha$ is our probability of succes. Using the likelihood of a binomial distribution, we can find the value of $\alpha$ that maximizes the probability of the data. We therefore want to find the value of $\alpha$ that maximizes
 
 $$
 \mathcal{L}(\alpha | \mathcal{D}) = \begin{pmatrix} 35\\25 \end{pmatrix} \alpha^{25} (1-\alpha)^{35-25}. \quad \quad (3)
 $$
 
-Note that $(3)$ expresses the *likelihood* of $\alpha$ given $\mathcal{D}$, which is not the same as saying the probability of $\alpha$ given $\mathcal{D}$ - we can apply Bayes' theorem to answer that question, but we'll get to that later on. Unsurprisingly the value of $\alpha$ that maximizes $\mathcal{L}$ is $\frac{k}{n}$, i.e. the proportion of successes in the trials. We've derived this result in a <a href="{{ site.url }}/pages/bslialo-notes-9b">different post</a>. This is also called the [maximum likelihood estimate](https://en.wikipedia.org/wiki/Maximum_likelihood_estimation){:target="_blank"} for $\alpha$. 
+Note that $(3)$ expresses the *likelihood* of $\alpha$ given $\mathcal{D}$, which is not the same as saying the probability of $\alpha$ given $\mathcal{D}$. Unsurprisingly, the value of $\alpha$ that maximizes $\mathcal{L}$ is $\frac{k}{n}$, i.e., the proportion of successes in the trials.
+<!--
+We've derived this result in a <a href="{{ site.url }}/pages/bslialo-notes-9b">different post</a>. This is also called the [maximum likelihood estimate](https://en.wikipedia.org/wiki/Maximum_likelihood_estimation){:target="_blank"} for $\alpha$. 
+-->
 
 The maximum likelihood estimate for $\alpha$ is therefore $\frac{k}{n} = \frac{25}{35} \approx 0.71$, which in turn gives us the answer to our question:
 
@@ -76,8 +82,7 @@ $$
 p(\mathcal{H}) = \alpha^2 = \left( \frac{25}{35} \right)^2 \approx 0.51.
 $$
 
-Since we find, there's a higher probability that the event happens than not, then we would bet for the event!
-
+Since the probability of seeing 2 heads in a row is larger than 0.5, we would bet for!
 
 #### Bayesian approach
 As the bayesian, we ask the question: what's the probability of $\alpha$ given $\mathcal{D}$? Now we treat $\alpha$ as a distribution. To answer the question, we use Bayes' theorem
@@ -99,7 +104,7 @@ p(\mathcal{H}, \alpha | \mathcal{D})
 $$
 p(\mathcal{D}) = \int_0^1 p(\mathcal{D}|\alpha) \mathrm{d}\alpha
 $$
--->
+
 
 
 ### Example: polynomial regression
