@@ -51,7 +51,7 @@ X = np.array([
 t = np.array([0, 0, 0, 0, 0, 1, 1, 1, 1, 1])
 
 
-fig = plt.figure(figsize=(6/golden, 6/golden))
+fig = plt.figure(figsize=(8/golden, 8/golden))
 ax = fig.add_subplot(111)
 
 ax.scatter(X[:5,0], X[:5,1],
@@ -228,5 +228,5 @@ ax.set_ylim(0.0,1.0)
 #ax.legend(frameon=False,loc="upper left")
 
 plt.tight_layout()
-plt.savefig("two_dim_cod.svg")
+plt.savefig("two_dim_cod.png")
 plt.show()

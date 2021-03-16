@@ -23,7 +23,7 @@ t = np.array([0, 0, 0, 0, 0, 1, 1, 1, 1, 1])
 
 
 # one dimension
-fig = plt.figure(figsize=(6/golden,6/golden))
+fig = plt.figure(figsize=(9/golden, 9/golden))
 ax = fig.add_subplot(111)
 
 ax.scatter(X[:5,0], [0]*5,
@@ -83,13 +83,13 @@ ax.get_yaxis().set_visible(False)
 ax.spines["left"].set_visible(False)
 ax.spines["right"].set_visible(False)
 ax.spines["top"].set_visible(False)
-ax.spines["bottom"].set_position(("data",0.00295))
+ax.spines["bottom"].set_position(("data",-0.01295))
 ax.spines["bottom"].set_zorder(0)
 ax.legend(frameon=False,loc=(0.01,0.55))
 
 
 plt.tight_layout()
-# plt.savefig("one_dim_cod.svg",
-#     bbox_inches=mpl.transforms.Bbox([[0, 1.5], [6/golden, (6/golden)-1.25]])
-# )
+plt.savefig("one_dim_cod.png",
+    bbox_inches=mpl.transforms.Bbox([[0, 1.5], [9/golden, (9/golden)-1.25]])
+)
 plt.show()
