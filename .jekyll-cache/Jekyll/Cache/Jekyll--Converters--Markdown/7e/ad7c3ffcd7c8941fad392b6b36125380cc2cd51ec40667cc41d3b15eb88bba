@@ -1,0 +1,205 @@
+I"�U<p>As mentioned in <a href="http://localhost:4000/guides/2021/03/08/bsmalea-notes-1a/">notes 1a</a>, machine learning is mainly concerned with prediction, and as you can imagine, prediction is very much concerned with probability. In this post we are going to look at the two main <a href="https://en.wikipedia.org/wiki/Probability_interpretations" target="_blank">interpretations of probability</a>: frequentism and Bayesianism.</p>
+
+<p>While the adjective “Bayesian” first appeared around the 1950s by R. A. Fisher<span class="sidenote-number"></span><span class="sidenote">S. E. Fienberg, “When did Bayesian inference become “Bayesian”?,” 2006.</span>, the concept was properly formalized long before by P. S. Laplace in the 18th century, but known as “inverse probability”<span class="sidenote-number"></span><span class="sidenote">S. M. Stigler, “The History of Statistics: The Measurement of Uncertainty Before 1900,” ch. 3, 1986.</span>. So while the gist of the Bayesian approach has been known for a while, it hasn’t gained much popularity until recently (last few decades), perhaps mostly due to computational complexity.</p>
+
+<p>The philosophical difference between the frequentist and Bayesian interpretation of probability is their definitions of probability: <strong>the frequentist (or classical) definition of probability is based on frequencies of events</strong>, whereas <strong>the Bayesian definition of probability is based on our knowledge of events</strong>. In the context of machine learning, we can interpret this difference as: what the data says versus what we know from the data.</p>
+
+<p>To understand what this means, I like to use <a href="https://stats.stackexchange.com/a/56" target="_blank">this analogy</a>. Imagine you’ve lost your phone somewhere in your home. You use your friend’s phone to call your phone - as it’s calling, your phone starts ringing (it’s not on vibrate). How do you decide, where to look for your phone in your home? The frequentist would use their ears to identify the most likely area from which the sound is coming. However, the Bayesian would also use their ears, but in addition they would recall which areas of their home they’ve previously lost their phone and take it into account, when inferring where to look for the phone. Both the frequentist and the Bayesian use their ears when inferring, where to look for the phone, but the Bayesian also incorporates <strong>prior knowledge</strong> about the lost phone into their inference.</p>
+
+<p>It’s important to note that there’s nothing stopping the frequentist from also incorporating the prior knowledge in some way. It’s usually more difficult though. The frequentist is really at a loss though, if the event hasn’t happened before and there’s no way to repeat it numerous times. A classic example is predicting if the Arctic ice pack will have melted by some year, which will happen either once or never. Even though it’s not possible to repeat the event numerous times, we do have prior knowledge about the ice cap, and it would be unscientific not to include it.</p>
+
+<h3 id="bayes-theorem">Bayes’ theorem</h3>
+<p>Hopefully, these last paragraphs haven’t confused you more than they’ve enlightened, because now we turn to formalizing the Bayesian approach - and to do this, we need to talk about <strong>Bayes’ theorem</strong>. Let’s say we have two sets of outcomes $\mathcal{A}$ and $\mathcal{B}$ (also called events). We denote the probabilities of each event $\text{Pr}(\mathcal{A})$ and $\text{Pr}(\mathcal{B})$ respectively. The probability of both events is denoted with the joint probability $\text{Pr}(\mathcal{A},\mathcal{B})$, and we can expand this with conditional probabilities</p>
+
+\[\text{Pr}(\mathcal{A},\mathcal{B}) = \text{Pr}(\mathcal{A}|\mathcal{B}) \text{Pr}(\mathcal{B}), \quad \quad (1)\]
+
+<p>i.e., the conditional probability of $\mathcal{A}$ given $\mathcal{B}$ and the probability of $\mathcal{B}$ gives us the joint probability of $\mathcal{A}$ and $\mathcal{B}$. It follows that</p>
+
+\[\text{Pr}(\mathcal{A},\mathcal{B}) = \text{Pr}(\mathcal{B}|\mathcal{A}) \text{Pr}(\mathcal{A}) \quad \quad (2)\]
+
+<p>as well. Since the left-hand sides of $(1)$ and $(2)$ are the same, we can see that the right-hand sides are equal</p>
+
+\[\begin{aligned}
+\text{Pr}(\mathcal{A}|\mathcal{B}) \text{Pr}(\mathcal{B}) &amp;= \text{Pr}(\mathcal{B}|\mathcal{A}) \text{Pr}(\mathcal{A}) \\
+\text{Pr}(\mathcal{A} | \mathcal{B}) &amp;= \frac{\text{Pr}(\mathcal{B} | \mathcal{A}) \text{Pr}(\mathcal{A})}{\text{Pr}(\mathcal{B})},
+\end{aligned}\]
+
+<p>which is Bayes’ theorem. This should seem familiar to you - if not, I’d recommend reading up on some basics of probability theory before moving on.</p>
+
+<p>We’re calculating the conditional probability of $\mathcal{A}$ given $\mathcal{B}$ from the conditional probability of $\mathcal{B}$ given $\mathcal{A}$ and the respective probabilities of $\mathcal{A}$ and $\mathcal{B}$. However, it might not be clear-cut, why this is so important in machine learning, so let’s write Bayes’ theorem in a more ‘data sciencey’ way:</p>
+
+\[\overbrace{\text{Pr}(\mathcal{\text{hypothesis}} | \mathcal{\text{data}})}^{\text{posterior}}
+= \frac{ \overbrace{\text{Pr}(\mathcal{\text{data}} | \mathcal{\text{hypothesis}})}^{\text{likelihood}} \, \overbrace{\text{Pr}(\mathcal{\text{hypothesis}})}^{\text{prior}} }{ \underbrace{\text{Pr}(\mathcal{\text{data}})}_{\text{evidence}} }.\]
+
+<p>Usually, we’re not just dealing with probabilities but probability distributions, and the evidence (the denominator above) ensures that the posterior distribution on the left-hand side is a valid probability density and is called the normalization constant. Since it’s just a normalization constant though, we often state the theorem in words as</p>
+
+\[\text{posterior} \propto \text{likelihood} \times \text{prior},\]
+
+<p>where $\propto$ means “proportional to”.
+<!-- Note that if we assume what's called a *flat* prior, i.e., a prior that is ambivalent towards the hypothesis, then the posterior is proportional to the likelihood, and we end up with the frequentist approach; maximum likelihood. --></p>
+
+<h3 id="example-coin-flipping">Example: coin flipping</h3>
+<p>We’ll start with <a href="https://www.behind-the-enemy-lines.com/2008/01/are-you-bayesian-or-frequentist-or.html" target="_blank">a simple example</a> that I think nicely illustrates the difference between the frequentist and Bayesian approach. Consider the following problem:</p>
+
+<p><em>A coin flips heads up with probability $\theta$ and tails with probability $1-\theta$ ($\theta$ is unknown). You flip the coin 35 times, and it ends up heads 25 times. Now, would you bet for or against the event that the next two tosses turn up heads?</em></p>
+
+<p>For our sake, let’s define some variables. Let $X$ be a random variable representing the coin, where $X=1$ is heads and $X=0$ is tails such that $\text{Pr}(X=1) = \theta$ and $\text{Pr}(X=0) = 1-\theta$. Furthermore, let $\mathcal{D}$ denote our observed data (25 heads, 10 tails). Now, we want to estimate the value of the parameter $\theta$, so that we can calculate the probability of seeing 2 heads in a row. If the probability is less than 0.5, we will bet against seeing 2 heads in a row, but if it’s above 0.5, then we bet for. So let’s look at how the frequentist and Bayesian would estimate $\theta$!</p>
+
+<h4 id="frequentist-approach">Frequentist approach</h4>
+<p>As the frequentist, we want to maximize the likelihood, which is to ask the question: what value of $\theta$ will maximize the probability that we got $\mathcal{D}$ given $\theta$, or more formally, we want to find</p>
+
+\[\hat{\theta}_{\text{MLE}} = \underset{\theta}{\arg\max} \text{Pr}(\mathcal{D} | \theta).\]
+
+<p>This is called <a href="https://en.wikipedia.org/wiki/Maximum_likelihood_estimation">maximum likelihood estimation (MLE)</a>. The experiment of flipping the coin 35 times follows a binomial distribution with $n=35$ trials, $k=25$ successes, and $\theta$ the probability of succes. Using the likelihood of a binomial distribution, we can find the value of $\theta$ that maximizes the probability of the data. We therefore want to find the value of $\theta$ that maximizes</p>
+
+\[\mathcal{L}(\theta | \mathcal{D}) = \begin{pmatrix} 35\\25 \end{pmatrix} \theta^{25} (1-\theta)^{35-25}. \quad \quad (3)\]
+
+<p>Note that $(3)$ expresses the <em>likelihood</em> of $\theta$ given $\mathcal{D}$, which is not the same as saying the probability of $\theta$ given $\mathcal{D}$. Unsurprisingly, the value of $\theta$ that maximizes $\mathcal{L}$ is $\frac{k}{n}$, i.e., the proportion of successes in the trials.
+<!--
+We've derived this result in a <a href="http://localhost:4000/pages/bslialo-notes-9b">different post</a>. This is also called the [maximum likelihood estimate](https://en.wikipedia.org/wiki/Maximum_likelihood_estimation){:target="_blank"} for $\theta$. 
+-->
+The maximum likelihood estimate $\hat{\theta}_{\text{MLE}}$ is therefore $\frac{k}{n} = \frac{25}{35} \approx 0.71$. Assuming the coin flips are independent, we can calculate the probability of seeing 2 heads in a row:</p>
+
+\[\text{Pr}(X=1) \times \text{Pr}(X=1) = \hat{\theta}_{\text{MLE}}^2 = \left( \frac{25}{35} \right)^2 \approx 0.51.\]
+
+<p>Since the probability of seeing 2 heads in a row is larger than 0.5, we would bet for!</p>
+
+<h4 id="bayesian-approach">Bayesian approach</h4>
+<p>As the bayesian, we want to maximize the posterior, so we ask the question: what value of $\theta$ will maximize the probability of $\theta$ given $\mathcal{D}$? Formally, we have</p>
+
+\[\hat{\theta}_{\text{MAP}} = \underset{\theta}{\arg\max} \text{Pr}(\mathcal{D} | \theta).\]
+
+<p>To answer the question, we use Bayes’ theorem</p>
+
+\[\overbrace{\text{Pr}(\theta | \mathcal{D})}^{\text{posterior}}
+= \frac{ \overbrace{\text{Pr}(\mathcal{D}|\theta)}^{\text{likelihood}} \, \overbrace{\text{Pr}(\theta)}^{\text{prior}}}
+{ \underbrace{\text{Pr}(\mathcal{D})}_{\text{evidence}} }.\]
+
+<p>Since $\text{Pr}(\mathcal{D})$ is not dependent on $\theta$, and we only want to find the maximum of the posterior, we can ignore. Finding the maximum of the posterior is called “<a href="https://en.wikipedia.org/wiki/Maximum_a_posteriori_estimation">maximum a posteriori (MAP) estimation</a>”. This now gives us</p>
+
+\[\text{Pr}(\theta | \mathcal{D}) \propto \text{Pr}(\mathcal{D}|\theta) \, \text{Pr}(\theta).\]
+
+<p>In the frequentist approach, we already found the likelihood $(3)$</p>
+
+\[\text{Pr}(\mathcal{D}|\theta) = \begin{pmatrix} 35\\25 \end{pmatrix} \theta^{25} (1-\theta)^{35-25}.\]
+
+<p>Once again, since the binomial coefficient is not dependent on $\theta$, we can drop it, which gives us</p>
+
+\[\text{Pr}(\theta | \mathcal{D}) \propto \theta^{25} (1-\theta)^{10} \, \text{Pr}(\theta).\]
+
+<p>The only thing left is the prior distribution $\text{Pr}(\theta)$. This distribution should describe our initial (prior) knowledge of $\theta$. A convenient distribution to choose is the <a href="https://en.wikipedia.org/wiki/Beta_distribution">Beta distribution</a>, because it’s defined on the interval [0, 1], and $\theta$ is a probability, which has to be between 0 and 1. <span class="marginnote">Additionally, the Beta distribution is the <a href="https://en.wikipedia.org/wiki/Conjugate_prior">conjugate prior</a> for the binomial distribution, which broadly means that if the posterior and prior distributions are in the same family, then the prior is the conjugate prior for the likelihood. This is often times a desired property.</span> This gives us</p>
+
+\[\begin{aligned}
+\text{Pr}(\theta)
+&amp;= B(\theta; a, b) \\
+&amp;= \frac{\Gamma (a) \Gamma (b)}{\Gamma (a+b)} \theta^{a-1} (1-\theta)^{b-1},
+\end{aligned}\]
+
+<p>where $\Gamma$ is the <a href="https://en.wikipedia.org/wiki/Gamma_function">Gamma function</a>. Once again, since the fraction is not dependent on $\theta$, we can drop it. This gives us</p>
+
+\[\begin{aligned}
+\text{Pr}(\theta | \mathcal{D})
+&amp;\propto \theta^{25} (1-\theta)^{10} \theta^{a-1} (1-\theta)^{b-1} \\
+&amp;\propto \theta^{a+24} (1-\theta)^{b+9}.
+\end{aligned}\]
+
+<p>It is now our job to set the prior distribution in such a way that we incorporate, what we know about $\theta$ <em>prior</em> to seeing the data. Let’s just say that we don’t know anything, i.e., it’s equally likely that $\theta$ is 0.1 and 0.873, or any other number between 0 and 1. This describes a uniform distribution, which is a special case of the beta distribution, when $a=b=1$. We know want to find the maximum of</p>
+
+\[\text{Pr}(\theta | \mathcal{D}) &amp;\propto \theta^{25} (1-\theta)^{10}\]
+
+<p>A special case of the Beta distribution</p>
+
+\[\begin{aligned}
+\text{Pr}(\mathcal{H}, \theta | \mathcal{D})
+&amp;= \int_0^1 \text{Pr}(\mathcal{H}, \theta | \mathcal{D}) \mathrm{d}\theta \\
+&amp;= \int_0^1 \text{Pr}(\mathcal{H} | \theta, \mathcal{D}) \text{Pr}(\theta | \mathcal{D}) \mathrm{d}\theta \\
+&amp;= \int_0^1 \text{Pr}(\mathcal{H} | \theta, \mathcal{D}) \frac{\text{Pr}(\mathcal{D}|\theta) \text{Pr}(\theta)}{\text{Pr}(\mathcal{D})} \mathrm{d}\theta \\
+&amp;=  \frac{ \int_0^1 \text{Pr}(\mathcal{H} | \theta, \mathcal{D}) \text{Pr}(\mathcal{D}|\theta) \text{Pr}(\theta) \mathrm{d}\theta}{\int_0^1 \text{Pr}(\mathcal{D}|\theta) \text{Pr}(\theta) \mathrm{d}\theta}
+\end{aligned}\]
+
+\[\text{Pr}(\mathcal{D}) = \int_0^1 \text{Pr}(\mathcal{D}|\theta) \mathrm{d}\theta\]
+
+<h3 id="example-polynomial-regression">Example: polynomial regression</h3>
+<p>Let’s continue with the example from <a href="http://localhost:4000/pages/bsmalea-notes-1a">notes 1a</a> and look at it from a probabilistic perspective. We’ll start with the frequentist perspective and then gradually move on to the fully Bayesian perspective.</p>
+
+<p>To quickly refresh our memory: we had a dataset $\mathcal{D} = { (x_1, t_1), \dots, (x_N, t_N) }$ of $N$ input and target variable pairs. Our objective was to fit a polynomial to the data. We can think about this from a probabilistic perspective by introducing an error term</p>
+
+\[h(x, \mathbf{w}) = w_0 + w_1 x + w_2 x^2 + \dots + w_M x^M + \epsilon = \sum_{m=0}^M w_m x^m + \epsilon, \quad \quad (3)\]
+
+<p>where $\epsilon \sim \mathcal{N}\left(\mu, \alpha^{-1} \right)$, and usually we assume the Gaussian has zero mean. What $(3)$ means is that we assume the polynomial we create $h$</p>
+
+<p>We can simplify this a bit by defining $\mathbf{w} = \left( w_0, w_1, w_2, \dots, w_M \right)^\intercal$ and $\mathbf{x}_i = \left( 1, x_i, x_i^2, \dots, x_i^M  \right)^\intercal$ such that</p>
+
+\[h(x, \mathbf{w}) = \mathbf{w}^\intercal \mathbf{x} + \epsilon.\]
+
+<p>The probability distribution of $t$ given the input variable $\mathbf{x}$, the parameters $\mathbf{w}$, and the precision (inverse variance) $\alpha$ is thus</p>
+
+\[p(t | x, \mathbf{w}, \alpha) = \mathcal{N} \left(t | h(x, \mathbf{w}), \alpha^{-1} \right).\]
+
+<p>For the sake of simplicity, let $\textbf{\textsf{x}} = \left\{ x_1, \dots, x_N \right\}$ and $\textbf{\textsf{t}} = \left\{ t_1, \dots, t_N \right\}$ denote all our input and target variables respectively.</p>
+
+<h4 id="frequentist-approach-1">Frequentist approach</h4>
+<p>Assuming the points are independent and identically distributed, we can write up the likelihood function, which is a function of $\mathbf{w}$ and $\alpha$, as</p>
+
+\[p( \textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha)
+= \prod_{n=1}^N \mathcal{N} \left( t_n | \mathbf{w}^\intercal \mathbf{x}_n, \alpha^{-1} \right).\]
+
+<p>We want to find the values of $\mathbf{w}$ and $\alpha$ that <strong>maximizes the likelihood</strong>, and as is common in <a href="https://en.wikipedia.org/wiki/Maximum_likelihood_estimation" target="_blank">maximum likelihood estimation</a> mainly due to computational reasons, we find the maximum of the log-likelihood instead. The log-likelihood is</p>
+
+\[\begin{aligned}
+\ln \left( p( \textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha) \right)
+&amp;= \ln \left( \prod_{n=1}^N \mathcal{N} \left( t_n | \mathbf{w}^\intercal \mathbf{x}_n, \alpha^{-1} \right) \right) \\
+&amp;= \sum_{n=1}^N \ln \left( \frac{1}{\sqrt{2\pi\alpha^{-1}}} \exp \left( -\frac{\left(t_n - \mathbf{w}^\intercal \mathbf{x}_n \right)^2}{2\alpha^{-1}} \right) \right) \\
+&amp;= \sum_{n=1}^N \left( \ln \frac{1}{\sqrt{2\pi\alpha^{-1}}} - \frac{\left(t_n - \mathbf{w}^\intercal \mathbf{x}_n \right)^2}{2\alpha^{-1}} \right) \\
+&amp;= - N \ln \sqrt{2\pi\alpha^{-1}} - \frac{\alpha}{2} \sum_{n=1}^N \left( t_n - \mathbf{w}^\intercal \mathbf{x}_n \right)^2. \quad \quad (4)
+\end{aligned}\]
+
+<p>Note that the sum in $(4)$ is equivalent to the objective function we used in <a href="http://localhost:4000/pages/bsmalea-notes-1a">notes 1a</a>, the sum of squared errors (SSE) function, since the left term in $(4)$ is constant with respect to $\mathbf{w}$ - so the solution to $\mathbf{w}$ is the same as in the last post. If we maximize $(4)$ with respect to $\alpha$, we get</p>
+
+\[\alpha^{-1}_{\text{ML}} = \frac{1}{N} \sum_{n=1}^N \left( t_n - \mathbf{w}_{\text{ML}}^\intercal \mathbf{x}_n \right)^2.\]
+
+<p>Now that we have determined the maximum likelihood solution for $\mathbf{w}$ and $\alpha$, we can make predictions for new values of $x$ expressed in terms of the <strong>predictive distribution</strong></p>
+
+\[p(t|x, \mathbf{w}_\text{ML}, \alpha_\text{ML}) = \mathcal{N} \left( t| h(x, \mathbf{w}_\text{ML}), \alpha^{-1}_\text{ML} \right).\]
+
+<h4 id="bayesian-approach-1">Bayesian approach</h4>
+<p>If we introduce a <strong>prior distribution</strong> over our parameters (the polynomial coefficients) $\mathbf{w}$, we can go from the frequentist perspective to the Bayesian. Remember that the prior is a way for us to incorporate our knowledege about the parameters. Note that it is in this ‘subjective’ choice, frequentists object to the Bayesian approach. Let’s assume a Gaussian prior distribution</p>
+
+\[p(\mathbf{w} | \beta)
+= \mathcal{N} \left( \mathbf{w} | \mathbf{0}, \beta^{-1} \mathbf{I} \right),\]
+
+<p>where $\beta$ is the precision (inverse variance) of the distribution, $\mathbf{0}$ is the $M+1 \times M+1$ <a href="https://en.wikipedia.org/wiki/Zero_matrix" target="_blank">zero matrix</a>, and $\mathbf{I}$ is the $M+1 \times M+1$ <a href="https://en.wikipedia.org/wiki/Identity_matrix" target="_blank">identity matrix</a>. We can rewrite it by using the <a href="https://en.wikipedia.org/wiki/Multivariate_normal_distribution#Properties" target="_blank">density of the multivariate Gaussian</a></p>
+
+\[\begin{aligned}
+\mathcal{N} \left( \mathbf{w} | \mathbf{0}, \beta^{-1} \mathbf{I} \right)
+&amp;= \frac{1}{\sqrt{(2\pi)^{M+1} |\beta^{-1}\mathbf{I}| }} \exp \left( -\frac{(\mathbf{w}-\mathbf{0})^\intercal (\beta^{-1} \mathbf{I})^{-1} (\mathbf{w}-\mathbf{0})}{2} \right) \\
+&amp;= \frac{1}{\left( 2\pi\beta^{-1} \right)^{\frac{M+1}{2}}} \exp \left( -\frac{\mathbf{w}^\intercal (\beta \mathbf{I}) \mathbf{w}}{2} \right) \\
+&amp;= \left( \frac{\beta}{2\pi} \right)^{\frac{M+1}{2}} \exp \left( -\frac{\beta}{2} \mathbf{w}^\intercal \mathbf{w} \right). \quad \quad (5)
+\end{aligned}\]
+
+<p>Using Bayes’ theorem as described above, the posterior distribution of our parameters is proportional to the product of the likelihood function and prior distribution</p>
+
+\[\overbrace{p(\mathbf{w} | \textbf{\textsf{x}}, \textbf{\textsf{t}}, \alpha, \beta)}^{\text{posterior}}
+\propto \overbrace{p(\textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha)}^{\text{likelihood}} \, \overbrace{p(\mathbf{w}|\beta)}^{\text{prior}}. \quad \quad (6)\]
+
+<p>By maximizing the posterior distribution we can find the most probable values of $\mathbf{w}$ given the data. This is called the <strong>maximum a posteriori</strong> (MAP) estimate. Note that we’re trying to find estimate a point (the maximum) on the posterior distribution, so we don’t have to normalize it by dividing by the evidence as mentioned earlier. By taking the logarithm of $(6)$ and substituting $(4)$ and $(5)$ in, we see that maximizing the posterior is given by maximizing</p>
+
+\[\begin{aligned}
+\ln \left( p(\mathbf{w} | \textbf{\textsf{x}}, \textbf{\textsf{t}}, \alpha, \beta) \right)
+&amp;\propto \ln \left( p(\textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha) p(\mathbf{w}|\beta) \right) \\
+&amp;= \ln p(\textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha) + \ln p(\mathbf{w}|\beta) \\
+&amp;\propto -\frac{\alpha}{2} \sum_{n=1}^N \left( t_n - \mathbf{w}^\intercal \mathbf{x}_n \right)^2 \underbrace{-\frac{\beta}{2} \mathbf{w}^\intercal \mathbf{w}}_{\text{regularization}}, \quad \quad (7)
+\end{aligned}\]
+
+<p>where we have dropped constant terms, since they don’t impact the maximum. $(7)$ is almost the same as the sum of squared errors function, but we have the extra term $\frac{\beta}{2} \mathbf{w}^\intercal \mathbf{w}$, which is a <strong>regularization</strong> term. We will discuss regularization further in <a href="http://localhost:4000/pages/bsmalea-notes-2">notes 2</a>, but for now it suffices to say that <strong>regularization is a technique of preventing overfitting</strong>.</p>
+
+<h4 id="fully-bayesian-approach">Fully Bayesian approach</h4>
+<p>While we’ve included a prior distribution, we’re still calculating what is called a point estimate, i.e. we’re finding the maximum of the posterior distribution, but to complete a fully Bayesian approach we would have to find the entire posterior distribution.</p>
+
+<p>https://m-clark.github.io/bayesian-basics/intro.html
+https://www.behind-the-enemy-lines.com/2008/01/are-you-bayesian-or-frequentist-or.html
+https://github.com/jsantarc/Bayesian-regression-with-Infinitely-Broad-Prior-Gaussian-Parameter-Distribution-
+http://jakevdp.github.io/blog/2014/06/14/frequentism-and-bayesianism-4-bayesian-in-python/
+https://www.ics.uci.edu/~smyth/courses/cs274/readings/bayesian_regression_overview.pdf</p>
+
+:ET

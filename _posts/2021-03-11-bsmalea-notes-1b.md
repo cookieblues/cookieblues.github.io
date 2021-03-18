@@ -107,6 +107,8 @@ The illustration underneath shows the exact thing, we just went over. The 100 po
 <img src="{{ site.url }}/extra/bsmalea-notes-1b/cod_final.svg">
 {: style="text-align: center"}
 
+#### Blessing of non-uniformity
+
 So how do we avoid getting cursed? Luckily, the **blessing of non-uniformity**<span class="sidenote-number"></span><span class="sidenote">P. Domingos, "A few useful things to know about machine learning," Communications of the ACM, vol. 55, no. 10, pp. 78-87, 2012.</span> comes to our rescue! In most practical (real-world) scenarios our data are not spread out uniformly, but are instead concentrated in some places, which can nullify the curse of dimensionality a little bit. But what if it really is the curse of dimensionality, when we're overfitting? There's not a definitive answer, as it really depends on the dataset, but there is a related [one in ten rule](https://en.wikipedia.org/wiki/One_in_ten_rule){:target="_blank"} of thumb; for every model parameter (roughly feature) we want at least $10$ data points. Some better options fall under the topic of **dimensionality reduction**, which we will look at later on in the course.
 
 ### Summary
