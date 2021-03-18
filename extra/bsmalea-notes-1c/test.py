@@ -84,6 +84,18 @@ for i in range(4):
             fontsize=14
         )
 
+ax.text(
+    0.77,
+    0.025,
+    'cookieblues.github.io',
+    fontsize=11,
+    horizontalalignment='center',
+    verticalalignment='center',
+    transform=ax.transAxes,
+    color='dimgrey',
+    zorder=5
+)
+
 plt.tight_layout()
 plt.savefig("test.png", bbox_inches="tight")
 plt.show()

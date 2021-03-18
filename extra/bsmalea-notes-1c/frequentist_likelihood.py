@@ -56,7 +56,19 @@ y_ticks = np.linspace(0, y_max, num=6)
 ax.set_yticks(y_ticks)
 ax.set_yticklabels(y_ticks)
 
+ax.text(
+    0.12,
+    0.02,
+    'cookieblues.github.io',
+    fontsize=11,
+    horizontalalignment='center',
+    verticalalignment='center',
+    transform=ax.transAxes,
+    color='dimgrey',
+    zorder=5
+)
+
 plt.tight_layout()
-plt.savefig("frequentist_likelihood.svg", bbox_inches="tight")
+plt.savefig("frequentist_likelihood.png", bbox_inches="tight")
 plt.show()
 

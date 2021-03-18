@@ -3,7 +3,7 @@ date: 2021-03-15
 title: "Machine learning, notes 1c: Frequentism and Bayesianism"
 categories:
   - Guides
-featured_image: https://raw.githubusercontent.com/cookieblues/cookieblues.github.io/master/extra/bsmalea-notes-1b/test.png
+featured_image: https://raw.githubusercontent.com/cookieblues/cookieblues.github.io/master/extra/bsmalea-notes-1c/test.png
 ---
 As mentioned in <a href="{{ site.url }}/guides/2021/03/08/bsmalea-notes-1a/">notes 1a</a>, machine learning is mainly concerned with prediction, and as you can imagine, prediction is very much concerned with probability. In this post we are going to look at the two main [interpretations of probability](https://en.wikipedia.org/wiki/Probability_interpretations){:target="_blank"}: frequentism and Bayesianism.
 
@@ -91,13 +91,13 @@ $$
 Since the probability of seeing 2 heads in a row is larger than 0.5, we would bet for!
 
 #### Bayesian approach
-**As the bayesian, we want to maximize the posterior**, so we ask the question: what value of $\theta$ will maximize the probability of $\theta$ given $\mathcal{D}$? Formally, we get
+**As the Bayesian, we want to maximize the posterior**, so we ask the question: what value of $\theta$ will maximize the probability of $\theta$ given $\mathcal{D}$? Formally, we get
 
 $$
 \hat{\theta}_{\text{MAP}} = \underset{\theta}{\arg\max} \text{Pr}(\theta | \mathcal{D}),
 $$
 
-which is called "[maximum a posteriori (MAP) estimation](https://en.wikipedia.org/wiki/Maximum_a_posteriori_estimation)". To answer the question, we use Bayes' theorem
+which is called [maximum a posteriori (MAP) estimation](https://en.wikipedia.org/wiki/Maximum_a_posteriori_estimation). To answer the question, we use Bayes' theorem
 
 $$ \begin{aligned}
 \hat{\theta}_{\text{MAP}}
@@ -106,7 +106,7 @@ $$ \begin{aligned}
   \overbrace{\text{Pr}(\mathcal{D} | \theta)}^{\text{likelihood}} \, \overbrace{\text{Pr}(\theta)}^{\text{prior}}
 }{
   \underbrace{\text{Pr}(\mathcal{D})}_{\text{evidence}}
-  }
+}.
 \end{aligned} $$
 
 Since the evidence $\text{Pr}(\mathcal{D})$ is a normalizing constant not dependent on $\theta$, we can ignore it.  This now gives us
@@ -161,7 +161,7 @@ Furthermore, if we were to choose $\alpha=\beta=1$, we get the special case wher
 
 
 #### Fully Bayesian approach
-While we did include a prior distribution in the previous approach, we're still collapsing the distribution into a point estimate and using that estimate to calculate the probability of 2 heads in a row. However, in a truly Bayesian approach, we wouldn't do this, as we don't just have a single estimate of $\theta$ but a whole distribution (the posterior). Let $\mathcal{H}$ denote the event of seeing 2 heads in a row - then we ask: what is the probability of seeing 2 heads given the data, i.e., $\text{Pr}(\mathcal{H} \| \mathcal{D})$? To answer this question, we first need to find the normalizing constant for the posterior distribution $(4)$. Since it's a beta distribution, we can look at $(4)$ and see that it must be $\frac{\Gamma(\alpha+\beta+11)}{\Gamma(\alpha+8)\Gamma(\beta+3)}$. Like earlier, we'll also assume that the coin tosses are independent, which means that the probability of seeing 2 heads in a row (given $\theta$ and the data) is just equal to the probability of seeing heads squared, i.e, $\mathrm{Pr} (\mathcal{H} | \theta, \mathcal{D}) = \theta^2$.
+While we did include a prior distribution in the previous approach, we're still collapsing the distribution into a point estimate and using that estimate to calculate the probability of 2 heads in a row. However, in a truly Bayesian approach, we wouldn't do this, as we don't just have a single estimate of $\theta$ but a whole distribution (the posterior). Let $\mathcal{H}$ denote the event of seeing 2 heads in a row - then we ask: what is the probability of seeing 2 heads given the data, i.e., $\text{Pr}(\mathcal{H} \| \mathcal{D})$? To answer this question, we first need to find the normalizing constant for the posterior distribution in $(4)$. Since it's a beta distribution, we can look at $(4)$ and see that it must be $\frac{\Gamma(\alpha+\beta+11)}{\Gamma(\alpha+8)\Gamma(\beta+3)}$. Like earlier, we'll also assume that the coin tosses are independent, which means that the probability of seeing 2 heads in a row (given $\theta$ and the data) is just equal to the probability of seeing heads squared, i.e, $\mathrm{Pr} (\mathcal{H} | \theta, \mathcal{D}) = \theta^2$.
 
 We can now answer this question by 'integrating out' $\theta$ as
 

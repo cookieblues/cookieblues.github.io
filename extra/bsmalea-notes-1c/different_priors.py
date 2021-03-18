@@ -23,6 +23,17 @@ for i in range(4):
     if i == 0:
         a = 1
         b = 1
+        ax.text(
+            0.7,
+            0.025,
+            'cookieblues.github.io',
+            fontsize=11,
+            horizontalalignment='center',
+            verticalalignment='center',
+            transform=ax.transAxes,
+            color='dimgrey',
+            zorder=5
+        )
     elif i == 1:
         a = 2
         b = 2
@@ -110,7 +121,9 @@ for i in range(4):
             fontsize=10
         )
 
+
+
 plt.tight_layout()
-plt.savefig("different_priors.svg", bbox_inches="tight")
+plt.savefig("different_priors.png", bbox_inches="tight")
 plt.show()
 
