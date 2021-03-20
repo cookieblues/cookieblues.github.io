@@ -4,6 +4,8 @@ from config import *
 
 
 polls = pd.read_csv("data/raw/polls.csv")
+polls["date"] = pd.to_datetime(polls[["year", "month", "day"]])
+polls = polls.sort_values(by="date", ascending=True)
 last_date = str(polls.iloc[-1]["year"]) + "-" + str(polls.iloc[-1]["month"]) + "-" + str(polls.iloc[-1]["day"])
 
 df = pd.read_csv("data/interim/gaussian_posterior.csv")

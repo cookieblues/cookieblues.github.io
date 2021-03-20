@@ -238,7 +238,7 @@ def gaussian_process():
     priors = priors / sum(priors)
     #priors = [1/len(sorted_parties) for _ in range(len(sorted_parties))]
     startingPointCertainty = 100_000
-
+    breakpoint()
     # Prepare data for stan
     model_data = {
         "n_polls": df.shape[0],
