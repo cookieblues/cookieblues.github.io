@@ -53,7 +53,7 @@ h = np.poly1d(np.flip(w, 0))
 x_ = np.linspace(x.min()-0.025, x.max()+0.025, 250)
 t_ = h(x_)
 
-fig = plt.figure(figsize=(6,6/golden))
+fig = plt.figure(figsize=(7,7/golden))
 ax = fig.add_subplot()
 
 plot_homogen_prob_density(x_, t_, alpha, ax=ax, cmap=mycmp, alpha=0.625)
@@ -83,13 +83,30 @@ ax.plot(
 )
 
 ax.set_xlim(x.min()-0.025, x.max()+0.025)
-ax.set_xticks([-1, -0.8, -0.6, -0.4, -0.2, 0, 0.2, 0.4, 0.6, 0.8, 1])
-ax.set_xticklabels(["$-1.0$", "$-0.8$", "$-0.6$", "$-0.4$", "$-0.2$", "$0.0$", "$0.2$", "$0.4$", "$0.6$", "$0.8$", "$1.0$"])
-ax.legend(frameon=False)
+ax.set_xticks([-1, -0.5, 0, 0.5, 1])
+ax.set_xticklabels([-1, -0.5, 0, 0.5, 1])
+ax.set_xlabel(r"$x$", fontsize=14)
 
+ax.set_yticks([-6, -4, -2, 0, 2, 4, 6])
+ax.set_yticklabels([-6, -4, -2, 0, 2, 4, 6])
+ax.set_ylabel(r"$t$", fontsize=14)
+
+ax.legend(frameon=False, fontsize=14)
+
+ax.text(
+    0.88,
+    0.025,
+    'cookieblues.github.io',
+    fontsize=11,
+    horizontalalignment='center',
+    verticalalignment='center',
+    transform=ax.transAxes,
+    color='dimgrey',
+    zorder=5
+)
 
 plt.tight_layout()
-plt.savefig("prob_linreg.svg")
+plt.savefig("prob_linreg.png", bbox_inches="tight")
 plt.show()
 
 

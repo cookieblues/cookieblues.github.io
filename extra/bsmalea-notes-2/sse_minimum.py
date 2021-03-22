@@ -58,7 +58,7 @@ sse_vals = sse_vals.reshape(w0.shape)
 
 
 # begin contour
-fig = plt.figure(figsize=(6, 6/golden))
+fig = plt.figure(figsize=(7, 7/golden))
 ax = fig.add_subplot(111)
 
 con_line = ax.contour(w0,w1,sse_vals,levels=[19,22,25],colors="black",alpha=1.0,linestyles="solid",linewidths=0.75)
@@ -72,6 +72,7 @@ con = ax.imshow(sse_vals,
     alpha=1.0
 )
 cbar = plt.colorbar(con,ax=ax,label="SSE")
+cbar.set_label(label="SSE",size=14)
 cbar.solids.set_edgecolor("face")
 ax.scatter(w[0],w[1],color="black",marker="x") # minimum
 
@@ -79,10 +80,23 @@ ax.set_xticks([-0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4])
 ax.set_xticklabels(["$-0.8$", "$-0.6$", "$-0.4$", "$-0.2$","$0.0$", "$0.2$", "$0.4$"])
 #ax.set_yticks([0.6, 1.0, 1.4, 1.8, 2.2])
 #ax.set_yticklabels(["$0.7$", "$1.0$", "$1.3$", "$1.6$", "$1.9$", "$2.2$"])
-ax.set_xlabel("$w_0$")
-ax.set_ylabel("$w_1$", rotation=0, labelpad=10)
+ax.set_xlabel("$w_0$", fontsize=14)
+ax.set_ylabel("$w_1$", rotation=0, labelpad=10, fontsize=14)
+
+
+ax.text(
+    0.21,
+    0.025,
+    'cookieblues.github.io',
+    fontsize=11,
+    horizontalalignment='center',
+    verticalalignment='center',
+    transform=ax.transAxes,
+    color='dimgrey',
+    zorder=5
+)
 
 
 plt.tight_layout()
-plt.savefig("weights.svg")
+plt.savefig("weights.png", bbox_inches="tight")
 plt.show()

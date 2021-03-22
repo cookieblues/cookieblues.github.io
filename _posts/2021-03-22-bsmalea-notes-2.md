@@ -16,7 +16,7 @@ $$
 h\left(\mathbf{x},\mathbf{w} \right) = w_0 + w_1 x_1 + \dots + w_D x_D = w_0 + \sum_{i=1}^D w_i x_i. \quad \quad (1)
 $$
 
-The first term $w_0$ is commonly called the **intercept** or **bias** parameter, and allows $h$ to adapt to a fixed offset in the data<span class="sidenote-number"></span><span class="sidenote">We'll show exactly what this means later in this post.</span>. If we introduce a $1$ as the first element of each $\mathbf{x}$, we can rewrite $(1)$ with vector notation, i.e. if we define $\mathbf{x} = \left( 1, x_1, \dots , x_D  \right)^\intercal$, we can rewrite $(1)$ as
+The first term $w_0$ is commonly called the **intercept** or **bias** parameter, and allows $h$ to adapt to a fixed offset in the data<span class="sidenote-number"></span><span class="sidenote">We'll show exactly what this means later in this post.</span>. If we introduce a $1$ as the first element of each input variable $\mathbf{x}$, we can rewrite $(1)$ with vector notation, i.e. if we define $\mathbf{x} = \left( 1, x_1, \dots , x_D  \right)^\intercal$, we can rewrite $(1)$ as
 
 $$
 h(\mathbf{x},\mathbf{w}) = \mathbf{w}^\intercal \mathbf{x},
@@ -65,12 +65,16 @@ Note that $(2)$ is a quadratic function of the parameters $\mathbf{w}$. Its part
 
 If we evaluate the SSE for values of $w_0$ and $w_1$ in a grid, then we can illustrate that our objective function has a unique minimum with a contour plot. This is shown below.
 
-<figure>
-    <img src="{{ site.url }}/extra/bsmalea-notes-2/weights.svg">
-    <span class="marginnote">The cross is located at the minimum of our objective function - this coordinate corresponds to the values of $w_0$ (x-axis) and $w_1$ (y-axis) that produces the smallest SSE for our dataset. The contour lines show some boundaries for the SSE; we can see that the optimal values of $w_0$ and $w_1$ lie within a boundary of value $19$, meaning that the minimum value of SSE is less than $19$.</span>
-</figure>
+<span class="marginnote">The cross is located at the minimum of our objective function - this coordinate corresponds to the values of $w_0$ (x-axis) and $w_1$ (y-axis) that produces the smallest SSE for our dataset. The contour lines show some boundaries for the SSE; we can see that the optimal values of $w_0$ and $w_1$ lie within a boundary of value $19$, meaning that the minimum value of SSE is less than $19$.</span>
 
-So, how do we find the minimum of $E$? Recall from <a href="{{ site.url }}/bslialo-notes-9b">the notes about extrema</a> that we find the minimum of a function by taking the derivative, setting the derivative equal to 0, and solving for the function variable. In our case, we have to take all the partial derivates of $E$ with respect to $w_0, \dots, w_{D}$ and set it equal to 0. Remember that all the partial derivatives of $E$ gives us the gradient $\nabla E$. To ease notation, let all our input variables be denoted by $\mathbf{X}$ with $N$ rows (one for each input variable) and $D+1$ columns (one for each feature plus one for the bias) defined as
+
+<img src="{{ site.url }}/extra/bsmalea-notes-2/weights.svg">
+{: style="text-align: center"}
+
+
+
+
+So, how do we find the minimum of $E$? Recall from <a href="{{ site.url }}/bslialo-notes-9b">the notes about extrema</a> that we find the minimum of a function by taking the derivative, setting the derivative equal to 0, and solving for the function variable. In our case, we have to take all the partial derivatives of $E$ with respect to $w_0, \dots, w_{D}$ and set it equal to 0. Remember that all the partial derivatives of $E$ gives us the gradient $\nabla E$. To ease notation, let all our input variables be denoted by $\mathbf{X}$ with $N$ rows (one for each input variable) and $D+1$ columns (one for each feature plus one for the bias) defined as
 
 $$
 \mathbf{X} = \begin{pmatrix}
@@ -120,7 +124,7 @@ $$
 $$
 
 #### Maximum likelihood
-Picking the SSE as the objective function might seem a bit arbitrary though - for example why not just go with the sum of the errors? Why do we have to square them? To show why this is a good choice, and why the solution makes sense, we are going to derive the same solution from a probabilistic perspective using [maximum likelihood estimation (MLE)](https://en.wikipedia.org/wiki/Maximum_likelihood_estimation). To do this, we assume that the target variable $t$ is given by our function $h(\mathbf{x}, \mathbf{w})$ with a bit of noise added:
+Choosing the SSE as the objective function might seem a bit arbitrary though - for example why not just go with the sum of the errors? Why do we have to square them? To show why this is a good choice, and why the solution makes sense, we are going to derive the same solution from a probabilistic perspective using [maximum likelihood estimation (MLE)](https://en.wikipedia.org/wiki/Maximum_likelihood_estimation). To do this, we assume that the target variable $t$ is given by our function $h(\mathbf{x}, \mathbf{w})$ with a bit of noise added:
 
 $$
 t = h \left( \mathbf{x},\mathbf{w} \right) + \epsilon,
@@ -132,9 +136,12 @@ $$
 p(t | \mathbf{x}, \mathbf{w}, \alpha) = \mathcal{N} \left( t | h(\mathbf{x},\mathbf{w}), \alpha \right). \quad \quad (3)
 $$
 
-<!--
-Let's take a moment to understand exactly, what we're doing. The image below illustrates what $(3)$ tells us: for 
--->
+
+Let's take a moment to understand exactly, what we're doing. The image below illustrates what $(3)$ tells us. We are estimating parameters $\mathbf{w}$ such that our target variables $t$ are normally distributed around the output values of $h$.
+
+<img src="{{ site.url }}/extra/bsmalea-notes-2/distribution.svg">
+{: style="text-align: center"}
+
 
 We can now use the entire dataset, $\mathbf{X}$ and $\textbf{\textsf{t}}$, to write up the likelihood function by making the assumption that our data points are drawn independently from $(3)$. The likelihood function then becomes the product of $(3)$ for all our input and target variable pairs, and is a function of $\mathbf{w}$ and $\alpha$:
 
@@ -196,10 +203,11 @@ w = np.linalg.inv(X.T @ X) @ X.T @ t
 alpha = sum((t - X @ w)**2) / len(t)
 {% endhighlight %}
 
-<figure>
-    <img src="{{ site.url }}/extra/bsmalea-notes-2/prob_linreg.svg">
-    <span class="marginnote">Plot of the line $w_0+w_1 x$ with our estimated values for $\mathbf{w}$ along with the uncertainty $\alpha$.</span>
-</figure>
+
+<span class="marginnote">Plot of the line $w_0+w_1 x$ with our estimated values for $\mathbf{w}$ along with the uncertainty $\alpha$.</span>
+
+<img src="{{ site.url }}/extra/bsmalea-notes-2/prob_linreg.svg">
+{: style="text-align: center"}
 
 ### Model selection
 You might be wondering what linear regression is so good for considering the image above, since it's not doing well, but now we're going to shine light on that by looking at ways to improve the simple linear regression model.
