@@ -5,13 +5,19 @@
 		</p>
 		<script type="text/javascript" src="{{ site.baseurl }}/js/sidebar_polls.js"></script>
 	</div>
+	
+	<hr>
+
+	<p>Like what you see?<br><a href="https://www.buymeacoffee.com/cookieblues">Buy me a coffee</a>.</p>
 
 	<hr>
+
 	<div class="social-icons">
 		{% if site.data.sidebar.facebook && site.data.sidebar.facebook != "" %}<a target="_blank" href="https://facebook.com/{{ site.data.sidebar.facebook }}">{% include social-icon.html icon="Facebook" %}</a>{% endif %} 
 		{% if site.data.sidebar.twitter && site.data.sidebar.twitter != "" %}<a target="_blank" href="https://twitter.com/{{ site.data.sidebar.twitter }}">{% include social-icon.html icon="Twitter" %}</a>{% endif %} 
 		{% if site.data.sidebar.instagram && site.data.sidebar.instagram != "" %}<a target="_blank" href="https://www.instagram.com/{{ site.data.sidebar.instagram }}">{% include social-icon.html icon="Instagram" %}</a>{% endif %}
 		{% if site.data.sidebar.medium && site.data.sidebar.medium != "" %}<a target="_blank" href="https://{{ site.data.sidebar.medium }}.medium.com">{% include social-icon.html icon="Medium" %}</a>{% endif %}
+		{% if site.data.sidebar.buymeacoffee && site.data.sidebar.buymeacoffee != "" %}<a target="_blank" href="https://buymeacoffee.com/{{ site.data.sidebar.buymeacoffee }}">{% include social-icon.html icon="Buymeacoffee" %}</a>{% endif %}
 		<a target="_blank" href="{{ site.baseurl }}/feed.xml">{% include social-icon.html icon="RSS" %}</a>
 	</div>
 </aside>
