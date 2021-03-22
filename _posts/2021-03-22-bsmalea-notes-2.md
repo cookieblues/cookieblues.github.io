@@ -3,7 +3,7 @@ date: 2021-03-22
 title: "Machine learning, notes 2: Regression"
 categories:
   - Guides
-featured_image: https://raw.githubusercontent.com/cookieblues/cookieblues.github.io/master/extra/bsmalea-notes-1c/test.png
+featured_image: https://raw.githubusercontent.com/cookieblues/cookieblues.github.io/33c1f7b6dbd05a952e9c9d381173195dce89fc52/extra/bsmalea-notes-2/prob_linreg.svg
 ---
 Regression analysis refers to a set of techniques for estimating relationships among variables. This post introduces **linear regression** augmented by **basis functions** to enable non-linear adaptation, which lies at the heart of supervised learning, as will be apparent when we turn to classification. Thus, a thorough understanding of this model will be hugely beneficial. We'll go through 2 derivations of the optimal parameters namely the method of **ordinary least squares (OLS)**, which we briefly looked at in <a href="{{ site.url }}/bsmalea-notes-1a">notes 1a</a>, and **maximum likelihood estimation (MLE)**. We'll also dabble with some Python throughout the post.
 
