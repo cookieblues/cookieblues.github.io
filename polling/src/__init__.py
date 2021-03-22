@@ -209,6 +209,7 @@ def gaussian_process():
     df = df.loc[df.index > PREV_ELECTION_DATES[0]].copy()
     first_date = df.index[0]
     df["time"] = (df.index-pd.Timestamp(first_date)).days + 1
+    n_days = (pd.Timestamp.today() - pd.Timestamp(first_date)).days + 1
 
     # Factorize pollsters
     pollsters, uniq_pollsters = pd.factorize(df["pollingfirm"])
@@ -238,11 +239,11 @@ def gaussian_process():
     priors = priors / sum(priors)
     #priors = [1/len(sorted_parties) for _ in range(len(sorted_parties))]
     startingPointCertainty = 100_000
-    breakpoint()
+    
     # Prepare data for stan
     model_data = {
         "n_polls": df.shape[0],
-        "n_days": df["time"].max(),
+        "n_days": n_days,
         "n_houses": len(uniq_pollsters),
         "n_parties": len(sorted_parties),
         "pseudoSampleSigma": 1.5,

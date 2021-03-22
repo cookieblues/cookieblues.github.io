@@ -1,4 +1,4 @@
-- name: Hjem
+- name: Home
   link: /
-- name: Om
-  link: /om/
+- name: About
+  link: /about/

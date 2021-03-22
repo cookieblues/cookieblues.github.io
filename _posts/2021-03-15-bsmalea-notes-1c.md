@@ -179,16 +179,15 @@ In this case, if we choose a uniform prior, i.e., $\alpha=\beta=1$, we actually 
 
 
 ### Example: polynomial regression (TBA)
-<!--
-Let's continue with the example from <a href="{{ site.url }}/pages/bsmalea-notes-1a">notes 1a</a> and look at it from a probabilistic perspective. We'll start with the frequentist perspective and then gradually move on to the fully Bayesian perspective.
+Let's continue with the example from <a href="{{ site.url }}/guides/2021/03/08/bsmalea-notes-1a/">notes 1a</a> and look at it from a probabilistic perspective. We'll start with the frequentist perspective and then gradually move on to the fully Bayesian perspective.
 
 To quickly refresh our memory: we had a dataset $\mathcal{D} = \{ (x_1, t_1), \dots, (x_N, t_N) \}$ of $N$ input and target variable pairs. Our objective was to fit a polynomial to the data. We can think about this from a probabilistic perspective by introducing an error term
 
 $$
-h(x, \mathbf{w}) = w_0 + w_1 x + w_2 x^2 + \dots + w_M x^M + \epsilon = \sum_{m=0}^M w_m x^m + \epsilon, \quad \quad (3)
+h(x, \mathbf{w}) = w_0 + w_1 x + w_2 x^2 + \dots + w_M x^M + \epsilon = \sum_{m=0}^M w_m x^m + \epsilon, \quad \quad (5)
 $$
 
-where $\epsilon \sim \mathcal{N}\left(\mu, \alpha^{-1} \right)$, and usually we assume the Gaussian has zero mean. What $(3)$ means is that we assume the polynomial we create $h$ 
+where $\epsilon \sim \mathcal{N}\left(\mu, \alpha^{-1} \right)$, and usually we assume the Gaussian has zero mean. What $(5)$ means is that we assume the polynomial we create $h$ 
 
 
 We can simplify this a bit by defining $\mathbf{w} = \left( w_0, w_1, w_2, \dots, w_M \right)^\intercal$ and $\mathbf{x}_i = \left( 1, x_i, x_i^2, \dots, x_i^M  \right)^\intercal$ such that
@@ -200,7 +199,7 @@ $$
 The probability distribution of $t$ given the input variable $\mathbf{x}$, the parameters $\mathbf{w}$, and the precision (inverse variance) $\alpha$ is thus
 
 $$
-p(t | x, \mathbf{w}, \alpha) = \mathcal{N} \left(t | h(x, \mathbf{w}), \alpha^{-1} \right).
+p(t | x, \mathbf{w}, \alpha) = \mathcal{N} \left(t | h(x, \mathbf{w}), \alpha^{-1} \right) = \mathcal{N} \left(t | \mathbf{w}^\intercal \mathbf{x}, \alpha^{-1} \right).
 $$
 
 For the sake of simplicity, let $\textbf{\textsf{x}} = \left\\{ x_1, \dots, x_N \right\\}$ and $\textbf{\textsf{t}} = \left\\{ t_1, \dots, t_N \right\\}$ denote all our input and target variables respectively.
@@ -210,6 +209,7 @@ Assuming the points are independent and identically distributed, we can write up
 
 $$
 p( \textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha)
+= \prod_{n=1}^N p( t_n | x_n, \mathbf{w}, \alpha)
 = \prod_{n=1}^N \mathcal{N} \left( t_n | \mathbf{w}^\intercal \mathbf{x}_n, \alpha^{-1} \right).
 $$
 
@@ -220,10 +220,10 @@ $$ \begin{aligned}
 &= \ln \left( \prod_{n=1}^N \mathcal{N} \left( t_n | \mathbf{w}^\intercal \mathbf{x}_n, \alpha^{-1} \right) \right) \\
 &= \sum_{n=1}^N \ln \left( \frac{1}{\sqrt{2\pi\alpha^{-1}}} \exp \left( -\frac{\left(t_n - \mathbf{w}^\intercal \mathbf{x}_n \right)^2}{2\alpha^{-1}} \right) \right) \\
 &= \sum_{n=1}^N \left( \ln \frac{1}{\sqrt{2\pi\alpha^{-1}}} - \frac{\left(t_n - \mathbf{w}^\intercal \mathbf{x}_n \right)^2}{2\alpha^{-1}} \right) \\
-&= - N \ln \sqrt{2\pi\alpha^{-1}} - \frac{\alpha}{2} \sum_{n=1}^N \left( t_n - \mathbf{w}^\intercal \mathbf{x}_n \right)^2. \quad \quad (4)
+&= - N \ln \sqrt{2\pi\alpha^{-1}} - \frac{\alpha}{2} \sum_{n=1}^N \left( t_n - \mathbf{w}^\intercal \mathbf{x}_n \right)^2. \quad \quad (6)
 \end{aligned} $$
 
-Note that the sum in $(4)$ is equivalent to the objective function we used in <a href="{{ site.url }}/pages/bsmalea-notes-1a">notes 1a</a>, the sum of squared errors (SSE) function, since the left term in $(4)$ is constant with respect to $\mathbf{w}$ - so the solution to $\mathbf{w}$ is the same as in the last post. If we maximize $(4)$ with respect to $\alpha$, we get
+Note that the sum in $(6)$ is equivalent to the objective function we used in <a href="{{ site.url }}/guides/2021/03/08/bsmalea-notes-1a/">notes 1a</a>, the sum of squared errors (SSE) function, since the left term in $(6)$ is constant with respect to $\mathbf{w}$ - so the solution to $\mathbf{w}$ is the same as in the last post. If we maximize $(6)$ with respect to $\alpha$, we get
 
 $$
 \alpha^{-1}_{\text{ML}} = \frac{1}{N} \sum_{n=1}^N \left( t_n - \mathbf{w}_{\text{ML}}^\intercal \mathbf{x}_n \right)^2.
@@ -236,7 +236,7 @@ p(t|x, \mathbf{w}_\text{ML}, \alpha_\text{ML}) = \mathcal{N} \left( t| h(x, \mat
 $$
 
 #### Bayesian approach
-If we introduce a **prior distribution** over our parameters (the polynomial coefficients) $\mathbf{w}$, we can go from the frequentist perspective to the Bayesian. Remember that the prior is a way for us to incorporate our knowledege about the parameters. Note that it is in this 'subjective' choice, frequentists object to the Bayesian approach. Let's assume a Gaussian prior distribution
+If we introduce a **prior distribution** over our parameters (the polynomial coefficients) $\mathbf{w}$, we can go from the frequentist perspective to the Bayesian. Remember that the prior is a way for us to incorporate our knowledge about the parameters. Note that it is in this 'subjective' choice, frequentists object to the Bayesian approach. Let's assume a Gaussian prior distribution
 
 $$
 p(\mathbf{w} | \beta)
@@ -249,7 +249,7 @@ $$ \begin{aligned}
 \mathcal{N} \left( \mathbf{w} | \mathbf{0}, \beta^{-1} \mathbf{I} \right)
 &= \frac{1}{\sqrt{(2\pi)^{M+1} |\beta^{-1}\mathbf{I}| }} \exp \left( -\frac{(\mathbf{w}-\mathbf{0})^\intercal (\beta^{-1} \mathbf{I})^{-1} (\mathbf{w}-\mathbf{0})}{2} \right) \\
 &= \frac{1}{\left( 2\pi\beta^{-1} \right)^{\frac{M+1}{2}}} \exp \left( -\frac{\mathbf{w}^\intercal (\beta \mathbf{I}) \mathbf{w}}{2} \right) \\
-&= \left( \frac{\beta}{2\pi} \right)^{\frac{M+1}{2}} \exp \left( -\frac{\beta}{2} \mathbf{w}^\intercal \mathbf{w} \right). \quad \quad (5)
+&= \left( \frac{\beta}{2\pi} \right)^{\frac{M+1}{2}} \exp \left( -\frac{\beta}{2} \mathbf{w}^\intercal \mathbf{w} \right). \quad \quad (7)
 \end{aligned} $$
 
 
@@ -257,23 +257,32 @@ Using Bayes' theorem as described above, the posterior distribution of our param
 
 $$
 \overbrace{p(\mathbf{w} | \textbf{\textsf{x}}, \textbf{\textsf{t}}, \alpha, \beta)}^{\text{posterior}}
-\propto \overbrace{p(\textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha)}^{\text{likelihood}} \, \overbrace{p(\mathbf{w}|\beta)}^{\text{prior}}. \quad \quad (6)
+\propto \overbrace{p(\textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha)}^{\text{likelihood}} \, \overbrace{p(\mathbf{w}|\beta)}^{\text{prior}}. \quad \quad (8)
 $$
 
-By maximizing the posterior distribution we can find the most probable values of $\mathbf{w}$ given the data. This is called the **maximum a posteriori** (MAP) estimate. Note that we're trying to find estimate a point (the maximum) on the posterior distribution, so we don't have to normalize it by dividing by the evidence as mentioned earlier. By taking the logarithm of $(6)$ and substituting $(4)$ and $(5)$ in, we see that maximizing the posterior is given by maximizing
+By maximizing the posterior distribution we can find the most probable values of $\mathbf{w}$ given the data. This is called the **maximum a posteriori** (MAP) estimate. Note that we're trying to find a point (the maximum) on the posterior distribution, so we don't have to normalize it by dividing by the evidence as mentioned earlier. By taking the logarithm of $(8)$ and substituting $(6)$ and $(7)$ in, we see that maximizing the posterior is given by maximizing
 
 $$ \begin{aligned}
 \ln \left( p(\mathbf{w} | \textbf{\textsf{x}}, \textbf{\textsf{t}}, \alpha, \beta) \right)
 &\propto \ln \left( p(\textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha) p(\mathbf{w}|\beta) \right) \\
 &= \ln p(\textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha) + \ln p(\mathbf{w}|\beta) \\
-&\propto -\frac{\alpha}{2} \sum_{n=1}^N \left( t_n - \mathbf{w}^\intercal \mathbf{x}_n \right)^2 \underbrace{-\frac{\beta}{2} \mathbf{w}^\intercal \mathbf{w}}_{\text{regularization}}, \quad \quad (7)
+&\propto -\frac{\alpha}{2} \sum_{n=1}^N \left( t_n - \mathbf{w}^\intercal \mathbf{x}_n \right)^2 \underbrace{-\frac{\beta}{2} \mathbf{w}^\intercal \mathbf{w}}_{\text{regularization}}, \quad \quad (9)
 \end{aligned} $$
 
-where we have dropped constant terms, since they don't impact the maximum. $(7)$ is almost the same as the sum of squared errors function, but we have the extra term $\frac{\beta}{2} \mathbf{w}^\intercal \mathbf{w}$, which is a **regularization** term. We will discuss regularization further in <a href="{{ site.url }}/pages/bsmalea-notes-2">notes 2</a>, but for now it suffices to say that **regularization is a technique of preventing overfitting**.
+where we have dropped constant terms, since they don't impact the maximum. $(9)$ is almost the same as the sum of squared errors function, but we have the extra term $\frac{\beta}{2} \mathbf{w}^\intercal \mathbf{w}$, which is a **regularization** term. We will discuss regularization further in the next post, <!--<a href="{{ site.url }}/pages/bsmalea-notes-2">notes 2</a>-->but for now it suffices to say that **regularization is a technique to prevent overfitting**. Taking the derivative of $(9)$, setting it equal to 0, and solving for $\mathbf{w}$ gives us
+
+$$ \begin{aligned}
+\frac{\partial}{\partial \mathbf{w}} \left( -\frac{\alpha}{2} \sum_{n=1}^N \left( t_n - \mathbf{w}^\intercal \mathbf{x}_n \right)^2 -\frac{\beta}{2} \mathbf{w}^\intercal \mathbf{w} \right)
+&= 0 \\
+\left( \frac{\partial}{\partial \mathbf{w}} \left( t_n - \mathbf{w}^\intercal \mathbf{x}_n \right) \right) \left(-\alpha \sum_{n=1}^N \left( t_n - \mathbf{w}^\intercal \mathbf{x}_n \right) \right) - \beta \mathbf{w}
+&= 0 \\
+
+&= \\
+\end{aligned} $$
 
 #### Fully Bayesian approach
 While we've included a prior distribution, we're still calculating what is called a point estimate, i.e. we're finding the maximum of the posterior distribution, but to complete a fully Bayesian approach we would have to find the entire posterior distribution.
--->
+
 
 <!--
 https://m-clark.github.io/bayesian-basics/intro.html

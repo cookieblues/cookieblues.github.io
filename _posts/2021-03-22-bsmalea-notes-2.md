@@ -1,9 +1,9 @@
 ---
-title: "BSMALEA, notes 2: Regression"
-layout: post
-category: Machine Learning
-tags: BSMALEA
-excerpt_separator: <!--more-->
+date: 2021-03-22
+title: "Machine learning, notes 2: Regression"
+categories:
+  - Guides
+featured_image: https://raw.githubusercontent.com/cookieblues/cookieblues.github.io/master/extra/bsmalea-notes-1c/test.png
 ---
 Regression analysis refers to a set of techniques for estimating relationships among variables. This post introduces **linear regression** augmented by **basis functions** to enable non-linear adaptation, which lies at the heart of supervised learning, as will be apparent when we turn to classification. Thus, a thorough understanding of this model will be hugely beneficial. We'll go through 2 derivations of the optimal parameters namely the method of **ordinary least squares (OLS)**, which we briefly looked at in <a href="{{ site.url }}/bsmalea-notes-1a">notes 1a</a>, and **maximum likelihood estimation (MLE)**. We'll also dabble with some Python throughout the post.
 
@@ -15,7 +15,6 @@ The simplest linear model for regression is just known as *linear regression*, w
 $$
 h\left(\mathbf{x},\mathbf{w} \right) = w_0 + w_1 x_1 + \dots + w_D x_D = w_0 + \sum_{i=1}^D w_i x_i. \quad \quad (1)
 $$
-<!--more-->
 
 The first term $w_0$ is commonly called the **intercept** or **bias** parameter, and allows $h$ to adapt to a fixed offset in the data<span class="sidenote-number"></span><span class="sidenote">We'll show exactly what this means later in this post.</span>. If we introduce a $1$ as the first element of each $\mathbf{x}$, we can rewrite $(1)$ with vector notation, i.e. if we define $\mathbf{x} = \left( 1, x_1, \dots , x_D  \right)^\intercal$, we can rewrite $(1)$ as
 

@@ -1,4 +1,4 @@
-I"�d<p>As mentioned in <a href="http://localhost:4000/guides/2021/03/08/bsmalea-notes-1a/">notes 1a</a>, machine learning is mainly concerned with prediction, and as you can imagine, prediction is very much concerned with probability. In this post we are going to look at the two main <a href="https://en.wikipedia.org/wiki/Probability_interpretations" target="_blank">interpretations of probability</a>: frequentism and Bayesianism.</p>
+I"5h<p>As mentioned in <a href="http://localhost:4000/guides/2021/03/08/bsmalea-notes-1a/">notes 1a</a>, machine learning is mainly concerned with prediction, and as you can imagine, prediction is very much concerned with probability. In this post we are going to look at the two main <a href="https://en.wikipedia.org/wiki/Probability_interpretations" target="_blank">interpretations of probability</a>: frequentism and Bayesianism.</p>
 
 <p>While the adjective “Bayesian” first appeared around the 1950s by R. A. Fisher<span class="sidenote-number"></span><span class="sidenote">S. E. Fienberg, “When did Bayesian inference become “Bayesian”?,” 2006.</span>, the concept was properly formalized long before by P. S. Laplace in the 18th century, but known as “inverse probability”<span class="sidenote-number"></span><span class="sidenote">S. M. Stigler, “The History of Statistics: The Measurement of Uncertainty Before 1900,” ch. 3, 1986.</span>. So while the gist of the Bayesian approach has been known for a while, it hasn’t gained much popularity until recently (last few decades), perhaps mostly due to computational complexity.</p>
 
@@ -141,101 +141,88 @@ The maximum likelihood estimate $\hat{\theta}_{\text{MLE}}$ is therefore $\frac{
 <p>In this case, if we choose a uniform prior, i.e., $\alpha=\beta=1$, we actually get $\frac{45}{91} \approx 0.49$, so we would bet against. The reason for this is more complicated and has to do with the uniform prior not being completely agnostic<span class="marginnote">A better choice of prior would be <a href="https://en.wikipedia.org/wiki/Beta_distribution#Haldane's_prior_probability_(Beta(0,0))">Haldane’s prior</a>, which is the $\mathrm{Beta}(0, 0)$ distribution.</span>. Furthermore, we’ve also made the implicit decision not to update our posterior distribution between the 2 tosses, we’re predicting. You can imagine, we would gain knowledge about the fairness of the coin (i.e., about $\theta$) after tossing the coin the first time, which we could use to update our posterior distribution. However, to simplify the calculations we haven’t done that.</p>
 
 <h3 id="example-polynomial-regression-tba">Example: polynomial regression (TBA)</h3>
-<!--
-Let's continue with the example from <a href="http://localhost:4000/pages/bsmalea-notes-1a">notes 1a</a> and look at it from a probabilistic perspective. We'll start with the frequentist perspective and then gradually move on to the fully Bayesian perspective.
+<p>Let’s continue with the example from <a href="http://localhost:4000/guides/2021/03/08/bsmalea-notes-1a/">notes 1a</a> and look at it from a probabilistic perspective. We’ll start with the frequentist perspective and then gradually move on to the fully Bayesian perspective.</p>
 
-To quickly refresh our memory: we had a dataset $\mathcal{D} = \{ (x_1, t_1), \dots, (x_N, t_N) \}$ of $N$ input and target variable pairs. Our objective was to fit a polynomial to the data. We can think about this from a probabilistic perspective by introducing an error term
+<p>To quickly refresh our memory: we had a dataset $\mathcal{D} = { (x_1, t_1), \dots, (x_N, t_N) }$ of $N$ input and target variable pairs. Our objective was to fit a polynomial to the data. We can think about this from a probabilistic perspective by introducing an error term</p>
 
-$$
-h(x, \mathbf{w}) = w_0 + w_1 x + w_2 x^2 + \dots + w_M x^M + \epsilon = \sum_{m=0}^M w_m x^m + \epsilon, \quad \quad (3)
-$$
+\[h(x, \mathbf{w}) = w_0 + w_1 x + w_2 x^2 + \dots + w_M x^M + \epsilon = \sum_{m=0}^M w_m x^m + \epsilon, \quad \quad (5)\]
 
-where $\epsilon \sim \mathcal{N}\left(\mu, \alpha^{-1} \right)$, and usually we assume the Gaussian has zero mean. What $(3)$ means is that we assume the polynomial we create $h$ 
+<p>where $\epsilon \sim \mathcal{N}\left(\mu, \alpha^{-1} \right)$, and usually we assume the Gaussian has zero mean. What $(5)$ means is that we assume the polynomial we create $h$</p>
 
+<p>We can simplify this a bit by defining $\mathbf{w} = \left( w_0, w_1, w_2, \dots, w_M \right)^\intercal$ and $\mathbf{x}_i = \left( 1, x_i, x_i^2, \dots, x_i^M  \right)^\intercal$ such that</p>
 
-We can simplify this a bit by defining $\mathbf{w} = \left( w_0, w_1, w_2, \dots, w_M \right)^\intercal$ and $\mathbf{x}_i = \left( 1, x_i, x_i^2, \dots, x_i^M  \right)^\intercal$ such that
+\[h(x, \mathbf{w}) = \mathbf{w}^\intercal \mathbf{x} + \epsilon.\]
 
-$$
-h(x, \mathbf{w}) = \mathbf{w}^\intercal \mathbf{x} + \epsilon.
-$$
+<p>The probability distribution of $t$ given the input variable $\mathbf{x}$, the parameters $\mathbf{w}$, and the precision (inverse variance) $\alpha$ is thus</p>
 
-The probability distribution of $t$ given the input variable $\mathbf{x}$, the parameters $\mathbf{w}$, and the precision (inverse variance) $\alpha$ is thus
+\[p(t | x, \mathbf{w}, \alpha) = \mathcal{N} \left(t | h(x, \mathbf{w}), \alpha^{-1} \right) = \mathcal{N} \left(t | \mathbf{w}^\intercal \mathbf{x}, \alpha^{-1} \right).\]
 
-$$
-p(t | x, \mathbf{w}, \alpha) = \mathcal{N} \left(t | h(x, \mathbf{w}), \alpha^{-1} \right).
-$$
+<p>For the sake of simplicity, let $\textbf{\textsf{x}} = \left\{ x_1, \dots, x_N \right\}$ and $\textbf{\textsf{t}} = \left\{ t_1, \dots, t_N \right\}$ denote all our input and target variables respectively.</p>
 
-For the sake of simplicity, let $\textbf{\textsf{x}} = \left\\{ x_1, \dots, x_N \right\\}$ and $\textbf{\textsf{t}} = \left\\{ t_1, \dots, t_N \right\\}$ denote all our input and target variables respectively.
+<h4 id="frequentist-approach-1">Frequentist approach</h4>
+<p>Assuming the points are independent and identically distributed, we can write up the likelihood function, which is a function of $\mathbf{w}$ and $\alpha$, as</p>
 
-#### Frequentist approach
-Assuming the points are independent and identically distributed, we can write up the likelihood function, which is a function of $\mathbf{w}$ and $\alpha$, as
+\[p( \textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha)
+= \prod_{n=1}^N p( t_n | x_n, \mathbf{w}, \alpha)
+= \prod_{n=1}^N \mathcal{N} \left( t_n | \mathbf{w}^\intercal \mathbf{x}_n, \alpha^{-1} \right).\]
 
-$$
-p( \textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha)
-= \prod_{n=1}^N \mathcal{N} \left( t_n | \mathbf{w}^\intercal \mathbf{x}_n, \alpha^{-1} \right).
-$$
+<p>We want to find the values of $\mathbf{w}$ and $\alpha$ that <strong>maximizes the likelihood</strong>, and as is common in <a href="https://en.wikipedia.org/wiki/Maximum_likelihood_estimation" target="_blank">maximum likelihood estimation</a> mainly due to computational reasons, we find the maximum of the log-likelihood instead. The log-likelihood is</p>
 
-We want to find the values of $\mathbf{w}$ and $\alpha$ that **maximizes the likelihood**, and as is common in [maximum likelihood estimation](https://en.wikipedia.org/wiki/Maximum_likelihood_estimation){:target="_blank"} mainly due to computational reasons, we find the maximum of the log-likelihood instead. The log-likelihood is
-
-$$ \begin{aligned}
+\[\begin{aligned}
 \ln \left( p( \textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha) \right)
-&= \ln \left( \prod_{n=1}^N \mathcal{N} \left( t_n | \mathbf{w}^\intercal \mathbf{x}_n, \alpha^{-1} \right) \right) \\
-&= \sum_{n=1}^N \ln \left( \frac{1}{\sqrt{2\pi\alpha^{-1}}} \exp \left( -\frac{\left(t_n - \mathbf{w}^\intercal \mathbf{x}_n \right)^2}{2\alpha^{-1}} \right) \right) \\
-&= \sum_{n=1}^N \left( \ln \frac{1}{\sqrt{2\pi\alpha^{-1}}} - \frac{\left(t_n - \mathbf{w}^\intercal \mathbf{x}_n \right)^2}{2\alpha^{-1}} \right) \\
-&= - N \ln \sqrt{2\pi\alpha^{-1}} - \frac{\alpha}{2} \sum_{n=1}^N \left( t_n - \mathbf{w}^\intercal \mathbf{x}_n \right)^2. \quad \quad (4)
-\end{aligned} $$
+&amp;= \ln \left( \prod_{n=1}^N \mathcal{N} \left( t_n | \mathbf{w}^\intercal \mathbf{x}_n, \alpha^{-1} \right) \right) \\
+&amp;= \sum_{n=1}^N \ln \left( \frac{1}{\sqrt{2\pi\alpha^{-1}}} \exp \left( -\frac{\left(t_n - \mathbf{w}^\intercal \mathbf{x}_n \right)^2}{2\alpha^{-1}} \right) \right) \\
+&amp;= \sum_{n=1}^N \left( \ln \frac{1}{\sqrt{2\pi\alpha^{-1}}} - \frac{\left(t_n - \mathbf{w}^\intercal \mathbf{x}_n \right)^2}{2\alpha^{-1}} \right) \\
+&amp;= - N \ln \sqrt{2\pi\alpha^{-1}} - \frac{\alpha}{2} \sum_{n=1}^N \left( t_n - \mathbf{w}^\intercal \mathbf{x}_n \right)^2. \quad \quad (6)
+\end{aligned}\]
 
-Note that the sum in $(4)$ is equivalent to the objective function we used in <a href="http://localhost:4000/pages/bsmalea-notes-1a">notes 1a</a>, the sum of squared errors (SSE) function, since the left term in $(4)$ is constant with respect to $\mathbf{w}$ - so the solution to $\mathbf{w}$ is the same as in the last post. If we maximize $(4)$ with respect to $\alpha$, we get
+<p>Note that the sum in $(6)$ is equivalent to the objective function we used in <a href="http://localhost:4000/guides/2021/03/08/bsmalea-notes-1a/">notes 1a</a>, the sum of squared errors (SSE) function, since the left term in $(6)$ is constant with respect to $\mathbf{w}$ - so the solution to $\mathbf{w}$ is the same as in the last post. If we maximize $(6)$ with respect to $\alpha$, we get</p>
 
-$$
-\alpha^{-1}_{\text{ML}} = \frac{1}{N} \sum_{n=1}^N \left( t_n - \mathbf{w}_{\text{ML}}^\intercal \mathbf{x}_n \right)^2.
-$$
+\[\alpha^{-1}_{\text{ML}} = \frac{1}{N} \sum_{n=1}^N \left( t_n - \mathbf{w}_{\text{ML}}^\intercal \mathbf{x}_n \right)^2.\]
 
-Now that we have determined the maximum likelihood solution for $\mathbf{w}$ and $\alpha$, we can make predictions for new values of $x$ expressed in terms of the **predictive distribution**
+<p>Now that we have determined the maximum likelihood solution for $\mathbf{w}$ and $\alpha$, we can make predictions for new values of $x$ expressed in terms of the <strong>predictive distribution</strong></p>
 
-$$
-p(t|x, \mathbf{w}_\text{ML}, \alpha_\text{ML}) = \mathcal{N} \left( t| h(x, \mathbf{w}_\text{ML}), \alpha^{-1}_\text{ML} \right).
-$$
+\[p(t|x, \mathbf{w}_\text{ML}, \alpha_\text{ML}) = \mathcal{N} \left( t| h(x, \mathbf{w}_\text{ML}), \alpha^{-1}_\text{ML} \right).\]
 
-#### Bayesian approach
-If we introduce a **prior distribution** over our parameters (the polynomial coefficients) $\mathbf{w}$, we can go from the frequentist perspective to the Bayesian. Remember that the prior is a way for us to incorporate our knowledege about the parameters. Note that it is in this 'subjective' choice, frequentists object to the Bayesian approach. Let's assume a Gaussian prior distribution
+<h4 id="bayesian-approach-1">Bayesian approach</h4>
+<p>If we introduce a <strong>prior distribution</strong> over our parameters (the polynomial coefficients) $\mathbf{w}$, we can go from the frequentist perspective to the Bayesian. Remember that the prior is a way for us to incorporate our knowledge about the parameters. Note that it is in this ‘subjective’ choice, frequentists object to the Bayesian approach. Let’s assume a Gaussian prior distribution</p>
 
-$$
-p(\mathbf{w} | \beta)
-= \mathcal{N} \left( \mathbf{w} | \mathbf{0}, \beta^{-1} \mathbf{I} \right),
-$$
+\[p(\mathbf{w} | \beta)
+= \mathcal{N} \left( \mathbf{w} | \mathbf{0}, \beta^{-1} \mathbf{I} \right),\]
 
-where $\beta$ is the precision (inverse variance) of the distribution, $\mathbf{0}$ is the $M+1 \times M+1$ [zero matrix](https://en.wikipedia.org/wiki/Zero_matrix){:target="_blank"}, and $\mathbf{I}$ is the $M+1 \times M+1$ [identity matrix](https://en.wikipedia.org/wiki/Identity_matrix){:target="_blank"}. We can rewrite it by using the [density of the multivariate Gaussian](https://en.wikipedia.org/wiki/Multivariate_normal_distribution#Properties){:target="_blank"}
+<p>where $\beta$ is the precision (inverse variance) of the distribution, $\mathbf{0}$ is the $M+1 \times M+1$ <a href="https://en.wikipedia.org/wiki/Zero_matrix" target="_blank">zero matrix</a>, and $\mathbf{I}$ is the $M+1 \times M+1$ <a href="https://en.wikipedia.org/wiki/Identity_matrix" target="_blank">identity matrix</a>. We can rewrite it by using the <a href="https://en.wikipedia.org/wiki/Multivariate_normal_distribution#Properties" target="_blank">density of the multivariate Gaussian</a></p>
 
-$$ \begin{aligned}
+\[\begin{aligned}
 \mathcal{N} \left( \mathbf{w} | \mathbf{0}, \beta^{-1} \mathbf{I} \right)
-&= \frac{1}{\sqrt{(2\pi)^{M+1} |\beta^{-1}\mathbf{I}| }} \exp \left( -\frac{(\mathbf{w}-\mathbf{0})^\intercal (\beta^{-1} \mathbf{I})^{-1} (\mathbf{w}-\mathbf{0})}{2} \right) \\
-&= \frac{1}{\left( 2\pi\beta^{-1} \right)^{\frac{M+1}{2}}} \exp \left( -\frac{\mathbf{w}^\intercal (\beta \mathbf{I}) \mathbf{w}}{2} \right) \\
-&= \left( \frac{\beta}{2\pi} \right)^{\frac{M+1}{2}} \exp \left( -\frac{\beta}{2} \mathbf{w}^\intercal \mathbf{w} \right). \quad \quad (5)
-\end{aligned} $$
+&amp;= \frac{1}{\sqrt{(2\pi)^{M+1} |\beta^{-1}\mathbf{I}| }} \exp \left( -\frac{(\mathbf{w}-\mathbf{0})^\intercal (\beta^{-1} \mathbf{I})^{-1} (\mathbf{w}-\mathbf{0})}{2} \right) \\
+&amp;= \frac{1}{\left( 2\pi\beta^{-1} \right)^{\frac{M+1}{2}}} \exp \left( -\frac{\mathbf{w}^\intercal (\beta \mathbf{I}) \mathbf{w}}{2} \right) \\
+&amp;= \left( \frac{\beta}{2\pi} \right)^{\frac{M+1}{2}} \exp \left( -\frac{\beta}{2} \mathbf{w}^\intercal \mathbf{w} \right). \quad \quad (7)
+\end{aligned}\]
 
+<p>Using Bayes’ theorem as described above, the posterior distribution of our parameters is proportional to the product of the likelihood function and prior distribution</p>
 
-Using Bayes' theorem as described above, the posterior distribution of our parameters is proportional to the product of the likelihood function and prior distribution
+\[\overbrace{p(\mathbf{w} | \textbf{\textsf{x}}, \textbf{\textsf{t}}, \alpha, \beta)}^{\text{posterior}}
+\propto \overbrace{p(\textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha)}^{\text{likelihood}} \, \overbrace{p(\mathbf{w}|\beta)}^{\text{prior}}. \quad \quad (8)\]
 
-$$
-\overbrace{p(\mathbf{w} | \textbf{\textsf{x}}, \textbf{\textsf{t}}, \alpha, \beta)}^{\text{posterior}}
-\propto \overbrace{p(\textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha)}^{\text{likelihood}} \, \overbrace{p(\mathbf{w}|\beta)}^{\text{prior}}. \quad \quad (6)
-$$
+<p>By maximizing the posterior distribution we can find the most probable values of $\mathbf{w}$ given the data. This is called the <strong>maximum a posteriori</strong> (MAP) estimate. Note that we’re trying to find a point (the maximum) on the posterior distribution, so we don’t have to normalize it by dividing by the evidence as mentioned earlier. By taking the logarithm of $(8)$ and substituting $(6)$ and $(7)$ in, we see that maximizing the posterior is given by maximizing</p>
 
-By maximizing the posterior distribution we can find the most probable values of $\mathbf{w}$ given the data. This is called the **maximum a posteriori** (MAP) estimate. Note that we're trying to find estimate a point (the maximum) on the posterior distribution, so we don't have to normalize it by dividing by the evidence as mentioned earlier. By taking the logarithm of $(6)$ and substituting $(4)$ and $(5)$ in, we see that maximizing the posterior is given by maximizing
-
-$$ \begin{aligned}
+\[\begin{aligned}
 \ln \left( p(\mathbf{w} | \textbf{\textsf{x}}, \textbf{\textsf{t}}, \alpha, \beta) \right)
-&\propto \ln \left( p(\textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha) p(\mathbf{w}|\beta) \right) \\
-&= \ln p(\textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha) + \ln p(\mathbf{w}|\beta) \\
-&\propto -\frac{\alpha}{2} \sum_{n=1}^N \left( t_n - \mathbf{w}^\intercal \mathbf{x}_n \right)^2 \underbrace{-\frac{\beta}{2} \mathbf{w}^\intercal \mathbf{w}}_{\text{regularization}}, \quad \quad (7)
-\end{aligned} $$
+&amp;\propto \ln \left( p(\textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha) p(\mathbf{w}|\beta) \right) \\
+&amp;= \ln p(\textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha) + \ln p(\mathbf{w}|\beta) \\
+&amp;\propto -\frac{\alpha}{2} \sum_{n=1}^N \left( t_n - \mathbf{w}^\intercal \mathbf{x}_n \right)^2 \underbrace{-\frac{\beta}{2} \mathbf{w}^\intercal \mathbf{w}}_{\text{regularization}}, \quad \quad (9)
+\end{aligned}\]
 
-where we have dropped constant terms, since they don't impact the maximum. $(7)$ is almost the same as the sum of squared errors function, but we have the extra term $\frac{\beta}{2} \mathbf{w}^\intercal \mathbf{w}$, which is a **regularization** term. We will discuss regularization further in <a href="http://localhost:4000/pages/bsmalea-notes-2">notes 2</a>, but for now it suffices to say that **regularization is a technique of preventing overfitting**.
+<p>where we have dropped constant terms, since they don’t impact the maximum. $(9)$ is almost the same as the sum of squared errors function, but we have the extra term $\frac{\beta}{2} \mathbf{w}^\intercal \mathbf{w}$, which is a <strong>regularization</strong> term. We will discuss regularization further in the next post, <!--<a href="http://localhost:4000/pages/bsmalea-notes-2">notes 2</a>-->but for now it suffices to say that <strong>regularization is a technique to prevent overfitting</strong>. Taking the derivative of $(9)$, setting it equal to 0, and solving for $\mathbf{w}$ gives us</p>
 
-#### Fully Bayesian approach
-While we've included a prior distribution, we're still calculating what is called a point estimate, i.e. we're finding the maximum of the posterior distribution, but to complete a fully Bayesian approach we would have to find the entire posterior distribution.
--->
+\[\begin{aligned}
+\frac{\partial}{\partial \mathbf{w}} \left( -\frac{\alpha}{2} \sum_{n=1}^N \left( t_n - \mathbf{w}^\intercal \mathbf{x}_n \right)^2 -\frac{\beta}{2} \mathbf{w}^\intercal \mathbf{w} \right)
+&amp;= 0 \\
+&amp;= 
+\end{aligned}\]
+
+<h4 id="fully-bayesian-approach-1">Fully Bayesian approach</h4>
+<p>While we’ve included a prior distribution, we’re still calculating what is called a point estimate, i.e. we’re finding the maximum of the posterior distribution, but to complete a fully Bayesian approach we would have to find the entire posterior distribution.</p>
 
 <!--
 https://m-clark.github.io/bayesian-basics/intro.html

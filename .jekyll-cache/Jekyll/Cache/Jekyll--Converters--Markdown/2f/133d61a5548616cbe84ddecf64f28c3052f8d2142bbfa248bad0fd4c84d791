@@ -1,0 +1,9 @@
+I"t<hr />
+<p>title: “BSMALEA, notes 2: Regression”
+layout: post
+category: Machine Learning
+tags: BSMALEA
+excerpt_separator: <!--more-->
+—
+Regression analysis refers to a set of techniques for estimating relationships among variables. This post introduces <strong>linear regression</strong> augmented by <strong>basis functions</strong> to enable non-linear adaptation, which lies at the heart of supervised learning, as will be apparent when we turn to classification. Thus, a thorough understanding of this model will be hugely beneficial. We’ll go through 2 derivations of the optimal parameters namely the method of <strong>ordinary least squares (OLS)</strong>, which we briefly looked at in <a href="http://localhost:4000/bsmalea-notes-1a">notes 1a</a>, and <strong>maximum likelihood estimation (MLE)</strong>. We’ll also dabble with some Python throughout the post.</p>
+:ET
