@@ -179,6 +179,7 @@ In this case, if we choose a uniform prior, i.e., $\alpha=\beta=1$, we actually 
 
 
 ### Example: polynomial regression (TBA)
+<!--
 Let's continue with the example from <a href="{{ site.url }}/guides/2021/03/08/bsmalea-notes-1a/">notes 1a</a> and look at it from a probabilistic perspective. We'll start with the frequentist perspective and then gradually move on to the fully Bayesian perspective.
 
 To quickly refresh our memory: we had a dataset $\mathcal{D} = \{ (x_1, t_1), \dots, (x_N, t_N) \}$ of $N$ input and target variable pairs. Our objective was to fit a polynomial to the data. We can think about this from a probabilistic perspective by introducing an error term
@@ -199,7 +200,7 @@ $$
 The probability distribution of $t$ given the input variable $\mathbf{x}$, the parameters $\mathbf{w}$, and the precision (inverse variance) $\alpha$ is thus
 
 $$
-p(t | x, \mathbf{w}, \alpha) = \mathcal{N} \left(t | h(x, \mathbf{w}), \alpha^{-1} \right) = \mathcal{N} \left(t | \mathbf{w}^\intercal \mathbf{x}, \alpha^{-1} \right).
+\mathrm{Pr}(t | x, \mathbf{w}, \alpha) = \mathcal{N} \left(t | h(x, \mathbf{w}), \alpha^{-1} \right) = \mathcal{N} \left(t | \mathbf{w}^\intercal \mathbf{x}, \alpha^{-1} \right).
 $$
 
 For the sake of simplicity, let $\textbf{\textsf{x}} = \left\\{ x_1, \dots, x_N \right\\}$ and $\textbf{\textsf{t}} = \left\\{ t_1, \dots, t_N \right\\}$ denote all our input and target variables respectively.
@@ -208,15 +209,15 @@ For the sake of simplicity, let $\textbf{\textsf{x}} = \left\\{ x_1, \dots, x_N 
 Assuming the points are independent and identically distributed, we can write up the likelihood function, which is a function of $\mathbf{w}$ and $\alpha$, as
 
 $$
-p( \textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha)
-= \prod_{n=1}^N p( t_n | x_n, \mathbf{w}, \alpha)
+\mathrm{Pr}( \textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha)
+= \prod_{n=1}^N \mathrm{Pr}( t_n | x_n, \mathbf{w}, \alpha)
 = \prod_{n=1}^N \mathcal{N} \left( t_n | \mathbf{w}^\intercal \mathbf{x}_n, \alpha^{-1} \right).
 $$
 
 We want to find the values of $\mathbf{w}$ and $\alpha$ that **maximizes the likelihood**, and as is common in [maximum likelihood estimation](https://en.wikipedia.org/wiki/Maximum_likelihood_estimation){:target="_blank"} mainly due to computational reasons, we find the maximum of the log-likelihood instead. The log-likelihood is
 
 $$ \begin{aligned}
-\ln \left( p( \textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha) \right)
+\ln \left( \mathrm{Pr}( \textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha) \right)
 &= \ln \left( \prod_{n=1}^N \mathcal{N} \left( t_n | \mathbf{w}^\intercal \mathbf{x}_n, \alpha^{-1} \right) \right) \\
 &= \sum_{n=1}^N \ln \left( \frac{1}{\sqrt{2\pi\alpha^{-1}}} \exp \left( -\frac{\left(t_n - \mathbf{w}^\intercal \mathbf{x}_n \right)^2}{2\alpha^{-1}} \right) \right) \\
 &= \sum_{n=1}^N \left( \ln \frac{1}{\sqrt{2\pi\alpha^{-1}}} - \frac{\left(t_n - \mathbf{w}^\intercal \mathbf{x}_n \right)^2}{2\alpha^{-1}} \right) \\
@@ -232,14 +233,14 @@ $$
 Now that we have determined the maximum likelihood solution for $\mathbf{w}$ and $\alpha$, we can make predictions for new values of $x$ expressed in terms of the **predictive distribution**
 
 $$
-p(t|x, \mathbf{w}_\text{ML}, \alpha_\text{ML}) = \mathcal{N} \left( t| h(x, \mathbf{w}_\text{ML}), \alpha^{-1}_\text{ML} \right).
+\mathrm{Pr}(t|x, \mathbf{w}_\text{ML}, \alpha_\text{ML}) = \mathcal{N} \left( t| h(x, \mathbf{w}_\text{ML}), \alpha^{-1}_\text{ML} \right).
 $$
 
 #### Bayesian approach
 If we introduce a **prior distribution** over our parameters (the polynomial coefficients) $\mathbf{w}$, we can go from the frequentist perspective to the Bayesian. Remember that the prior is a way for us to incorporate our knowledge about the parameters. Note that it is in this 'subjective' choice, frequentists object to the Bayesian approach. Let's assume a Gaussian prior distribution
 
 $$
-p(\mathbf{w} | \beta)
+\mathrm{Pr}(\mathbf{w} | \beta)
 = \mathcal{N} \left( \mathbf{w} | \mathbf{0}, \beta^{-1} \mathbf{I} \right),
 $$
 
@@ -256,20 +257,20 @@ $$ \begin{aligned}
 Using Bayes' theorem as described above, the posterior distribution of our parameters is proportional to the product of the likelihood function and prior distribution
 
 $$
-\overbrace{p(\mathbf{w} | \textbf{\textsf{x}}, \textbf{\textsf{t}}, \alpha, \beta)}^{\text{posterior}}
-\propto \overbrace{p(\textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha)}^{\text{likelihood}} \, \overbrace{p(\mathbf{w}|\beta)}^{\text{prior}}. \quad \quad (8)
+\overbrace{\mathrm{Pr}(\mathbf{w} | \textbf{\textsf{x}}, \textbf{\textsf{t}}, \alpha, \beta)}^{\text{posterior}}
+\propto \overbrace{\mathrm{Pr}(\textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha)}^{\text{likelihood}} \, \overbrace{\mathrm{Pr}(\mathbf{w}|\beta)}^{\text{prior}}. \quad \quad (8)
 $$
 
 By maximizing the posterior distribution we can find the most probable values of $\mathbf{w}$ given the data. This is called the **maximum a posteriori** (MAP) estimate. Note that we're trying to find a point (the maximum) on the posterior distribution, so we don't have to normalize it by dividing by the evidence as mentioned earlier. By taking the logarithm of $(8)$ and substituting $(6)$ and $(7)$ in, we see that maximizing the posterior is given by maximizing
 
 $$ \begin{aligned}
-\ln \left( p(\mathbf{w} | \textbf{\textsf{x}}, \textbf{\textsf{t}}, \alpha, \beta) \right)
-&\propto \ln \left( p(\textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha) p(\mathbf{w}|\beta) \right) \\
-&= \ln p(\textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha) + \ln p(\mathbf{w}|\beta) \\
+\ln \left( \mathrm{Pr}(\mathbf{w} | \textbf{\textsf{x}}, \textbf{\textsf{t}}, \alpha, \beta) \right)
+&\propto \ln \left( \mathrm{Pr}(\textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha) \mathrm{Pr}(\mathbf{w}|\beta) \right) \\
+&= \ln \mathrm{Pr}(\textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha) + \ln \mathrm{Pr}(\mathbf{w}|\beta) \\
 &\propto -\frac{\alpha}{2} \sum_{n=1}^N \left( t_n - \mathbf{w}^\intercal \mathbf{x}_n \right)^2 \underbrace{-\frac{\beta}{2} \mathbf{w}^\intercal \mathbf{w}}_{\text{regularization}}, \quad \quad (9)
 \end{aligned} $$
 
-where we have dropped constant terms, since they don't impact the maximum. $(9)$ is almost the same as the sum of squared errors function, but we have the extra term $\frac{\beta}{2} \mathbf{w}^\intercal \mathbf{w}$, which is a **regularization** term. We will discuss regularization further in the next post, <!--<a href="{{ site.url }}/pages/bsmalea-notes-2">notes 2</a>-->but for now it suffices to say that **regularization is a technique to prevent overfitting**. Taking the derivative of $(9)$, setting it equal to 0, and solving for $\mathbf{w}$ gives us
+where we have dropped constant terms, since they don't impact the maximum. $(9)$ is almost the same as the sum of squared errors function, but we have the extra term $\frac{\beta}{2} \mathbf{w}^\intercal \mathbf{w}$, which is a **regularization** term. We will discuss regularization further in the next post, <a href="{{ site.url }}/pages/bsmalea-notes-2">notes 2</a>but for now it suffices to say that **regularization is a technique to prevent overfitting**. Taking the derivative of $(9)$, setting it equal to 0, and solving for $\mathbf{w}$ gives us
 
 $$ \begin{aligned}
 \frac{\partial}{\partial \mathbf{w}} \left( -\frac{\alpha}{2} \sum_{n=1}^N \left( t_n - \mathbf{w}^\intercal \mathbf{x}_n \right)^2 -\frac{\beta}{2} \mathbf{w}^\intercal \mathbf{w} \right)
@@ -281,7 +282,29 @@ $$ \begin{aligned}
 \end{aligned} $$
 
 #### Fully Bayesian approach
-While we've included a prior distribution, we're still calculating what is called a point estimate, i.e. we're finding the maximum of the posterior distribution, but to complete a fully Bayesian approach we would have to find the entire posterior distribution.
+While we've included a prior distribution, we're still calculating what is called a point estimate, i.e. we're finding the maximum of the posterior distribution, but to complete a fully Bayesian approach we would need to compute the **posterior predictive distribution**. Using Bayes' theorem, the likelihood, and prior that we've defined so far, we can write up the posterior distribution
+
+$$
+\overbrace{\mathrm{Pr} \left( \mathbf{w} | \textbf{\textsf{x}}, \textbf{\textsf{t}}, \alpha, \beta \right)}^{\mathrm{posterior}}
+\propto \overbrace{\mathrm{Pr}( \textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha)}^{\mathrm{likelihood}} \, \overbrace{\mathrm{Pr}(\mathbf{w} | \beta)}^{\mathrm{prior}}.
+$$
+
+We will omit the proof for now, since it's a little longer, but since both our likelihood and our prior are normal distributions, the posterior is also a normal distribution, and the posterior d
+
+$$ \begin{aligned}
+\mathrm{Pr} \left( \mathbf{w} | \textbf{\textsf{x}}, \textbf{\textsf{t}}, \alpha, \beta \right)
+&\propto \mathrm{Pr}( \textbf{\textsf{t}} | \textbf{\textsf{x}}, \mathbf{w}, \alpha) \mathrm{Pr}(\mathbf{w} | \beta) \\
+&= \mathcal{N} \left( \mathbf{w} | \mathbf{w}_N, \mathbf{S}_N \right),
+\end{aligned} $$
+
+where
+
+$$ \begin{aligned}
+\mathbf{w}_N &= \alpha \mathbf{S}_N \mathbf{X}^\intercal \textbf{\textsf{t}} \\
+\mathbf{S}_N^{-1} &= \beta \mathbf{I} + \alpha \mathbf{X}^\intercal \mathbf{X}
+\end{aligned} $$
+-->
+
 
 
 <!--
