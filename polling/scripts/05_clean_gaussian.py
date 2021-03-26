@@ -19,7 +19,7 @@ df_new = df[vote_cols].mean(axis=0)
 n_days = int(df_new.shape[0] / 15)
 parties = sorted(PARTIES.keys()) + ["other"]
 mean_df = pd.DataFrame(
-    index=pd.date_range(end=pd.Timestamp(last_date), freq="D", periods=n_days),
+    index=pd.date_range(end=pd.Timestamp.today().date(), freq="D", periods=n_days),
     columns=parties
 )
 

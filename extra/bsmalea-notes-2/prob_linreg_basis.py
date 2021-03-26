@@ -48,7 +48,7 @@ def plot_homogen_prob_density(x, y, variance, ax, l=1000, **kwargs):
 
 
 ### figure
-fig = plt.figure(figsize=(6,6/golden))
+fig = plt.figure(figsize=(7, 7/golden))
 
 Ms = [2, 4, 6, 8]
 for idx, M in enumerate(Ms):
@@ -62,7 +62,7 @@ for idx, M in enumerate(Ms):
     #w, residuals, rank, s = np.linalg.lstsq(Phi, t)
     alpha = sum((t - Phi @ w)**2) / len(t)
 
-    h = np.vectorize(lambda w,phi: w @ phi, signature="(m),(n,m)->(n)")
+    h = np.vectorize(lambda w, phi: w @ phi, signature="(m),(n,m)->(n)")
 
     x_ = np.linspace(x.min()-0.05, x.max()+0.05, 250)
     Phi_ = np.ones((x_.shape[0], M))
@@ -70,10 +70,9 @@ for idx, M in enumerate(Ms):
         Phi_[:, m+1] = np.vectorize(gaussian_basis)(x_, mus[m])
     t_ = w @ Phi_.T
 
-
     ax = fig.add_subplot(2, 2, int(idx+1))
 
-    plot_homogen_prob_density(x_, t_, alpha, ax=ax, cmap=mycmp, alpha=0.625)
+    plot_homogen_prob_density(x_, t_, alpha, ax=ax, cmap=mycmp, alpha=1)
     ax.scatter(x, t,
         edgecolors = "magenta",
         c = "None",
@@ -82,7 +81,7 @@ for idx, M in enumerate(Ms):
         zorder = 3
     )
     ax.plot(x_, t_,
-        color="turquoise",
+        color="darkturquoise",
         linewidth = 1,
         label = "Predicted (mean)"
     )
@@ -96,11 +95,12 @@ for idx, M in enumerate(Ms):
     ax.text(0.6, -5, s=r"$M={}$".format(M))
     ax.set_xlim(x.min()-0.05, x.max()+0.05)
     ax.set_ylim(t.min()-0.5, t.max()+0.5)
-    ax.legend(frameon=False,loc=2)
+    if idx == 0:
+        ax.legend(frameon=False,loc=2)
 
 
 plt.tight_layout()
-plt.savefig("prob_linreg_basis.svg")
+plt.savefig("prob_linreg_basis.svg", bbox_inches="tight")
 plt.show()
 
 

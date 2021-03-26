@@ -42,3 +42,12 @@ $$
 
 
 Naive bayes, LDA, QDA
+
+
+https://www.eecs189.org/static/notes/n18.pdf
+https://stats.stackexchange.com/questions/80507/what-is-a-gaussian-discriminant-analysis-gda
+https://web.archive.org/web/20200103035702/http://cs229.stanford.edu/notes/cs229-notes2.pdf
+https://stats.stackexchange.com/questions/254963/differences-linear-discriminant-analysis-and-gaussian-mixture-model
+https://stats.stackexchange.com/questions/190806/sources-seeming-disagreement-on-linear-quadratic-and-fishers-discriminant-ana/190821#190821
+https://stats.stackexchange.com/questions/71489/three-versions-of-discriminant-analysis-differences-and-how-to-use-them
+https://www.datascienceblog.net/post/machine-learning/linear-discriminant-analysis/

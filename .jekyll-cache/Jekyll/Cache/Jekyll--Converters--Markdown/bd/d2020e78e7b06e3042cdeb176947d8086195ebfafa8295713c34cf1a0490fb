@@ -1,4 +1,4 @@
-I"�h<p>Regression analysis refers to a set of techniques for estimating relationships among variables. This post introduces <strong>linear regression</strong> augmented by <strong>basis functions</strong> to enable non-linear adaptation, which lies at the heart of supervised learning, as will be apparent when we turn to classification. Thus, a thorough understanding of this model will be hugely beneficial. We’ll go through 2 derivations of the optimal parameters namely the method of <strong>ordinary least squares (OLS)</strong>, which we briefly looked at in <a href="http://localhost:4000/bsmalea-notes-1a">notes 1a</a>, and <strong>maximum likelihood estimation (MLE)</strong>. We’ll also dabble with some Python throughout the post.</p>
+I"Xi<p>Regression analysis refers to a set of techniques for estimating relationships among variables. This post introduces <strong>linear regression</strong> augmented by <strong>basis functions</strong> to enable non-linear adaptation, which lies at the heart of supervised learning, as will be apparent when we turn to classification. Thus, a thorough understanding of this model will be hugely beneficial. We’ll go through 2 derivations of the optimal parameters namely the method of <strong>ordinary least squares (OLS)</strong>, which we briefly looked at in <a href="http://localhost:4000/guides/2021/03/08/bsmalea-notes-1a/">notes 1a</a>, and <strong>maximum likelihood estimation (MLE)</strong>. We’ll also dabble with some Python throughout the post.</p>
 
 <h3 id="setup-and-objective">Setup and objective</h3>
 <p>Given a training dataset of $N$ input variables $\mathbf{x} \in \mathbb{R}^D$ with corresponding target variables $t \in \mathbb{R}$, the objective of regression is to construct a function $h(\mathbf{x})$ that yields prediction values of $t$ for new values of $\mathbf{x}$.</p>
@@ -13,7 +13,7 @@
 
 <p>where $\mathbf{w} = \left(w_0, \dots, w_D \right)^\intercal$.</p>
 
-<p>In <a href="http://localhost:4000/bsmalea-notes-1a">notes 1a</a> we went over polynomial regression with a $1$-dimensional input variable $x \in \mathbb{R}$. Now we’re just doing linear regression (not polynomial), but we’re allowing our input variable to be $D$-dimensional $\mathbf{x} \in \mathbb{R}^D$, hence it becomes a vector instead of a scalar. For the sake of visualization, however, let’s stick to the same example dataset:</p>
+<p>In <a href="http://localhost:4000/guides/2021/03/08/bsmalea-notes-1a/">notes 1a</a> we went over polynomial regression with a $1$-dimensional input variable $x \in \mathbb{R}$. Now we’re just doing linear regression (not polynomial), but we’re allowing our input variable to be $D$-dimensional $\mathbf{x} \in \mathbb{R}^D$, hence it becomes a vector instead of a scalar. For the sake of visualization, however, let’s stick to the same example dataset:</p>
 
 <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
 
@@ -30,7 +30,7 @@
 <p>So, how do we train the model? We’ll look at 2 different approaches of deriving the method of training this model. Recall that <strong>training</strong> (or <strong>learning</strong>) refers to <strong>the process of estimating the parameters</strong> of our model, so when we ask how to train the model, it’s the same as asking how to estimate the values of $\mathbf{w}$.</p>
 
 <h4 id="ordinary-least-squares">Ordinary least squares</h4>
-<p>Like we did in <a href="http://localhost:4000/bsmalea-notes-1a">notes 1a</a>, we defined an <strong>objective function</strong> that calculated a measure of the performance of our model in terms of an error, and then we minimized this error with respect to our parameters. This means we would find the parameters that would result in the least error. We’ll use the same objective function as in <a href="http://localhost:4000/bsmalea-notes-1a">notes 1a</a>, the sum of squared errors (SSE), defined as</p>
+<p>Like we did in <a href="http://localhost:4000/guides/2021/03/08/bsmalea-notes-1a/">notes 1a</a>, we defined an <strong>objective function</strong> that calculated a measure of the performance of our model in terms of an error, and then we minimized this error with respect to our parameters. This means we would find the parameters that would result in the least error. We’ll use the same objective function as in <a href="http://localhost:4000/guides/2021/03/08/bsmalea-notes-1a/">notes 1a</a>, the sum of squared errors (SSE), defined as</p>
 
 \[\begin{aligned}
 E(\mathbf{w}) &amp;= \sum_{n=1}^N \left( t_n - h \left( \mathbf{x}_n, \mathbf{w} \right) \right)^2 \\
@@ -154,7 +154,7 @@ E(\mathbf{w}) &amp;= \sum_{n=1}^N \left( t_n - \mathbf{w}^\intercal \mathbf{x}_n
 \end{aligned}\]
 
 <h4 id="python-implementation">Python implementation</h4>
-<p>In <a href="http://localhost:4000/bsmalea-notes-1a">notes 1a</a> we implemented the OLS solution, but since we have a probabilistic model now, we make predictions that are probability distributions over $t$ instead of just point estimates. This is done by substituting the maximum likelihood solutions for $\mathbf{w}$ and $\alpha$ into $(3)$</p>
+<p>In <a href="http://localhost:4000/guides/2021/03/08/bsmalea-notes-1a/">notes 1a</a> we implemented the OLS solution, but since we have a probabilistic model now, we make predictions that are probability distributions over $t$ instead of just point estimates. This is done by substituting the maximum likelihood solutions for $\mathbf{w}$ and $\alpha$ into $(3)$</p>
 
 \[p(t | \mathbf{x}, \mathbf{w}_{\text{ML}}, \alpha_{\text{ML}}) = \mathcal{N} \left( t | h(\mathbf{x},\mathbf{w}_{\text{ML}}), \alpha_{\text{ML}} \right).\]
 
@@ -182,7 +182,7 @@ h(\mathbf{x},\mathbf{w}) &amp;= w_0 \phi_0(\mathbf{x}) + \cdots + w_{M-1} \phi_{
 <p><span class="marginnote">Note that we had $D+1$ parameters in the simple linear regression model, but by augmenting it with basis functions, we now have $M$ parameters, which can be larger than $D$ if need be.</span>
 where we define $\bm{\phi}(\mathbf{x}) = \left( \phi_0 (\mathbf{x}), \dots, \phi_{M-1}(\mathbf{x}) \right)^\intercal$ and $\phi_0 ( {\mathbf{x}} ) = 1$ to keep the intercept $w_0$. By using nonlinear basis functions it is possible for $h$ to adapt to nonlinear relationships of $\mathbf{x}$, which we will see shortly - we call these models <strong>linear basis function models</strong>.</p>
 
-<p>We already looked at one example of basis functions in <a href="http://localhost:4000/bsmalea-notes-1a">notes 1a</a>, where we augmented the simple linear regression model with basis functions of powers of $x$, i.e. $\phi_i (x) = x^i$. Another common basis function is the Gaussian</p>
+<p>We already looked at one example of basis functions in <a href="http://localhost:4000/guides/2021/03/08/bsmalea-notes-1a/">notes 1a</a>, where we augmented the simple linear regression model with basis functions of powers of $x$, i.e. $\phi_i (x) = x^i$. Another common basis function is the Gaussian</p>
 
 \[\phi_i (\mathbf{x}) = \exp \left( - \gamma_i \| \bm{\mu}_i -\mathbf{x} \|_2^2  \right).\]
 
@@ -201,10 +201,9 @@ where we define $\bm{\phi}(\mathbf{x}) = \left( \phi_0 (\mathbf{x}), \dots, \phi
 \phi_0 (\mathbf{x}_N) &amp; \phi_1 (\mathbf{x}_N) &amp; \cdots &amp; \phi_{M-1} (\mathbf{x}_N)
 \end{pmatrix}.\]
 
-<figure>
-    <img src="http://localhost:4000/extra/bsmalea-notes-2/prob_linreg_basis.svg" />
-    <span class="marginnote">Illustration of the effect of using $M-1$ Gaussian basis functions plus the intercept.</span>
-</figure>
+<p><span class="marginnote">Illustration of the effect of using $M-1$ Gaussian basis functions plus the intercept.</span></p>
+
+<p style="text-align: center"><img src="http://localhost:4000/extra/bsmalea-notes-2/prob_linreg_basis.svg" /></p>
 
 <p>The Gaussian basis function for the plot above was implemented as below, where $\mu_i=\frac{i}{M}$ and $\gamma_i = 1$ for $i = 1, \dots, M-1$.</p>
 
@@ -214,7 +213,7 @@ where we define $\bm{\phi}(\mathbf{x}) = \left( \phi_0 (\mathbf{x}), \dots, \phi
 <!-- MENTION POLYNOMIAL REGRESSION -->
 
 <h4 id="regularization">Regularization</h4>
-<p>We briefly ran into the concept of regularization in the <a href="http://localhost:4000/bsmalea-notes-1c">previous notes</a>, which we described as a technique of preventing overfitting. If we look back at the objective function we defined earlier, augmented with basis functions, we can introduce a regularization term</p>
+<p>We briefly ran into the concept of regularization in the <a href="http://localhost:4000/guides/2021/03/15/bsmalea-notes-1c">previous notes</a>, which we described as a technique of preventing overfitting. If we look back at the objective function we defined earlier, augmented with basis functions, we can introduce a regularization term</p>
 
 \[E(\mathbf{w}) = \sum_{i=1}^N (t_n - \mathbf{w}^\intercal \bm{\phi}(\mathbf{x}_i))^2 + \underbrace{\lambda \sum_{j=0}^{M-1} | w_j |^q}_{\text{regularization}},\]
 
@@ -236,10 +235,9 @@ E(\mathbf{w})
 
 <p>When we introduce regularization, the process of model selection goes from finding the appropriate number of basis functions to finding the appropriate value for the regularization parameter $\lambda$.</p>
 
-<figure>
-    <img src="http://localhost:4000/extra/bsmalea-notes-2/prob_linreg_basis_regularization.svg" />
-    <span class="marginnote">Illustration of changing the value of the regularization parameter $\lambda$, while keeping the number of basis functions $M=8$ constant. Even though we overfitted earlier when $M=8$, our effective complexity is now controlled by the regularization instead, and the model will not overfit if $\lambda$ is large enough. Note also that as the regularization parameter is increased, the uncertainty increases as well.</span>
-</figure>
+<p><span class="marginnote">Illustration of changing the value of the regularization parameter $\lambda$, while keeping the number of basis functions $M=8$ constant. Even though we overfitted earlier when $M=8$, our effective complexity is now controlled by the regularization instead, and the model will not overfit if $\lambda$ is large enough. Note also that as the regularization parameter is increased, the uncertainty increases as well.</span></p>
+
+<p style="text-align: center"><img src="http://localhost:4000/extra/bsmalea-notes-2/prob_linreg_basis_regularization.svg" /></p>
 
 <h3 id="summary">Summary</h3>
 <ul>

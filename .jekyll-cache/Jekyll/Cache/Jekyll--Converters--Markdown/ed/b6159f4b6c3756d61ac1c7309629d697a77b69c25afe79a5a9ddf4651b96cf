@@ -1,0 +1,21 @@
+I"�<p>As mentioned in <a href="http://localhost:4000/guides/2021/03/08/bsmalea-notes-1a">notes 1a</a>, in classification the possible values for the target variables are discrete, and we call these possible values “classes”. In <a href="http://localhost:4000/guides/2021/03/22/bsmalea-notes-2">notes 2</a> we went through regression, which in short refers to constructing a function $h( \mathbf{x} )$ from a dataset $\mathbf{X} = \left( (\mathbf{x}_1, t_1), \dots, (\mathbf{x}_N, t_N) \right)$ that yields prediction values $t$ for new values of $\mathbf{x}$. The objective in classification is the same, except the values of $t$ are discrete.</p>
+
+<p>We are going to cover $3$ different approaches or types of classifiers:</p>
+
+<ul>
+  <li><strong>Generative classifiers</strong> that model the joint probability distribution of the input and target variables $p(\mathbf{x}, t)$.</li>
+  <li><strong>Discriminative classifiers</strong> that model the conditional probability distribution of the target given an input variable $p(t | \mathbf{x})$.</li>
+  <li><strong>Distribution-free classifiers</strong> that do not use a probability model but directly assign input to target variables.</li>
+</ul>
+
+<p>A quick disclaimer for this topic: <strong>the nomenclature will be very confusing</strong>, but we’ll deal with that when we cross those bridges.</p>
+
+<h2 id="multivariate-gaussian-distribution">Multivariate Gaussian distribution</h2>
+
+<h2 id="bayes-theorem">Bayes’ theorem</h2>
+<p>If you haven’t read the <a href="http://localhost:4000/guides/2021/03/15/bsmalea-notes-1c/">post on frequentism and Bayesianism</a>, then here’s a quick recap on Bayes’ theorem.</p>
+
+<p>Class conditional distribution.</p>
+
+<p>Bayes theorem.</p>
+:ET

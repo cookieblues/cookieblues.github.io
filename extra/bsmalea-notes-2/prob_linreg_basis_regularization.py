@@ -49,7 +49,7 @@ def plot_homogen_prob_density(x, y, variance, ax, l=1000, **kwargs):
 
 
 ### figure
-fig = plt.figure(figsize=(6,6/golden))
+fig = plt.figure(figsize=(7, 7/golden))
 
 Ms = [8, 8, 8, 8]
 lambdas = [0, 10e-5, 10e-4, 10e-3]
@@ -80,7 +80,7 @@ for idx, M in enumerate(Ms):
 
     ax = fig.add_subplot(2, 2, int(idx+1))
 
-    plot_homogen_prob_density(x_, t_, alpha, ax=ax, cmap=mycmp, alpha=0.625)
+    plot_homogen_prob_density(x_, t_, alpha, ax=ax, cmap=mycmp, alpha=1)
     ax.scatter(x, t,
         edgecolors = "magenta",
         c = "None",
@@ -89,7 +89,7 @@ for idx, M in enumerate(Ms):
         zorder = 3
     )
     ax.plot(x_, t_,
-        color="turquoise",
+        color="darkturquoise",
         linewidth = 1,
         label = "Predicted (mean)"
     )
@@ -114,11 +114,13 @@ for idx, M in enumerate(Ms):
     ax.text(0.5, -5,s=r"$M={}$".format(M))
     ax.set_xlim(x.min()-0.05, x.max()+0.05)
     ax.set_ylim(t.min()-0.5, t.max()+0.5)
-    ax.legend(frameon=False)
+
+    if idx==0:
+        ax.legend(frameon=False)
 
 
 plt.tight_layout()
-plt.savefig("prob_linreg_basis_regularization.svg")
+plt.savefig("prob_linreg_basis_regularization.png", bbox_inches="tight")
 plt.show()
 
 
