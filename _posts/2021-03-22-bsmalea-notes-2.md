@@ -133,7 +133,7 @@ $$
 where $\epsilon \sim \mathcal{N} \left( 0,\alpha \right)$, i.e. $\epsilon$ is a Gaussian random variable with mean 0 and variance $\alpha$. This lets us say that given an input variable $\mathbf{x}$, the corresponding target value $t$ is normally distributed with mean $h(\mathbf{x}, \mathbf{w})$ and variance $\alpha$, i.e.
 
 $$
-p(t | \mathbf{x}, \mathbf{w}, \alpha) = \mathcal{N} \left( t | h(\mathbf{x},\mathbf{w}), \alpha \right). \quad \quad (3)
+\text{Pr}(t | \mathbf{x}, \mathbf{w}, \alpha) = \mathcal{N} \left( t | h(\mathbf{x},\mathbf{w}), \alpha \right). \quad \quad (3)
 $$
 
 
@@ -146,14 +146,14 @@ Let's take a moment to understand exactly, what we're doing. The image below ill
 We can now use the entire dataset, $\mathbf{X}$ and $\textbf{\textsf{t}}$, to write up the likelihood function by making the assumption that our data points are drawn independently from $(3)$. The likelihood function then becomes the product of $(3)$ for all our input and target variable pairs, and is a function of $\mathbf{w}$ and $\alpha$:
 
 $$
-p(\textbf{\textsf{t}} | \mathbf{X}, \mathbf{w}, \alpha) =
+\text{Pr}(\textbf{\textsf{t}} | \mathbf{X}, \mathbf{w}, \alpha) =
 \prod_{i=1}^N \mathcal{N} \left( t_i | h(\mathbf{x}_i,\mathbf{w}), \alpha \right). \quad \quad (4)
 $$
 
 Now we want to maximize the likelihood, which means we want to determine the values of our parameters $\mathbf{w}$ and $\alpha$ that maximizes $(4)$. This might seem dauntingly difficult, but we can make it simpler with a handy trick.<span class="marginnote">Taking the log of the likelihood not only simplifies the math, but it helps computationally as well, since the product of many probabilities usually causes [underflow](https://en.wikipedia.org/wiki/Arithmetic_underflow), whereas the sum of logs doesn't.</span> Since the logarithm is a monotonically increasing function, maximizing the log-likelihood is equivalent to maximizing the likelihood. Taking the log of the likelihood gives us
 
 $$ \begin{aligned}
-\ln p(\textbf{\textsf{t}} | \mathbf{X}, \mathbf{w}, \alpha)
+\ln \text{Pr}(\textbf{\textsf{t}} | \mathbf{X}, \mathbf{w}, \alpha)
 &= \ln \left(
     \prod_{i=1}^N \mathcal{N} \left( t_i | h(\mathbf{x}_i,\mathbf{w}), \alpha \right)
 \right) \\
@@ -175,7 +175,7 @@ We can use the result of the maximum likelihood solution for $\mathbf{w}$ to fin
 <span class="marginnote">Note that we are in fact jointly maximizing the likelihood with respect to both $\mathbf{w}$ and $\alpha$, but because the maximization with respect to $\mathbf{w}$ is independent of $\alpha$, we start by finding the maximum likelihood solution for $\mathbf{w}$, and then use that result to find $\alpha$.</span>
 
 $$ \begin{aligned}
-\frac{\partial}{\partial \alpha} \ln p(\textbf{\textsf{t}} | \mathbf{X}, \mathbf{w}_{\text{ML}}, \alpha)
+\frac{\partial}{\partial \alpha} \ln \text{Pr}(\textbf{\textsf{t}} | \mathbf{X}, \mathbf{w}_{\text{ML}}, \alpha)
 &= 0 \\
 \frac{\partial}{\partial \alpha} \left(
     - \frac{N}{2} \ln 2 \pi \alpha - \frac{1}{2 \alpha} \sum_{i=1}^N (t_n - \mathbf{w}_{\text{ML}}^\intercal \mathbf{x}_i)^2
@@ -193,7 +193,7 @@ $$ \begin{aligned}
 In <a href="{{ site.url }}/guides/2021/03/08/bsmalea-notes-1a/">notes 1a</a> we implemented the OLS solution, but since we have a probabilistic model now, we make predictions that are probability distributions over $t$ instead of just point estimates. This is done by substituting the maximum likelihood solutions for $\mathbf{w}$ and $\alpha$ into $(3)$
 
 $$
-p(t | \mathbf{x}, \mathbf{w}_{\text{ML}}, \alpha_{\text{ML}}) = \mathcal{N} \left( t | h(\mathbf{x},\mathbf{w}_{\text{ML}}), \alpha_{\text{ML}} \right).
+\text{Pr}(t | \mathbf{x}, \mathbf{w}_{\text{ML}}, \alpha_{\text{ML}}) = \mathcal{N} \left( t | h(\mathbf{x},\mathbf{w}_{\text{ML}}), \alpha_{\text{ML}} \right).
 $$
 
 We can find $\mathbf{w}$ and $\alpha$ with the following code snippet
@@ -258,7 +258,7 @@ The Gaussian basis function for the plot above was implemented as below, where $
 
 {% highlight python %}
 def gaussian_basis(x, mu, gamma=1):
-    return np.exp(-gamma * np.linalg.norm(mu-x)**2)
+    return np.ex\text{Pr}(-gamma * np.linalg.norm(mu-x)**2)
 {% endhighlight %}
 
 <!-- MENTION POLYNOMIAL REGRESSION -->

@@ -95,6 +95,13 @@ for i in range(3):
 
     ax.set_aspect(1/ax.get_data_ratio(), adjustable="box")
 
+    if i == 0:
+        ax.set_title("Different covariance matrices", fontsize=14)
+    if i == 1:
+        ax.set_title("Diagonal covariance matrices", fontsize=14)
+    if i == 2:
+        ax.set_title("Diagonal with equal variance", fontsize=14)
+
 
 plt.tight_layout()
 plt.savefig("gaussians.svg", bbox_inches="tight")
