@@ -1,5 +1,5 @@
 ---
-date: 2021-03-23
+date: 2021-03-30
 title: "Machine learning, notes 3a: Classification"
 categories:
   - Guides
