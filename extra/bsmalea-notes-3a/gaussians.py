@@ -25,7 +25,7 @@ mpl.rc("text", usetex=True)
 mpl.rc("font", family="serif")
 
 
-fig = plt.figure(figsize=(15, 15/3), constrained_layout=True)
+fig = plt.figure(figsize=(8, 8/3), constrained_layout=True)
 gs = mpl.gridspec.GridSpec(2, 6, figure=fig)
 
 for i in range(3):
@@ -112,15 +112,15 @@ for i in range(3):
     ax.set_aspect(1/ax.get_data_ratio(), adjustable="box")
 
     if i == 0:
-        ax.set_title("Different covariance matrices", fontsize=14)
+        ax.set_title("Different covariance matrices", fontsize=12)
     if i == 1:
-        ax.set_title("Diagonal covariance matrices", fontsize=14)
+        ax.set_title("Diagonal covariance matrices", fontsize=12)
     if i == 2:
-        ax.set_title("Diagonal with equal variance", fontsize=14)
+        ax.set_title("Diagonal with equal variance", fontsize=12)
         # link
         ax.text(
-            0.82,
-            0.02,
+            0.68,
+            0.04,
             'cookieblues.github.io',
             fontsize=11,
             horizontalalignment='center',
