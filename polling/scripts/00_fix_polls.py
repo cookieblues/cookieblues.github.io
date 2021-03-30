@@ -18,7 +18,7 @@ party_names = [
     "Alternativet"
 ]
 
-df = pd.read_csv("data/raw/polls.csv", usecols=[
+df = pd.read_csv("data/raw/all_polls.csv", usecols=[
     "year",
     "month",
     "day",

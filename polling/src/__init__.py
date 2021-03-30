@@ -7,6 +7,18 @@ import pystan
 from config import *
 
 
+def merge_polls():
+    df = pd.concat([
+        pd.read_csv(DATA_DIRECTORY / "raw/polls.csv"),
+        pd.read_csv(DATA_DIRECTORY / "raw/other_polls.csv")
+    ], axis=0)
+
+    # Create date column
+    df["date"] = pd.to_datetime(df[["year", "month", "day"]])
+    df = df.sort_values(by="date", ascending=True)
+    df.to_csv(DATA_DIRECTORY / "raw/all_polls.csv", index=False)
+
+
 def jackman2005(party_name):
     df = pd.read_csv(DATA_DIRECTORY / "raw/polls.csv")
     party_code = PARTIES[party_name]
@@ -190,12 +202,17 @@ def dirichlet_multinomial_process():
 def gaussian_process():
     np.random.seed(11)
 
-    df = pd.read_csv(DATA_DIRECTORY / "raw/polls.csv")
-    # Create date column
-    df["date"] = pd.to_datetime(df[["year", "month", "day"]])
-    df = df.sort_values(by="date", ascending=True)
-    df.index = df["date"]
-    df = df.drop(["year", "month", "day", "date"], axis=1)
+    merge_polls()
+    df = pd.read_csv(DATA_DIRECTORY / "raw/all_polls.csv", index_col="date", parse_dates=True)
+    df = df.drop(["year", "month", "day"], axis=1)
+    # df = pd.concat([
+    #     pd.read_csv(DATA_DIRECTORY / "raw/polls.csv"),
+    #     pd.read_csv(DATA_DIRECTORY / "raw/other_polls.csv")
+    # ], axis=0)
+    # # Create date column
+    # df["date"] = pd.to_datetime(df[["year", "month", "day"]])
+    # df = df.sort_values(by="date", ascending=True)
+    # df = df.drop(["year", "month", "day", "date"], axis=1)
 
     # Fix column names
     PARTIES_INV = {v: k for k, v in PARTIES.items()}
