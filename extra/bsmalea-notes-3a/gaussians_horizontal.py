@@ -28,23 +28,23 @@ mpl.rc("font", family="serif")
 fig = plt.figure(figsize=(15, 15/3), constrained_layout=True)
 gs = mpl.gridspec.GridSpec(2, 6, figure=fig)
 
-for i in range(3):
+for i in range(4):
     mean_1 = np.array([-0.5, -0.5])
     mean_2 = np.array([0.5, 0.5])
     if i == 0:
-        cov_1 = np.array([[0.3, 0.2], [0.2, 0.1]], dtype=np.float32)
-        cov_2 = np.array([[0.05, -0.1], [-0.1, 0.6]], dtype=np.float32)
+        cov_1 = np.array([[3, 2], [2, 1]], dtype=np.float32)
+        cov_2 = np.array([[0.5, -1], [-1, 6]], dtype=np.float32)
     elif i == 1:
-        cov_1 = np.array([[1, 0], [0, 0.1]], dtype=np.float32)
-        cov_2 = np.array([[0.2, 0], [0, 0.4]], dtype=np.float32)
+        cov_1 = np.array([[5, 0], [0, 1]], dtype=np.float32)
+        cov_2 = np.array([[2, 0], [0, 4]], dtype=np.float32)
     else:
-        cov_1 = np.array([[0.2, 0], [0, 0.2]], dtype=np.float32)
-        cov_2 = np.array([[0.5, 0], [0, 0.5]], dtype=np.float32)
-    #cov_1 /= cov_1.sum()
-    #cov_2 /= cov_2.sum()
+        cov_1 = np.array([[2, 0], [0, 2]], dtype=np.float32)
+        cov_2 = np.array([[5, 0], [0, 5]], dtype=np.float32)
+    cov_1 /= cov_1.sum()
+    cov_2 /= cov_2.sum()
 
 
-    ax = fig.add_subplot(1, 3, int(i+1))
+    ax = fig.add_subplot(1, 4, int(i+1))
 
     draw_ellipse(
         mean_1,
@@ -90,24 +90,8 @@ for i in range(3):
         # labelleft=False
     )
 
-    xticks = range(-3, 4)
-    ax.set_xlim(-3.6, 3.6)
-    ax.set_xticks(xticks)
-    yticks = range(-3, 4)
-    ax.set_ylim(-3.6, 3.6)
-    ax.set_yticks(yticks)
-
-    # Grids
-    ax.set_axisbelow(True)
-    ax.tick_params(
-        which="both",
-        top="off",
-        left="off",
-        right="off",
-        bottom="off",
-        length=0
-    )
-    ax.grid(linestyle=":", linewidth=0.5)
+    ax.set_xlim(-4, 4)
+    ax.set_ylim(-4, 4)
 
     ax.set_aspect(1/ax.get_data_ratio(), adjustable="box")
 
@@ -117,9 +101,11 @@ for i in range(3):
         ax.set_title("Diagonal covariance matrices", fontsize=14)
     if i == 2:
         ax.set_title("Diagonal with equal variance", fontsize=14)
+    if i == 3:
+        ax.set_title("Diagonal with equal variance", fontsize=14)
         # link
         ax.text(
-            0.82,
+            0.85,
             0.02,
             'cookieblues.github.io',
             fontsize=11,
@@ -132,6 +118,6 @@ for i in range(3):
 
 
 plt.tight_layout()
-plt.savefig("gaussians.png", bbox_inches="tight")
+plt.savefig("gaussians.svg", bbox_inches="tight")
 plt.show()
 

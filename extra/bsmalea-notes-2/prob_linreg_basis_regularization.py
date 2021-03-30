@@ -110,17 +110,29 @@ for idx, M in enumerate(Ms):
     else:
         tex_lambda = "0"
 
-    ax.text(0.5, -3.5,s=r"$\lambda={}$".format(tex_lambda))
-    ax.text(0.5, -5,s=r"$M={}$".format(M))
+    ax.text(0.5, -2.5,s=r"$\lambda={}$".format(tex_lambda))
+    ax.text(0.5, -4,s=r"$M={}$".format(M))
     ax.set_xlim(x.min()-0.05, x.max()+0.05)
     ax.set_ylim(t.min()-0.5, t.max()+0.5)
 
     if idx==0:
         ax.legend(frameon=False)
+    if idx == 3:
+        ax.text(
+            0.755,
+            0.04,
+            'cookieblues.github.io',
+            fontsize=11,
+            horizontalalignment='center',
+            verticalalignment='center',
+            transform=ax.transAxes,
+            color='dimgrey',
+            zorder=5
+        )
 
 
 plt.tight_layout()
-plt.savefig("prob_linreg_basis_regularization.png", bbox_inches="tight")
+plt.savefig("prob_linreg_basis_regularization.svg", bbox_inches="tight")
 plt.show()
 
 

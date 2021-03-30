@@ -92,15 +92,27 @@ for idx, M in enumerate(Ms):
         linewidth = 1,
         label = "True"
     )
-    ax.text(0.6, -5, s=r"$M={}$".format(M))
+    ax.text(0.6, -4, s=r"$M={}$".format(M))
     ax.set_xlim(x.min()-0.05, x.max()+0.05)
     ax.set_ylim(t.min()-0.5, t.max()+0.5)
     if idx == 0:
         ax.legend(frameon=False,loc=2)
+    if idx == 3:
+        ax.text(
+            0.755,
+            0.04,
+            'cookieblues.github.io',
+            fontsize=11,
+            horizontalalignment='center',
+            verticalalignment='center',
+            transform=ax.transAxes,
+            color='dimgrey',
+            zorder=5
+        )
 
 
 plt.tight_layout()
-plt.savefig("prob_linreg_basis.svg", bbox_inches="tight")
+plt.savefig("prob_linreg_basis.png", bbox_inches="tight")
 plt.show()
 
 
