@@ -1,0 +1,313 @@
+I"D_<p>As mentioned in <a href="http://localhost:4000/guides/2021/03/23/bsmalea-notes-3a/">notes 3a</a>, generative classifiers model the <strong>joint probability distribution</strong> of the input and target variables $\text{Pr}(\mathbf{x}, t)$. This means, we would end up with a distribution that could generate (hence the name) new input variables with their respective targets, i.e., we can sample new data points with the joint probability distribution, and we will see how to do that in this post.</p>
+
+<p>The models, we will be looking at in this post, are called <strong>Gaussian Discriminant Analysis (GDA)</strong> models. Now is when the nomenclature starts getting tricky! Note that a Gaussian <em>Discriminant</em> Analysis model is a <em>generative</em> model! It is <em>not</em> a discriminative model despite its name.</p>
+
+<h2 id="quadratic-discriminant-analysis-qda">Quadratic Discriminant Analysis (QDA)</h2>
+<h3 id="setup-and-objective">Setup and objective</h3>
+<p>Given a training dataset of $N$ input variables $\mathbf{x} \in \mathbb{R}^D$ with corresponding target variables $t \in \mathcal{C}_c$ where $c \in \{1, \dots, K\}$, GDA models assume that the <strong>class-conditional densities</strong> are normally distributed</p>
+
+\[\text{Pr}(\mathbf{x} \mid t = c, \boldsymbol{\mu}_c, \mathbf{\Sigma}_c) = \mathcal{N} \left( \mathbf{x} \mid \boldsymbol{\mu}_c, \mathbf{\Sigma}_c \right),\]
+
+<p>where $\boldsymbol{\mu}_c$ is the <strong>class-specific mean vector</strong> and $\mathbf{\Sigma}_c$ is the <strong>class-specific covariance matrix</strong>. Using Bayes’ theorem, we can now calculate the class posterior</p>
+
+\[\overbrace{\text{Pr}(t=c | \mathbf{x}, \boldsymbol{\mu}_c, \mathbf{\Sigma}_c)}^{\text{class posterior}}
+= \frac{ \overbrace{\text{Pr}(\mathbf{x} \mid t = c, \boldsymbol{\mu}_c, \mathbf{\Sigma}_c)}^{\text{class-conditional density}} \, \overbrace{\text{Pr}(t=c)}^{\text{class prior}} }{ \sum_{k=1}^K \text{Pr}(\mathbf{x} \mid t = k, \boldsymbol{\mu}_k, \mathbf{\Sigma}_k) \, \text{Pr}(t=k) }.\]
+
+<p>We will then classify $\mathbf{x}$ into class</p>
+
+\[\hat{h} (\mathbf{x}) = \underset{c}{\text{argmax }} \text{Pr}(t=c | \mathbf{x}, \boldsymbol{\mu}_c, \mathbf{\Sigma}_c).\]
+
+<h3 id="derivation-and-training">Derivation and training</h3>
+<p>For each input variable $\mathbf{x}_{n}$, we define $t_{nk} = 1$ if $\mathbf{x}_n$ belongs to class $\mathcal{C}_k$, otherwise $t_{nk}=0$, i.e., we end up having $k$ binary indicator variables for each input variable. Furthermore, let $\textbf{\textsf{t}} = \left( t_1, \dots, t_N \right)^\intercal$ denote all our target variables, and $\pi_c = \text{Pr}(t=c)$ the prior for class $c$. Assuming the data points are drawn independently, the likelihood function is given by</p>
+
+\[\begin{aligned}
+\text{Pr} \left( \textbf{\textsf{t}} | \boldsymbol{\mu}_1, \dots, \boldsymbol{\mu}_K, \mathbf{\Sigma}_1, \dots, \mathbf{\Sigma}_K \right)
+&amp;= \prod_{n=1}^N \prod_{k=1}^K \text{Pr} \left( t_n=k \right)^{t_{nk}} \text{Pr}\left( \mathbf{x}_n \mid t_n = k, \boldsymbol{\mu}_k, \mathbf{\Sigma}_k \right)^{t_{nk}} \\
+&amp;= \prod_{n=1}^N \prod_{k=1}^K \pi_k^{t_{nk}} \mathcal{N} \left( \mathbf{x}_n \mid \boldsymbol{\mu}_k, \mathbf{\Sigma}_k \right)^{t_{nk}}.
+\end{aligned}\]
+
+<p>To simplify notation, let $\boldsymbol{\theta}$ denote all the class priors, class-specific mean vectors, and covariance matrices $\left\{ \pi_1, \dots, \pi_K, \boldsymbol{\mu}_1, \dots, \boldsymbol{\mu}_K, \mathbf{\Sigma}_1, \dots, \mathbf{\Sigma}_K \right\}$. As we know, <strong>maximizing the likelihood is equivalent to maximizing the log-likelihood</strong>. The log-likelihood is</p>
+
+\[\begin{aligned}
+\ln \text{Pr} \left( \textbf{\textsf{t}} | \boldsymbol{\phi} \right)
+&amp;= \ln \prod_{n=1}^N \prod_{k=1}^K \pi_k^{t_{nk}} \mathcal{N} \left( \mathbf{x}_n \mid \boldsymbol{\mu}_k, \mathbf{\Sigma}_k \right)^{t_{nk}} \\
+&amp;= \sum_{n=1}^N \ln \prod_{k=1}^K \pi_k^{t_{nk}} \mathcal{N} \left( \mathbf{x}_n \mid \boldsymbol{\mu}_k, \mathbf{\Sigma}_k \right)^{t_{nk}} \\
+&amp;= \sum_{n=1}^N \sum_{k=1}^K \ln \pi_k^{t_{nk}} \mathcal{N} \left( \mathbf{x}_n \mid \boldsymbol{\mu}_k, \mathbf{\Sigma}_k \right)^{t_{nk}} \\
+&amp;= \sum_{n=1}^N \sum_{k=1}^K t_{nk} \left( \ln \pi_k + \, \ln \mathcal{N} \left( \mathbf{x}_n \mid \boldsymbol{\mu}_k, \mathbf{\Sigma}_k \right) \right) \\
+&amp;= \sum_{n=1}^N \sum_{k=1}^K \left(
+  t_{nk} \ln \pi_k + t_{nk} \ln \mathcal{N} \left( \mathbf{x}_n \mid \boldsymbol{\mu}_k, \mathbf{\Sigma}_k \right)
+\right). \quad \quad (1)
+\end{aligned}\]
+
+<p>Expanding $(1)$ will greatly help us in the upcoming derivations:</p>
+
+\[\begin{aligned}
+\ln \text{Pr} \left( \textbf{\textsf{t}} | \boldsymbol{\phi} \right)
+&amp;= \sum_{n=1}^N \sum_{k=1}^K t_{nk} \left(
+  \ln \pi_k +
+  \ln \left(
+    \frac{1}{\sqrt{ (2\pi)^D \det{\mathbf{\Sigma}_c} }} \exp{\left( -\frac{1}{2} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)^\intercal \mathbf{\Sigma}_c^{-1} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right) \right)}
+  \right)
+\right) \\
+&amp;= \sum_{n=1}^N \sum_{k=1}^K t_{nk} \left(
+  \ln \pi_k +
+  \ln \frac{1}{\sqrt{ (2\pi)^D \det{\mathbf{\Sigma}_c} }}
+  -\frac{1}{2} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)^\intercal \mathbf{\Sigma}_c^{-1} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)
+\right) \\
+&amp;= \sum_{n=1}^N \sum_{k=1}^K t_{nk} \left(
+  \ln \pi_k
+  -\frac{1}{2} \ln \left( (2\pi)^D \det{\mathbf{\Sigma}_c} \right)
+  -\frac{1}{2} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)^\intercal \mathbf{\Sigma}_c^{-1} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)
+\right) \\
+&amp;= \sum_{n=1}^N \sum_{k=1}^K t_{nk} \left(
+  \ln \pi_k
+  -\frac{1}{2} \left(
+    D \ln 2\pi + \ln \det{\mathbf{\Sigma}_c}
+  \right)
+  -\frac{1}{2} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)^\intercal \mathbf{\Sigma}_c^{-1} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)
+\right) \\
+&amp;= \sum_{n=1}^N \sum_{k=1}^K t_{nk} \left(
+  \ln \pi_k
+  -\frac{D}{2} \ln 2\pi
+  +\frac{1}{2} \ln \det{\mathbf{\Sigma}_c^{-1}}
+  -\frac{1}{2} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)^\intercal \mathbf{\Sigma}_c^{-1} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)
+\right). \quad \quad (2)
+\end{aligned}\]
+
+<p>We have to find the maximum likelihood solution for $\pi_c$, $\boldsymbol{\mu}_c$, and $\mathbf{\Sigma}_c$. Starting with $\pi_c$, we have to take the derivative of $(2)$, set it equal to 0, and solve for $\pi_c$, however, we have to maintain the constraint $\sum_{k=1}^K \pi_k = 1$. This is done by using a Lagrange multiplier $\lambda$, and instead maximizing</p>
+
+\[\ln \text{Pr} \left( \textbf{\textsf{t}} | \boldsymbol{\phi} \right) + \lambda \left( \sum_{k=1}^K \pi_k - 1 \right). \quad \quad (3)\]
+
+<p>Using the result from $(2)$, we then take the derivative of $(3)$ with respect to $\pi_c$, set it equal to 0, and solve for $\pi_c$</p>
+
+\[\begin{aligned}
+\frac{\partial}{\partial \pi_c} \left( \ln \text{Pr} \left( \textbf{\textsf{t}} | \boldsymbol{\phi} \right) + \lambda \left( \sum_{k=1}^K \pi_k - 1 \right) \right)
+&amp;= 0 \\
+\sum_{n=1}^N \frac{\partial}{\partial \pi_c} \left(
+  t_{nc} \ln \pi_k 
+\right) +
+\lambda \frac{\partial}{\partial \pi_c} \left(
+  \pi_c - 1
+\right)
+&amp;= 0 \\
+\sum_{n=1}^N \frac{t_{nc}}{\pi_c} + \lambda
+&amp;= 0 \\
+\pi_c \lambda
+&amp;= - N_c, \quad \quad (4)
+\end{aligned}\]
+
+<p>where $N_c$ is the number of data points in class $\mathcal{C}_c$, and since we know that $\sum_{k=1}^K \pi_k = 1$, we can find $\lambda$</p>
+
+\[\begin{aligned}
+\sum_{k=1}^K \pi_k \lambda
+&amp;= - \sum_{k=1}^K N_k \\
+\lambda
+&amp;= -N.
+\end{aligned}\]
+
+<p>Substituting $\lambda = -N$ back into $(4)$ gives us</p>
+
+\[\begin{aligned}
+-\pi_c N
+&amp;= -N_c \\
+\pi_c
+&amp;= \frac{N_c}{N}. \quad \quad (5)
+\end{aligned}\]
+
+<p>$(5)$ tells us that the class prior is simply the proportion of data points that belong to the class, which intuitively makes sense as well. Now we turn to maximizing the log-likelihood with respect to $\boldsymbol{\mu}_c$. Again, using the result from $(2)$, makes it easy for us to take the derivative with respect to $\boldsymbol{\mu}_c$, set it equal to 0, and solve for $\boldsymbol{\mu}_c$</p>
+
+\[\begin{aligned}
+\frac{\partial}{\partial \boldsymbol{\mu}_c} \left(
+  \ln \text{Pr} \left( \textbf{\textsf{t}} | \boldsymbol{\phi} \right)
+\right)
+&amp;= 0 \\
+\sum_{n=1}^N
+\frac{\partial}{\partial \boldsymbol{\mu}_c} 
+  -\frac{t_{nc}}{2} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)^\intercal \mathbf{\Sigma}_c^{-1} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)
+&amp;= 0.
+\end{aligned}\]
+
+<p>To evaluate this derivative, we use the following <a href="https://en.wikipedia.org/wiki/Matrix_calculus#Scalar-by-vector_identities">matrix calculus identity</a>:</p>
+
+<blockquote>
+  <p><em>If $\mathbf{A}$ is not a function of $\mathbf{u}$, and $\mathbf{A}$ is symmetric, then $\frac{\partial \mathbf{u}^\intercal \mathbf{A} \mathbf{u}}{\partial \mathbf{u}} = 2 \mathbf{A} \mathbf{u}$.</em></p>
+</blockquote>
+
+<p>Since covariances matrices are always symmetric, and the inverse of a symmetric matrix is also symmetric, we can use this identity to get</p>
+
+\[\begin{aligned}
+\sum_{n=1}^N
+\frac{\partial}{\partial \boldsymbol{\mu}_c} 
+  -\frac{t_{nc}}{2} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)^\intercal \mathbf{\Sigma}_c^{-1} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)
+&amp;= 0 \\
+\sum_{n=1}^N t_{nc} \mathbf{\Sigma}_c^{-1} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)
+&amp;= 0 \\
+\sum_{n=1}^N t_{nc} \mathbf{\Sigma}_c^{-1} \mathbf{x}_n
+&amp;= \sum_{n=1}^N t_{nc} \mathbf{\Sigma}_c^{-1} \boldsymbol{\mu}_c \\
+\sum_{n=1}^N t_{nc} \mathbf{x}_n
+&amp;= N_c \boldsymbol{\mu}_c \\
+\frac{1}{N_c} \sum_{n=1}^N t_{nc} \mathbf{x}_n
+&amp;= \boldsymbol{\mu}_c. \quad \quad (6)
+\end{aligned}\]
+
+<p>Let’s take a moment to understand what $(6)$ is saying. $t_{nc}$ is only equal to 1, for the data points that belong to class $\mathcal{C}_c$. Which means that the sum on the left-hand side of $(6)$ only includes input variables $\mathbf{x}$ that belong to class $\mathcal{C}_c$. Afterwards we’re dividing that sum of vectors with the number of data points in the class $N_c$, which is the same as taking the average of the vectors. This means that the class-specific mean vector $\boldsymbol{\mu}_c$ is the average of the input variables $\mathbf{x}_n$ that belong to the class, i.e., <strong>the class-specific mean vector is just the mean of the vectors of the class</strong>. Once again, this makes intuitive sense as well.</p>
+
+<p>Lastly, we have to maximize the log-likelihood with respect to the class-specific covariance matrix $\mathbf{\Sigma}_c$. Again, we take the derivative with respect to $\mathbf{\Sigma}_c$ using the result from $(2)$, set it equal to 0, and solve</p>
+
+\[\begin{aligned}
+\frac{\partial}{\partial \mathbf{\Sigma}_c} \left(
+  \ln \text{Pr} \left( \textbf{\textsf{t}} | \boldsymbol{\phi} \right)
+\right)
+&amp;= 0 \\
+\sum_{n=1}^N
+\frac{\partial}{\partial \mathbf{\Sigma}_c} \left(
+  \frac{t_{nc}}{2} \ln \det{\mathbf{\Sigma}_c^{-1}}
+  -\frac{t_{nc}}{2} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)^\intercal \mathbf{\Sigma}_c^{-1} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)
+\right)
+&amp;= 0 \\
+\sum_{n=1}^N
+\frac{t_{nc}}{2}
+\frac{\partial}{\partial \mathbf{\Sigma}_c} \left(
+  \ln \det{\mathbf{\Sigma}_c^{-1}}
+  -\left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)^\intercal \mathbf{\Sigma}_c^{-1} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)
+\right)
+&amp;= 0.
+\end{aligned}\]
+
+<p>This derivative requires a bit more work. Firstly, we can use the following <a href="https://en.wikipedia.org/wiki/Matrix_calculus#Scalar-by-vector_identities">identity</a>:</p>
+
+<blockquote>
+  <p><em>If $a$ is not a function of $\mathbf{A}$, then $\frac{\partial \ln \det a\mathbf{A}}{\partial \mathbf{A}} = \mathbf{A}^{-1}$.</em></p>
+</blockquote>
+
+<p>This takes care of the first part. Secondly, we use a <a href="https://en.wikipedia.org/wiki/Trace_(linear_algebra)#Trace_of_a_product">property of the trace of a product</a>:</p>
+
+<blockquote>
+  <p><em>If $\mathbf{u}$ is a column vector, then $\mathbf{u}^\intercal \mathbf{A} \mathbf{u} = \text{tr} \left( \mathbf{u}^\intercal \mathbf{u} \mathbf{A} \right)$.</em></p>
+</blockquote>
+
+<p>Finally, we use another <a href="https://en.wikipedia.org/wiki/Matrix_calculus#Scalar-by-vector_identities">matrix calculus identity</a>:</p>
+
+<blockquote>
+  <p><em>If $\mathbf{B}$ is not a function of $\mathbf{A}$, then $\frac{\partial \text{tr}\left( \mathbf{B} \mathbf{A} \right)}{\partial \mathbf{A}} = \mathbf{B}^\intercal$.</em></p>
+</blockquote>
+
+<p>This now gives us</p>
+
+\[\begin{aligned}
+\sum_{n=1}^N
+\frac{t_{nc}}{2}
+\frac{\partial}{\partial \mathbf{\Sigma}_c} \left(
+  \ln \det{\mathbf{\Sigma}_c^{-1}}
+  -\left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)^\intercal \mathbf{\Sigma}_c^{-1} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)
+\right)
+&amp;= 0 \\
+\sum_{n=1}^N
+t_{nc}
+\left(
+  \mathbf{\Sigma}_c
+  -\frac{\partial}{\partial \mathbf{\Sigma}_c} \left(
+    \text{tr} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)^\intercal \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right) \mathbf{\Sigma}_c^{-1}
+  \right)
+\right)
+&amp;= 0 \\
+\sum_{n=1}^N
+t_{nc}
+\left(
+  \mathbf{\Sigma}_c
+  -\left( \mathbf{x}_n - \boldsymbol{\mu}_c \right) \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)^\intercal
+\right)
+&amp;= 0 \\
+\sum_{n=1}^N t_{nc} \mathbf{\Sigma}_c
+&amp;= \sum_{n=1}^N t_{nc} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right) \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)^\intercal \\
+\mathbf{\Sigma}_c
+&amp;= \frac{1}{N_c} \sum_{n=1}^N t_{nc} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right) \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)^\intercal. \quad \quad (7)
+\end{aligned}\]
+
+<p>Just like the class-specific mean vector is just the mean of the vectors of the class, <strong>the class-specific covariance matrix is just the covariance of the vectors of the class</strong>, and we end up with our maximum likelihood solutions $(5)$, $(6)$, and $(7)$. Thus, we can classify using the following</p>
+
+\[\hat{h} (\mathbf{x}) = \underset{c}{\text{argmax }} \ln \pi_c +\frac{1}{2} \ln \det{\mathbf{\Sigma}_c^{-1}} -\frac{1}{2} \left( \mathbf{x} - \boldsymbol{\mu}_c \right)^\intercal \mathbf{\Sigma}_c^{-1} \left( \mathbf{x} - \boldsymbol{\mu}_c \right). \quad \quad (8)\]
+
+<h3 id="python-implementation">Python implementation</h3>
+<p>Let’s start with some data - you can see it in the plot underneath. You can download the data <a href="https://github.com/cookieblues/cookieblues.github.io/raw/master/extra/bsmalea-notes-3b/data.csv">here</a>.</p>
+
+<p style="text-align: center"><img src="http://localhost:4000/extra/bsmalea-notes-3b/data.svg" /></p>
+
+<p>The code underneath is a simple implementation of QDA that we just went over.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="k">class</span> <span class="nc">QDA</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">priors</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">means</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">covs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">classes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">classes</span><span class="p">:</span>
+            <span class="n">X_c</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">t</span> <span class="o">==</span> <span class="n">c</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">priors</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">X_c</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">means</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X_c</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">covs</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">X_c</span><span class="p">,</span> <span class="n">rowvar</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="n">preds</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span><span class="p">:</span>
+            <span class="n">posts</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">classes</span><span class="p">:</span>
+                <span class="n">prior</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">priors</span><span class="p">[</span><span class="n">c</span><span class="p">])</span>
+                <span class="n">inv_cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">covs</span><span class="p">[</span><span class="n">c</span><span class="p">])</span>
+                <span class="n">inv_cov_det</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">inv_cov</span><span class="p">)</span>
+                <span class="n">diff</span> <span class="o">=</span> <span class="n">x</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">means</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+                <span class="n">likelihood</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">inv_cov_det</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">diff</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">inv_cov</span> <span class="o">@</span> <span class="n">diff</span>
+                <span class="n">post</span> <span class="o">=</span> <span class="n">prior</span> <span class="o">+</span> <span class="n">likelihood</span>
+                <span class="n">posts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">post</span><span class="p">)</span>
+            <span class="n">pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">posts</span><span class="p">)]</span>
+            <span class="n">preds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">preds</span><span class="p">)</span></code></pre></figure>
+
+<p>We can now make predictions with the following code.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s">"../data.csv"</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s">","</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+
+<span class="n">qda</span> <span class="o">=</span> <span class="n">QDA</span><span class="p">()</span>
+<span class="n">qda</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<span class="n">preds</span> <span class="o">=</span> <span class="n">qda</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span></code></pre></figure>
+
+<p>This gives us the Gaussian distributions along with predictions.</p>
+
+<p style="text-align: center"><img src="http://localhost:4000/extra/bsmalea-notes-3b/qda/preds.svg" /></p>
+
+<h2 id="naive-bayes">Naive Bayes</h2>
+
+<h3 id="setup-and-objective-1">Setup and objective</h3>
+
+<h3 id="derivation-and-training-1">Derivation and training</h3>
+
+<h4 id="python-implementation-1">Python implementation</h4>
+
+<h3 id="model-selection">Model selection</h3>
+
+<h2 id="linear-discriminant-analysis-lda">Linear Discriminant Analysis (LDA)</h2>
+
+<h3 id="setup-and-objective-2">Setup and objective</h3>
+
+<h3 id="derivation-and-training-2">Derivation and training</h3>
+
+<h4 id="python-implementation-2">Python implementation</h4>
+
+<h3 id="model-selection-1">Model selection</h3>
+
+<p>https://www.eecs189.org/static/notes/n18.pdf
+https://stats.stackexchange.com/questions/80507/what-is-a-gaussian-discriminant-analysis-gda
+https://web.archive.org/web/20200103035702/http://cs229.stanford.edu/notes/cs229-notes2.pdf
+https://stats.stackexchange.com/questions/254963/differences-linear-discriminant-analysis-and-gaussian-mixture-model
+https://stats.stackexchange.com/questions/190806/sources-seeming-disagreement-on-linear-quadratic-and-fishers-discriminant-ana/190821#190821
+https://stats.stackexchange.com/questions/71489/three-versions-of-discriminant-analysis-differences-and-how-to-use-them
+https://www.datascienceblog.net/post/machine-learning/linear-discriminant-analysis/
+https://xavierbourretsicotte.github.io/LDA_QDA.html</p>
+:ET
