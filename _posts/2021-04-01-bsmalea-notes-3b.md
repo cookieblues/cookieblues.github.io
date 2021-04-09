@@ -306,7 +306,7 @@ To make it easier for us to illustrate, how QDA works and how well it works, we 
 ## Linear Discriminant Analysis (LDA)
 
 ### Setup and objective
-The only difference between linear discriminant analysis (LDA) and quadratic discriminant analysis (QDA) is that LDA does not have class-specific covariance matrices, but one shared covariance matrix among the classes. So, given a training dataset of $N$ input variables $\mathbf{x} \in \mathbb{R}^D$ with corresponding target variables $t \in \mathcal{C}_c$ where $c \in \\{1, \dots, K\\}$, LDA assumes that the **class-conditional densities** are normally distributed
+The only difference between linear discriminant analysis (LDA) and quadratic discriminant analysis (QDA) is that **LDA does not have class-specific covariance matrices, but one shared covariance matrix among the classes**. So, given a training dataset of $N$ input variables $\mathbf{x} \in \mathbb{R}^D$ with corresponding target variables $t \in \mathcal{C}_c$ where $c \in \\{1, \dots, K\\}$, LDA assumes that the **class-conditional densities** are normally distributed
 
 $$
 \text{Pr}(\mathbf{x} \mid t = c, \boldsymbol{\mu}_c, \mathbf{\Sigma}) = \mathcal{N} \left( \mathbf{x} \mid \boldsymbol{\mu}_c, \mathbf{\Sigma} \right),
