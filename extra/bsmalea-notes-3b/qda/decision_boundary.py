@@ -49,7 +49,7 @@ def decision_contour(model, X, y, fig, ax, cmap=colormap, alpha=0.4):
     x_min, x_max = ax.get_xlim()
     y_min, y_max = ax.get_ylim()
 
-    xx, yy = np.meshgrid(np.linspace(x_min, x_max, 10*x_points), np.linspace(y_min, y_max, 10*y_points))
+    xx, yy = np.meshgrid(np.linspace(x_min, x_max, 5*x_points), np.linspace(y_min, y_max, 5*y_points))
     all_ = np.c_[xx.ravel(),  yy.ravel()]
 
     probs = model.predict_prob(all_)
@@ -118,7 +118,7 @@ preds = qda.predict(X)
 
 
 # Figure
-fig = plt.figure(figsize=(8, 8/1.4))
+fig = plt.figure(figsize=(1400/96, 1400/(96*1.8)), dpi=96)
 ax = fig.add_subplot(111)
 
 
@@ -160,5 +160,5 @@ ax.scatter(
 decision_contour(qda, X, t, fig, ax, cmap=colormap)
 
 plt.tight_layout()
-plt.savefig("decision_boundary.svg", bbox_inches="tight")
+plt.savefig("decision_boundary.png", bbox_inches="tight")
 plt.show()

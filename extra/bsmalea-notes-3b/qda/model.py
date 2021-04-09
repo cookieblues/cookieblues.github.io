@@ -141,6 +141,6 @@ ax.axis("equal")
 
 
 plt.tight_layout()
-plt.savefig("preds.svg", bbox_inches="tight")
+plt.savefig("preds.png", bbox_inches="tight")
 plt.show()
 

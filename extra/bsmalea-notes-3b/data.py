@@ -90,6 +90,6 @@ ax.axis("equal")
 
 
 plt.tight_layout()
-plt.savefig("data.svg", bbox_inches="tight")
+plt.savefig("data.png", bbox_inches="tight")
 plt.show()
 
