@@ -5,7 +5,7 @@ categories:
   - Guides
 featured_image: https://raw.githubusercontent.com/cookieblues/cookieblues.github.io/2a3bf86bc6dc670086c4fbf326d4c19f0049c2e9/extra/bsmalea-notes-3b/qda/decision_boundary.svg
 ---
-As mentioned in <a href="{{ site.url }}/guides/2021/03/23/bsmalea-notes-3a/">notes 3a</a>, generative classifiers model the **joint probability distribution** of the input and target variables $\text{Pr}(\mathbf{x}, t)$. This means, we would end up with a distribution that could generate (hence the name) new input variables with their respective targets, i.e., we can sample new data points with the joint probability distribution, and we will see how to do that in this post.
+As mentioned in <a href="{{ site.url }}/guides/2021/03/30/bsmalea-notes-3a/">notes 3a</a>, generative classifiers model the **joint probability distribution** of the input and target variables $\text{Pr}(\mathbf{x}, t)$. This means, we would end up with a distribution that could generate (hence the name) new input variables with their respective targets, i.e., we can sample new data points with the joint probability distribution, and we will see how to do that in this post.
 
 The models, we will be looking at in this post, are called **Gaussian Discriminant Analysis (GDA)** models. Now is when the nomenclature starts getting tricky! Note that a Gaussian *Discriminant* Analysis model is a *generative* model! It is *not* a discriminative model despite its name.
 
@@ -59,31 +59,31 @@ $$ \begin{aligned}
 &= \sum_{n=1}^N \sum_{k=1}^K t_{nk} \left(
   \ln \pi_k +
   \ln \left(
-    \frac{1}{\sqrt{ (2\pi)^D \det{\mathbf{\Sigma}_c} }} \exp{\left( -\frac{1}{2} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)^\intercal \mathbf{\Sigma}_c^{-1} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right) \right)}
+    \frac{1}{\sqrt{ (2\pi)^D \det{\mathbf{\Sigma}_k} }} \exp{\left( -\frac{1}{2} \left( \mathbf{x}_n - \boldsymbol{\mu}_k \right)^\intercal \mathbf{\Sigma}_k^{-1} \left( \mathbf{x}_n - \boldsymbol{\mu}_k \right) \right)}
   \right)
 \right) \\
 &= \sum_{n=1}^N \sum_{k=1}^K t_{nk} \left(
   \ln \pi_k +
-  \ln \frac{1}{\sqrt{ (2\pi)^D \det{\mathbf{\Sigma}_c} }}
-  -\frac{1}{2} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)^\intercal \mathbf{\Sigma}_c^{-1} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)
+  \ln \frac{1}{\sqrt{ (2\pi)^D \det{\mathbf{\Sigma}_k} }}
+  -\frac{1}{2} \left( \mathbf{x}_n - \boldsymbol{\mu}_k \right)^\intercal \mathbf{\Sigma}_k^{-1} \left( \mathbf{x}_n - \boldsymbol{\mu}_k \right)
 \right) \\
 &= \sum_{n=1}^N \sum_{k=1}^K t_{nk} \left(
   \ln \pi_k
-  -\frac{1}{2} \ln \left( (2\pi)^D \det{\mathbf{\Sigma}_c} \right)
-  -\frac{1}{2} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)^\intercal \mathbf{\Sigma}_c^{-1} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)
+  -\frac{1}{2} \ln \left( (2\pi)^D \det{\mathbf{\Sigma}_k} \right)
+  -\frac{1}{2} \left( \mathbf{x}_n - \boldsymbol{\mu}_k \right)^\intercal \mathbf{\Sigma}_k^{-1} \left( \mathbf{x}_n - \boldsymbol{\mu}_k \right)
 \right) \\
 &= \sum_{n=1}^N \sum_{k=1}^K t_{nk} \left(
   \ln \pi_k
   -\frac{1}{2} \left(
-    D \ln 2\pi + \ln \det{\mathbf{\Sigma}_c}
+    D \ln 2\pi + \ln \det{\mathbf{\Sigma}_k}
   \right)
-  -\frac{1}{2} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)^\intercal \mathbf{\Sigma}_c^{-1} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)
+  -\frac{1}{2} \left( \mathbf{x}_n - \boldsymbol{\mu}_k \right)^\intercal \mathbf{\Sigma}_k^{-1} \left( \mathbf{x}_n - \boldsymbol{\mu}_k \right)
 \right) \\
 &= \sum_{n=1}^N \sum_{k=1}^K t_{nk} \left(
   \ln \pi_k
   -\frac{D}{2} \ln 2\pi
-  +\frac{1}{2} \ln \det{\mathbf{\Sigma}_c^{-1}}
-  -\frac{1}{2} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)^\intercal \mathbf{\Sigma}_c^{-1} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)
+  +\frac{1}{2} \ln \det{\mathbf{\Sigma}_k^{-1}}
+  -\frac{1}{2} \left( \mathbf{x}_n - \boldsymbol{\mu}_k \right)^\intercal \mathbf{\Sigma}_k^{-1} \left( \mathbf{x}_n - \boldsymbol{\mu}_k \right)
 \right). \quad \quad (2)
 \end{aligned} $$
 
@@ -443,20 +443,93 @@ Underneath is a chart with the data points (color coded to match their respectiv
 <img src="{{ site.url }}/extra/bsmalea-notes-3b/lda/preds.svg">
 {: style="text-align: center"}
 
-## Naive Bayes
+## (Gaussian) Naive Bayes
 
 ### Setup and objective
+We've looked at quadratic discriminant analysis (QDA), which assumes class-specific covariance matrices, and linear discriminant analysis (LDA), which assumes a shared covariance matrix among the classes, and now we'll look at (Gaussian) Naive Bayes, which is also slightly different. Naive Bayes makes the assumption that the features are independent. This means that **we are still assuming class-specific covariance matrices (as in QDA), but the covariance matrices are diagonal matrices**. This is due to the assumption that the features are independent.
+
+So, given a training dataset of $N$ input variables $\mathbf{x} \in \mathbb{R}^D$ with corresponding target variables $t \in \mathcal{C}_c$ where $c \in \\{1, \dots, K\\}$, (Gaussian) Naive Bayes assumes that the **class-conditional densities** are normally distributed
+
+$$
+\text{Pr}(\mathbf{x} \mid t = c, \boldsymbol{\mu}_c, \mathbf{\Sigma}_c) = \mathcal{N} \left( \mathbf{x} \mid \boldsymbol{\mu}_c, \mathbf{\Sigma}_c \right),
+$$
+
+where $\boldsymbol{\mu}_c$ is the **class-specific mean vector** and $\mathbf{\Sigma}_c$ is the **class-specific diagonal covariance matrix**. Using Bayes' theorem, we can now calculate the class posterior
+
+$$
+\overbrace{\text{Pr}(t=c | \mathbf{x}, \boldsymbol{\mu}_c, \mathbf{\Sigma}_c)}^{\text{class posterior}}
+= \frac{ \overbrace{\text{Pr}(\mathbf{x} \mid t = c, \boldsymbol{\mu}_c, \mathbf{\Sigma}_c)}^{\text{class-conditional density}} \, \overbrace{\text{Pr}(t=c)}^{\text{class prior}} }{ \sum_{k=1}^K \text{Pr}(\mathbf{x} \mid t = k, \boldsymbol{\mu}_k, \mathbf{\Sigma}_c) \, \text{Pr}(t=k) }.
+$$
+
+We will then classify $\mathbf{x}$ into class
+
+$$
+\hat{h} (\mathbf{x}) = \underset{c}{\text{argmax }} \text{Pr}(t=c | \mathbf{x}, \boldsymbol{\mu}_c, \mathbf{\Sigma}_c).
+$$
 
 ### Derivation and training
+The derivation actually follows the derivation of the class-specific priors, means, and covariance matrices from QDA. The only difference is that we have to set everything but the diagonal to 0 in the class-specific covariance matrices. We therefore get the following
+
+$$ \begin{aligned}
+\pi_c &= \frac{N_c}{N} \\
+\boldsymbol{\mu}_c &= \frac{1}{N_c} \sum_{n=1}^N t_{nc} \mathbf{x}_n \\
+\mathbf{\Sigma}_c &= \mathrm{diag} \left( \frac{1}{N_c} \sum_{n=1}^N t_{nc} \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right) \left( \mathbf{x}_n - \boldsymbol{\mu}_c \right)^\intercal \right)
+\end{aligned} $$
+
+where diag means that we set every value not on the diagonal equal to 0.
+
 
 ### Python implementation
+The code underneath is a simple implementation of (Gaussian) Naive Bayes that we just went over.
 
 
-<!-- https://www.eecs189.org/static/notes/n18.pdf
-https://stats.stackexchange.com/questions/80507/what-is-a-gaussian-discriminant-analysis-gda
-https://web.archive.org/web/20200103035702/http://cs229.stanford.edu/notes/cs229-notes2.pdf
-https://stats.stackexchange.com/questions/254963/differences-linear-discriminant-analysis-and-gaussian-mixture-model
-https://stats.stackexchange.com/questions/190806/sources-seeming-disagreement-on-linear-quadratic-and-fishers-discriminant-ana/190821#190821
-https://stats.stackexchange.com/questions/71489/three-versions-of-discriminant-analysis-differences-and-how-to-use-them
-https://www.datascienceblog.net/post/machine-learning/linear-discriminant-analysis/
-https://xavierbourretsicotte.github.io/LDA_QDA.html -->
+{% highlight python %}
+class GaussianNB:
+    def fit(self, X, t):
+        self.priors = dict()
+        self.means = dict()
+        self.covs = dict()
+        
+        self.classes = np.unique(t)
+
+        for c in self.classes:
+            X_c = X[t == c]
+            self.priors[c] = X_c.shape[0] / X.shape[0]
+            self.means[c] = np.mean(X_c, axis=0)
+            self.covs[c] = np.diag(np.diag(np.cov(X_c, rowvar=False)))
+            
+    def predict(self, X):
+        preds = list()
+        for x in X:
+            posts = list()
+            for c in self.classes:
+                prior = np.log(self.priors[c])
+                inv_cov = np.linalg.inv(self.covs[c])
+                inv_cov_det = np.linalg.det(inv_cov)
+                diff = x-self.means[c]
+                likelihood = 0.5*np.log(inv_cov_det) - 0.5*diff.T @ inv_cov @ diff
+                post = prior + likelihood
+                posts.append(post)
+            pred = self.classes[np.argmax(posts)]
+            preds.append(pred)
+        return np.array(preds)
+{% endhighlight %}
+
+We can now make predictions with the following code.
+
+{% highlight python %}
+data = np.loadtxt("../data.csv", delimiter=",", skiprows=1)
+
+X = data[:, 0:2]
+t = data[:, 2]
+
+nb = GaussianNB()
+nb.fit(X, t)
+preds = nb.predict(X)
+{% endhighlight %}
+
+Underneath is a chart with the data points (color coded to match their respective classes), the class distributions that our (Gaussian) Naive Bayes model finds, and the decision boundaries generated by the respective class distributions. Note that while the decision boundary is not linear as in the case of LDA, the class distributions are completely circular Gaussian distributions, since the covariance matrices are diagonal matrices.
+
+<img src="{{ site.url }}/extra/bsmalea-notes-3b/nb/preds.svg">
+{: style="text-align: center"}
+
