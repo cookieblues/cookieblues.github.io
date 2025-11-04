@@ -1,3 +1,4 @@
 polling/data/raw/
 polling/data/interim/
 _site/
+.jekyll-cache/

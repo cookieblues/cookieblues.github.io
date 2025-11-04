@@ -14,7 +14,7 @@
 	{% if page.print_stylesheet %}
 	<link rel="stylesheet" media="print" href="{{ site.baseurl }}/css/print.css">
 	{% endif %}
-	<link rel="icon" type="image/png" href="{{ site.baseurl }}/images/logo.svg">
+	<link rel="icon" type="image/png" href="{{ site.baseurl }}{{ site.data.details.logo_image }}">
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128381822-1"></script>
@@ -58,7 +58,7 @@
 	{% include navigation.html %}
 	<header>
 		<a href="{{site.baseurl }}/">
-			<img src="{{ site.baseurl }}{{ site.data.company_details.logo_image }}" width="100" alt="logo">
+			<img src="{{ site.baseurl }}{{ site.data.details.logo_image }}" width="100" alt="logo">
 		</a>
 	</header>
 
@@ -73,7 +73,7 @@
 	<footer>
 		<div class="container">
 			<hr>
-			&copy; {{ site.title }} {{ site.time | date: "%Y" }}. All rights reserved.
+			&copy; {{ site.title }} {{ site.time | date: "%Y" }}.
 		</div>
 	</footer>
 </body>
