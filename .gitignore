@@ -2,3 +2,5 @@ polling/data/raw/
 polling/data/interim/
 _site/
 .jekyll-cache/
+__pycache__
+.venv

@@ -36,9 +36,20 @@
 	<script async src='https://www.google-analytics.com/analytics.js'></script>
 	{% endif %}
 
-	<!-- START d3 -->
-	<script type="text/javascript" src="{{ site.baseurl }}/js/d3.min.js"></script>
-	<!-- END d3 -->
+	<!-- START VEGA-ALTAIR -->
+	<script type="text/javascript">
+		{% include js/justcharts.js %}
+	</script>
+	<script type="text/javascript">
+		{% include js/vega.min.js %}
+	</script>
+	<script type="text/javascript">
+		{% include js/vega-lite.min.js %}
+	</script>
+	<script type="text/javascript">
+		{% include js/vega-embed.min.js %}
+	</script>
+	<!-- END VEGA-ALTAIR -->
 
 	<!-- START KATEX -->
 	<script type="text/javascript">
