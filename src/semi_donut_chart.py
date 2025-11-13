@@ -2,7 +2,7 @@ import altair as alt
 import numpy as np
 import pandas as pd
 
-from constants import PARTY_COLORS
+from constants import PARTIES
 
 
 PARTY_LETTERS = {
@@ -28,10 +28,13 @@ folketinget_sorting = [
     "Alternativet",
     "Veganerpartiet",
     "Radikale Venstre",
+    "Moderaterne",
     "Liberal Alliance",
     "Kristendemokraterne",
     "Dansk Folkeparti",
+    "Borgernes Parti",
     "Nye Borgerlige",
+    "Danmarksdemokraterne",
     "Stram Kurs",
     "Venstre",
     "Det Konservative Folkeparti",
@@ -51,13 +54,17 @@ def calculate_mandates(df: pd.DataFrame) -> pd.DataFrame:
     return n_mandates.astype(int)
 
 # prepare data
-df = pd.read_csv("polling/data/processed/mean_polls.csv", parse_dates=["date"])
+# df = pd.read_csv("polling/data/processed/mean_polls.csv", parse_dates=["date"])
+df = pd.read_csv("data/latent_party_probs.csv", parse_dates=["date"])
+df = df.loc[df["date"] >= pd.Timestamp.now() - pd.Timedelta(days=365)]
+df = df.dropna(axis=1, how="all")
+
 parties = df.columns.difference(["date", "other"])
 df = calculate_mandates(df[parties])
 latest_estimation = df.iloc[-1][df.iloc[-1] > 0]
 df = latest_estimation.reset_index()  # only use latest estimation and disregard 0s
 df.columns = ["party", "value"]
-df["party_letter"] = df["party"].map(PARTY_LETTERS)
+df["party_letter"] = df["party"].map(lambda party: PARTIES[party]["letter"])
 
 # reorder according to left-right
 df["party"] = pd.Categorical(df["party"], categories=folketinget_sorting, ordered=True)
@@ -71,6 +78,8 @@ base = alt.Chart(df).transform_calculate(
     outerRadius=RADIUS,
     innerRadius=RADIUS/5,
     opacity=0.75,
+    stroke="white",
+    strokeWidth=2,
 ).encode(
     theta=alt.Theta(
         field="value",
@@ -83,7 +92,7 @@ base = alt.Chart(df).transform_calculate(
     color=alt.Color(
         field="party",
         type="nominal",
-        scale=alt.Scale(domain=folketinget_sorting, range=[PARTY_COLORS[p] for p in folketinget_sorting]),
+        scale=alt.Scale(domain=folketinget_sorting, range=[PARTIES[p]["color"] for p in folketinget_sorting]),
         legend=None,
         sort=folketinget_sorting,
     ),
@@ -93,7 +102,7 @@ party_letters = base.mark_text(
     radius=RADIUS*1.06,
     size=RADIUS/10,
     fontWeight="bold",
-    stroke="#cecece",
+    stroke="#aeaeae",
     strokeWidth=1,
 ).encode(
     text="party_letter:N"
@@ -102,7 +111,7 @@ n_mandates = base.mark_text(
     radius=RADIUS/2+RADIUS/10,
     size=RADIUS/10,
     fontWeight="bold",
-    stroke="#cecece",
+    stroke="#aeaeae",
     strokeWidth=1.25,
 ).encode(
     text="value:Q"
