@@ -1,12 +1,14 @@
 import altair as alt
 import pandas as pd
 
-from constants import PARTY_COLORS
+from constants import PARTIES
 
 
 # prepare data
-df = pd.read_csv("polling/data/processed/mean_polls.csv")
-df["date"] = pd.to_datetime(df["date"])
+#df = pd.read_csv("polling/data/processed/mean_polls.csv")
+df = pd.read_csv("data/latent_party_probs.csv", parse_dates=["date"])
+df = df.loc[df["date"] >= pd.Timestamp.now() - pd.Timedelta(days=365)]
+df = df.dropna(axis=1, how="all")
 parties = [col for col in df.columns if col != "date" and col != "other"]
 chart_data = df.melt(id_vars=["date"], value_vars=parties, var_name="party", value_name="value")
 
@@ -31,7 +33,7 @@ nearest_party = alt.selection_point(
     fields=["party"],
 )
 
-# neares party selection when clicking
+# nearest party selection when clicking
 click_selection = alt.selection_point(
     nearest=True,
     on="click",
@@ -44,10 +46,12 @@ nearest_points = base.mark_circle().encode(
 ).add_params(nearest_date, nearest_party, click_selection)
 
 # party lines
+parties = list(PARTIES.keys())
+colors = [PARTIES[party]["color"] for party in parties]
 lines = base.mark_line().encode(
     color=alt.Color(
         "party:N",
-        scale=alt.Scale(domain=list(PARTY_COLORS.keys()), range=list(PARTY_COLORS.values())),
+        scale=alt.Scale(domain=parties, range=colors),
         legend=None,
     ),
     size=alt.condition(nearest_party | click_selection, alt.value(3), alt.value(0.1))
@@ -63,13 +67,13 @@ text = formatted.mark_text(
     dy=-10,
     fontSize=16,
     fontWeight="bold",
-    stroke="#cecece",
+    stroke="#aeaeae",
     strokeWidth=1,
 ).encode(
     text=alt.when(nearest_date).then("formatted_text:N").otherwise(alt.value(" ")),
     color=alt.Color(
         "party:N",
-        scale=alt.Scale(domain=list(PARTY_COLORS.keys()), range=list(PARTY_COLORS.values())),
+        scale=alt.Scale(domain=parties, range=colors),
         legend=None,
     ),
     opacity=alt.condition(nearest_party | click_selection, alt.value(1), alt.value(0.05)),
