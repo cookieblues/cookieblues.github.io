@@ -1,0 +1,42 @@
+---
+title: Model methodology
+image_view: true
+include_sidebar: true
+---
+<h1>A Bayesian model of political support over time</h1>
+<p>The political support estimates are based on a Bayesian statistical model that tracks public support for political parties day by day.
+At its core, it combines polls, which are noisy and biased, with a representation of how the underlying voter preference change over time.
+The result is a probabilistic picture of the political landscape for each day along with uncertainty intervals.</p>
+
+<h2>A latent view of public opinion</h2>
+<p>For each party, we model the "true" public support as a latent variable that evolves over time.
+These scores are not probabilities, but rather mathematical representations that reflect the relative support each day, and ensure probabilities will always sum to one.
+These latent variables evolve via a multivariate Gaussian random walk, which means that support today tend to be similar to support yesterday, but can change gradually over time.
+The size of these day-to-day changes is governed by an estimated volatility parameter, allowing the model to learn whether voter sentiment is relatively stable or unusually turbulent.
+Importantly, the changes for different parties are allowed to be correlated, reflecting the real-world fact that shifts in opinion often benefit some parties at the expense of others.</p>
+
+<h2>Handling the messiness of polls</h2>
+<p>Polls are not created equally.
+They vary in sample quality, methodology, and sample size, all of which can introduce bias and noise.
+Instead of assuming that polls perfectly reflect public opinion, the model explicitly accounts for systematic pollster-specific biases.</p>
+
+<p>Each pollsters gets a set of adjustments representing how it tends to overstate or understate support for each party.
+When a poll arrives, the model takes the latent support on that day, adjusts it by the pollster's bias, converts it into probabilities, and evaluates how probable the poll would be under these assumptions.
+If it conflicts with expectations, the posterior distribution widens, and if it aligns well, the model grows more confident.</p>
+
+<h2>Learning correlations between parties</h2>
+<p>Voters do not shift support randomly. When one party rises, its gains typically come from predictable competitors, not from all parties in equal measure.
+The model includes a structured correlation matrix that learns how changes for different parties move together.
+This allows the model to infer realistic substitution patterns, e.g. that two ideologically adjacent parties may rise and fall in tandem, while distant rivals often experience movements in opposite directions.</p>
+
+<h2>Bringing everything together: Bayesian updating</h2>
+<p>All these components come together through a statistical technique called Markov Chain Monte Carlo (MCMC) sampling.
+The algorithm explores thousands of possible configurations of the before-mentioned variables, each time adjusting them slightly and evaluating how well they explain the observed polling data.
+These samples naturally represent both the uncertainty in public opinion today and the uncertainty caused by polling noise.
+The spread of these simulated outcomes determines each party's probability of finishing with a given vote share.</p>
+
+<h2>Interpreting the results</h2>
+<p>The final output is not a single number, but a probability distribution: a set of thousands of political support trajectories.
+The more frequently a scenario appears in these simulations, the more probable the model considers it.
+As with any statistical forecast, the model relies on the assumption that the future behaves similarly to the past.
+Political life is famously unpredictable, and shocks can always occur, but by combining polls, history, and a flexible dynamic framework, this approach provides an assessment of the political landscape along with an honest accounting of the inherent uncertainty.</p>
