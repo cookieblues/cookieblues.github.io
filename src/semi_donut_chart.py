@@ -2,26 +2,11 @@ import altair as alt
 import numpy as np
 import pandas as pd
 
+from utils import calculate_mandates
 from constants import PARTIES
 
 
-PARTY_LETTERS = {
-    "Socialdemokratiet": "S",
-    "Radikale Venstre": "B",
-    "Det Konservative Folkeparti": "K",
-    "Nye Borgerlige": "D",
-    "Klaus Riskær Pedersen": "E",
-    "Socialistisk Folkeparti": "F",
-    "Veganerpartiet": "G",
-    "Liberal Alliance": "I",
-    "Kristendemokraterne": "K",
-    "Dansk Folkeparti": "O",
-    "Stram Kurs": "P",
-    "Venstre": "V",
-    "Enhedslisten": "Ø",
-    "Alternativet": "Å",
-}
-folketinget_sorting = [
+FOLKETINGET_SORTING = [
     "Socialdemokratiet",
     "Enhedslisten",
     "Socialistisk Folkeparti",
@@ -40,19 +25,6 @@ folketinget_sorting = [
     "Det Konservative Folkeparti",
 ]
 
-def calculate_mandates(df: pd.DataFrame) -> pd.DataFrame:
-    adjusted_percentage = df[parties].div(df[parties].sum(axis=1), axis=0)
-    above_barrier = adjusted_percentage >= 0.02
-    mandate_key = adjusted_percentage[above_barrier].sum(axis=1) / 175
-    total_allowed_n_mandates = adjusted_percentage[above_barrier].div(mandate_key, axis=0)
-    n_mandates = pd.DataFrame(np.floor(total_allowed_n_mandates))
-    leftover_mandates = 175-n_mandates.sum(axis=1)
-    mandate_residue = (total_allowed_n_mandates-n_mandates).rank(axis=1, method="first", ascending=False)
-    additional_mandates = mandate_residue.le(leftover_mandates, axis=0)
-    n_mandates = n_mandates.fillna(0)
-    n_mandates += additional_mandates
-    return n_mandates.astype(int)
-
 # prepare data
 # df = pd.read_csv("polling/data/processed/mean_polls.csv", parse_dates=["date"])
 df = pd.read_csv("data/latent_party_probs.csv", parse_dates=["date"])
@@ -67,13 +39,13 @@ df.columns = ["party", "value"]
 df["party_letter"] = df["party"].map(lambda party: PARTIES[party]["letter"])
 
 # reorder according to left-right
-df["party"] = pd.Categorical(df["party"], categories=folketinget_sorting, ordered=True)
+df["party"] = pd.Categorical(df["party"], categories=FOLKETINGET_SORTING, ordered=True)
 df = df.sort_values("party").reset_index(drop=True)
 
 # base chart
 RADIUS = 400
 base = alt.Chart(df).transform_calculate(
-  order=f"indexof({folketinget_sorting}, datum.party)"  # get the order 
+  order=f"indexof({FOLKETINGET_SORTING}, datum.party)"  # get the order 
 ).mark_arc(
     outerRadius=RADIUS,
     innerRadius=RADIUS/5,
@@ -92,9 +64,9 @@ base = alt.Chart(df).transform_calculate(
     color=alt.Color(
         field="party",
         type="nominal",
-        scale=alt.Scale(domain=folketinget_sorting, range=[PARTIES[p]["color"] for p in folketinget_sorting]),
+        scale=alt.Scale(domain=FOLKETINGET_SORTING, range=[PARTIES[p]["color"] for p in FOLKETINGET_SORTING]),
         legend=None,
-        sort=folketinget_sorting,
+        sort=FOLKETINGET_SORTING,
     ),
 )
 
@@ -121,4 +93,5 @@ n_mandates = base.mark_text(
 chart = alt.layer(base, party_letters, n_mandates)
 chart.properties(
     width="container",
+    height=10,
 ).save("js/semi_donut_chart.json")
