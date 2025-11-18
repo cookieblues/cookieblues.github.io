@@ -8,9 +8,9 @@ from utils import calculate_mandates
 from constants import PARTIES
 
 
-N_SIMS = 500
 WIDTH = 275
 df = pd.read_csv("data/current_popularity_dist.csv")
+N_SIMS = len(df)
 
 df[df < 0.0005] = np.nan
 df = df.dropna(how="all", axis=1)
@@ -25,9 +25,11 @@ for party in parties:
     hist_df = df[party].value_counts().reset_index()
     hist_df["Probability"] = 100 * hist_df["count"] / N_SIMS
     xmin = max(0-0.5, df[party].min()-2)
-    xmax = int(df[party].max()+5) if medians.loc[party] < 4 else int(df[party].max()+3)
-    bins = range(int(xmin), xmax)
-    chart = alt.Chart(hist_df).mark_bar(
+    xmax = df[party].max()+4.5 if medians.loc[party] < 4 else df[party].max()+2.5
+    bins = range(int(xmin), int(np.ceil(xmax)))
+    chart = alt.Chart(
+        hist_df
+    ).mark_bar(
         size=0.85*WIDTH/len(bins),
         color=PARTIES[party]["color"],
         stroke="#aeaeae",
@@ -35,10 +37,11 @@ for party in parties:
     ).encode(
         x=alt.X(
             party,
+            title=party,
             type="quantitative",
             scale=alt.Scale(bins=bins, domain=[xmin, xmax]),
         ),
-        y="Probability"
+        y=alt.Y("Probability", title="Probability [%]", ),
     ).properties(
         width=WIDTH,
         height=WIDTH*0.675,
@@ -46,6 +49,9 @@ for party in parties:
     charts.append(chart)
 
 chart_rows = [alt.hconcat(*row) for row in batched(charts, 3)]
-chart = alt.vconcat(*chart_rows)
+chart = alt.vconcat(*chart_rows).configure_axis(
+    labelFontSize=10,
+    titleFontSize=14,
+)
 
 chart.save("js/current_mandate_histogram.json")
