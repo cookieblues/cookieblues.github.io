@@ -15,7 +15,7 @@ chart_data = df.melt(id_vars=["date"], value_vars=parties, var_name="party", val
 # base chart
 base = alt.Chart(chart_data).encode(
     x=alt.X("date", title="Date"),
-    y=alt.Y("value:Q", title="Polling percentage")
+    y=alt.Y("value:Q", title="Estimated public support [%]")
 )
 
 # nearest date selection for vertical ruler
@@ -89,4 +89,7 @@ chart.properties(
     height=600,
 ).configure(
     padding={"right": 280}  # increase value until labels are visible
+).configure_axis(
+    labelFontSize=10,
+    titleFontSize=14,
 ).save("js/polling_chart.json")
