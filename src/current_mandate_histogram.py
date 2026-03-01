@@ -16,7 +16,7 @@ df[df < 0.0005] = np.nan
 df = df.dropna(how="all", axis=1)
 df = df.fillna(0)
 df = calculate_mandates(df)
-medians = df.median().sort_values(ascending=False)
+medians = df.agg(["median", "mean"]).T.sort_values(["median", "mean"], ascending=False)["median"]
 parties = medians.index
 
 chart_columns = list()
