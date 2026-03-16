@@ -8,5 +8,6 @@ local:
 	uv run python src/polling_chart.py
 	uv run python src/semi_donut_chart.py
 	uv run python src/current_mandate_histogram.py
+	uv run python src/uncertainty.py
 	bundle install
 	bundle exec jekyll serve

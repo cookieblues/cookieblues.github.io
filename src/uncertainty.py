@@ -1,7 +1,6 @@
-from itertools import batched
-
 import altair as alt
 import pandas as pd
+import numpy as np
 
 from constants import PARTIES
 
@@ -10,12 +9,9 @@ WIDTH = 350
 HEIGHT = 200
 
 # --- Load & filter data ---
-df = pd.read_csv("data/latent_party_probs.csv", parse_dates=["date"])
-df = df.loc[df["date"] >= pd.Timestamp.now() - pd.Timedelta(days=365)]
+df = pd.read_csv("data/latent_party_probs_all.csv", parse_dates=["date"])
+df = df.loc[df["date"] >= df["date"].max() - pd.Timedelta(days=30)]
 df = df.dropna(axis=1, how="all")
-
-# Detect parties (exclude date and "other")
-parties_in_data = [col for col in df.columns if col not in ("date", "other")]
 
 # Detect uncertainty columns: expects columns named like "party_lower" and "party_upper"
 # Adjust the suffix naming below if your columns use a different convention
@@ -23,11 +19,15 @@ parties_in_data = [col for col in df.columns if col not in ("date", "other")]
 LOWER_SUFFIX = "_lower"
 UPPER_SUFFIX = "_upper"
 
-parties_with_ci = [
-    p for p in parties_in_data
-    if f"{p}{LOWER_SUFFIX}" in df.columns and f"{p}{UPPER_SUFFIX}" in df.columns
+# Detect parties (exclude date and "other")
+# parties_in_data = [col for col in df.columns if col not in ("date", "other")]
+parties_in_data = [
+    col for col in df.columns
+    if col not in ("date", "other")
+    and not col.endswith(LOWER_SUFFIX)
+    and not col.endswith(UPPER_SUFFIX)
+    and df[col].iloc[-1] >= 0.05
 ]
-parties_without_ci = [p for p in parties_in_data if p not in parties_with_ci]
 
 # --- Shared selections ---
 nearest_date = alt.selection_point(
@@ -38,15 +38,13 @@ nearest_date = alt.selection_point(
 )
 
 # --- Build one chart per party ---
+ymax = 1.1 * df.drop("date", axis=1).max().max()
+y_scale = alt.Scale(domain=[0, ymax])
+
 charts = []
-all_parties = list(PARTIES.keys())
-colors = {p: PARTIES[p]["color"] for p in all_parties}
 
-for party in all_parties:
-    if party not in parties_in_data:
-        continue
-
-    color = colors.get(party, "#888888")
+for party in parties_in_data:
+    color = PARTIES[party]["color"]
 
     # Columns for this party
     lower_col = f"{party}{LOWER_SUFFIX}"
@@ -97,28 +95,21 @@ for party in all_parties:
         x="date:T",
     ).transform_filter(nearest_date)
 
-    # Tooltip dot
-    dot = base.mark_circle(color=color, size=60).encode(
-        y=alt.Y("value:Q"),
-        opacity=alt.condition(nearest_date, alt.value(1), alt.value(0)),
-        tooltip=[
-            alt.Tooltip("date:T", title="Date", format="%d %b %Y"),
-            alt.Tooltip("value:Q", title="Support (%)", format=".1f"),
-            *(
-                [
-                    alt.Tooltip("lower:Q", title="Lower CI (%)", format=".1f"),
-                    alt.Tooltip("upper:Q", title="Upper CI (%)", format=".1f"),
-                ]
-                if has_ci
-                else []
-            ),
-        ],
-    )
+    date_label = base.mark_text(
+        align="right",
+        dx=-2,
+        dy=-HEIGHT // 2 + 10,
+        fontSize=10,
+        color="gray",
+    ).encode(
+        x="date:T",
+        text=alt.Text("date:T", format="%d %b"),
+    ).transform_filter(nearest_date)
 
-    layers = [rule_points, rule]
+    layers = [rule_points, rule, date_label]
     if has_ci:
         layers.append(band)
-    layers += [line, dot]
+    layers += [line]
 
     chart = alt.layer(*layers).properties(
         width=WIDTH,
@@ -134,8 +125,8 @@ for party in all_parties:
     charts.append(chart)
 
 # --- Arrange in rows of 3 ---
-chart_rows = [alt.hconcat(*row).resolve_scale(y="independent") for row in batched(charts, 3)]
-final_chart = alt.vconcat(*chart_rows).configure_axis(
+charts = [charts[i] for i in np.argsort(-df[parties_in_data].iloc[-1]).values]  # reorder from highest support to lowest
+final_chart = alt.concat(*charts, columns=3).configure_axis(
     labelFontSize=10,
     titleFontSize=12,
 ).configure_view(

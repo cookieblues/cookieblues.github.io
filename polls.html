@@ -5,15 +5,18 @@ include_sidebar: false
 ---
 Read about how the model works <a href="{{ site.baseurl }}/model-methodology">here</a>.
 
-<h1>Estimated support over time</h1>
+<h1>Party support</h1>
+<h2>Estimated support over last year</h2>
 Click near party to highlight it. Click again to remove.
 <vegachart schema-url="{{ site.baseurl }}/js/polling_chart.json" style="width: 100%"></vegachart>
 
+<h2>Support uncertainty last 30 days before election day</h2>
+<vegachart schema-url="{{ site.baseurl }}/js/polling_chart_multiples.json" style="width: 100%"></vegachart>
 
-<h1>Estimated mandates in parliament</h1>
-If there was an election tomorrow.
+
+<h1>Number of mandates</h1>
+<h2>Estimated mandates in parliament on election day</h2>
 <vegachart schema-url="{{ site.baseurl }}/js/semi_donut_chart.json" style="width: 100%"></vegachart>
 
-<h1>All simulations of mandates in parliament</h1>
-If there was an election tomorrow.
+<h2>All simulations of mandates in parliament on election day</h2>
 <vegachart schema-url="{{ site.baseurl }}/js/current_mandate_histogram.json" style="width: 100%"></vegachart>
