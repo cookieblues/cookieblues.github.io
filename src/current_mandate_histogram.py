@@ -55,4 +55,4 @@ chart = alt.vconcat(*chart_rows).configure_axis(
 )
 
 chart.save("js/current_mandate_histogram.json")
-chart.save("current_mandate_histogram.png")
+chart.save("current_mandate_histogram.png", scale_factor=2.0)
