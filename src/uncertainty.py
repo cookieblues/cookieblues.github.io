@@ -1,6 +1,6 @@
 import altair as alt
-import pandas as pd
 import numpy as np
+import pandas as pd
 
 from constants import PARTIES
 
@@ -22,7 +22,8 @@ UPPER_SUFFIX = "_upper"
 # Detect parties (exclude date and "other")
 # parties_in_data = [col for col in df.columns if col not in ("date", "other")]
 parties_in_data = [
-    col for col in df.columns
+    col
+    for col in df.columns
     if col not in ("date", "other")
     and not col.endswith(LOWER_SUFFIX)
     and not col.endswith(UPPER_SUFFIX)
@@ -56,14 +57,16 @@ for party in parties_in_data:
     if has_ci:
         cols += [lower_col, upper_col]
     party_df = df[cols].copy()
-    party_df = party_df.rename(columns={
-        party: "value",
-        lower_col: "lower",
-        upper_col: "upper",
-    })
+    party_df = party_df.rename(
+        columns={
+            party: "value",
+            lower_col: "lower",
+            upper_col: "upper",
+        }
+    )
 
     base = alt.Chart(party_df).encode(
-        x=alt.X("date:T", title="Date", axis=alt.Axis(format="%b %Y")),
+        x=alt.X("date:T", title="Date", axis=alt.Axis(format="%d %b")),
     )
 
     # Confidence band
@@ -76,6 +79,16 @@ for party in parties_in_data:
             y=alt.Y("lower:Q", title="Support [%]"),
             y2=alt.Y2("upper:Q"),
         )
+        label_expr = (
+            alt.expr.format(alt.datum.value, ".1f")
+            + " ["
+            + alt.expr.format(alt.datum.lower, ".1f")
+            + ", "
+            + alt.expr.format(alt.datum.upper, ".1f")
+            + "]"
+        )
+    else:
+        label_expr = alt.expr.format(alt.datum.value, ".1f")
 
     # Centre line
     line = base.mark_line(
@@ -87,26 +100,57 @@ for party in parties_in_data:
     )
 
     # Vertical rule on hover
-    rule_points = base.mark_circle(opacity=0).encode(
-        y=alt.Y("value:Q"),
-    ).add_params(nearest_date)
+    rule_points = (
+        base.mark_circle(opacity=0)
+        .encode(
+            y=alt.Y("value:Q"),
+        )
+        .add_params(nearest_date)
+    )
 
-    rule = base.mark_rule(color="gray", strokeWidth=1).encode(
-        x="date:T",
-    ).transform_filter(nearest_date)
+    rule = (
+        base.mark_rule(color="gray", strokeWidth=1)
+        .encode(
+            x="date:T",
+        )
+        .transform_filter(nearest_date)
+    )
 
-    date_label = base.mark_text(
-        align="right",
-        dx=-2,
-        dy=-HEIGHT // 2 + 10,
-        fontSize=10,
-        color="gray",
-    ).encode(
-        x="date:T",
-        text=alt.Text("date:T", format="%d %b"),
-    ).transform_filter(nearest_date)
+    value_label = (
+        base.mark_text(
+            dx=-2,
+            dy=-HEIGHT // 2,
+            align="right",
+            fontSize=12,
+            color=color,
+            fontWeight="bold",
+            stroke="black",
+            strokeWidth=0.25,
+        )
+        .encode(text=alt.Text("value:Q", format=".1f"))
+        .transform_filter(nearest_date)
+    )
 
-    layers = [rule_points, rule, date_label]
+    ci_label = (
+        base.mark_text(
+            dx=-2,
+            dy=-HEIGHT // 2 + 12,
+            align="right",
+            fontSize=8,
+            color="grey",
+        )
+        .encode(
+            text=alt.Text("ci:N"),
+        )
+        .transform_filter(nearest_date)
+        .transform_calculate(
+            ci=alt.expr.format(alt.datum.lower, ".1f")
+            + "–"
+            + alt.expr.format(alt.datum.upper, ".1f")
+        )
+    )
+
+    layers = [rule_points, rule, value_label, ci_label]
     if has_ci:
         layers.append(band)
     layers += [line]
@@ -125,12 +169,19 @@ for party in parties_in_data:
     charts.append(chart)
 
 # --- Arrange in rows of 3 ---
-charts = [charts[i] for i in np.argsort(-df[parties_in_data].iloc[-1]).values]  # reorder from highest support to lowest
-final_chart = alt.concat(*charts, columns=3).configure_axis(
-    labelFontSize=10,
-    titleFontSize=12,
-).configure_view(
-    stroke=None,
+charts = [
+    charts[i] for i in np.argsort(-df[parties_in_data].iloc[-1]).values
+]  # reorder from highest support to lowest
+final_chart = (
+    alt.concat(*charts, columns=3)
+    .configure_axis(
+        labelFontSize=10,
+        titleFontSize=12,
+    )
+    .configure_view(
+        stroke=None,
+    )
 )
 
 final_chart.save("js/polling_chart_multiples.json")
+final_chart.save("polling_chart_multiples.png", scale_factor=2.0)
