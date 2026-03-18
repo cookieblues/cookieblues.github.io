@@ -3,9 +3,8 @@ import pandas as pd
 
 from constants import PARTIES
 
-
 # prepare data
-#df = pd.read_csv("polling/data/processed/mean_polls.csv")
+# df = pd.read_csv("polling/data/processed/mean_polls.csv")
 df = pd.read_csv("data/latent_party_probs.csv", parse_dates=["date"])
 df = df.loc[df["date"] >= pd.Timestamp.now() - pd.Timedelta(days=365)]
 df = df.dropna(axis=1, how="all")
@@ -15,16 +14,11 @@ chart_data = df.melt(id_vars=["date"], value_vars=parties, var_name="party", val
 # base chart
 base = alt.Chart(chart_data).encode(
     x=alt.X("date", title="Date"),
-    y=alt.Y("value:Q", title="Estimated public support [%]")
+    y=alt.Y("value:Q", title="Estimated public support [%]"),
 )
 
 # nearest date selection for vertical ruler
-nearest_date = alt.selection_point(
-    nearest=True, 
-    on="pointerover", 
-    fields=["date"],
-    empty=False
-)
+nearest_date = alt.selection_point(nearest=True, on="pointerover", fields=["date"], empty=False)
 
 # nearest party selection for line highlight
 nearest_party = alt.selection_point(
@@ -41,26 +35,32 @@ click_selection = alt.selection_point(
     toggle="true",  # enables toggling of parties without holding shift
 )
 
-nearest_points = base.mark_circle().encode(
-    opacity=alt.value(0),
-).add_params(nearest_date, nearest_party, click_selection)
+nearest_points = (
+    base.mark_circle()
+    .encode(
+        opacity=alt.value(0),
+    )
+    .add_params(nearest_date, nearest_party, click_selection)
+)
 
 # party lines
 parties = list(PARTIES.keys())
 colors = [PARTIES[party]["color"] for party in parties]
-lines = base.mark_line().encode(
-    color=alt.Color(
-        "party:N",
-        scale=alt.Scale(domain=parties, range=colors),
-        legend=None,
-    ),
-    size=alt.condition(nearest_party | click_selection, alt.value(3), alt.value(0.1))
-).add_params(nearest_party, click_selection)
+lines = (
+    base.mark_line()
+    .encode(
+        color=alt.Color(
+            "party:N",
+            scale=alt.Scale(domain=parties, range=colors),
+            legend=None,
+        ),
+        size=alt.condition(nearest_party | click_selection, alt.value(3), alt.value(0.1)),
+    )
+    .add_params(nearest_party, click_selection)
+)
 
 # dynamic label text
-formatted = base.transform_calculate(
-    formatted_text="datum['party'] + ' ' + format(datum['value'], '.1f') + '%'"
-)
+formatted = base.transform_calculate(formatted_text="datum['party'] + ' ' + format(datum['value'], '.1f') + '%'")
 text = formatted.mark_text(
     align="left",
     dx=1,
