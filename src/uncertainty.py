@@ -143,11 +143,7 @@ for party in parties_in_data:
             text=alt.Text("ci:N"),
         )
         .transform_filter(nearest_date)
-        .transform_calculate(
-            ci=alt.expr.format(alt.datum.lower, ".1f")
-            + "–"
-            + alt.expr.format(alt.datum.upper, ".1f")
-        )
+        .transform_calculate(ci=alt.expr.format(alt.datum.lower, ".1f") + "–" + alt.expr.format(alt.datum.upper, ".1f"))
     )
 
     layers = [rule_points, rule, value_label, ci_label]
@@ -169,9 +165,7 @@ for party in parties_in_data:
     charts.append(chart)
 
 # --- Arrange in rows of 3 ---
-charts = [
-    charts[i] for i in np.argsort(-df[parties_in_data].iloc[-1]).values
-]  # reorder from highest support to lowest
+charts = [charts[i] for i in np.argsort(-df[parties_in_data].iloc[-1]).values]  # reorder from highest support to lowest
 final_chart = (
     alt.concat(*charts, columns=3)
     .configure_axis(
