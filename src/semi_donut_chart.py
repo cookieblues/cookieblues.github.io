@@ -25,7 +25,21 @@ FOLKETINGET_SORTING = [
 ]
 
 # prepare data
-# df1 = pd.read_csv("data/current_popularity_dist.csv")
+# df1 = pd.read_csv("data/current_popularity_dist.csv").drop(
+#     ["Nye Borgerlige", "Frie Grønne", "Kristendemokraterne"], axis=1
+# )
+# df1 = df1.div(df1.sum(axis=1), axis=0)
+# df = df1.loc[
+#     df1["Socialdemokratiet"]
+#     + df1["Moderaterne"]
+#     # + df1["Venstre"]
+#     + df1["Radikale Venstre"]
+#     + df1["Socialistisk Folkeparti"]
+#     >= 0.5
+# ]
+# print(100 * len(df) / len(df1))
+# exit()
+# df = df.mean(axis=0).to_frame().transpose()
 df = pd.read_csv("data/latent_party_probs.csv", parse_dates=["date"])
 df = df.loc[df["date"] >= pd.Timestamp.now() - pd.Timedelta(days=365)]
 df = df.dropna(axis=1, how="all")
@@ -98,3 +112,4 @@ chart.properties(
     width="container",
     height=10,
 ).save("js/semi_donut_chart.json")
+chart.save("semi_donut_chart.png", scale_factor=2.0)
